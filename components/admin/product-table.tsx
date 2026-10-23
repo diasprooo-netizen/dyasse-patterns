@@ -115,7 +115,7 @@ export function ProductTable({ products }: { products: Product[] }) {
                   <div className="flex gap-2">
                     <Button size="icon" variant="ghost" onClick={() => setEditing(product)} aria-label={`Edit ${product.title}`}><Edit className="h-4 w-4" /></Button>
                     <Button size="icon" variant="ghost" onClick={() => runDuplicate(product)} aria-label={`Duplicate ${product.title}`}><Copy className="h-4 w-4" /></Button>
-                    <Button size="icon" variant="ghost" asChild aria-label={`View ${product.title}`}><Link href={`/product/${product.slug}`}><ExternalLink className="h-4 w-4" /></Link></Button>
+                    <Button size="icon" variant="ghost" asChild aria-label={`View ${product.title}`}><Link href={product.is_published ? `/product/${product.slug}` : `/admin/preview/${product.slug}`}><ExternalLink className="h-4 w-4" /></Link></Button>
                     <Button size="icon" variant="ghost" onClick={() => runDelete(product)} className="text-red-300 hover:text-red-200" aria-label={`Delete ${product.title}`}><Trash2 className="h-4 w-4" /></Button>
                   </div>
                 </td>
