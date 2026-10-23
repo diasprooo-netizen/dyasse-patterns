@@ -10,7 +10,7 @@ import type { Product, ProductStats } from '@/types/product'
 
 function StatCard({ label, value, icon: Icon }: { label: string; value: number; icon: typeof Package }) {
   return (
-    <div className="rounded-[2rem] border border-#EADBC8 bg-white/[0.05] p-6 shadow-luxury backdrop-blur">
+    <div className="rounded-[2rem] border border-[#EADBC8] bg-white/[0.05] p-6 shadow-luxury backdrop-blur">
       <div className="flex items-center justify-between">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#6B5B4D]">{label}</p>
         <Icon className="h-5 w-5 text-[#D8A24A]" />
@@ -24,7 +24,7 @@ export function AdminDashboard({ products, stats, adminEmail }: { products: Prod
   return (
     <div className="min-h-screen bg-[#FFF8EF] text-[#2F261F]">
       <Toaster richColors position="top-right" />
-      <section className="border-b border-#EADBC8 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.18),transparent_40%),radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_35%)]">
+      <section className="border-b border-[#EADBC8] bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.18),transparent_40%),radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_35%)]">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -44,8 +44,8 @@ export function AdminDashboard({ products, stats, adminEmail }: { products: Prod
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:px-8"><nav className="flex flex-wrap gap-3"><Link className="rounded-full bg-[#2f261f] px-5 py-3 text-white" href="/admin/analytics">Analytics</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/subscribers">Email subscribers</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/qa">Pattern QA</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/import">Import 177 drafts</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/import-top20">Import best-selling 20</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/seo">SEO audit</Link></nav>
-        <section className="rounded-[2rem] border border-#EADBC8 bg-white p-5 shadow-luxury">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:px-8"><nav className="flex flex-wrap gap-3"><Link className="rounded-full bg-[#2f261f] px-5 py-3 text-white" href="/admin/analytics">Analytics</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/subscribers">Email subscribers</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/gumroad">Gumroad links</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/qa">Pattern QA</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/import">Import 177 drafts</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/import-top20">Import best-selling 20</Link><Link className="rounded-full bg-[#f7e7ce] px-5 py-3" href="/admin/seo">SEO audit</Link></nav>
+        <section className="rounded-[2rem] border border-[#EADBC8] bg-white p-5 shadow-luxury">
           <div className="mb-6">
             <h2 className="text-2xl font-black">Add New Product</h2>
             <p className="text-sm text-[#6B5B4D]">This form writes directly to the Supabase products table after RLS admin checks pass.</p>

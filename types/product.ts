@@ -27,9 +27,11 @@ export interface Product {
   cross_sell_product_ids: string[]
   seo_title: string | null
   seo_description: string | null
+  qa_verified: boolean
+  test_evidence_url: string | null
 }
 
-export type ProductInput = Omit<Product, 'id' | 'created_at' | 'updated_at'>
+export type ProductInput = Omit<Product, 'id' | 'created_at' | 'updated_at' | 'qa_verified' | 'test_evidence_url'>
 
 export interface ProductStats {
   totalProducts: number
