@@ -37,7 +37,7 @@ export async function POST(request:NextRequest){
   const {data:existing,error:readError}=await db.from('products').select('slug').in('slug',[...seen])
   if(readError)throw Error('Unable to check existing products.')
   const already=new Set((existing??[]).map(p=>p.slug))
-  const newRecords=records.filter(r=>!already.has(r.slug))
+  const newRecords=records.filter((r:{slug:string})=>!already.has(r.slug))
   if(newRecords.length){
     const {error}=await db.from('products').insert(newRecords)
     if(error)throw Error('Database import failed: '+error.message)
