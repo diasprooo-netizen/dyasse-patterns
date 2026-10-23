@@ -1,0 +1,3 @@
+import type { Metadata } from 'next'
+export const metadata:Metadata={title:'Contact Dyasse',description:'Need help with your Dyasse crochet or knitting PDF pattern? Contact our support team.',alternates:{canonical:'/contact'}}
+export default function Contact(){return <article className="mx-auto max-w-3xl px-6 py-20"><h1 className="text-5xl font-bold">Contact us</h1><p className="mt-7 text-lg leading-8">Questions about a pattern, download, or order? Reply to your Gumroad purchase receipt or use the support contact listed on your purchase page. Please include the product title and your order reference, but never send passwords or payment card details.</p><p className="mt-4 text-[#79685b]">We are preparing a dedicated Dyasse support inbox.</p></article>}
