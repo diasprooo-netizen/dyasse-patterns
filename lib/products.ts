@@ -37,6 +37,8 @@ function normalizeProduct(row: Record<string, unknown>): Product {
     cross_sell_product_ids: normalizeArray(row.cross_sell_product_ids),
     seo_title: row.seo_title ? String(row.seo_title) : null,
     seo_description: row.seo_description ? String(row.seo_description) : null,
+    qa_verified: Boolean(row.qa_verified),
+    test_evidence_url: row.test_evidence_url ? String(row.test_evidence_url) : null,
   }
 }
 
