@@ -64,7 +64,7 @@ export function ProductTable({ products }: { products: Product[] }) {
   }
 
   return (
-    <section className="space-y-5 rounded-[2rem] border border-#EADBC8 bg-white p-5 shadow-luxury">
+    <section className="space-y-5 rounded-[2rem] border border-[#EADBC8] bg-white p-5 shadow-luxury">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <h2 className="text-2xl font-black text-[#2F261F]">Product Manager</h2>
@@ -92,14 +92,14 @@ export function ProductTable({ products }: { products: Product[] }) {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-3xl border border-#EADBC8">
+      <div className="overflow-x-auto rounded-3xl border border-[#EADBC8]">
         <table className="min-w-[1100px] w-full text-left text-sm">
-          <thead className="bg-black/40 text-xs uppercase tracking-[0.2em] text-[#6B5B4D]">
+          <thead className="bg-[#f7e7ce] text-xs uppercase tracking-[0.2em] text-[#6B5B4D]">
             <tr>
               <th className="px-4 py-4">Thumbnail</th><th className="px-4 py-4">Title</th><th className="px-4 py-4">Slug</th><th className="px-4 py-4">Price</th><th className="px-4 py-4">Sale</th><th className="px-4 py-4">Published</th><th className="px-4 py-4">Featured</th><th className="px-4 py-4">On sale</th><th className="px-4 py-4">Created</th><th className="px-4 py-4">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-#EADBC8">
+          <tbody className="divide-y divide-[#EADBC8]">
             {filtered.map((product) => (
               <tr key={product.id} className="text-[#6B5B4D]">
                 <td className="px-4 py-4"><div className="relative h-14 w-14 overflow-hidden rounded-xl bg-slate-900"><Image src={product.image_url} alt="" fill sizes="56px" className="object-cover" /></div></td>
