@@ -46,15 +46,14 @@ export async function getCurrentAdminState(): Promise<{ isLoggedIn: boolean; isA
 
   if (!user?.email) return { isLoggedIn: false, isAdmin: false, email: null }
 
-  const email = user.email.toLowerCase()
-  const envAdminEmail = process.env.ADMIN_EMAIL?.toLowerCase()
-
-  if (envAdminEmail && email === envAdminEmail) {
-    return { isLoggedIn: true, isAdmin: true, email }
-  }
-
-  const { data } = await supabase.from('admin_users').select('email').eq('email', email).maybeSingle()
-  return { isLoggedIn: true, isAdmin: Boolean(data), email }
+  // Admin permissions are held in the database, never inferred from an email env var.
+  // This matches the RLS rules on products, subscribers and QA reviews.
+  const { data, error } = await supabase
+    .from('admin_users')
+    .select('user_id')
+    .eq('user_id', user.id)
+    .maybeSingle()
+  return { isLoggedIn: true, isAdmin: !error && Boolean(data), email: user.email.toLowerCase() }
 }
 
 export async function requireAdmin() {
