@@ -11,25 +11,25 @@ const collections: Record<string, Collection> = {
     label: 'Crochet patterns', tagline: 'Made with every little stitch.',
     intro: 'Discover crochet ideas for bags, keepsakes and everyday accessories. Only ready-to-purchase PDF patterns appear below.',
     match: v => /crochet|amigurumi|baby shoes|keychain|bag|plush|booties/i.test(v),
-    theme: 'bg-[#eee7da] text-[#735940]', icon: Scissors, eyebrow: 'THE CROCHET EDIT',
+    theme: 'bg-[#FCE0DA] text-[#A64D56]', icon: Scissors, eyebrow: 'THE CROCHET EDIT',
   },
   'knitting-patterns': {
     label: 'Knitting patterns', tagline: 'For the cosy things in life.',
     intro: 'Hats, headbands, scarves and textured projects. Browse patterns with clear project details when releases are available.',
     match: v => /knit|beanie|cable|headband|scarf|cowl/i.test(v),
-    theme: 'bg-[#e5e9df] text-[#687861]', icon: Layers3, eyebrow: 'THE KNITTING EDIT',
+    theme: 'bg-[#DDF1E7] text-[#367A69]', icon: Layers3, eyebrow: 'THE KNITTING EDIT',
   },
   'baby-shoes': {
     label: 'Baby footwear', tagline: 'Tiny projects, thoughtful details.',
     intro: 'Baby shoes, booties and sandals in downloadable pattern form. Review measurements and sizing details before a purchase.',
     match: v => /baby|booties|sandal|clog|shoe|sneaker/i.test(v),
-    theme: 'bg-[#f1e2da] text-[#a5755e]', icon: Footprints, eyebrow: 'LITTLE BEGINNINGS',
+    theme: 'bg-[#FFE1D7] text-[#B35A56]', icon: Footprints, eyebrow: 'LITTLE BEGINNINGS',
   },
   'keychains': {
     label: 'Keychains & gifts', tagline: 'Small makes. So much heart.',
     intro: 'Little crochet charms and quick handmade gifts. Find individual digital instructions as they are approved for release.',
     match: v => /keychain|key ring|keyring/i.test(v),
-    theme: 'bg-[#e9e4ed] text-[#846b88]', icon: Gift, eyebrow: 'SMALL & LOVELY',
+    theme: 'bg-[#E7E1FC] text-[#6548AF]', icon: Gift, eyebrow: 'SMALL & LOVELY',
   },
 }
 export function generateStaticParams() { return Object.keys(collections).map(slug=>({slug})) }
@@ -44,8 +44,8 @@ export default async function Collection({params}:{params:{slug:string}}) {
   if (!c) notFound()
   const Icon=c.icon
   const list=(await getPublishedProducts()).filter(p=>c.match([p.title,p.category??'',...p.tags].join(' ')))
-  return <div className="bg-[#fcfaf7] text-[#342c25]">
-    <section className={'relative overflow-hidden border-b border-[#e5d9ce] '+c.theme}>
+  return <div className="bg-[#FFFDFD] text-[#213759]">
+    <section className={'relative overflow-hidden border-b border-[#EAE0EE] '+c.theme}>
       <div className="pointer-events-none absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full border-[40px] border-white/30" aria-hidden="true"/>
       <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-[1.2fr_.8fr] md:items-center md:py-20">
         <div className="relative z-10">
@@ -53,9 +53,9 @@ export default async function Collection({params}:{params:{slug:string}}) {
             <Link href="/" className="hover:underline">Home</Link><span>/</span><span>{c.label}</span>
           </nav>
           <p className="mt-12 text-[11px] font-bold uppercase tracking-[.22em]">{c.eyebrow}</p>
-          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.5rem,6vw,6rem)] leading-[1] tracking-[-.06em]">{c.label}<span className="text-[#b77c5b]">.</span></h1>
+          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.5rem,6vw,6rem)] leading-[1] tracking-[-.06em]">{c.label}<span className="text-[#DF5667]">.</span></h1>
           <p className="mt-6 font-serif text-2xl italic opacity-85">{c.tagline}</p>
-          <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#64574d]">{c.intro}</p>
+          <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#556B84]">{c.intro}</p>
           <Link href="/#collections" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-8"><ArrowLeft size={16}/> All collections</Link>
         </div>
         <div aria-hidden="true" className="relative hidden h-[300px] items-center justify-center md:flex">
@@ -79,7 +79,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
             <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#79695c]">Our patterns are reviewed before they appear for purchase. Nothing in this collection is listed for sale yet, and we won't show unreviewed drafts as ready-to-buy items.</p>
             <Link href="/faq" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[#865b43] underline underline-offset-8">Learn how our PDF patterns work <ArrowUpRight size={17}/></Link>
           </div>
-          <div aria-hidden="true" className="flex h-36 w-36 items-center justify-center rounded-[35px] bg-[#f4eae0] text-[#a77a5e]"><BookOpen size={62} strokeWidth={.95}/></div>
+          <div aria-hidden="true" className="flex h-36 w-36 items-center justify-center rounded-[35px] bg-[#EBE6FF] text-[#6355BB]"><BookOpen size={62} strokeWidth={.95}/></div>
         </div>}
     </section>
   </div>
