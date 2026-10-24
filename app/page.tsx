@@ -3,8 +3,10 @@ import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircleCheck, Downlo
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { EtsyTestimonials } from '@/components/etsy-testimonials'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
+export const metadata: Metadata = { title: 'Crochet & Knitting PDF Patterns | Dyasse Shop', description: 'Explore digital crochet and knitting PDF patterns: baby booties, crochet bags, keychains, amigurumi, knitted headbands and scarves. Digital instructions, not finished items.', alternates: { canonical: '/' } }
 
 const collections = [
   { href: '/collections/crochet-patterns', label: 'The crochet edit', subtitle: 'Accessories, textures & tiny keepsakes', number: '01', icon: Scissors, palette: 'bg-[#FCE4D6]', ink: 'text-[#A24748]', deco: 'bg-[#F7B4A7]' },
@@ -58,13 +60,13 @@ export default async function Home() {
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-10 lg:pb-24 lg:pt-24">
         <div className="relative z-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-[#dfd1c1] bg-white/60 px-4 py-2 text-[10px] font-bold uppercase tracking-[.20em] text-[#9b6c4b]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#a77f5b]"/> A creative space for makers
+            <span className="h-1.5 w-1.5 rounded-full bg-[#a77f5b]"/> CROCHET & KNITTING PDF PATTERNS
           </span>
           <h1 className="mt-8 max-w-[700px] font-serif text-[clamp(3.9rem,7vw,6.75rem)] leading-[.99] tracking-[-.07em] text-[#1B2D50]">
-            The beauty<br />of <em className="font-normal text-[#D45263]">making</em><br />it yourself<span className="text-[#EA7674]">.</span>
+            Crochet &amp;<br />knitting <em className="font-normal text-[#D45263]">patterns</em><span className="text-[#EA7674]">.</span>
           </h1>
           <p className="mt-7 max-w-[510px] text-[16px] leading-[1.9] text-[#726355] sm:text-[18px]">
-            A considered collection of crochet and knitting PDF patterns for handmade gifts, everyday comforts, and the joy of a new project.
+            Explore digital crochet patterns and knitting PDF instructions for baby booties, bags, keychains, amigurumi, scarves and thoughtful handmade gifts. Every released design is a downloadable pattern, not a finished item.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Link href="/#collections" className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#1E3456] px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#a2674a]">
@@ -110,6 +112,10 @@ export default async function Home() {
             <p className="mt-2 text-[13px] leading-6 text-[#66594e]">{item.subtitle}</p></div>
         </Link> })}
       </div>
+      <nav aria-label="More pattern collections" className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-5 pb-12 sm:px-8">
+        <span className="mr-2 text-xs font-bold uppercase tracking-widest text-[#8A728A]">Explore more</span>
+        {[{label:'Crochet bags',href:'/collections/crochet-bags'},{label:'Amigurumi & plush',href:'/collections/amigurumi'},{label:'Crochet accessories',href:'/collections/crochet-accessories'},{label:'Beaded bag patterns',href:'/collections/beaded-bags'}].map(item=><Link key={item.href} href={item.href} className="rounded-full border border-[#DFD4E6] bg-white px-4 py-2.5 text-sm font-semibold text-[#364C69] hover:border-[#CF6981] hover:text-[#B34660]">{item.label} ↗</Link>)}
+      </nav>
     </section>
 
     <section className="border-y border-[#e7d9ca] bg-[#F4EEF9]">
@@ -143,6 +149,20 @@ export default async function Home() {
     </section>
 
     <EtsyTestimonials />
+
+    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
+      <div className="grid gap-6 rounded-[32px] border border-[#E5DEED] bg-[#F5F2FB] p-8 md:grid-cols-2 lg:p-12">
+        <div>
+          <p className="dyasse-eyebrow">MAKER'S LEARNING CENTRE</p>
+          <h2 className="mt-4 font-serif text-4xl tracking-[-.05em]">Make sense of every stitch.</h2>
+          <p className="mt-4 text-[15px] leading-8 text-[#627087]">New to written patterns? Learn the abbreviations, materials, gauge and construction notes to check before starting.</p>
+        </div>
+        <div className="flex flex-col justify-center gap-4">
+          <Link href="/guides/crochet-patterns-for-beginners" className="flex items-center justify-between gap-4 rounded-2xl bg-white px-6 py-5 text-sm font-bold text-[#293E61] shadow-sm hover:text-[#C64F65]">How to read crochet patterns <ArrowUpRight size={19}/></Link>
+          <Link href="/guides/knitting-patterns-for-beginners" className="flex items-center justify-between gap-4 rounded-2xl bg-white px-6 py-5 text-sm font-bold text-[#293E61] shadow-sm hover:text-[#C64F65]">How to read knitting patterns <ArrowUpRight size={19}/></Link>
+        </div>
+      </div>
+    </section>
 
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
       <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">

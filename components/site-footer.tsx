@@ -7,12 +7,18 @@ const collectionLinks = [
   { label: 'Knitting patterns', href: '/collections/knitting-patterns' },
   { label: 'Baby footwear', href: '/collections/baby-shoes' },
   { label: 'Keychains & gifts', href: '/collections/keychains' },
+  { label: 'Crochet bags & purses', href: '/collections/crochet-bags' },
+  { label: 'Amigurumi patterns', href: '/collections/amigurumi' },
+  { label: 'Crochet accessories', href: '/collections/crochet-accessories' },
+  { label: 'Beaded bag patterns', href: '/collections/beaded-bags' },
 ]
 const supportLinks = [
   { label: 'About dyasse', href: '/about' },
   { label: 'How it works', href: '/faq' },
   { label: 'Contact & help', href: '/contact' },
   { label: 'Privacy policy', href: '/privacy' },
+  { label: 'Crochet beginner guide', href: '/guides/crochet-patterns-for-beginners' },
+  { label: 'Knitting beginner guide', href: '/guides/knitting-patterns-for-beginners' },
 ]
 
 export function SiteFooter() {

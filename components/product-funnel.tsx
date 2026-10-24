@@ -6,6 +6,7 @@ import { PriceDisplay } from '@/components/price-display'
 import { ProductCard } from '@/components/product-card'
 import { SaleBadge } from '@/components/sale-badge'
 import type { Product } from '@/types/product'
+import { collectionSeo, primaryCollection } from '@/lib/seo'
 
 function ItemList({ title, items }: { title: string; items: string[] }) {
   if (!items.length) return null
@@ -19,6 +20,7 @@ function ItemList({ title, items }: { title: string; items: string[] }) {
 
 export function ProductFunnel({ product, upsells, crossSells }: { product: Product; upsells: Product[]; crossSells: Product[] }) {
  const gallery=[product.image_url,...product.gallery_images].filter(Boolean)
+ const mainCollection=primaryCollection(product)
  const digitalInfo=[
    { icon: FileText, title: 'Digital PDF', detail: 'Instructions, not a physical item' },
    { icon: Download, title: 'Gumroad delivery', detail: 'Access your file after completed checkout' },
@@ -29,7 +31,7 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
    <section className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 lg:pt-12">
      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#887769]">
        <Link href="/" className="inline-flex items-center gap-1 hover:underline"><ArrowLeft size={15}/>Home</Link>
-       <span>/</span><span>{product.category || 'Digital patterns'}</span><span>/</span><span className="max-w-[200px] truncate text-[#aa7355]">{product.title}</span>
+       <span>/</span><Link href={'/collections/'+mainCollection} className="hover:underline">{collectionSeo[mainCollection].label}</Link><span>/</span><span className="max-w-[200px] truncate text-[#aa7355]">{product.title}</span>
      </nav>
      <div className="mt-9 grid gap-10 lg:grid-cols-[1.03fr_.97fr] lg:items-start lg:gap-16">
        <div className="min-w-0">
@@ -75,6 +77,10 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
          <ItemList title="Materials & tools" items={product.materials}/>
          <ItemList title="What you'll learn" items={product.what_you_will_learn}/>
         </div>:null}
+       <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold">
+         <Link href={'/collections/'+mainCollection} className="rounded-full border border-[#C9BBDA] bg-white px-5 py-3 text-[#465A83] hover:bg-[#F4F0FC]">More {collectionSeo[mainCollection].label.toLowerCase()} →</Link>
+         <Link href={mainCollection==='knitting-patterns'?'/guides/knitting-patterns-for-beginners':'/guides/crochet-patterns-for-beginners'} className="rounded-full border border-[#C9BBDA] bg-white px-5 py-3 text-[#465A83] hover:bg-[#F4F0FC]">How to read a pattern →</Link>
+       </div>
        <div className="mt-8 flex flex-wrap items-start gap-4 rounded-[22px] border border-[#e3d5c5] bg-[#EBE7FD] p-6">
          <BookOpen size={24} strokeWidth={1.4} className="shrink-0 text-[#B7546B]"/>
          <div className="flex-1"><p className="font-semibold">Before you get started</p><p className="mt-2 text-sm leading-7 text-[#756357]">Check your materials, finished dimensions and the PDF instructions. Read our guide to digital downloads before ordering.</p>
