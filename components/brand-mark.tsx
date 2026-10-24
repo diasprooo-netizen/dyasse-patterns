@@ -3,15 +3,14 @@ import { ArrowUpRight } from 'lucide-react'
 
 export function BrandMark({ light = false }: { light?: boolean }) {
   return <Link href="/" aria-label="dyasse — home" className="group inline-flex min-w-0 items-center gap-3">
-    <span className={'relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[15px] border transition-transform group-hover:-rotate-6 ' +
-      (light ? 'border-white/35 bg-[#fff8ee] text-[#382e29]' : 'border-[#223A5C] bg-[#1A3153] text-white')}>
-      <span aria-hidden="true" className="absolute -left-3 top-0 h-9 w-9 rounded-full border border-current opacity-20" />
-      <span aria-hidden="true" className="absolute -bottom-4 -right-2 h-10 w-10 rounded-full border border-current opacity-30" />
-      <span aria-hidden="true" className="relative -mt-1 font-serif text-[34px] italic leading-none">d</span>
+    <span className={'relative flex h-[43px] w-[43px] shrink-0 items-center justify-center border transition-transform duration-200 group-hover:-rotate-3 ' +
+      (light ? 'border-[#DACCBF]/40 bg-[#F2EAE0] text-[#273849]' : 'border-[#D8C8B9] bg-[#EFE7DC] text-[#7B5C51]')}>
+      <span aria-hidden="true" className="absolute left-1.5 top-1.5 h-3 w-3 rounded-full border border-current opacity-25"/>
+      <span aria-hidden="true" className="relative -mt-1 font-serif text-[32px] font-normal italic leading-none">d</span>
     </span>
     <span className="flex flex-col">
-      <span className={'font-serif text-[27px] font-bold leading-none tracking-[-.065em] ' + (light ? 'text-white' : 'text-[#1A3153]')}>dyasse<span className={light ? 'text-[#d6a989]' : 'text-[#EB666C]'}>.</span></span>
-      <span className={'mt-1 text-[9px] font-semibold uppercase tracking-[.20em] ' + (light ? 'text-white/60' : 'text-[#697B97]')}>Patterns for makers</span>
+      <span className={'font-serif text-[30px] font-normal leading-[.96] tracking-[-.075em] ' + (light ? 'text-[#F7F2EA]' : 'text-[#28394A]')}>dyasse<span className={light ? 'text-[#C99B8A]' : 'text-[#AD6970]'}>.</span></span>
+      <span className={'mt-1.5 text-[8px] font-bold uppercase tracking-[.23em] ' + (light ? 'text-[#B8C5C1]' : 'text-[#7C817C]')}>Patterns for makers</span>
     </span>
   </Link>
 }
