@@ -3,13 +3,13 @@ import type { Metadata } from 'next'
 import { ArrowUpRight, BookOpen, Heart, Leaf, PenLine, Scissors } from 'lucide-react'
 export const metadata: Metadata={title:'The story of dyasse',description:'Dyasse shop creates a thoughtful home for crochet and knitting PDF patterns.',alternates:{canonical:'/about'}}
 export default function About(){
- return <div className="bg-[#fcfaf7] text-[#342c25]">
-  <section className="overflow-hidden bg-[#f1e7d9] px-5 py-20 sm:px-8 lg:py-28">
+ return <div className="bg-[#FFFDFD] text-[#203759]">
+  <section className="overflow-hidden bg-[linear-gradient(120deg,#FDE8DB,#F4D6E1_65%,#E7E1F9)] px-5 py-20 sm:px-8 lg:py-28">
     <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.15fr_.85fr]">
       <div><p className="dyasse-eyebrow">A LITTLE ABOUT DYASSE</p>
-        <h1 className="mt-6 font-serif text-[clamp(3.6rem,6vw,6.4rem)] leading-[.99] tracking-[-.06em]">Good things are<br/><em className="font-normal text-[#ae7454]">made by hand.</em></h1>
+        <h1 className="mt-6 font-serif text-[clamp(3.6rem,6vw,6.4rem)] leading-[.99] tracking-[-.06em]">Good things are<br/><em className="font-normal text-[#D94D65]">made by hand.</em></h1>
         <p className="mt-8 max-w-xl text-[17px] leading-9 text-[#6d5c50]">We love the details that turn a ball of yarn into something meaningful. Dyasse brings together crochet and knitting PDF patterns for makers who enjoy the process just as much as the result.</p>
-        <Link href="/#collections" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#352c25] px-6 text-sm font-semibold text-white">Explore our collections <ArrowUpRight size={17}/></Link>
+        <Link href="/#collections" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1D3657] px-6 text-sm font-semibold text-white">Explore our collections <ArrowUpRight size={17}/></Link>
       </div>
       <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-md rounded-[50px] bg-[#dec8b4] p-9">
         <div className="absolute -right-12 top-10 h-56 w-56 rounded-full border border-white/60"/>
