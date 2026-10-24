@@ -1,20 +1,30 @@
 import Link from 'next/link'
-import Header from '@/components/Header'
-
+import { ArrowLeft, ArrowRight, ShieldCheck, UserRound } from 'lucide-react'
+export const metadata={title:'Create a Dyasse account',robots:{index:false,follow:false}}
 export default function SignupPage({searchParams}:{searchParams?:{error?:string;message?:string}}){
  const msg=searchParams?.message
  const error=searchParams?.error
- return <main className="min-h-screen bg-[#fff8ef] text-[#2f261f]"><Header/>
-  <div className="mx-auto max-w-xl px-6 py-16"><div className="rounded-3xl border border-[#eadbc8] bg-white p-8 shadow-sm">
-  <h1 className="text-3xl font-bold">Create your Dyasse account</h1>
-  <p className="mt-3 text-[#756453]">Create a real account with Supabase Authentication. Admin access requires separate approval and is never granted automatically.</p>
-  {error?<p role="alert" className="mt-5 rounded-xl bg-red-50 p-4 text-sm text-red-800">{error}</p>:null}
-  {msg?<p role="status" className="mt-5 rounded-xl bg-green-50 p-4 text-sm text-green-800">{msg}</p>:null}
-  <form action="/auth/signup" method="post" className="mt-8 space-y-5">
-  <label className="block text-sm font-semibold">Email address<input name="email" type="email" autoComplete="email" required maxLength={254} className="mt-2 w-full rounded-xl border border-[#dfcab5] px-4 py-3"/></label>
-  <label className="block text-sm font-semibold">Password<input name="password" type="password" minLength={8} maxLength={128} autoComplete="new-password" required className="mt-2 w-full rounded-xl border border-[#dfcab5] px-4 py-3"/></label>
-  <label className="block text-sm font-semibold">Confirm password<input name="confirm" type="password" minLength={8} maxLength={128} autoComplete="new-password" required className="mt-2 w-full rounded-xl border border-[#dfcab5] px-4 py-3"/></label>
-  <button type="submit" className="w-full rounded-xl bg-[#2f261f] px-6 py-4 font-semibold text-white">Create account</button>
-  </form><p className="mt-6 text-sm">Already have an account? <Link className="underline" href="/account/login">Sign in</Link></p>
-  </div></div></main>
+ return <div className="bg-[#fcfaf7] px-5 py-16 text-[#352c25] sm:px-8 lg:py-24">
+  <div className="mx-auto max-w-xl rounded-[30px] border border-[#e5d8c9] bg-white p-8 shadow-[0_15px_60px_rgba(51,36,23,.05)] sm:p-12">
+   <Link href="/account/login" className="inline-flex items-center gap-2 text-sm text-[#785f50]"><ArrowLeft size={16}/> Back to sign in</Link>
+   <span className="mt-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f2e7dc] text-[#a26e51]"><UserRound size={27} strokeWidth={1.5}/></span>
+   <h1 className="mt-6 font-serif text-[clamp(2.4rem,5vw,3.7rem)] leading-tight tracking-[-.05em]">A place for <em className="font-normal text-[#ad7556]">makers.</em></h1>
+   <p className="mt-4 text-sm leading-7 text-[#756558]">Create a Dyasse account with secure email and password authentication. Admin privileges are managed separately.</p>
+   {error ? <p role="alert" className="mt-6 rounded-xl bg-[#fff0ec] p-4 text-sm text-[#952c27]">{error}</p> : null}
+   {msg ? <p role="status" className="mt-6 rounded-xl bg-[#ecf4e7] p-4 text-sm text-[#446941]">{msg}</p> : null}
+   <form action="/auth/signup" method="post" className="mt-8 space-y-5">
+    <label className="block text-sm font-semibold">Email address
+     <input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="you@example.com"
+      className="mt-2 block w-full rounded-xl border border-[#d9c9bb] bg-[#fffcf7] px-4 py-3.5 font-normal outline-none focus:border-[#a77355]"/></label>
+    <label className="block text-sm font-semibold">Password
+     <input name="password" type="password" minLength={8} maxLength={128} autoComplete="new-password" required placeholder="At least 8 characters"
+      className="mt-2 block w-full rounded-xl border border-[#d9c9bb] bg-[#fffcf7] px-4 py-3.5 font-normal outline-none focus:border-[#a77355]"/></label>
+    <label className="block text-sm font-semibold">Confirm password
+     <input name="confirm" type="password" minLength={8} maxLength={128} autoComplete="new-password" required placeholder="Repeat your password"
+      className="mt-2 block w-full rounded-xl border border-[#d9c9bb] bg-[#fffcf7] px-4 py-3.5 font-normal outline-none focus:border-[#a77355]"/></label>
+    <button type="submit" className="inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-full bg-[#352c25] px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-[#94654d]">Create account <ArrowRight size={17}/></button>
+   </form>
+   <p className="mt-6 flex items-start gap-2 text-xs leading-6 text-[#79695d]"><ShieldCheck className="mt-0.5 shrink-0 text-[#819074]" size={16}/> Your email may need verification before you sign in. Never share your password with anyone.</p>
+  </div>
+ </div>
 }

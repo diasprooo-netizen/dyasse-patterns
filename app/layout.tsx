@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
-import { SiteHeader } from '@/components/site-header'
+import { SiteChrome } from '@/components/site-chrome'
 import { CartProvider } from '@/context/CartContext'
 import './globals.css'
 
@@ -9,5 +9,5 @@ const isPublicDomain = /^https:\/\/(www\.)?dyasse\.com\/?$/i.test(siteUrl)
 export const metadata: Metadata = { metadataBase: new URL(siteUrl), title: { default: 'Dyasse Shop | Premium Crochet PDF Patterns', template: '%s | Dyasse Shop' }, description: 'Premium digital crochet and knitting patterns for modern handmade makers.', robots: { index: isPublicDomain, follow: isPublicDomain } }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className="min-h-screen bg-background font-sans text-foreground antialiased"><CartProvider><SiteHeader /><main>{children}</main></CartProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="en"><body className="min-h-screen bg-background font-sans text-foreground antialiased"><CartProvider><SiteChrome>{children}</SiteChrome></CartProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
 }

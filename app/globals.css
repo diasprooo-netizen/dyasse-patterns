@@ -72,3 +72,30 @@
   .crochet-badge { @apply rounded-full bg-[#c77d4a] px-3 py-1 text-xs font-semibold text-white; }
   .knitting-badge { @apply rounded-full bg-[#7a9e7e] px-3 py-1 text-xs font-semibold text-white; }
 }
+
+/* Dyasse editorial store design tokens and craft illustration surfaces. */
+@theme inline {
+  --font-serif: Georgia, 'Times New Roman', ui-serif, serif;
+}
+@layer base {
+  body { background: #fcfaf7; color: #342c25; }
+  ::selection { background: #ead0be; color: #32271f; }
+  :focus-visible { outline: 3px solid #b8734d; outline-offset: 4px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+}
+.dyasse-stitch-pattern {
+  background-color: #eee1d0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(148,112,90,.17) 0 2px, transparent 2px 13px),
+    repeating-linear-gradient(-45deg, rgba(148,112,90,.11) 0 2px, transparent 2px 13px);
+  background-size: 28px 28px;
+}
+.dyasse-eyebrow {
+  display: flex; align-items: center; gap: .75rem; color: #a37354;
+  font-size: 11px; font-weight: 750; line-height: 1.6;
+  letter-spacing: .20em; text-transform: uppercase;
+}
+.dyasse-container { width: min(100% - 2.5rem, 80rem); margin-inline: auto; }
+@media(min-width:640px) { .dyasse-container { width: min(100% - 4rem, 80rem); } }
