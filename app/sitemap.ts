@@ -1,10 +1,46 @@
 import type { MetadataRoute } from 'next'
 import { getPublishedProducts } from '@/lib/products'
+import { collectionSeo, IS_OFFICIAL_DOMAIN, primaryCollection, SITE_URL } from '@/lib/seo'
+
 export const dynamic = 'force-dynamic'
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
- const rawBase = process.env.NEXT_PUBLIC_SITE_URL || 'https://dyasse-patterns.vercel.app'; const base = rawBase.endsWith('/') ? rawBase.slice(0,-1) : rawBase
- const paths=['/','/collections/crochet-patterns','/collections/knitting-patterns','/collections/baby-shoes','/collections/keychains','/about','/contact','/privacy','/faq']
- const staticPages=paths.map(path=>({url:base+path,changeFrequency:'weekly' as const,priority:path==='/'?1:0.6}))
- const products=(await getPublishedProducts()).map(p=>({url:base+'/product/'+encodeURIComponent(p.slug),lastModified:new Date(p.updated_at??p.created_at),changeFrequency:'weekly' as const,priority:0.8}))
- return [...staticPages,...products]
+  // The temporary Vercel URL is intentionally non-indexed until dyasse.com
+  // is connected and verified. Draft product URLs never enter any sitemap.
+  if (!IS_OFFICIAL_DOMAIN) return []
+
+  const products = await getPublishedProducts()
+  const activeCollections = new Set(products.map(primaryCollection))
+  // Include the main crochet collection as the parent for all crochet projects.
+  if (products.some(p => primaryCollection(p) !== 'knitting-patterns' && primaryCollection(p) !== 'beaded-bags')) {
+    activeCollections.add('crochet-patterns')
+  }
+
+  const staticPages: MetadataRoute.Sitemap = [
+    '/', '/about', '/contact', '/faq', '/privacy',
+    '/guides/crochet-patterns-for-beginners',
+    '/guides/knitting-patterns-for-beginners',
+  ].map(path => ({
+    url: SITE_URL + path,
+    changeFrequency: 'monthly' as const,
+    priority: path === '/' ? 1 : path.startsWith('/guides') ? 0.7 : 0.5,
+  }))
+
+  const collections = Object.keys(collectionSeo)
+    .filter(slug => activeCollections.has(slug as keyof typeof collectionSeo))
+    .map(slug => ({
+      url: SITE_URL + '/collections/' + slug,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    }))
+
+  const productPages = products.map(p => ({
+    url: SITE_URL + '/product/' + encodeURIComponent(p.slug),
+    lastModified: new Date(p.updated_at ?? p.created_at),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+    images: p.image_url ? [p.image_url] : [],
+  }))
+
+  return [...staticPages, ...collections, ...productPages]
 }
