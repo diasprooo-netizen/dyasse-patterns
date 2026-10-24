@@ -1,147 +1,160 @@
 import Link from 'next/link'
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircleCheck, Download, FileText, Footprints, Gift, Layers3, Leaf, Scissors, Sparkles, WandSparkles } from 'lucide-react'
+import type { Metadata } from 'next'
+import {
+  ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText,
+  Footprints, Gift, Layers3, Leaf, Scissors, ShieldCheck, Sparkles
+} from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { EtsyTestimonials } from '@/components/etsy-testimonials'
-import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
-export const metadata: Metadata = { title: 'Crochet & Knitting PDF Patterns | Dyasse Shop', description: 'Explore digital crochet and knitting PDF patterns: baby booties, crochet bags, keychains, amigurumi, knitted headbands and scarves. Digital instructions, not finished items.', alternates: { canonical: '/' } }
+export const metadata: Metadata = {
+  title: 'Crochet & Knitting PDF Patterns | Dyasse Shop',
+  description: 'Explore digital crochet and knitting PDF patterns for baby booties, bags, keychains, amigurumi, knitted headbands and scarves. Each released listing includes project details.',
+  alternates: { canonical: '/' },
+}
 
 const collections = [
-  { href: '/collections/crochet-patterns', label: 'The crochet edit', subtitle: 'Accessories, textures & tiny keepsakes', number: '01', icon: Scissors, palette: 'bg-[#FCE4D6]', ink: 'text-[#A24748]', deco: 'bg-[#F7B4A7]' },
-  { href: '/collections/knitting-patterns', label: 'All things knit', subtitle: 'Modern hats, scarves & headbands', number: '02', icon: Layers3, palette: 'bg-[#DCEFE8]', ink: 'text-[#276B64]', deco: 'bg-[#B4D9CB]' },
-  { href: '/collections/baby-shoes', label: 'Little beginnings', subtitle: 'Delicate makes for little feet', number: '03', icon: Footprints, palette: 'bg-[#FFE4D5]', ink: 'text-[#B65C44]', deco: 'bg-[#FAB7A1]' },
-  { href: '/collections/keychains', label: 'Small & lovely', subtitle: 'Crochet charms and thoughtful gifts', number: '04', icon: Gift, palette: 'bg-[#E9E2FC]', ink: 'text-[#644EB2]', deco: 'bg-[#CDBEF6]' },
+  { href: '/collections/crochet-patterns', label: 'Crochet patterns', detail: 'From beautiful little accessories to treasured keepsakes', number: '01', icon: Scissors, tint: 'bg-[#EFE8DE]', ink: 'text-[#8D6E5C]' },
+  { href: '/collections/knitting-patterns', label: 'Knitting patterns', detail: 'Comforting scarves, timeless headbands and knitwear', number: '02', icon: Layers3, tint: 'bg-[#E4EAE2]', ink: 'text-[#687C69]' },
+  { href: '/collections/baby-shoes', label: 'Baby booties', detail: 'Thoughtful little makes for tiny feet', number: '03', icon: Footprints, tint: 'bg-[#F2E2DB]', ink: 'text-[#AD7168]' },
+  { href: '/collections/crochet-bags', label: 'Bags & purses', detail: 'Useful pieces with a handmade point of view', number: '04', icon: Gift, tint: 'bg-[#E9E8E4]', ink: 'text-[#777566]' },
 ]
 
-function HeroArtwork() {
-  return <div className="relative mx-auto flex h-[430px] w-full max-w-[520px] items-center justify-center sm:h-[520px]" aria-label="Decorative illustration of a crafting journal and yarn">
-    <div className="absolute inset-[5%_7%_5%_4%] rotate-[7deg] rounded-[46px] bg-[#ED8E91]" />
-    <div className="absolute left-[7%] top-[9%] h-28 w-28 rounded-full border border-[#fff7ec]/50 sm:h-40 sm:w-40" aria-hidden="true" />
-    <div className="absolute bottom-[5%] right-[4%] h-40 w-40 rounded-full border border-[#fcf6ed]/50 sm:h-56 sm:w-56" aria-hidden="true" />
-    <div className="absolute left-[13%] top-[7%] w-[74%] -rotate-[7deg] rounded-[26px] border border-[#e4d5c5] bg-[#fdfaf3] p-6 shadow-[0_27px_60px_rgba(69,45,30,.16)] sm:p-8">
-      <div className="flex items-center justify-between border-b border-[#eae0d3] pb-4">
-        <span className="font-serif text-2xl italic text-[#61483b]">Notes from the studio</span>
-        <span className="text-[10px] font-semibold tracking-[.2em] text-[#a27e66]">NO. 001</span>
+const extraCollections = [
+  { href: '/collections/keychains', label: 'Keychains & gifts' },
+  { href: '/collections/amigurumi', label: 'Amigurumi & plush' },
+  { href: '/collections/crochet-accessories', label: 'Crochet accessories' },
+  { href: '/collections/beaded-bags', label: 'Beaded bags' },
+]
+
+function StudioArtwork() {
+  return <div className="relative mx-auto h-[440px] w-full max-w-[530px] sm:h-[530px]" aria-label="Stylized studio still life with pattern notes and a ball of yarn" role="img">
+    <div className="absolute inset-x-[10%] top-[5%] bottom-[6%] rounded-t-[220px] rounded-b-[42px] border border-[#E1D9CE] bg-[#E9E3D8]"/>
+    <div className="absolute inset-x-[15%] top-[9%] bottom-[10%] rounded-t-[220px] rounded-b-[35px] border border-white/80 bg-[#F3EEE6]"/>
+    <div className="absolute left-[4%] top-[15%] z-10 w-[58%] -rotate-[8deg] rounded-[7px] border border-[#E1D8CB] bg-[#FFFEFC] px-6 pb-6 pt-7 shadow-[0_24px_50px_rgba(44,45,37,.11)] sm:px-8 sm:pt-9">
+      <div className="flex items-center justify-between border-b border-[#E7E0D7] pb-3">
+        <span className="text-[9px] font-bold uppercase tracking-[.23em] text-[#856F60]">Pattern notebook</span>
+        <span className="font-serif text-[16px] italic text-[#A68D7A]">no. 01</span>
       </div>
-      <div className="relative mt-6 flex aspect-square items-center justify-center overflow-hidden rounded-[18px] bg-[#eee4d4]">
-        <div className="absolute inset-0 opacity-70 dyasse-stitch-pattern" />
-        <div className="relative grid h-[77%] w-[77%] place-items-center rounded-full border-[10px] border-[#f9f6eb] bg-[#BE7ABF] shadow-[0_15px_35px_rgba(83,57,40,.16)]">
-          <div className="grid h-[78%] w-[78%] place-items-center rounded-full border border-[#f3e5d5]/70 bg-[#F6B6B8]">
-            <svg viewBox="0 0 180 180" aria-hidden="true" className="h-[82%] w-[82%] fill-none stroke-[#875f4a]" strokeWidth="2.2" strokeLinecap="round">
-              <path d="M26 108c21-32 44-41 65-20 18 18 38 12 57-15M26 121c21-32 44-41 65-20 18 18 38 12 57-15M26 134c21-32 44-41 65-20 18 18 38 12 57-15" />
-              <path d="M38 44c9 16 24 18 36 5s26-8 37 4 24 10 34-5M37 57c9 16 24 18 36 5s26-8 37 4 24 10 34-5M37 70c9 16 24 18 36 5s26-8 37 4 24 10 34-5" />
-            </svg>
-          </div>
-        </div>
-        <div className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#fff8ee]/90 text-[#8d674e] shadow-sm"><Leaf size={22} strokeWidth={1.3} /></div>
+      <div className="mt-6 space-y-3">
+        <div className="h-[1px] w-full bg-[#E3E0DB]"/><div className="h-[1px] w-[75%] bg-[#E3E0DB]"/><div className="h-[1px] w-[92%] bg-[#E3E0DB]"/>
       </div>
-      <div className="mt-5 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[.16em] text-[#9c7f6b]">
-        <span>Make · create · repeat</span><span>dyasse / studio</span>
-      </div>
+      <svg viewBox="0 0 260 185" aria-hidden="true" className="mt-7 w-full fill-none stroke-[#A78F80]" strokeWidth="1.5" strokeLinecap="round">
+        <path d="M28 89c31-41 54-50 85-14s62 29 112-11M25 101c31-41 54-50 85-14s62 29 112-11M22 113c31-41 54-50 85-14s62 29 112-11M20 125c31-41 54-50 85-14s62 29 112-11"/>
+        <path d="M48 26c23 29 45 29 62 9s35-18 51 3 37 21 55-4M42 39c23 29 45 29 62 9s35-18 51 3 37 21 55-4M38 52c23 29 45 29 62 9s35-18 51 3 37 21 55-4"/>
+        <path d="M36 151h180M36 158h117"/>
+      </svg>
+      <div className="mt-4 flex items-center justify-between border-t border-[#E7E0D7] pt-3 text-[8px] font-bold uppercase tracking-[.16em] text-[#A18D7B]"><span>Made with care</span><span>dyasse</span></div>
     </div>
-    <div className="absolute -bottom-1 right-[1%] flex w-[57%] -rotate-[4deg] items-center gap-3 rounded-2xl border border-[#d8c5b5] bg-white px-5 py-4 shadow-[0_16px_35px_rgba(69,45,30,.14)] sm:bottom-[5%]">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e5eadf] text-[#65795c]"><BookOpen size={19} strokeWidth={1.6}/></span>
-      <span className="text-left"><span className="block text-xs font-bold text-[#46392f]">A little creativity</span><span className="mt-1 block text-[10px] text-[#8b796b]">One stitch at a time</span></span>
+    <div className="absolute bottom-[9%] right-[2%] z-20 flex h-[56%] w-[58%] items-center justify-center">
+      <div className="absolute inset-[8%] rounded-full bg-[#C7A9A0] shadow-[0_30px_45px_rgba(68,47,41,.17)]"/>
+      <svg viewBox="0 0 300 300" aria-hidden="true" className="relative h-full w-full fill-none stroke-[#F8EBE3]" strokeLinecap="round" strokeWidth="4">
+        <circle cx="150" cy="150" r="117" stroke="#B78C81" strokeWidth="2" />
+        <path d="M54 177c13-83 83-140 166-124M50 192c19-95 105-153 194-117M67 225c25-98 120-143 192-105M99 249c15-101 102-150 162-101M132 263c-2-94 67-155 115-152M165 259c-20-96 32-153 71-165M194 250c-38-93-1-142 23-162M64 116c89-11 154 44 174 130M52 142c104-18 170 44 176 104M70 89c82 6 155 73 155 149M101 65c64 24 119 88 112 172"/>
+        <path d="M235 222c31 21 50 34 47 68" stroke="#BD9489" strokeWidth="5"/>
+      </svg>
     </div>
-    <div className="absolute left-0 top-[27%] flex rotate-[-10deg] items-center gap-2 rounded-full border border-[#eadac6] bg-[#fffdf8] px-4 py-3 shadow-md">
-      <Sparkles size={14} className="text-[#bc855d]"/><span className="text-[10px] font-semibold text-[#715a48]">THE MAKER'S EDIT</span>
+    <div className="absolute bottom-[2%] left-[7%] z-30 flex items-center gap-3 border border-[#E1D9CC] bg-[#FFFCF7] px-4 py-3 shadow-[0_14px_26px_rgba(49,43,35,.08)]">
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E4EBE1] text-[#718173]"><Leaf size={17}/></span>
+      <span className="font-serif text-lg italic text-[#57625E]">For the love of making</span>
     </div>
+    <div className="absolute right-[6%] top-[9%] z-20 h-11 w-11 rounded-full border border-[#D0B9A4] bg-[#F5E9D9] p-3 text-[#A68A76]"><Sparkles size={19}/></div>
   </div>
 }
 
 export default async function Home() {
   const products = (await getPublishedProducts()).slice(0, 8)
-  return <div className="overflow-hidden bg-[#FFFCFD] text-[#1C304F]">
-    <section className="relative overflow-hidden border-b border-[#E6DDEA] bg-[linear-gradient(115deg,#FFF2E9_0%,#F8D6D5_55%,#EAE2FD_100%)]">
-      <div className="pointer-events-none absolute -left-44 top-4 h-[480px] w-[480px] rounded-full border border-[#dcd0c1]/60" aria-hidden="true"/>
-      <div className="pointer-events-none absolute -left-32 top-16 h-[370px] w-[370px] rounded-full border border-[#dcd0c1]/60" aria-hidden="true"/>
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-10 lg:pb-24 lg:pt-24">
+  return <div className="overflow-hidden bg-[#FBF9F5] text-[#263345]">
+    <section className="relative overflow-hidden border-b border-[#E7E1D9] bg-[#F7F3ED]">
+      <div className="pointer-events-none absolute -left-28 top-8 h-80 w-80 rounded-full border border-[#E7DED4]" aria-hidden="true"/>
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:gap-7 lg:pb-24 lg:pt-20">
         <div className="relative z-10">
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#dfd1c1] bg-white/60 px-4 py-2 text-[10px] font-bold uppercase tracking-[.20em] text-[#9b6c4b]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#a77f5b]"/> CROCHET & KNITTING PDF PATTERNS
-          </span>
-          <h1 className="mt-8 max-w-[700px] font-serif text-[clamp(3.9rem,7vw,6.75rem)] leading-[.99] tracking-[-.07em] text-[#1B2D50]">
-            Crochet &amp;<br />knitting <em className="font-normal text-[#D45263]">patterns</em><span className="text-[#EA7674]">.</span>
+          <div className="dyasse-eyebrow"><span className="h-px w-9 bg-[#A9565F]"/> THE DYASSE PATTERN LIBRARY</div>
+          <h1 className="mt-7 max-w-[710px] font-serif text-[clamp(3.5rem,6.5vw,6.3rem)] leading-[1.035] tracking-[-.065em] text-[#273849]">
+            Made to be<br/><span className="italic font-normal text-[#A9565F]">made by you.</span>
           </h1>
-          <p className="mt-7 max-w-[510px] text-[16px] leading-[1.9] text-[#726355] sm:text-[18px]">
-            Explore digital crochet patterns and knitting PDF instructions for baby booties, bags, keychains, amigurumi, scarves and thoughtful handmade gifts. Every released design is a downloadable pattern, not a finished item.
+          <p className="mt-8 max-w-[500px] text-[16px] leading-[1.95] text-[#66717D] sm:text-[17px]">
+            A considered home for crochet and knitting PDF patterns. Discover thoughtful projects for the little things, the useful things, and the things worth making by hand.
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link href="/#collections" className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#1E3456] px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#a2674a]">
-              Explore the collections <ArrowUpRight size={17} strokeWidth={1.8}/>
-            </Link>
-            <Link href="/about" className="inline-flex min-h-14 items-center gap-2 rounded-full border border-[#cdb9a8] px-7 text-sm font-semibold text-[#46362d] transition hover:bg-white">
-              Our story <ArrowRight size={16}/>
-            </Link>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/collections/crochet-patterns" className="dyasse-button-primary">Explore crochet patterns <ArrowUpRight size={17}/></Link>
+            <Link href="/collections/knitting-patterns" className="dyasse-button-secondary">Shop knitting <ArrowRight size={16}/></Link>
           </div>
-          <div className="mt-12 flex flex-wrap items-center gap-6 border-t border-[#ded2c4] pt-6 text-[11px] font-semibold uppercase tracking-[.15em] text-[#907865]">
-            <span className="inline-flex items-center gap-2"><FileText size={16}/> Digital PDFs</span>
-            <span className="inline-flex items-center gap-2"><Scissors size={16}/> Crochet & knit</span>
-            <span className="inline-flex items-center gap-2"><Leaf size={16}/> Make at your pace</span>
+          <p className="mt-6 max-w-[510px] text-xs leading-6 text-[#7B827F]">Digital patterns, not finished handmade items. Only checked and released designs are offered for purchase.</p>
+          <div className="mt-11 flex flex-wrap gap-6 border-t border-[#DFD6C9] pt-6 text-[11px] font-semibold uppercase tracking-[.11em] text-[#68736E]">
+            <span className="inline-flex items-center gap-2"><FileText size={16} strokeWidth={1.5}/> PDF patterns</span>
+            <span className="inline-flex items-center gap-2"><ShieldCheck size={16} strokeWidth={1.5}/> Clear purchase details</span>
+            <span className="inline-flex items-center gap-2"><Leaf size={16} strokeWidth={1.5}/> Make at your pace</span>
           </div>
         </div>
-        <div className="relative z-10 lg:pl-4"><HeroArtwork /></div>
+        <StudioArtwork/>
+      </div>
+    </section>
+
+    <section className="border-b border-[#E9E1D8] bg-white">
+      <div className="mx-auto grid max-w-7xl divide-y divide-[#E9E1D8] px-5 py-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 sm:px-8">
+        {[
+          {icon:FileText,title:'Digital by design',detail:'PDF instructions, never a shipped item'},
+          {icon:CheckCircle2,title:'Know what you’re making',detail:'Project information before checkout'},
+          {icon:ShieldCheck,title:'Checkout through Gumroad',detail:'For patterns released and ready to buy'},
+        ].map(({icon:Icon,title,detail})=><div key={title} className="flex items-center gap-4 px-3 py-4 sm:px-6">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F2EDE6] text-[#92796B]"><Icon size={19} strokeWidth={1.5}/></span>
+          <div><p className="text-[13px] font-bold text-[#334251]">{title}</p><p className="mt-1 text-xs leading-5 text-[#758085]">{detail}</p></div>
+        </div>)}
       </div>
     </section>
 
     <section id="collections" className="scroll-mt-32 mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-      <div className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <div><p className="dyasse-eyebrow"><span className="h-px w-8 bg-current" /> FIND YOUR KIND OF MAKING</p>
-          <h2 className="mt-5 max-w-xl font-serif text-[clamp(2.65rem,5vw,4.6rem)] leading-[1.08] tracking-[-.05em]">
-            A project for every <em className="font-normal text-[#D45263]">mood.</em>
-          </h2></div>
-        <p className="max-w-xs text-sm leading-7 text-[#617089]">Big ideas, small keepsakes, and everything in between. Find your next favourite craft.</p>
+      <div className="mb-11 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <p className="dyasse-eyebrow"><span className="h-px w-8 bg-current"/> THE COLLECTIONS</p>
+          <h2 className="mt-5 max-w-2xl font-serif text-[clamp(2.8rem,5vw,4.7rem)] leading-[1.08] tracking-[-.05em]">Find a project that<br/><span className="italic font-normal text-[#A9565F]">feels like you.</span></h2>
+        </div>
+        <p className="max-w-[310px] text-sm leading-8 text-[#707982]">Explore the things you love to make, from baby booties to textured knits and everyday bags.</p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {collections.map((item) => { const Icon = item.icon; return <Link href={item.href} key={item.href}
-          className={'group relative flex min-h-[340px] flex-col overflow-hidden rounded-[25px] p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_38px_rgba(56,38,26,.12)] ' + item.palette}>
-          <div className={'absolute -right-20 -top-12 h-56 w-56 rounded-full '+item.deco} aria-hidden="true"/>
-          <div className={'absolute -right-3 bottom-24 h-40 w-40 rounded-full border-2 border-current opacity-20 '+item.ink} aria-hidden="true"/>
-          <div className="relative flex items-start justify-between">
-            <span className={'text-xs font-semibold tracking-widest '+item.ink}>{item.number} / COLLECTION</span>
-            <span className={'flex h-11 w-11 items-center justify-center rounded-full border border-current/25 bg-white/65 '+item.ink}><ArrowUpRight size={19}/></span>
+        {collections.map(({href,label,detail,number,icon:Icon,tint,ink})=><Link href={href} key={href} className="group relative flex min-h-[332px] flex-col overflow-hidden rounded-[5px] border border-[#E7E0D8] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-[#CCB9AD] hover:shadow-[0_22px_45px_rgba(52,49,44,.08)] sm:p-7">
+          <div className="flex items-center justify-between"><span className="text-[10px] font-bold tracking-[.19em] text-[#9E948C]">{number} / COLLECTION</span><ArrowUpRight size={17} className="text-[#867C70] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"/></div>
+          <div className="my-auto flex min-h-[170px] items-center justify-center">
+            <div className={'relative flex h-[132px] w-[132px] items-center justify-center rounded-full border border-white/80 '+tint+' '+ink}>
+              <div className="absolute -inset-4 rounded-full border border-current/10" aria-hidden="true"/>
+              <Icon size={61} strokeWidth={1.1}/>
+            </div>
           </div>
-          <div className="relative my-auto flex min-h-[150px] items-center justify-center">
-            <span className={'relative flex h-[126px] w-[126px] items-center justify-center rounded-[35px] border-2 border-white/80 bg-white/45 shadow-[0_16px_30px_rgba(54,39,29,.07)] transition-transform group-hover:rotate-[-8deg] group-hover:scale-105 '+item.ink}>
-              <Icon size={60} strokeWidth={1.05} aria-hidden="true"/>
-            </span>
-          </div>
-          <div className="relative"><h3 className="font-serif text-[28px] leading-tight tracking-[-.035em]">{item.label}</h3>
-            <p className="mt-2 text-[13px] leading-6 text-[#66594e]">{item.subtitle}</p></div>
-        </Link> })}
+          <h3 className="font-serif text-[27px] tracking-[-.035em] text-[#273849]">{label}</h3>
+          <p className="mt-2 text-[13px] leading-6 text-[#777E80]">{detail}</p>
+        </Link>)}
       </div>
-      <nav aria-label="More pattern collections" className="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-5 pb-12 sm:px-8">
-        <span className="mr-2 text-xs font-bold uppercase tracking-widest text-[#8A728A]">Explore more</span>
-        {[{label:'Crochet bags',href:'/collections/crochet-bags'},{label:'Amigurumi & plush',href:'/collections/amigurumi'},{label:'Crochet accessories',href:'/collections/crochet-accessories'},{label:'Beaded bag patterns',href:'/collections/beaded-bags'}].map(item=><Link key={item.href} href={item.href} className="rounded-full border border-[#DFD4E6] bg-white px-4 py-2.5 text-sm font-semibold text-[#364C69] hover:border-[#CF6981] hover:text-[#B34660]">{item.label} ↗</Link>)}
+      <nav aria-label="More pattern collections" className="mt-8 flex flex-wrap items-center gap-3">
+        <span className="mr-2 text-[10px] font-bold uppercase tracking-[.16em] text-[#8A837D]">Also explore</span>
+        {extraCollections.map(item=><Link href={item.href} key={item.href} className="rounded-full border border-[#DED5CB] bg-white px-4 py-2.5 text-[13px] font-semibold text-[#50606A] transition hover:border-[#B67477] hover:text-[#9B4E58]">{item.label} <span aria-hidden="true">↗</span></Link>)}
       </nav>
     </section>
 
-    <section className="border-y border-[#e7d9ca] bg-[#F4EEF9]">
+    <section className="border-y border-[#E7E0D7] bg-[#F1EEE8]">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
-        <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
-          <div><p className="dyasse-eyebrow">FROM THE PATTERN LIBRARY</p>
-            <h2 className="mt-4 font-serif text-[clamp(2.65rem,5vw,4rem)] leading-[1.1] tracking-[-.045em]">The latest <em className="font-normal text-[#D65362]">edits.</em></h2>
-          </div>
-          {products.length>0 && <Link href="/collections/crochet-patterns" className="inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-8">See the collection <ArrowUpRight size={17}/></Link>}
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
+          <div><p className="dyasse-eyebrow">THE PATTERN LIBRARY</p><h2 className="mt-4 font-serif text-[clamp(2.8rem,5vw,4.3rem)] leading-tight tracking-[-.055em]">Ready for your<br/><em className="font-normal text-[#A9565F]">next make.</em></h2></div>
+          {products.length>0?<Link href="/collections/crochet-patterns" className="inline-flex items-center gap-2 border-b border-[#A9565F] pb-2 text-sm font-semibold text-[#344454]">View all released patterns <ArrowUpRight size={17}/></Link>:null}
         </div>
-        {products.length > 0 ?
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">{products.map(p=><ProductCard key={p.id} product={p} />)}</div>
-        : <div className="grid overflow-hidden rounded-[30px] border border-[#ddcdbc] bg-white md:grid-cols-[1.15fr_.85fr]">
-            <div className="p-8 sm:p-12 lg:p-16">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#FBE7E3] px-4 py-2 text-xs font-semibold text-[#805d49]"><WandSparkles size={15}/> Studio update</span>
-              <h3 className="mt-8 max-w-md font-serif text-[clamp(2.3rem,4vw,3.7rem)] leading-[1.1] tracking-[-.05em]">Something lovely<br/>is in the <em className="font-normal text-[#D45263]">making.</em></h3>
-              <p className="mt-6 max-w-md text-[15px] leading-8 text-[#736457]">We're reviewing the first pattern releases before making them available here. Explore our craft collections and learn how digital patterns work in the meantime.</p>
-              <Link href="/faq" className="mt-8 inline-flex items-center gap-3 text-sm font-bold text-[#744a37] underline decoration-[#c9ac96] underline-offset-8">How digital patterns work <ArrowUpRight size={18}/></Link>
+        {products.length>0?
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{products.map(p=><ProductCard key={p.id} product={p}/>)}</div>
+        : <div className="grid overflow-hidden rounded-[5px] border border-[#E2DAD0] bg-white md:grid-cols-[1.15fr_.85fr]">
+            <div className="p-8 sm:p-12 lg:p-14">
+              <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[.16em] text-[#A9565F]"><Sparkles size={15}/> A NOTE FROM THE STUDIO</span>
+              <h3 className="mt-8 max-w-lg font-serif text-[clamp(2.25rem,4vw,3.65rem)] leading-[1.13] tracking-[-.04em] text-[#263748]">Thoughtful patterns<br/><em className="font-normal text-[#A9565F]">are worth preparing well.</em></h3>
+              <p className="mt-6 max-w-lg text-[15px] leading-8 text-[#65717A]">Our first releases are undergoing final checks. For now, explore the collections and learn how digital patterns work. We only display items for sale when they're ready.</p>
+              <Link href="/faq" className="mt-8 inline-flex items-center gap-2 border-b border-[#A9565F] pb-2 text-sm font-bold text-[#374451]">How our downloads work <ArrowUpRight size={16}/></Link>
             </div>
-            <div className="relative min-h-[300px] overflow-hidden bg-[#D8D3F6] p-10">
-              <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[24px] border-white/25" aria-hidden="true"/>
-              <div className="absolute left-10 top-10 rotate-[8deg] rounded-[25px] border border-[#ece5d6] bg-[#fffdf6] p-8 shadow-2xl sm:left-[18%]">
-                <div className="flex items-center gap-3 text-[#806753]"><BookOpen size={24} strokeWidth={1.4}/><span className="text-[10px] font-bold uppercase tracking-[.2em]">Dyasse studio</span></div>
-                <div className="mt-8 h-24 w-44 rounded-[13px] bg-[#ede0cb] dyasse-stitch-pattern"/>
-                <div className="mt-6 h-2 w-32 rounded-full bg-[#e6d7c6]"/><div className="mt-3 h-2 w-24 rounded-full bg-[#e6d7c6]"/>
-                <p className="mt-8 font-serif text-xl italic text-[#7b5c49]">Made with intention.</p>
+            <div className="relative flex min-h-[290px] items-center justify-center overflow-hidden bg-[#E2E7DF] p-8">
+              <div className="absolute h-[270px] w-[270px] rounded-full border border-[#C7D0C5]"/>
+              <div className="absolute h-[210px] w-[210px] rounded-full border border-[#C7D0C5]"/>
+              <div className="relative w-[200px] rotate-[7deg] border border-[#D7D0C4] bg-[#FFFCF7] p-8 shadow-[0_25px_40px_rgba(45,58,46,.12)]">
+                <BookOpen size={32} strokeWidth={1.2} className="text-[#81907E]"/>
+                <div className="mt-9 h-px w-full bg-[#D2D3CB]"/><div className="mt-3 h-px w-4/5 bg-[#D2D3CB]"/><div className="mt-3 h-px w-3/5 bg-[#D2D3CB]"/>
+                <p className="mt-9 font-serif text-lg italic text-[#5B6B5B]">One stitch at a time.</p>
               </div>
             </div>
           </div>}
@@ -150,51 +163,51 @@ export default async function Home() {
 
     <EtsyTestimonials />
 
-    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
-      <div className="grid gap-6 rounded-[32px] border border-[#E5DEED] bg-[#F5F2FB] p-8 md:grid-cols-2 lg:p-12">
-        <div>
-          <p className="dyasse-eyebrow">MAKER'S LEARNING CENTRE</p>
-          <h2 className="mt-4 font-serif text-4xl tracking-[-.05em]">Make sense of every stitch.</h2>
-          <p className="mt-4 text-[15px] leading-8 text-[#627087]">New to written patterns? Learn the abbreviations, materials, gauge and construction notes to check before starting.</p>
-        </div>
-        <div className="flex flex-col justify-center gap-4">
-          <Link href="/guides/crochet-patterns-for-beginners" className="flex items-center justify-between gap-4 rounded-2xl bg-white px-6 py-5 text-sm font-bold text-[#293E61] shadow-sm hover:text-[#C64F65]">How to read crochet patterns <ArrowUpRight size={19}/></Link>
-          <Link href="/guides/knitting-patterns-for-beginners" className="flex items-center justify-between gap-4 rounded-2xl bg-white px-6 py-5 text-sm font-bold text-[#293E61] shadow-sm hover:text-[#C64F65]">How to read knitting patterns <ArrowUpRight size={19}/></Link>
-        </div>
-      </div>
-    </section>
-
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
-      <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
-        <div><p className="dyasse-eyebrow">OUR LITTLE PHILOSOPHY</p>
-          <h2 className="mt-5 font-serif text-[clamp(2.65rem,5vw,4.5rem)] leading-[1.07] tracking-[-.05em]">Good things take <em className="font-normal text-[#D45263]">a little care.</em></h2>
-          <p className="mt-6 max-w-sm text-[15px] leading-8 text-[#75675b]">A beautiful pattern page should tell you what you'll make, what it includes, and how to get help, before you decide to purchase.</p>
-          <Link href="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-[#77523d] underline underline-offset-8">Get to know us <ArrowUpRight size={17}/></Link>
+      <div className="grid gap-10 border-y border-[#E4DBD0] py-16 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
+        <div><p className="dyasse-eyebrow">THE MAKER'S LIBRARY</p>
+          <h2 className="mt-5 font-serif text-[clamp(2.65rem,4.5vw,4.1rem)] leading-[1.12] tracking-[-.05em]">A little knowledge<br/>goes a <em className="font-normal text-[#A9565F]">long way.</em></h2>
+          <p className="mt-6 max-w-md text-[15px] leading-8 text-[#6D7780]">Before you cast on or make the first chain, learn what the instructions mean and what to check.</p>
         </div>
-        <div className="space-y-4">
-          {[
-            { icon: BookOpen, number: '01', title: 'Know your project', text: 'Understand what a pattern makes and check its materials, size and skill level before buying.' },
-            { icon: CircleCheck, number: '02', title: 'Reviewed before release', text: 'Only patterns marked ready in our catalog are shown for sale. Technical checks are part of the release process.' },
-            { icon: Download, number: '03', title: 'Digital from the start', text: 'Available products are downloadable PDF instructions, not finished handmade items. Checkout and delivery are managed by Gumroad.' },
-          ].map(({icon:Icon,number,title,text})=>
-            <div key={number} className="flex gap-5 rounded-[22px] border border-[#ebe0d4] bg-white px-5 py-6 sm:gap-7 sm:px-8">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#f4ebe1] text-[#a87355]"><Icon size={25} strokeWidth={1.4}/></span>
-              <div className="flex-1"><span className="text-[10px] font-bold tracking-[.18em] text-[#ad886e]">STEP {number}</span>
-                <h3 className="mt-1 font-serif text-[25px] tracking-[-.025em]">{title}</h3>
-                <p className="mt-2 text-sm leading-7 text-[#77685a]">{text}</p></div>
-              <ArrowDownRight size={18} className="hidden shrink-0 text-[#b8a698] sm:block"/>
-            </div>)}
+        <div className="grid gap-3">
+          <Link href="/guides/crochet-patterns-for-beginners" className="group flex items-center gap-5 rounded-[5px] border border-[#E5DDD2] bg-white px-6 py-6 hover:border-[#BFA99A]">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#F0E7DE] text-[#9E7966]"><Scissors size={24} strokeWidth={1.4}/></span>
+            <span className="flex-1"><span className="block font-serif text-[22px] text-[#27394B]">How to read crochet patterns</span><span className="mt-1 block text-xs text-[#7B8488]">Abbreviations, rounds & stitch counts</span></span><ArrowUpRight size={19} className="text-[#9B7F6E]"/>
+          </Link>
+          <Link href="/guides/knitting-patterns-for-beginners" className="group flex items-center gap-5 rounded-[5px] border border-[#E5DDD2] bg-white px-6 py-6 hover:border-[#BFA99A]">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#E6EBE5] text-[#718672]"><Layers3 size={24} strokeWidth={1.4}/></span>
+            <span className="flex-1"><span className="block font-serif text-[22px] text-[#27394B]">How to read knitting patterns</span><span className="mt-1 block text-xs text-[#7B8488]">Gauge, cable charts & knitting symbols</span></span><ArrowUpRight size={19} className="text-[#9B7F6E]"/>
+          </Link>
         </div>
       </div>
     </section>
 
-    <section className="bg-[#E1E7FA] px-5 py-20 text-center sm:px-8 lg:py-24">
+    <section className="bg-[#E7EAE3] px-5 py-20 sm:px-8 lg:py-24">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.75fr_1.25fr] lg:items-center lg:gap-20">
+        <div><p className="dyasse-eyebrow">OUR APPROACH</p><h2 className="mt-5 font-serif text-[clamp(2.6rem,4.4vw,4.2rem)] leading-[1.1] tracking-[-.05em]">The little details<br/><em className="font-normal text-[#9F5C62]">really matter.</em></h2>
+          <p className="mt-5 text-[15px] leading-8 text-[#657169]">Making something beautiful begins with knowing what you're making. We believe in clear listings, honest expectations and support when you need it.</p>
+          <Link href="/about" className="mt-7 inline-flex items-center gap-2 border-b border-[#A9565F] pb-1.5 text-sm font-bold text-[#394A43]">Our approach <ArrowUpRight size={16}/></Link>
+        </div>
+        <div className="grid gap-3">
+          {[
+            {number:'01',title:'Know the project',text:'Check materials, sizing information and the pattern details before you choose.'},
+            {number:'02',title:'Clarity before release',text:'Only released designs appear as available. Drafts remain off sale while being checked.'},
+            {number:'03',title:'Digital, without surprises',text:'PDF instructions — not a finished item. Gumroad handles checkout and delivery for released patterns.'}
+          ].map(item=><div key={item.number} className="flex gap-6 border-b border-[#CDD6CC] py-5 first:pt-0 last:border-0">
+            <span className="mt-1 font-serif text-2xl italic text-[#9A7D6C]">{item.number}</span>
+            <div><h3 className="font-serif text-[25px] tracking-[-.025em] text-[#263A34]">{item.title}</h3><p className="mt-2 text-sm leading-7 text-[#647269]">{item.text}</p></div>
+          </div>)}
+        </div>
+      </div>
+    </section>
+
+    <section className="border-t border-[#E6DDD2] bg-[#FBF9F5] px-5 py-20 text-center sm:px-8 lg:py-24">
       <div className="mx-auto max-w-3xl">
-        <Leaf size={29} strokeWidth={1.2} className="mx-auto text-[#907056]"/>
-        <p className="mt-5 text-[11px] font-bold uppercase tracking-[.22em] text-[#906b51]">QUESTIONS BEFORE YOU CREATE?</p>
-        <h2 className="mt-5 font-serif text-[clamp(2.8rem,6vw,5rem)] leading-[1.07] tracking-[-.05em]">We're here for the <em className="font-normal text-[#D45263]">details.</em></h2>
-        <p className="mx-auto mt-6 max-w-xl text-[16px] leading-8 text-[#566783]">Not sure what a PDF pattern includes, or where downloads come from? Find straightforward answers before you start.</p>
-        <Link href="/faq" className="mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#1A3154] px-8 text-sm font-bold text-white transition hover:bg-[#885d48]">Read our FAQ <ArrowUpRight size={18}/></Link>
+        <Leaf size={30} strokeWidth={1.2} className="mx-auto text-[#A78070]"/>
+        <p className="dyasse-eyebrow mt-6 justify-center">GOOD TO KNOW</p>
+        <h2 className="mt-5 font-serif text-[clamp(2.7rem,5vw,4.3rem)] leading-[1.1] tracking-[-.05em]">Questions before<br/><em className="font-normal text-[#A9565F]">you begin?</em></h2>
+        <p className="mx-auto mt-6 max-w-xl text-[16px] leading-8 text-[#6A7680]">How does a digital pattern work? What will you receive? Where do downloads come from? We've put the important answers in one place.</p>
+        <Link href="/faq" className="dyasse-button-primary mt-8">Read our FAQ <ArrowUpRight size={17}/></Link>
       </div>
     </section>
   </div>

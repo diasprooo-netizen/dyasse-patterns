@@ -74,48 +74,36 @@ const reviews: readonly EtsyReview[] = [
 ]
 
 export function EtsyTestimonials() {
-  return (
-    <section aria-labelledby="etsy-reviews-title" className="relative overflow-hidden border-y border-[#E8D9EB] bg-[linear-gradient(115deg,#FFF5F3_0%,#F8EDFC_58%,#EDF2FF_100%)]">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="text-[11px] font-extrabold uppercase tracking-[.18em] text-[#B54865]">WORDS FROM OUR ETSY CUSTOMERS</p>
-            <h2 id="etsy-reviews-title" className="mt-4 max-w-2xl font-serif text-[clamp(2.65rem,5vw,4.4rem)] leading-[1.08] tracking-[-.045em] text-[#1F3356]">
-              A few kind words from <em className="font-normal text-[#D55367]">real makers.</em>
-            </h2>
-            <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#5C6C86]">
-              Twelve selected five-star reviews from customers who purchased through our Etsy shop.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 rounded-2xl border border-[#E4D7E6] bg-white/85 px-5 py-4 shadow-[0_7px_25px_rgba(26,45,75,.04)]">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FCE6E9] text-[#C74D62]"><Quote size={24} aria-hidden="true"/></span>
-            <div>
-              <p className="text-sm font-extrabold text-[#233958]">From our Etsy shop</p>
-              <p className="text-xs font-medium text-[#7484A0]">Past customer feedback</p>
-            </div>
-          </div>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {reviews.map((review,index)=>(
-            <figure key={review.reviewer+review.date} className="flex min-h-[235px] flex-col rounded-[22px] border border-[#E6DEEC] bg-white/95 p-6 shadow-[0_8px_28px_rgba(28,45,83,.045)] transition-shadow hover:shadow-[0_18px_38px_rgba(28,45,83,.08)]">
-              <div role="img" aria-label="5 out of 5 stars" className="flex gap-1 text-[#EBA047]">
-                {Array.from({length:5},(_,i)=><Star key={i} size={17} fill="currentColor" strokeWidth={1.3} aria-hidden="true"/>)}
-              </div>
-              <blockquote className="mt-5 flex-1 whitespace-pre-wrap text-[14px] leading-7 text-[#30425D]">“{review.message}”</blockquote>
-              <figcaption className="mt-6 flex items-center justify-between gap-3 border-t border-[#EDF0F4] pt-4">
-                <span className="min-w-0 truncate text-[13px] font-extrabold text-[#263B5C]">{review.reviewer}</span>
-                <time dateTime={review.date.slice(6)+'-'+review.date.slice(0,2)+'-'+review.date.slice(3,5)} className="shrink-0 text-[11px] font-medium text-[#8492A7]">
-                  {review.date}
-                </time>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-8 text-center text-xs leading-6 text-[#687993]">
-          Selected five-star Etsy reviews, reproduced from the original export. This is not a storewide average rating.
-          Feedback relates to prior Etsy purchases, not orders placed on dyasse.com.
-        </p>
-      </div>
-    </section>
-  )
+ return <section aria-labelledby="etsy-reviews-title" className="border-y border-[#E5DDD3] bg-white">
+   <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+     <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_.5fr] lg:items-end">
+       <div>
+         <p className="dyasse-eyebrow">FROM OUR EARLIER ETSY SHOP</p>
+         <h2 id="etsy-reviews-title" className="mt-5 max-w-2xl font-serif text-[clamp(2.7rem,5vw,4.3rem)] leading-[1.08] tracking-[-.055em] text-[#273849]">
+           Words from people who <em className="font-normal text-[#A9565F]">made it.</em>
+         </h2>
+         <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#66717C]">A hand-picked selection of twelve genuine five-star reviews from past customers of our Etsy shop.</p>
+       </div>
+       <div className="flex items-center gap-4 border-t border-[#E6DCD2] pt-5 lg:ml-auto lg:mt-0">
+         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F2E7DD] text-[#A9565F]"><Quote size={20} strokeWidth={1.4}/></span>
+         <span><span className="block text-[13px] font-bold text-[#354655]">Past Etsy buyer feedback</span><span className="mt-1 block text-xs text-[#7D8586]">Selected reviews, not a storewide rating</span></span>
+       </div>
+     </div>
+     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+       {reviews.map(review=><figure key={review.reviewer+review.date} className="flex min-h-[216px] flex-col border border-[#E8E1D9] bg-[#FBF9F5] p-6 sm:p-7">
+         <div role="img" aria-label="5 out of 5 stars" className="flex gap-1 text-[#B59169]">
+           {Array.from({length:5},(_,i)=><Star key={i} size={15} fill="currentColor" strokeWidth={1} aria-hidden="true"/>)}
+         </div>
+         <blockquote className="mt-5 flex-1 whitespace-pre-wrap text-[14px] leading-7 text-[#414F59]">“{review.message}”</blockquote>
+         <figcaption className="mt-6 flex items-center justify-between gap-3 border-t border-[#E5DED5] pt-4">
+           <span className="min-w-0 truncate text-[13px] font-bold text-[#354656]">{review.reviewer}</span>
+           <time dateTime={review.date.slice(6)+'-'+review.date.slice(0,2)+'-'+review.date.slice(3,5)} className="shrink-0 text-[11px] text-[#868785]">{review.date}</time>
+         </figcaption>
+       </figure>)}
+     </div>
+     <p className="mt-8 max-w-3xl text-xs leading-6 text-[#7A8285]">
+       Original texts from our Etsy reviews export. These twelve selected five-star reviews are not an overall shop rating and do not represent purchases made through the new Dyasse website.
+     </p>
+   </div>
+ </section>
 }
