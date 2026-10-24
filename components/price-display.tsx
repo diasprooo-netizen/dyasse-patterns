@@ -20,14 +20,14 @@ export function PriceDisplay({ price, salePrice, currency = 'USD', size = 'lg' }
   const priceClass = size === 'lg' ? 'text-4xl' : 'text-2xl'
 
   if (!activeSale) {
-    return <p className={`${priceClass} font-bold text-[#D8A24A]`}>{formatPrice(price, currency)}</p>
+    return <p className={`${priceClass} font-bold text-[#1D3558]`}>{formatPrice(price, currency)}</p>
   }
 
   return (
     <div className="flex flex-wrap items-end gap-3" aria-label="Sale price">
       <span className="text-lg font-semibold text-slate-400 line-through">{formatPrice(price, currency)}</span>
-      <span className={`${priceClass} font-black text-[#C77D4A]`}>{formatPrice(salePrice, currency)}</span>
-      {discount ? <span className="rounded-full bg-[#C77D4A]/15 px-3 py-1 text-sm font-bold text-[#A9643C]">Save {discount}%</span> : null}
+      <span className={`${priceClass} font-black text-[#DF4D60]`}>{formatPrice(salePrice, currency)}</span>
+      {discount ? <span className="rounded-full bg-[#FCE4E9] px-3 py-1 text-sm font-bold text-[#A83A50]">Save {discount}%</span> : null}
     </div>
   )
 }

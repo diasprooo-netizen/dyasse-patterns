@@ -95,71 +95,71 @@ export function GumroadLinkManager({ products }: { products: GumroadProduct[] })
     } catch { setStatus({ ok: false, text: 'Clipboard unavailable. You can copy product slugs from the table.' }) }
   }
 
-  return <div className="space-y-8 text-[#2f261f]">
+  return <div className="space-y-8 text-[#243957]">
     <div className="grid gap-4 sm:grid-cols-4">{([
       ['Total catalog', counts.total], ['Linked to Gumroad', counts.connected],
       ['QA approved', counts.reviewed], ['Live in store', counts.live],
     ] as const).map(([label, value]) =>
-      <div key={label} className="rounded-3xl border border-[#eadbc8] bg-white p-6">
-        <p className="text-sm text-[#786756]">{label}</p>
+      <div key={label} className="rounded-3xl border border-[#E0E7F2] bg-white p-6">
+        <p className="text-sm text-[#7B8DA4]">{label}</p>
         <p className="mt-3 text-3xl font-bold">{value}</p>
       </div>,
     )}</div>
 
-    <div className="rounded-3xl border border-[#eadbc8] bg-white p-6 md:p-8">
+    <div className="rounded-3xl border border-[#E0E7F2] bg-white p-6 md:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-2xl font-bold">Bulk connect Gumroad products</h2>
         <button type="button" onClick={copyTemplate} className="rounded-full border border-[#9d816b] px-5 py-2 text-sm font-semibold">Copy CSV template</button>
       </div>
-      <p className="mt-3 max-w-3xl text-sm leading-7 text-[#705e4e]">
+      <p className="mt-3 max-w-3xl text-sm leading-7 text-[#70829D]">
         From your Gumroad dashboard, copy each real published product URL. Paste two columns:
         Dyasse product slug, Gumroad product URL. This does not upload PDFs, synchronize prices,
         import sales or publish any product automatically.
       </p>
       <textarea aria-label="Bulk Gumroad URLs" value={bulkText} onChange={e => setBulkText(e.target.value)}
         placeholder={'slug,gumroad_link\ncrochet-pattern-name,https://your-shop.gumroad.com/l/your-pattern'}
-        rows={6} className="mt-5 w-full rounded-xl border border-[#d9c5ad] bg-[#fffdf9] p-4 font-mono text-xs" />
+        rows={6} className="mt-5 w-full rounded-xl border border-[#DDE4F1] bg-[#FAFBFE] p-4 font-mono text-xs" />
       <button type="button" disabled={busy || !bulkText.trim()} onClick={saveBulk}
-        className="mt-3 rounded-full bg-[#2f261f] px-7 py-3 font-semibold text-white disabled:opacity-50">
+        className="mt-3 rounded-full bg-[#465BE2] px-7 py-3 font-semibold text-white disabled:opacity-50">
         {busy ? 'Saving…' : 'Validate & save links'}
       </button>
-      <p className="mt-4 text-sm text-[#986a43]">Important: the catalog prices are largely in MAD; confirm that each Gumroad checkout uses a matching currency and amount before QA approval and publication.</p>
+      <p className="mt-4 text-sm text-[#A36042]">Important: the catalog prices are largely in MAD; confirm that each Gumroad checkout uses a matching currency and amount before QA approval and publication.</p>
     </div>
 
     {status && <p role="status" className={'rounded-2xl p-4 text-sm ' + (status.ok ? 'bg-[#e9f4e9] text-[#235b32]' : 'bg-[#fff0ec] text-[#9a2727]')}>{status.text}</p>}
 
-    <section className="rounded-3xl border border-[#eadbc8] bg-white p-6">
+    <section className="rounded-3xl border border-[#E0E7F2] bg-white p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div><h2 className="text-2xl font-bold">Gumroad product mapping</h2>
-          <p className="mt-1 text-sm text-[#786756]">Only matching live Gumroad product links should be saved here.</p></div>
+          <p className="mt-1 text-sm text-[#7B8DA4]">Only matching live Gumroad product links should be saved here.</p></div>
         <Link href="/admin/qa" className="text-sm font-semibold underline">Go to pattern QA →</Link>
       </div>
       <div className="mt-5 flex flex-wrap gap-3">
         <input aria-label="Search patterns" value={search} onChange={e => setSearch(e.target.value)}
-          placeholder="Search product title or slug" className="min-w-0 flex-1 rounded-xl border border-[#d9c5ad] px-4 py-3" />
+          placeholder="Search product title or slug" className="min-w-0 flex-1 rounded-xl border border-[#DDE4F1] px-4 py-3" />
         <select aria-label="Filter by readiness" value={filter} onChange={e => setFilter(e.target.value as Filter)}
-          className="rounded-xl border border-[#d9c5ad] px-4 py-3">
+          className="rounded-xl border border-[#DDE4F1] px-4 py-3">
           <option value="all">All products</option>
           <option value="missing">Missing Gumroad</option>
           <option value="linked">Gumroad linked</option>
           <option value="review">Needs QA</option>
         </select>
       </div>
-      <p className="mt-3 text-sm text-[#786756]">Showing {visible.length} of {products.length}</p>
+      <p className="mt-3 text-sm text-[#7B8DA4]">Showing {visible.length} of {products.length}</p>
       <div className="mt-4 max-h-[72vh] overflow-auto">
         <table className="w-full min-w-[750px] border-collapse text-left text-sm">
-          <thead className="sticky top-0 bg-[#f7e7ce]"><tr>
+          <thead className="sticky top-0 bg-[#EDF1FF]"><tr>
             <th className="p-3">Pattern</th><th className="p-3">Listed price</th>
             <th className="p-3">Gumroad product URL</th><th className="p-3">QA / Store</th><th className="p-3">Save</th>
           </tr></thead>
           <tbody>{visible.map(p => <tr key={p.slug} className="border-b border-[#ede2d5]">
-            <td className="max-w-[240px] p-3"><p className="font-semibold">{p.title}</p><p className="mt-1 break-all text-xs text-[#786756]">{p.slug}</p></td>
+            <td className="max-w-[240px] p-3"><p className="font-semibold">{p.title}</p><p className="mt-1 break-all text-xs text-[#7B8DA4]">{p.slug}</p></td>
             <td className="whitespace-nowrap p-3">{p.price.toFixed(2)} {p.currency}</td>
             <td className="p-3"><input aria-label={'Gumroad link for ' + p.title} value={links[p.slug] ?? ''} onChange={e => setLinks(a => ({ ...a, [p.slug]: e.target.value }))}
-              placeholder="https://seller.gumroad.com/l/..." className="w-full min-w-[280px] rounded-lg border border-[#d9c5ad] p-3 text-xs" /></td>
+              placeholder="https://seller.gumroad.com/l/..." className="w-full min-w-[280px] rounded-lg border border-[#DDE4F1] p-3 text-xs" /></td>
             <td className="whitespace-nowrap p-3">{p.qa_verified ? 'QA ✓' : 'Needs QA'}<p className="mt-1 text-xs">{p.is_published ? 'Live' : 'Draft'}</p></td>
             <td className="p-3"><button type="button" disabled={busy || saving===p.slug} onClick={() => saveOne(p.slug)}
-                className="rounded-xl bg-[#2f261f] px-4 py-2 text-white disabled:opacity-50">Save</button></td>
+                className="rounded-xl bg-[#465BE2] px-4 py-2 text-white disabled:opacity-50">Save</button></td>
           </tr>)}</tbody>
         </table>
       </div>

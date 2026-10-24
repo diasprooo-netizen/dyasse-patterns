@@ -25,7 +25,7 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
    { icon: Headphones, title: 'Need a hand?', detail: 'Find help using your purchase receipt' },
  ]
  const related=[...upsells,...crossSells].filter((p,i,a)=>p.id!==product.id&&a.findIndex(q=>q.id===p.id)===i).slice(0,4)
- return <div className="bg-[#fcfaf7] text-[#342c25]">
+ return <div className="bg-[#FFFDFD] text-[#213759]">
    <section className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 lg:pt-12">
      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-semibold text-[#887769]">
        <Link href="/" className="inline-flex items-center gap-1 hover:underline"><ArrowLeft size={15}/>Home</Link>
@@ -33,12 +33,12 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
      </nav>
      <div className="mt-9 grid gap-10 lg:grid-cols-[1.03fr_.97fr] lg:items-start lg:gap-16">
        <div className="min-w-0">
-         <div className="relative aspect-[4/4.4] overflow-hidden rounded-[29px] border border-[#e7dacc] bg-[#f1e9df] sm:aspect-[5/4.4]">
+         <div className="relative aspect-[4/4.4] overflow-hidden rounded-[29px] border border-[#e7dacc] bg-[#FDE7E6] sm:aspect-[5/4.4]">
           <Image src={product.image_url} alt={product.title} fill priority sizes="(min-width:1024px) 50vw,100vw" className="object-cover"/>
           <span className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/95 px-4 py-2 text-[11px] font-bold uppercase tracking-[.12em] text-[#594435] shadow-sm"><FileText size={16}/> PDF pattern</span>
          </div>
          {gallery.length>1 ? <div className="mt-3 grid grid-cols-4 gap-3">
-          {gallery.slice(1,5).map((image,i)=><div className="relative aspect-square overflow-hidden rounded-[15px] border border-[#e7dacc] bg-[#eee5da]" key={image}>
+          {gallery.slice(1,5).map((image,i)=><div className="relative aspect-square overflow-hidden rounded-[15px] border border-[#e7dacc] bg-[#ECE8F8]" key={image}>
             <Image src={image} alt={product.title+' — additional view '+(i+1)} fill sizes="120px" className="object-cover"/>
           </div>)}
          </div>:null}
@@ -53,14 +53,14 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
          <p className="mt-4 text-[12px] leading-6 text-[#877566]">Digital purchase only. No finished item or physical package will be shipped.</p>
          <div className="mt-8 divide-y divide-[#e9dfd5] border-y border-[#e9dfd5]">
            {digitalInfo.map(({icon:Icon,title,detail})=><div className="flex items-center gap-4 py-4" key={title}>
-             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#f0e6d9] text-[#a77253]"><Icon size={21} strokeWidth={1.4}/></span>
+             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[14px] bg-[#FDE8E4] text-[#D65362]"><Icon size={21} strokeWidth={1.4}/></span>
              <div><p className="text-sm font-bold">{title}</p><p className="mt-1 text-xs text-[#826f61]">{detail}</p></div>
            </div>)}
          </div>
        </div>
      </div>
    </section>
-   <section className="border-t border-[#e9dfd4] bg-[#f5efe8]">
+   <section className="border-t border-[#e9dfd4] bg-[#F5F0FA]">
      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20">
        <div className="grid gap-10 lg:grid-cols-[.3fr_.7fr] lg:gap-14">
          <div><p className="dyasse-eyebrow">THE DETAILS</p><h2 className="mt-4 font-serif text-[clamp(2.3rem,4vw,3.8rem)] leading-tight tracking-[-.05em]">A closer look at this pattern.</h2></div>
@@ -75,8 +75,8 @@ export function ProductFunnel({ product, upsells, crossSells }: { product: Produ
          <ItemList title="Materials & tools" items={product.materials}/>
          <ItemList title="What you'll learn" items={product.what_you_will_learn}/>
         </div>:null}
-       <div className="mt-8 flex flex-wrap items-start gap-4 rounded-[22px] border border-[#e3d5c5] bg-[#efe5d9] p-6">
-         <BookOpen size={24} strokeWidth={1.4} className="shrink-0 text-[#967251]"/>
+       <div className="mt-8 flex flex-wrap items-start gap-4 rounded-[22px] border border-[#e3d5c5] bg-[#EBE7FD] p-6">
+         <BookOpen size={24} strokeWidth={1.4} className="shrink-0 text-[#B7546B]"/>
          <div className="flex-1"><p className="font-semibold">Before you get started</p><p className="mt-2 text-sm leading-7 text-[#756357]">Check your materials, finished dimensions and the PDF instructions. Read our guide to digital downloads before ordering.</p>
            <Link href="/faq" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#80543f] underline underline-offset-4">PDF download FAQ <ArrowUpRight size={16}/></Link></div>
        </div>
