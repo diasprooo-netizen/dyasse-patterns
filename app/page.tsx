@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircleCheck, Download, FileText, Footprints, Gift, Layers3, Leaf, Scissors, Sparkles, WandSparkles } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
-import { SiteFooter } from '@/components/site-footer'
 
 export const dynamic = 'force-dynamic'
 
@@ -175,6 +174,5 @@ export default async function Home() {
         <Link href="/faq" className="mt-8 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#342c25] px-8 text-sm font-bold text-white transition hover:bg-[#885d48]">Read our FAQ <ArrowUpRight size={18}/></Link>
       </div>
     </section>
-    <SiteFooter />
   </div>
 }
