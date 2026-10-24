@@ -7,10 +7,10 @@ import type { Product } from '@/types/product'
 export function ProductEditModal({ product, products, open, onOpenChange }: { product: Product | null; products: Product[]; open: boolean; onOpenChange: (open: boolean) => void }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[90vh] max-w-5xl overflow-y-auto border-white/[0.08] bg-[#111827] text-[#F8FAFC]">
+      <DialogContent className="max-h-[92vh] max-w-5xl overflow-y-auto rounded-[24px] border-[#DDE5F1] bg-white text-[#253956] shadow-2xl">
         <DialogHeader>
           <DialogTitle>Edit product</DialogTitle>
-          <DialogDescription className="text-[#94A3B8]">Update store content, offers, payment links, and upsell logic.</DialogDescription>
+          <DialogDescription className="text-[#7B8AA2]">Update store content, offers, payment links, and upsell logic.</DialogDescription>
         </DialogHeader>
         {product ? <ProductForm products={products} initialProduct={product} onSaved={() => onOpenChange(false)} /> : null}
       </DialogContent>
