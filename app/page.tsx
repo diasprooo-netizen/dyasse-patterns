@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, CircleCheck, Download, FileText, Footprints, Gift, Layers3, Leaf, Scissors, Sparkles, WandSparkles } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
+import { EtsyTestimonials } from '@/components/etsy-testimonials'
 
 export const dynamic = 'force-dynamic'
 
@@ -140,6 +141,8 @@ export default async function Home() {
           </div>}
       </div>
     </section>
+
+    <EtsyTestimonials />
 
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
       <div className="grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
