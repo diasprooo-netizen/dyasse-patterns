@@ -87,7 +87,7 @@ function TextField({ label, value, onChange, required, type = 'text', placeholde
   return (
     <label className="space-y-2 text-sm font-semibold text-[#526681]">
       <span>{label}{required ? <span className="text-[#E66A61]"> *</span> : null}</span>
-      <input type={type} value={value} onChange={(event) => onChange(event.target.value)} required={required} placeholder={placeholder} className="w-full rounded-2xl border border-[#D8E1F0] bg-[#F9FAFE] px-4 py-3 text-[#2F261F] outline-none focus:border-[#5069E9] focus:ring-2 focus:ring-[#5069E9]/15" />
+      <input type={type} value={value} onChange={(event) => onChange(event.target.value)} required={required} placeholder={placeholder} className="w-full rounded-2xl border border-[#D8E1F0] bg-[#F9FAFE] px-4 py-3 text-[#223854] placeholder:text-[#889AB3] outline-none focus:border-[#5069E9] focus:ring-2 focus:ring-[#5069E9]/15" />
     </label>
   )
 }
@@ -96,7 +96,7 @@ function TextArea({ label, value, onChange, required, placeholder, rows = 4 }: {
   return (
     <label className="space-y-2 text-sm font-semibold text-[#526681]">
       <span>{label}{required ? <span className="text-[#E66A61]"> *</span> : null}</span>
-      <textarea value={value} onChange={(event) => onChange(event.target.value)} required={required} placeholder={placeholder} rows={rows} className="w-full rounded-2xl border border-[#D8E1F0] bg-[#F9FAFE] px-4 py-3 text-[#2F261F] outline-none focus:border-[#5069E9] focus:ring-2 focus:ring-[#5069E9]/15" />
+      <textarea value={value} onChange={(event) => onChange(event.target.value)} required={required} placeholder={placeholder} rows={rows} className="w-full rounded-2xl border border-[#D8E1F0] bg-[#F9FAFE] px-4 py-3 text-[#223854] placeholder:text-[#889AB3] outline-none focus:border-[#5069E9] focus:ring-2 focus:ring-[#5069E9]/15" />
     </label>
   )
 }
@@ -117,7 +117,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
       description: form.description,
       price: Number(form.price),
       sale_price: form.sale_price ? Number(form.sale_price) : null,
-      currency: form.currency || 'USD',
+      currency: form.currency || 'MAD',
       image_url: form.image_url,
       gallery_images: linesToArray(form.gallery_images),
       gumroad_link: form.gumroad_link || null,
@@ -162,7 +162,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextField label="Slug" value={form.slug} onChange={(value) => update('slug', value)} required placeholder="crochet-market-bag" />
         <TextField label="Price" value={form.price} onChange={(value) => update('price', value)} required type="number" placeholder="12" />
         <TextField label="Sale Price" value={form.sale_price} onChange={(value) => update('sale_price', value)} type="number" placeholder="7" />
-        <TextField label="Currency" value={form.currency} onChange={(value) => update('currency', value)} placeholder="USD" />
+        <TextField label="Currency" value={form.currency} onChange={(value) => update('currency', value)} placeholder="MAD" />
         <TextField label="Category" value={form.category} onChange={(value) => update('category', value)} placeholder="Bags" />
         <TextField label="Main Image URL" value={form.image_url} onChange={(value) => update('image_url', value)} required placeholder="https://..." />
         <TextField label="Gumroad Link" value={form.gumroad_link} onChange={(value) => update('gumroad_link', value)} placeholder="https://gumroad.com/..." />
@@ -179,16 +179,16 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextArea label="SEO Description" value={form.seo_description} onChange={(value) => update('seo_description', value)} />
       </div>
       <div className="grid gap-3 sm:grid-cols-3">
-        <label className="flex items-center gap-3 rounded-2xl bg-[#EFF3FB] p-3 text-sm text-[#526681]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-4 w-4 accent-[#5069E9]" /> Published (requires QA approval and Gumroad checkout)</label>
-        <label className="flex items-center gap-3 rounded-2xl bg-[#EFF3FB] p-3 text-sm text-[#526681]"><input type="checkbox" checked={form.is_featured} onChange={(event) => update('is_featured', event.target.checked)} className="h-4 w-4 accent-[#5069E9]" /> Featured</label>
-        <label className="flex items-center gap-3 rounded-2xl bg-[#EFF3FB] p-3 text-sm text-[#526681]"><input type="checkbox" checked={form.is_on_sale} onChange={(event) => update('is_on_sale', event.target.checked)} className="h-4 w-4 accent-[#5069E9]" /> On Sale</label>
+        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Published (requires QA approval and Gumroad checkout)</label>
+        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_featured} onChange={(event) => update('is_featured', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Featured</label>
+        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_on_sale} onChange={(event) => update('is_on_sale', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> On Sale</label>
       </div>
       <OfferControls isOnSale={form.is_on_sale} isFeatured={form.is_featured} saleBadge={form.sale_badge} onChange={(patch) => setForm((current) => ({ ...current, ...patch }))} />
       <div className="grid gap-4 lg:grid-cols-2">
         <UpsellSelector label="Upsell products: You may also love" products={products} currentProductId={initialProduct?.id} selectedIds={form.upsell_product_ids} onChange={(ids) => update('upsell_product_ids', ids)} />
         <UpsellSelector label="Cross-sell products: Complete the collection" products={products} currentProductId={initialProduct?.id} selectedIds={form.cross_sell_product_ids} onChange={(ids) => update('cross_sell_product_ids', ids)} />
       </div>
-      <Button disabled={isPending} type="submit" className="w-full bg-[#4A5DE7] py-6 text-base font-black text-[#04130E] hover:bg-[#A9643C] disabled:opacity-60">
+      <Button disabled={isPending} type="submit" className="w-full bg-[#4A5DE7] py-6 text-base font-black text-white shadow-[0_10px_26px_rgba(66,87,221,.2)] hover:bg-[#344AC9] focus-visible:ring-[3px] focus-visible:ring-[#4A5DE7]/25 disabled:opacity-60">
         {isPending ? 'Saving product...' : initialProduct ? 'Save Product Changes' : 'Add New Product'}
       </Button>
     </form>
