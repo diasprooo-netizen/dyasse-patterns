@@ -11,6 +11,7 @@ const navigation = [
  { href: '/collections/knitting-patterns', label: 'Knitting' },
  { href: '/collections/baby-shoes', label: 'Baby makes' },
  { href: '/collections/keychains', label: 'Small gifts' },
+ { href: '/collections/crochet-bags', label: 'Crochet bags' },
  { href: '/about', label: 'Our story' },
 ]
 type AccountState={ authenticated:boolean; isAdmin:boolean; email:string|null }
