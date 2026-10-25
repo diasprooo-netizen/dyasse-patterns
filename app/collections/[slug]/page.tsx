@@ -89,7 +89,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
       ...(list.length>0?[{'@type':'ItemList',itemListElement:list.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.title,url:SITE_URL+'/product/'+encodeURIComponent(p.slug)}))}]:[])
     ]
   }
-  return <div className="bg-[#FBF9F5] text-[#263747]">
+  return <div className="bg-[#FFFFFF] text-[#263747]">
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:safeJsonLd(graph)}}/>
     <section className={'relative overflow-hidden border-b border-[#E5DBD0] '+c.theme}>
       <div className="pointer-events-none absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full border-[1px] border-[#D3C8BA]/50" aria-hidden="true"/>
@@ -99,7 +99,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
             <Link href="/" className="hover:underline">Home</Link><span>/</span><span>{c.label}</span>
           </nav>
           <p className="mt-12 text-[10px] font-bold uppercase tracking-[.22em]">{c.eyebrow}</p>
-          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.2rem,6vw,5.7rem)] leading-[1.07] tracking-[-.055em] text-[#273849]">{c.label}<span className="text-[#A9565F]">.</span></h1>
+          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.2rem,6vw,5.7rem)] leading-[1.07] tracking-[-.055em] text-[#22272B]">{c.label}<span className="text-[#762538]">.</span></h1>
           <p className="mt-6 font-serif text-[26px] italic font-normal opacity-80">{c.tagline}</p>
           <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#616D71]">{c.intro}</p>
           <Link href="/#collections" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-8"><ArrowLeft size={16}/> All collections</Link>
@@ -128,7 +128,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
           <div aria-hidden="true" className="flex h-36 w-36 items-center justify-center rounded-[35px] bg-[#E5EAE3] text-[#68806D]"><BookOpen size={62} strokeWidth={.95}/></div>
         </div>}
     </section>
-    <section className="border-t border-[#E5DCD2] bg-[#F1EEE8]">
+    <section className="border-t border-[#E5DCD2] bg-[#F1F8FC]">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <h2 className="font-serif text-3xl tracking-[-.04em]">Plan your next project</h2>
         <p className="mt-4 max-w-3xl text-[15px] leading-8 text-[#667279]">Every listing is for downloadable instructions, not a finished handmade item. Before selecting a pattern, review its materials, project size, techniques and delivery details. Unreviewed drafts are not offered for sale.</p>
