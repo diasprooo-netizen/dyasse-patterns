@@ -65,7 +65,7 @@ export default async function Home(){
 
    <section className="border-b border-[#E3EFF5] bg-white">
      <div className="mx-auto grid max-w-7xl gap-3 px-5 py-5 text-[12px] font-semibold text-[#364959] sm:grid-cols-3 sm:gap-0 sm:px-8">
-       {[{icon:FileText,t:'Digital downloads',d:'No physical item shipped'},{icon:CheckCircle2,t:'Understand your project',d:'Read details before buying'},{icon:ShieldCheck,t:'Checkout via Gumroad',d:'For patterns released for sale'}].map(({icon:Icon,t,d})=><div key={t} className="flex items-center gap-3 py-2 sm:justify-center sm:border-r sm:border-[#E3EFF5] sm:last:border-r-0">
+       {[{icon:FileText,t:'Digital downloads',d:'No physical item shipped'},{icon:CheckCircle2,t:'Understand your project',d:'Read details before buying'},{icon:ShieldCheck,t:'Secure PDF checkout',d:'For reviewed patterns ready for sale'}].map(({icon:Icon,t,d})=><div key={t} className="flex items-center gap-3 py-2 sm:justify-center sm:border-r sm:border-[#E3EFF5] sm:last:border-r-0">
          <Icon size={19} className="shrink-0 text-[#781D35]" strokeWidth={1.6}/><span><strong className="block">{t}</strong><span className="mt-0.5 block text-[11px] font-normal text-[#637587]">{d}</span></span>
        </div>)}
      </div>
