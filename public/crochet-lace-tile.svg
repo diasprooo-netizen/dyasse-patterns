@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="288" viewBox="0 0 320 288" fill="none">
+  <title>Delicate hand-crochet lace rosette repeat</title>
+  <g stroke="#F9E8D9" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity=".62">
+    <g transform="translate(160 144)">
+      <circle r="92" stroke-dasharray="1 9" stroke-width="2.2"/>
+      <circle r="79"/>
+      <circle r="58" stroke-dasharray="2 7"/>
+      <circle r="20"/>
+      <path d="M-92 0Q-80-20-69 0Q-58 20-46 0M46 0Q58-20 69 0Q80 20 92 0"/>
+      <g>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(45)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(90)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(135)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(180)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(225)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(270)"/>
+        <path d="M0-19C-24-33-40-76 0-91C40-76 24-33 0-19" transform="rotate(315)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(45)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(90)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(135)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(180)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(225)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(270)"/>
+        <path d="M0-5C-9-12-12-21 0-28C12-21 9-12 0-5" transform="rotate(315)"/>
+      </g>
+    </g>
+    <path d="M0 0Q34 31 70 0T140 0T210 0T280 0T350 0" stroke-dasharray="2 8"/>
+    <path d="M-25 288Q10 253 45 288T115 288T185 288T255 288T325 288" stroke-dasharray="2 8"/>
+  </g>
+</svg>
