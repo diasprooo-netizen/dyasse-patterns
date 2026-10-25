@@ -74,7 +74,7 @@ const reviews: readonly EtsyReview[] = [
 ]
 
 export function EtsyTestimonials() {
- return <section aria-labelledby="etsy-reviews-title" className="border-y border-[#E5DDD3] bg-[#FFF9F2]">
+ return <section aria-labelledby="etsy-reviews-title" className="border-y border-[#E5DDD3] bg-[#FFFFFF]">
    <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
      <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_.5fr] lg:items-end">
        <div>
@@ -85,7 +85,7 @@ export function EtsyTestimonials() {
          <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#66717C]">A hand-picked selection of twelve genuine five-star reviews from past customers of our Etsy shop.</p>
        </div>
        <div className="flex items-center gap-4 border-t border-[#E6DCD2] pt-5 lg:ml-auto lg:mt-0">
-         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F2E7DD] text-[#884957]"><Quote size={20} strokeWidth={1.4}/></span>
+         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E9F5FB] text-[#884957]"><Quote size={20} strokeWidth={1.4}/></span>
          <span><span className="block text-[13px] font-bold text-[#354655]">Past Etsy buyer feedback</span><span className="mt-1 block text-xs text-[#7D8586]">Selected reviews, not a storewide rating</span></span>
        </div>
      </div>
