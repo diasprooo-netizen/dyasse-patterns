@@ -28,6 +28,9 @@ type FormState = {
   gumroad_link: string
   lemon_checkout_url: string
   paypal_link: string
+  paypal_price_usd_cents: string
+  paypal_checkout_enabled: boolean
+  digital_file_path: string
   features: string
   materials: string
   what_you_will_learn: string
@@ -44,7 +47,7 @@ type FormState = {
 }
 
 const emptyState: FormState = {
-  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'MAD', image_url: '', gallery_images: '', gumroad_link: '', lemon_checkout_url: '', paypal_link: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
+  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'MAD', image_url: '', gallery_images: '', gumroad_link: '', lemon_checkout_url: '', paypal_link: '', paypal_price_usd_cents: '', paypal_checkout_enabled: false, digital_file_path: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
 }
 
 function linesToArray(value: string) {
@@ -69,6 +72,9 @@ function productToState(product?: Product): FormState {
     gumroad_link: product.gumroad_link ?? '',
     lemon_checkout_url: product.lemon_checkout_url ?? '',
     paypal_link: product.paypal_link ?? '',
+    paypal_price_usd_cents: product.paypal_price_usd_cents == null ? '' : String(product.paypal_price_usd_cents),
+    paypal_checkout_enabled: product.paypal_checkout_enabled,
+    digital_file_path: product.digital_file_path ?? '',
     features: arrayToLines(product.features),
     materials: arrayToLines(product.materials),
     what_you_will_learn: arrayToLines(product.what_you_will_learn),
@@ -125,6 +131,9 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
       gumroad_link: form.gumroad_link || null,
       lemon_checkout_url: form.lemon_checkout_url || null,
       paypal_link: form.paypal_link || null,
+      paypal_price_usd_cents: form.paypal_price_usd_cents ? Number(form.paypal_price_usd_cents) : null,
+      paypal_checkout_enabled: form.paypal_checkout_enabled,
+      digital_file_path: form.digital_file_path || null,
       features: linesToArray(form.features),
       materials: linesToArray(form.materials),
       what_you_will_learn: linesToArray(form.what_you_will_learn),
@@ -170,6 +179,8 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextField label="Main Image URL" value={form.image_url} onChange={(value) => update('image_url', value)} required placeholder="https://..." />
         <TextField label="Lemon Squeezy checkout link (temporary)" value={form.lemon_checkout_url} onChange={(value) => update('lemon_checkout_url', value)} placeholder="https://your-store.lemonsqueezy.com/checkout/buy/..." />
         <TextField label="Gumroad Link" value={form.gumroad_link} onChange={(value) => update('gumroad_link', value)} placeholder="https://gumroad.com/..." />
+        <TextField label="PayPal USD price in cents" value={form.paypal_price_usd_cents} onChange={(value) => update('paypal_price_usd_cents', value)} type="number" placeholder="509" />
+        <TextField label="Private PDF storage path" value={form.digital_file_path} onChange={(value) => update('digital_file_path', value)} placeholder="DYS-0138/Pattern.pdf" />
         <TextField label="PayPal Link" value={form.paypal_link} onChange={(value) => update('paypal_link', value)} placeholder="https://paypal.com/..." />
         <TextField label="SEO Title" value={form.seo_title} onChange={(value) => update('seo_title', value)} />
       </div>
@@ -182,8 +193,12 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextArea label="Tags (one per line)" value={form.tags} onChange={(value) => update('tags', value)} />
         <TextArea label="SEO Description" value={form.seo_description} onChange={(value) => update('seo_description', value)} />
       </div>
+      <label className="flex items-center gap-3 rounded-lg border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F]">
+        <input type="checkbox" checked={form.paypal_checkout_enabled} onChange={(event) => update('paypal_checkout_enabled', event.target.checked)} />
+        Enable direct PayPal checkout (only after real private PDF upload, QA and live PayPal setup)
+      </label>
       <div className="grid gap-3 sm:grid-cols-3">
-        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Published (requires QA approval and a verified checkout)</label>
+        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Published (requires QA approval and verified PayPal, Gumroad or Lemon checkout)</label>
         <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_featured} onChange={(event) => update('is_featured', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Featured</label>
         <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_on_sale} onChange={(event) => update('is_on_sale', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> On Sale</label>
       </div>
