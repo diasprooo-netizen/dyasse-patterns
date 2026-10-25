@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   try {
     // A sandbox-only route allows the store administrator to test a PDF
     // before its public technical QA has passed. This MUST never enable live sales.
-    const sandboxTest = process.env.VERCEL_ENV === 'preview'
+    const sandboxTest = process.env.VERCEL_ENV !== 'production'
       && process.env.PAYPAL_ENVIRONMENT === 'sandbox'
       && slug === 'cocoa-bobble-handbag-crochet-pattern-pdf-chunky-tube-yarn-purse-with-d-shaped-handles'
       && request.headers.get('x-dyasse-sandbox-test') === 'DYS-0138'
