@@ -2,6 +2,7 @@ import { createHash, randomBytes } from 'node:crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/service'
 import { callPayPal, hasPayPalCredentials, paypalErrorResponse } from '@/lib/paypal-server'
+import { getCurrentAdminState } from '@/lib/admin-products'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -22,11 +23,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid product' }, { status: 400 })
 
   try {
+    // A sandbox-only route allows the store administrator to test a PDF
+    // before its public technical QA has passed. This MUST never enable live sales.
+    const sandboxTest = process.env.VERCEL_ENV !== 'production'
+      && process.env.PAYPAL_ENVIRONMENT === 'sandbox'
+      && slug === 'cocoa-bobble-handbag-crochet-pattern-pdf-chunky-tube-yarn-purse-with-d-shaped-handles'
+      && request.headers.get('x-dyasse-sandbox-test') === 'DYS-0138'
+    if (sandboxTest) {
+      const admin = await getCurrentAdminState()
+      if (!admin.isAdmin) return NextResponse.json({ error: 'Admin access required for sandbox test' }, { status: 403 })
+    }
     const db = createServiceClient()
-    const { data: product, error } = await db.from('products')
+    let productQuery = db.from('products')
       .select('id,title,slug,paypal_price_usd_cents,digital_file_path')
-      .eq('slug', slug).eq('is_published', true).eq('qa_verified', true)
-      .eq('paypal_checkout_enabled', true).maybeSingle()
+      .eq('slug', slug)
+    if (!sandboxTest) {
+      productQuery = productQuery
+        .eq('is_published', true).eq('qa_verified', true)
+        .eq('paypal_checkout_enabled', true)
+    }
+    const { data: product, error } = await productQuery.maybeSingle()
     if (error || !product) return NextResponse.json({ error: 'Product not available' }, { status: 404 })
     const cents = Number(product.paypal_price_usd_cents)
     const path = product.digital_file_path

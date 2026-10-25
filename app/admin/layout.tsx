@@ -16,5 +16,5 @@ export default async function AdminLayout({children}:{children:React.ReactNode})
    </div>
   </div>
  }
- return <AdminShell email={account.email??'Administrator'}>{children}</AdminShell>
+ return <AdminShell email={account.email??'Administrator'} showSandboxTest={process.env.VERCEL_ENV==='preview' && process.env.PAYPAL_ENVIRONMENT==='sandbox'}>{children}</AdminShell>
 }

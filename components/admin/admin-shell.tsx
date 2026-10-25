@@ -34,7 +34,7 @@ const descriptions:Record<string,string>={
  '/admin/import':'Add draft listings safely',
  '/admin/import-top20':'Import the bestselling shortlist',
 }
-export function AdminShell({children,email}:{children:ReactNode,email:string}){
+export function AdminShell({children,email,showSandboxTest=false}:{children:ReactNode,email:string,showSandboxTest?:boolean}){
  const pathname=usePathname()
  const [mobileOpen,setMobileOpen]=useState(false)
  const current=sections.flatMap(s=>s.items).find(x=>x.href===pathname)??sections.flatMap(s=>s.items).find(x=>x.href!=='/admin'&&pathname.startsWith(x.href+'/'))
@@ -84,6 +84,7 @@ export function AdminShell({children,email}:{children:ReactNode,email:string}){
          <div><p className="text-[10px] font-bold uppercase tracking-[.17em] text-[#8A9BAD]">Workspace / dyasse</p><h1 className="mt-1 font-serif text-[27px] leading-none tracking-[-.04em] text-[#172231]">{title}</h1></div>
        </div>
        <div className="flex items-center gap-3">
+         {showSandboxTest?<Link href="/sandbox/paypal-test" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#D3BD68] bg-[#FFF8DA] px-3 text-xs font-bold text-[#6B4900] hover:bg-[#FFEDAD]">Test PayPal (Sandbox)</Link>:null}
          <span className="hidden items-center gap-2 rounded-full border border-[#CFE8DC] bg-[#F2FBF6] px-4 py-2.5 text-[11px] font-semibold text-[#2D7455] sm:inline-flex"><span className="h-2 w-2 rounded-full bg-[#39A878]"/> Supabase connected</span>
          <Link href="/admin/products" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#781D35] px-5 text-xs font-bold text-white transition hover:bg-[#5E132A]"><Package size={16}/> Catalog <ArrowUpRight size={14}/></Link>
          <span className="hidden h-10 w-10 items-center justify-center rounded-full bg-[#EBF5FA] text-xs font-semibold sm:flex">{initials}</span>
