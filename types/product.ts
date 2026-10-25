@@ -15,6 +15,9 @@ export interface Product {
   gumroad_link: string | null
   lemon_checkout_url: string | null
   paypal_link: string | null
+  paypal_price_usd_cents: number | null
+  paypal_checkout_enabled: boolean
+  digital_file_path: string | null
   features: JsonArray
   materials: JsonArray
   what_you_will_learn: JsonArray
