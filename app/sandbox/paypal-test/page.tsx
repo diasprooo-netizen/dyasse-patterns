@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Dyasse — Sandbox PayPal Test', robots: { index: false, follow: false } }
 
 export default async function SandboxPayPalTest() {
-  if (process.env.VERCEL_ENV !== 'preview' || process.env.PAYPAL_ENVIRONMENT !== 'sandbox') notFound()
+  if (process.env.VERCEL_ENV === 'production') notFound()
 
   const admin = await getCurrentAdminState()
   if (!admin.isAdmin) {
@@ -18,6 +18,10 @@ export default async function SandboxPayPalTest() {
       <Link className="mt-6 inline-block rounded-lg bg-[#781D35] px-5 py-3 font-semibold text-white"
         href="/account/login?next=/sandbox/paypal-test">Sign in to run the Sandbox test</Link>
     </main>
+  }
+
+  if (process.env.PAYPAL_ENVIRONMENT !== 'sandbox') {
+    return <main className="mx-auto max-w-xl px-5 py-16"><h1 className="text-2xl font-bold">PayPal Sandbox configuration is unavailable</h1><p className="mt-3">Only the Preview environment can run this test. No real payments are enabled.</p></main>
   }
 
   const db = createServiceClient()
