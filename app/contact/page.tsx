@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Download, FileText, Mail, ShieldCheck } from 'lucide-react'
 export const metadata:Metadata={title:'Contact and pattern support',description:'Where to get support for Dyasse crochet and knitting PDF pattern orders and digital downloads.',alternates:{canonical:'/contact'}}
-export default function Contact(){return <div className="bg-[#fcfaf7] text-[#342c25]">
+export default function Contact(){return <div className="bg-white text-[#172231]">
  <section className="bg-[#f0e7db] px-5 py-20 sm:px-8">
   <div className="mx-auto max-w-5xl">
    <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-[#795f4b]"><ArrowLeft size={15}/> Back to home</Link>
