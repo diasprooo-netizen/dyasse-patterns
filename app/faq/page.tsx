@@ -4,17 +4,17 @@ import { ArrowLeft, ArrowUpRight, BookOpen, Download, FileText, HelpCircle, Mail
 
 export const metadata: Metadata = {
   title: 'Frequently asked questions',
-  description: 'Clear answers about Dyasse digital crochet and knitting PDF patterns, Gumroad downloads and buyer support.',
+  description: 'Clear answers about Dyasse digital crochet and knitting PDF patterns, digital downloads and buyer support.',
   alternates: { canonical: '/faq' },
 }
 
 const faqs=[
   { question:'Am I buying a finished item?', answer:'No. Dyasse patterns are digital PDF instructions for you to make the item yourself. Yarn, hooks, needles, accessories, and the finished handmade product are not included unless an individual listing explicitly says otherwise.' },
-  { question:'How do I receive my PDF?', answer:'When a pattern is available for sale, checkout and file delivery are handled by Gumroad. After successful payment you can access the files through the instructions in your Gumroad purchase receipt. Nothing is sent by post.' },
+  { question:'How do I receive my PDF?', answer:'When a pattern is available for sale, checkout and file delivery are handled by the secure payment provider shown on the product. After successful payment, follow the download instructions in your order confirmation email. Nothing is sent by post.' },
   { question:'Are all the patterns available right now?', answer:'Not yet. A pattern appears publicly only after it has passed our release checks and has a working checkout link. If a collection has no products, its releases are still being prepared.' },
   { question:'Do I need to know how to crochet or knit?', answer:'Each available product page should describe the project, materials and skill expectations. Check these details before checkout. A beginner-level project can still require some familiarity with basic stitches.' },
-  { question:'What if I have trouble downloading?', answer:'First open the Gumroad purchase email and follow its download link. If it still does not work, reply to the receipt or use the seller contact on your Gumroad purchase page. Include the pattern title and your order reference, but never share your password or bank details.' },
-  { question:'Can I request help with a pattern?', answer:'Yes. Use the support contact listed on the related Gumroad order or product page. Tell us which pattern, version and step you need help with, and include a clear description or photo if relevant.' },
+  { question:'What if I have trouble downloading?', answer:'First open your order confirmation email and follow its download link. If that does not work, contact us via the website with your order reference. Include the pattern title and your order reference, but never share your password or bank details.' },
+  { question:'Can I request help with a pattern?', answer:'Yes. Use the contact details on our website or your purchase receipt. Tell us which pattern, version and step you need help with, and include a clear description or photo if relevant.' },
   { question:'Are pattern photos proof of a finished handmade sample?', answer:'Only where a listing explicitly provides verified sample information. Decorative illustrations and listing photographs should not be used as a substitute for testing written instructions.' },
 ]
 export default function FAQ(){
@@ -30,7 +30,7 @@ export default function FAQ(){
   </section>
   <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8 lg:py-20">
    <div className="grid gap-4 sm:grid-cols-3">
-    {[{I:FileText,label:'Digital PDF only'},{I:Download,label:'Gumroad checkout'},{I:BookOpen,label:'Read before buying'}].map(({I,label})=><div key={label} className="flex items-center gap-3 rounded-2xl border border-[#e7dbcc] bg-white p-5 text-sm font-semibold"><I size={21} strokeWidth={1.5} className="shrink-0 text-[#ae7857]"/>{label}</div>)}
+    {[{I:FileText,label:'Digital PDF only'},{I:Download,label:'Secure PDF checkout'},{I:BookOpen,label:'Read before buying'}].map(({I,label})=><div key={label} className="flex items-center gap-3 rounded-2xl border border-[#e7dbcc] bg-white p-5 text-sm font-semibold"><I size={21} strokeWidth={1.5} className="shrink-0 text-[#ae7857]"/>{label}</div>)}
    </div>
    <h2 className="mt-14 font-serif text-3xl tracking-[-.03em]">Frequently asked questions</h2>
    <div className="mt-6 divide-y divide-[#e7ded4] border-y border-[#e7ded4]">
@@ -43,7 +43,7 @@ export default function FAQ(){
      </details>)}
    </div>
    <div className="mt-12 flex flex-wrap items-center justify-between gap-5 rounded-[26px] bg-[#342b24] px-7 py-9 text-white sm:px-10">
-     <div><Mail size={25} strokeWidth={1.5} className="text-[#d7ac8b]"/><h3 className="mt-3 font-serif text-2xl">Still have a question?</h3><p className="mt-2 max-w-md text-sm leading-7 text-[#e0d1c3]">For order-specific support, use the contact provided with your Gumroad purchase.</p></div>
+     <div><Mail size={25} strokeWidth={1.5} className="text-[#d7ac8b]"/><h3 className="mt-3 font-serif text-2xl">Still have a question?</h3><p className="mt-2 max-w-md text-sm leading-7 text-[#e0d1c3]">For order-specific support, use our contact page and include your purchase reference.</p></div>
      <Link href="/contact" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-[#342b24]">Contact information <ArrowUpRight size={17}/></Link>
    </div>
   </section>
