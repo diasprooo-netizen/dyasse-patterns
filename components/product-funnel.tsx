@@ -25,7 +25,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
 
   const details=[
     {icon:FileText,title:'Digital pattern',subtitle:'PDF instructions — not a finished handmade item'},
-    {icon:Download,title:'Digital delivery',subtitle:'Access files from your Gumroad receipt after purchase'},
+    {icon:Download,title:'Digital delivery',subtitle:'Access your PDF through the payment receipt after purchase'},
     {icon:Headphones,title:'Questions about your pattern?',subtitle:'Use your purchase information when contacting support'},
   ]
 
@@ -69,7 +69,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
               <span><span className="block text-[13px] font-bold text-[#374A56]">{title}</span><span className="mt-1 block text-xs leading-5 text-[#7A8587]">{subtitle}</span></span>
             </div>)}
           </div>
-          <p className="mt-6 text-xs leading-6 text-[#78827E]">Digital purchase only. Payment and file access are managed by Gumroad for released products.</p>
+          <p className="mt-6 text-xs leading-6 text-[#78827E]">Digital purchase only. Checkout and digital delivery are handled by the verified payment provider shown at purchase.</p>
         </div>
       </div>
     </section>
