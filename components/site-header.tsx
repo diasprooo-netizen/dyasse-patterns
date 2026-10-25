@@ -49,20 +49,20 @@ export function SiteHeader() {
   const accountLabel = account?.isAdmin ? 'Manager' : account?.authenticated ? 'My account' : account === null ? 'Account' : 'Sign in'
 
   return <>
-    <div className="relative z-[71] border-b border-[#354456] bg-[#263747] text-[#F8F3EC]">
+    <div className="relative z-[71] border-b border-[#6E4B55] bg-[#4A2E3A] text-[#FFF6EC]">
       <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-[10px] font-medium tracking-[.07em] sm:text-[11px]">
         <FileText size={13} strokeWidth={1.5} aria-hidden="true"/>
         <span>Thoughtful crochet & knitting PDF patterns <span className="mx-1.5 text-[#C7A693]">·</span> Digital delivery for released designs</span>
       </div>
     </div>
-    <header className="sticky top-0 z-[70] border-b border-[#E6DDD4] bg-[#FFFEFC]/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-[70] border-b border-[#E6DDD4] bg-[#FFFBF7]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-5 px-5 sm:px-8 lg:h-[88px]">
         <BrandMark/>
         <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
           {navigation.map(item => <Link key={item.href} href={item.href}
-            className={'relative py-3 text-[13px] font-semibold transition hover:text-[#A9565F] ' + (pathname === item.href ? 'text-[#A9565F]' : 'text-[#4F5C62]')}>
+            className={'relative py-3 text-[13px] font-semibold transition hover:text-[#763E4C] ' + (pathname === item.href ? 'text-[#763E4C]' : 'text-[#4F5C62]')}>
             {item.label}
-            {pathname === item.href ? <span className="absolute inset-x-0 bottom-1 h-px bg-[#A9565F]"/> : null}
+            {pathname === item.href ? <span className="absolute inset-x-0 bottom-1 h-px bg-[#763E4C]"/> : null}
           </Link>)}
         </nav>
         <div className="hidden items-center gap-4 lg:flex">
@@ -80,7 +80,7 @@ export function SiteHeader() {
                 <SignOutButton/>
               </div>
             </details> :
-            <Link href={personalPath} className="inline-flex min-h-11 items-center gap-2 px-3 text-[13px] font-semibold text-[#4D5A62] transition hover:text-[#A9565F]"><UserRound size={17}/>{accountLabel}</Link>}
+            <Link href={personalPath} className="inline-flex min-h-11 items-center gap-2 px-3 text-[13px] font-semibold text-[#4D5A62] transition hover:text-[#763E4C]"><UserRound size={17}/>{accountLabel}</Link>}
           <Link href="/#collections" className="dyasse-button-primary !min-h-[45px] !px-5 !text-[12px]">
             Explore patterns <ArrowUpRight size={16}/>
           </Link>
@@ -94,10 +94,10 @@ export function SiteHeader() {
         <nav aria-label="Mobile navigation" className="mx-auto grid max-w-7xl">
           {navigation.map((item, i) => <Link href={item.href} key={item.href} onClick={() => setIsOpen(false)}
             className="flex items-center justify-between border-b border-[#EEE8E1] py-4 text-[16px] font-semibold text-[#354653]">
-            <span><span className="mr-3 text-xs font-bold text-[#AA7E7A]">{String(i + 1).padStart(2,'0')}</span>{item.label}</span><ArrowRight size={17}/>
+            <span><span className="mr-3 text-xs font-bold text-[#9C6370]">{String(i + 1).padStart(2,'0')}</span>{item.label}</span><ArrowRight size={17}/>
           </Link>)}
           <Link href="/about" onClick={() => setIsOpen(false)} className="flex items-center justify-between border-b border-[#EEE8E1] py-4 text-[16px] font-semibold text-[#354653]">
-            <span><span className="mr-3 text-xs font-bold text-[#AA7E7A]">06</span>Our story</span><ArrowRight size={17}/>
+            <span><span className="mr-3 text-xs font-bold text-[#9C6370]">06</span>Our story</span><ArrowRight size={17}/>
           </Link>
           {account?.authenticated ? <div className="mt-4 bg-[#F5F1EA] p-2">
             <p className="truncate px-4 py-2 text-xs text-[#727F82]">{account.email}</p>

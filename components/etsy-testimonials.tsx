@@ -74,23 +74,23 @@ const reviews: readonly EtsyReview[] = [
 ]
 
 export function EtsyTestimonials() {
- return <section aria-labelledby="etsy-reviews-title" className="border-y border-[#E5DDD3] bg-white">
+ return <section aria-labelledby="etsy-reviews-title" className="border-y border-[#E5DDD3] bg-[#FFF9F2]">
    <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
      <div className="mb-12 grid gap-8 lg:grid-cols-[1fr_.5fr] lg:items-end">
        <div>
          <p className="dyasse-eyebrow">FROM OUR EARLIER ETSY SHOP</p>
-         <h2 id="etsy-reviews-title" className="mt-5 max-w-2xl font-serif text-[clamp(2.7rem,5vw,4.3rem)] leading-[1.08] tracking-[-.055em] text-[#273849]">
-           Words from people who <em className="font-normal text-[#A9565F]">made it.</em>
+         <h2 id="etsy-reviews-title" className="mt-5 max-w-2xl font-serif text-[clamp(2.7rem,5vw,4.3rem)] leading-[1.08] tracking-[-.055em] text-[#452F3B]">
+           Words from people who <em className="font-normal text-[#884957]">made it.</em>
          </h2>
          <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#66717C]">A hand-picked selection of twelve genuine five-star reviews from past customers of our Etsy shop.</p>
        </div>
        <div className="flex items-center gap-4 border-t border-[#E6DCD2] pt-5 lg:ml-auto lg:mt-0">
-         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F2E7DD] text-[#A9565F]"><Quote size={20} strokeWidth={1.4}/></span>
+         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F2E7DD] text-[#884957]"><Quote size={20} strokeWidth={1.4}/></span>
          <span><span className="block text-[13px] font-bold text-[#354655]">Past Etsy buyer feedback</span><span className="mt-1 block text-xs text-[#7D8586]">Selected reviews, not a storewide rating</span></span>
        </div>
      </div>
      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-       {reviews.map(review=><figure key={review.reviewer+review.date} className="flex min-h-[216px] flex-col border border-[#E8E1D9] bg-[#FBF9F5] p-6 sm:p-7">
+       {reviews.map(review=><figure key={review.reviewer+review.date} className="flex min-h-[216px] flex-col border border-[#E8E1D9] bg-[#FFFEFC] p-6 sm:p-7">
          <div role="img" aria-label="5 out of 5 stars" className="flex gap-1 text-[#B59169]">
            {Array.from({length:5},(_,i)=><Star key={i} size={15} fill="currentColor" strokeWidth={1} aria-hidden="true"/>)}
          </div>
