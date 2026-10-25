@@ -23,6 +23,7 @@ function normalizeProduct(row: Record<string, unknown>): Product {
     image_url: String(row.image_url),
     gallery_images: normalizeArray(row.gallery_images),
     gumroad_link: row.gumroad_link ? String(row.gumroad_link) : null,
+    lemon_checkout_url: row.lemon_checkout_url ? String(row.lemon_checkout_url) : null,
     paypal_link: row.paypal_link ? String(row.paypal_link) : null,
     features: normalizeArray(row.features),
     materials: normalizeArray(row.materials),

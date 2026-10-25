@@ -13,6 +13,7 @@ export interface Product {
   image_url: string
   gallery_images: JsonArray
   gumroad_link: string | null
+  lemon_checkout_url: string | null
   paypal_link: string | null
   features: JsonArray
   materials: JsonArray

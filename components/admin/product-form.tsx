@@ -26,6 +26,7 @@ type FormState = {
   image_url: string
   gallery_images: string
   gumroad_link: string
+  lemon_checkout_url: string
   paypal_link: string
   features: string
   materials: string
@@ -43,7 +44,7 @@ type FormState = {
 }
 
 const emptyState: FormState = {
-  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'MAD', image_url: '', gallery_images: '', gumroad_link: '', paypal_link: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
+  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'MAD', image_url: '', gallery_images: '', gumroad_link: '', lemon_checkout_url: '', paypal_link: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
 }
 
 function linesToArray(value: string) {
@@ -66,6 +67,7 @@ function productToState(product?: Product): FormState {
     image_url: product.image_url,
     gallery_images: arrayToLines(product.gallery_images),
     gumroad_link: product.gumroad_link ?? '',
+    lemon_checkout_url: product.lemon_checkout_url ?? '',
     paypal_link: product.paypal_link ?? '',
     features: arrayToLines(product.features),
     materials: arrayToLines(product.materials),
@@ -121,6 +123,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
       image_url: form.image_url,
       gallery_images: linesToArray(form.gallery_images),
       gumroad_link: form.gumroad_link || null,
+      lemon_checkout_url: form.lemon_checkout_url || null,
       paypal_link: form.paypal_link || null,
       features: linesToArray(form.features),
       materials: linesToArray(form.materials),
@@ -165,6 +168,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextField label="Currency" value={form.currency} onChange={(value) => update('currency', value)} placeholder="MAD" />
         <TextField label="Category" value={form.category} onChange={(value) => update('category', value)} placeholder="Bags" />
         <TextField label="Main Image URL" value={form.image_url} onChange={(value) => update('image_url', value)} required placeholder="https://..." />
+        <TextField label="Lemon Squeezy checkout link (temporary)" value={form.lemon_checkout_url} onChange={(value) => update('lemon_checkout_url', value)} placeholder="https://your-store.lemonsqueezy.com/checkout/buy/..." />
         <TextField label="Gumroad Link" value={form.gumroad_link} onChange={(value) => update('gumroad_link', value)} placeholder="https://gumroad.com/..." />
         <TextField label="PayPal Link" value={form.paypal_link} onChange={(value) => update('paypal_link', value)} placeholder="https://paypal.com/..." />
         <TextField label="SEO Title" value={form.seo_title} onChange={(value) => update('seo_title', value)} />
@@ -179,7 +183,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
         <TextArea label="SEO Description" value={form.seo_description} onChange={(value) => update('seo_description', value)} />
       </div>
       <div className="grid gap-3 sm:grid-cols-3">
-        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Published (requires QA approval and Gumroad checkout)</label>
+        <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_published} onChange={(event) => update('is_published', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Published (requires QA approval and a verified checkout)</label>
         <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_featured} onChange={(event) => update('is_featured', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> Featured</label>
         <label className="flex min-h-[64px] cursor-pointer items-center gap-3 rounded-2xl border border-[#D8E1F0] bg-white p-4 text-sm font-semibold text-[#2B405F] hover:border-[#8499E1]"><input type="checkbox" checked={form.is_on_sale} onChange={(event) => update('is_on_sale', event.target.checked)} className="h-[18px] w-[18px] shrink-0 accent-[#4B60DF]" /> On Sale</label>
       </div>

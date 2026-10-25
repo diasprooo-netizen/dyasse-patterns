@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { createClient, hasSupabaseConfig } from '@/lib/supabase/server'
 import { normalizeProducts } from '@/lib/products'
+import { validLemonCheckoutUrl } from '@/lib/checkout'
 import type { Product, ProductInput, ProductStats } from '@/types/product'
 
 type ActionResult<T = undefined> =
@@ -109,9 +110,14 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
   const price = toNumber(input.price)
   const salePrice = input.sale_price === null || input.sale_price === undefined || String(input.sale_price) === '' ? null : toNumber(input.sale_price)
   const imageUrl = cleanString(input.image_url)
+  const lemonCheckoutUrl = cleanOptionalString(input.lemon_checkout_url)
 
   if (!title || !slug || !description || !imageUrl || !Number.isFinite(price)) {
     return { ok: false, message: 'Title, slug, description, price, and main image URL are required.' }
+  }
+
+  if (lemonCheckoutUrl && !validLemonCheckoutUrl(lemonCheckoutUrl)) {
+    return { ok: false, message: 'Use a valid Lemon Squeezy checkout/buy link from your live product, not a cart or store URL.' }
   }
 
   if (salePrice !== null && (!Number.isFinite(salePrice) || salePrice >= price)) {
@@ -128,6 +134,7 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
     image_url: imageUrl,
     gallery_images: cleanArray(input.gallery_images),
     gumroad_link: cleanOptionalString(input.gumroad_link),
+    lemon_checkout_url: lemonCheckoutUrl,
     paypal_link: cleanOptionalString(input.paypal_link),
     features: cleanArray(input.features),
     materials: cleanArray(input.materials),
