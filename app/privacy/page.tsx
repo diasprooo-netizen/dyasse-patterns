@@ -3,12 +3,12 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Database, Fingerprint, LockKeyhole, ShieldCheck } from 'lucide-react'
 export const metadata: Metadata={title:'Privacy at dyasse',description:'How dyasse currently handles account access, anonymous analytics and digital checkout.',alternates:{canonical:'/privacy'}}
 export default function Privacy(){
- return <div className="bg-[#fcfaf7] text-[#352c25]">
+ return <div className="bg-white text-[#172231]">
   <section className="bg-[#f1e9dd] px-5 py-20 sm:px-8">
    <div className="mx-auto max-w-4xl">
     <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#795e4b]"><ArrowLeft size={17}/> Back to home</Link>
     <p className="dyasse-eyebrow mt-12">YOUR INFORMATION MATTERS</p>
-    <h1 className="mt-5 font-serif text-[clamp(3.2rem,6vw,5.8rem)] leading-[1.04] tracking-[-.05em]">Privacy should feel <em className="font-normal text-[#ad7456]">simple.</em></h1>
+    <h1 className="mt-5 font-serif text-[clamp(3.2rem,6vw,5.8rem)] leading-[1.04] tracking-[-.05em]">Privacy should feel <em className="font-normal text-[#781D35]">simple.</em></h1>
     <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[#726153]">A straightforward summary of the services used on this pre-launch Dyasse site and what happens when you choose to sign in or buy a digital pattern.</p>
    </div>
   </section>
