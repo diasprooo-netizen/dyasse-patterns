@@ -49,13 +49,13 @@ export function SiteHeader() {
   const accountLabel = account?.isAdmin ? 'Manager' : account?.authenticated ? 'My account' : account === null ? 'Account' : 'Sign in'
 
   return <>
-    <div className="relative z-[71] border-b border-[#6E4B55] bg-[#4A2E3A] text-[#FFF6EC]">
+    <div className="relative z-[71] border-b border-[#D5E6EF] bg-[#FFFFFF] text-[#2B343B]">
       <div className="mx-auto flex min-h-9 max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-[10px] font-medium tracking-[.07em] sm:text-[11px]">
         <FileText size={13} strokeWidth={1.5} aria-hidden="true"/>
         <span>Thoughtful crochet & knitting PDF patterns <span className="mx-1.5 text-[#C7A693]">·</span> Digital delivery for released designs</span>
       </div>
     </div>
-    <header className="sticky top-0 z-[70] border-b border-[#E6DDD4] bg-[#FFFBF7]/95 backdrop-blur-xl">
+    <header className="sticky top-0 z-[70] border-b border-[#E6DDD4] bg-[#FFFFFF]/95 backdrop-blur-xl">
       <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-5 px-5 sm:px-8 lg:h-[88px]">
         <BrandMark/>
         <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">
@@ -86,7 +86,7 @@ export function SiteHeader() {
           </Link>
         </div>
         <button type="button" aria-label={isOpen ? 'Close menu' : 'Open menu'} aria-expanded={isOpen} aria-controls="dyasse-mobile-navigation"
-          onClick={() => setIsOpen(v => !v)} className="inline-flex h-11 w-11 items-center justify-center border border-[#E3DBD2] bg-white text-[#364856] lg:hidden">
+          onClick={() => setIsOpen(v => !v)} className="inline-flex h-11 w-11 items-center justify-center border border-[#D7E6EF] bg-white text-[#364856] lg:hidden">
           {isOpen ? <X size={22}/> : <Menu size={22}/>}
         </button>
       </div>
@@ -94,12 +94,12 @@ export function SiteHeader() {
         <nav aria-label="Mobile navigation" className="mx-auto grid max-w-7xl">
           {navigation.map((item, i) => <Link href={item.href} key={item.href} onClick={() => setIsOpen(false)}
             className="flex items-center justify-between border-b border-[#EEE8E1] py-4 text-[16px] font-semibold text-[#354653]">
-            <span><span className="mr-3 text-xs font-bold text-[#9C6370]">{String(i + 1).padStart(2,'0')}</span>{item.label}</span><ArrowRight size={17}/>
+            <span><span className="mr-3 text-xs font-bold text-[#762538]">{String(i + 1).padStart(2,'0')}</span>{item.label}</span><ArrowRight size={17}/>
           </Link>)}
           <Link href="/about" onClick={() => setIsOpen(false)} className="flex items-center justify-between border-b border-[#EEE8E1] py-4 text-[16px] font-semibold text-[#354653]">
-            <span><span className="mr-3 text-xs font-bold text-[#9C6370]">06</span>Our story</span><ArrowRight size={17}/>
+            <span><span className="mr-3 text-xs font-bold text-[#762538]">06</span>Our story</span><ArrowRight size={17}/>
           </Link>
-          {account?.authenticated ? <div className="mt-4 bg-[#F5F1EA] p-2">
+          {account?.authenticated ? <div className="mt-4 bg-[#F2F8FC] p-2">
             <p className="truncate px-4 py-2 text-xs text-[#727F82]">{account.email}</p>
             <Link href={personalPath} onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-4 py-3 text-sm font-bold text-[#354653]"><LayoutDashboard size={16}/>{account.isAdmin?'Manage store':'My account'}</Link>
             <SignOutButton mobile/>
