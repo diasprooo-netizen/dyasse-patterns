@@ -163,3 +163,14 @@
   background:rgba(255,255,255,.50); color:#24262A;border-color:#9FBBCB;
 }
 .dyasse-sky-hero .dyasse-hero-outline:hover {background:white;border-color:#762538}
+
+/* Approved reference fidelity: editorial sky-blue image panel, white surfaces and burgundy CTA. */
+.dyasse-hero-photo {
+ background-color:#D8EDF8;
+ background-image:url('https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=1600');
+ background-size:cover;
+ background-position:center 50%;
+}
+.dyasse-admin-hero {background:linear-gradient(110deg,#E2F2FC,#F6FBFE);}
+.dyasse-button-primary {background:#781D35;border-color:#781D35;color:#fff;}
+.dyasse-button-primary:hover{background:#5C1428;border-color:#5C1428;}
