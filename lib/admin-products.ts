@@ -111,6 +111,17 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
   const salePrice = input.sale_price === null || input.sale_price === undefined || String(input.sale_price) === '' ? null : toNumber(input.sale_price)
   const imageUrl = cleanString(input.image_url)
   const lemonCheckoutUrl = cleanOptionalString(input.lemon_checkout_url)
+  const paypalPriceUsdCents = input.paypal_price_usd_cents == null ? null : toNumber(input.paypal_price_usd_cents)
+  const digitalFilePath = cleanOptionalString(input.digital_file_path)
+  if (paypalPriceUsdCents !== null && (!Number.isSafeInteger(paypalPriceUsdCents) || paypalPriceUsdCents <= 0)) {
+    return { ok: false, message: 'PayPal USD cents must be a positive whole number.' }
+  }
+  if (digitalFilePath && !/^DYS-\d{4}\/Pattern\.pdf$/.test(digitalFilePath)) {
+    return { ok: false, message: 'Use the private PDF path DYS-0000/Pattern.pdf.' }
+  }
+  if (input.paypal_checkout_enabled && (!digitalFilePath || !paypalPriceUsdCents)) {
+    return { ok: false, message: 'Connect and verify the private PDF and USD price before enabling PayPal checkout.' }
+  }
 
   if (!title || !slug || !description || !imageUrl || !Number.isFinite(price)) {
     return { ok: false, message: 'Title, slug, description, price, and main image URL are required.' }
@@ -136,6 +147,9 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
     gumroad_link: cleanOptionalString(input.gumroad_link),
     lemon_checkout_url: lemonCheckoutUrl,
     paypal_link: cleanOptionalString(input.paypal_link),
+    paypal_price_usd_cents: paypalPriceUsdCents,
+    paypal_checkout_enabled: Boolean(input.paypal_checkout_enabled),
+    digital_file_path: digitalFilePath,
     features: cleanArray(input.features),
     materials: cleanArray(input.materials),
     what_you_will_learn: cleanArray(input.what_you_will_learn),
