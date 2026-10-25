@@ -12,8 +12,8 @@ type PayPalSdk = { Buttons: (options: {
 }) => PayPalButtons }
 declare global { interface Window { paypal?: PayPalSdk } }
 
-export function PayPalCheckout({ slug, priceCents, clientId }: {
-  slug: string; priceCents: number; clientId: string
+export function PayPalCheckout({ slug, priceCents, clientId, sandboxTest = false }: {
+  slug: string; priceCents: number; clientId: string; sandboxTest?: boolean
 }) {
   const slot = useRef<HTMLDivElement>(null)
   const rendered = useRef(false)
@@ -30,7 +30,7 @@ export function PayPalCheckout({ slug, priceCents, clientId }: {
         setError('')
         const result = await fetch('/api/paypal/order', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', ...(sandboxTest ? { 'x-dyasse-sandbox-test': 'DYS-0138' } : {}) },
           body: JSON.stringify({ slug }), credentials: 'same-origin',
         })
         const value = await result.json() as { id?: string; error?: string }
@@ -57,7 +57,7 @@ export function PayPalCheckout({ slug, priceCents, clientId }: {
         setError('Checkout could not finish. If money was taken, do not pay twice: contact support with your PayPal receipt.')
       },
     }).render(slot.current).catch(() => setError('PayPal button is unavailable. Please try again.'))
-  }, [slug])
+  }, [slug, sandboxTest])
 
   return <div className="space-y-3">
     {download ? (
