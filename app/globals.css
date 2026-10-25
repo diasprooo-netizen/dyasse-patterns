@@ -3,186 +3,89 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Dyasse Sky Atelier: white, sky-blue, ink, with restrained maroon. */
 :root {
-  /* Crochet Atelier — warm ivory, wine velvet and natural yarn */
-  --font-inter: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --background: #FFF9F2;
-  --foreground: #332E35;
-  --card: #FFFFFF;
-  --card-foreground: #332E35;
-  --popover: #FFFFFF;
-  --popover-foreground: #332E35;
-  --primary: #763E4C;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F4E8DE;
-  --secondary-foreground: #344335;
-  --muted: #F8F0E8;
-  --muted-foreground: #66717C;
-  --accent: #BD9D79;
-  --accent-foreground: #263345;
-  --destructive: #A6424D;
-  --destructive-foreground: #FFFFFF;
-  --border: #E7D9CE;
-  --input: #E6DED4;
-  --ring: #9A6267;
-  --radius: .9rem;
+ --font-inter: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+ --background: #FFFFFF;
+ --foreground: #182435;
+ --card: #FFFFFF;
+ --card-foreground: #182435;
+ --popover: #FFFFFF;
+ --popover-foreground: #182435;
+ --primary: #781D35;
+ --primary-foreground: #FFFFFF;
+ --secondary: #E8F4FB;
+ --secondary-foreground: #182435;
+ --muted: #F3F8FC;
+ --muted-foreground: #596776;
+ --accent: #DCEFFA;
+ --accent-foreground: #182435;
+ --destructive: #9F293B;
+ --destructive-foreground: #FFFFFF;
+ --border: #DEE9F0;
+ --input: #D8E5ED;
+ --ring: #781D35;
+ --radius: 1.125rem;
 }
-
 @theme inline {
-  --font-sans: var(--font-inter);
-  --font-serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', ui-serif, serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+ --font-sans: var(--font-inter);
+ --font-serif: Georgia,'Iowan Old Style','Palatino Linotype',ui-serif,serif;
+ --font-mono: 'Geist Mono','Geist Mono Fallback';
+ --color-background: var(--background);
+ --color-foreground: var(--foreground);
+ --color-card: var(--card);
+ --color-card-foreground: var(--card-foreground);
+ --color-popover: var(--popover);
+ --color-popover-foreground: var(--popover-foreground);
+ --color-primary: var(--primary);
+ --color-primary-foreground: var(--primary-foreground);
+ --color-secondary: var(--secondary);
+ --color-secondary-foreground: var(--secondary-foreground);
+ --color-muted: var(--muted);
+ --color-muted-foreground: var(--muted-foreground);
+ --color-accent: var(--accent);
+ --color-accent-foreground: var(--accent-foreground);
+ --color-destructive: var(--destructive);
+ --color-destructive-foreground: var(--destructive-foreground);
+ --color-border: var(--border);
+ --color-input: var(--input);
+ --color-ring: var(--ring);
+ --radius-sm: calc(var(--radius) - 4px);
+ --radius-md: calc(var(--radius) - 2px);
+ --radius-lg: var(--radius);
+ --radius-xl: calc(var(--radius) + 4px);
 }
 @layer base {
-  * { @apply border-border outline-ring/50; }
-  html { scroll-behavior: smooth; }
-  body { @apply bg-background text-foreground; background: #FFF9F2; }
-  ::selection { background: #EFD2CB; color: #263345; }
-  :focus-visible { outline: 3px solid #8A4E5B; outline-offset: 3px; }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      scroll-behavior: auto !important;
-      animation-duration: .01ms !important;
-      transition-duration: .01ms !important;
-    }
-  }
+ * { @apply border-border outline-ring/50; }
+ html { scroll-behavior:smooth; }
+ body { @apply bg-background text-foreground; }
+ ::selection { background:#CFEAF9; color:#182435; }
+ :focus-visible { outline:3px solid #781D35; outline-offset:3px; }
+ @media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; transition-duration:.01ms!important; }
+ }
 }
 @layer components {
-  .craft-card { @apply rounded-3xl border border-border bg-card shadow-[0_12px_35px_rgba(37,44,49,.045)]; }
-  .yarn-gradient { background: linear-gradient(130deg,#F8F4EF,#EFE7DC); }
-  .stitch-divider { background-image: repeating-linear-gradient(90deg,#B79C7C 0 12px,transparent 12px 20px); height: 2px; }
-  .pdf-badge { @apply rounded-full bg-[#F1E8DE] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#65513F]; }
-  .crochet-badge { @apply rounded-full bg-[#A9565F] px-3 py-1 text-xs font-semibold text-white; }
-  .knitting-badge { @apply rounded-full bg-[#6A8476] px-3 py-1 text-xs font-semibold text-white; }
+ .craft-card { @apply rounded-3xl border border-border bg-card shadow-[0_12px_35px_rgba(31,52,76,.045)]; }
+ .yarn-gradient { background:#E7F4FC; }
+ .stitch-divider { background:#D4EAF6; height:2px; }
+ .pdf-badge { @apply rounded-full bg-[#EAF4FA] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#182435]; }
+ .crochet-badge { @apply rounded-full bg-[#781D35] px-3 py-1 text-xs font-semibold text-white; }
+ .knitting-badge { @apply rounded-full bg-[#E4F2F9] px-3 py-1 text-xs font-semibold text-[#182435]; }
 }
-.dyasse-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  color: #8A4E5B;
-  font-size: 10px;
-  font-weight: 750;
-  line-height: 1.7;
-  letter-spacing: .21em;
-  text-transform: uppercase;
-}
-.dyasse-container { width: min(100% - 2.5rem, 80rem); margin-inline: auto; }
-@media (min-width:640px) { .dyasse-container { width: min(100% - 4rem, 80rem); } }
-.dyasse-stitch-pattern {
-  background-color: #EDE6DC;
-  background-image:
-    repeating-linear-gradient(45deg,rgba(140,122,99,.13) 0 1px,transparent 1px 14px),
-    repeating-linear-gradient(-45deg,rgba(140,122,99,.08) 0 1px,transparent 1px 14px);
-}
-.dyasse-button-primary {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: .75rem;
-  border: 1px solid #273849;
-  border-radius: 999px;
-  background: #273849;
-  padding: .75rem 1.65rem;
-  color: #fff;
-  font-size: .875rem;
-  font-weight: 700;
-  transition: background .2s,border-color .2s,transform .2s;
-}
-.dyasse-button-primary:hover { background:#763E4C; border-color:#763E4C; transform:translateY(-1px); }
-.dyasse-button-secondary {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: .65rem;
-  border: 1px solid #CFC3B8;
-  border-radius: 999px;
-  background: transparent;
-  padding: .75rem 1.55rem;
-  color: #263345;
-  font-size: .875rem;
-  font-weight: 700;
-  transition: background .2s,border-color .2s;
-}
-.dyasse-button-secondary:hover { background:#fff; border-color:#763E4C; }
-.dyasse-hairline { border-color: #E9E1D8; }
-.dyasse-admin-shell ::selection { background: #DFE4E8; color: #263345; }
-.dyasse-admin-shell input, .dyasse-admin-shell textarea, .dyasse-admin-shell select { color-scheme:light; }
-.dyasse-admin-shell [aria-current="page"] {font-weight:800;}
-
-/* The crochet theme is intentionally visual, not a flat background:
-   a single wine-violet surface with an original low-contrast lace motif. */
-.dyasse-crochet-hero {
-  position: relative;
-  isolation: isolate;
-  background:
-    radial-gradient(ellipse at 79% 43%, rgba(220,157,152,.25) 0%, transparent 47%),
-    linear-gradient(112deg, #4D2B3D 0%, #623B4C 52%, #82555C 100%);
-}
-.dyasse-crochet-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url('/crochet-lace-tile.svg');
-  background-size: 320px 288px;
-  background-repeat: repeat;
-  opacity: .30;
-  z-index: 0;
-}
-.dyasse-crochet-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(0deg, rgba(255,239,222,.11) 0, rgba(255,239,222,.11) 1px, transparent 1px, transparent 5px),
-    repeating-linear-gradient(90deg, rgba(255,239,222,.06) 0, rgba(255,239,222,.06) 1px, transparent 1px, transparent 7px);
-  opacity: .19;
-  z-index: 0;
-}
-.dyasse-crochet-hero > * { position: relative; z-index: 1; }
-.dyasse-atelier-fiber {
-  background-image: linear-gradient(125deg, #FFF8F1 0%, #F9EEE4 55%, #F2E4D8 100%);
-}
-.dyasse-crochet-hero .dyasse-hero-cta {
-  background: #FFF4E6;
-  border-color: #FFF4E6;
-  color: #543442;
-}
-.dyasse-crochet-hero .dyasse-hero-cta:hover {
-  background: #F1D7C8;
-  border-color: #F1D7C8;
-}
-.dyasse-crochet-hero .dyasse-hero-outline {
-  color: #FFF4E6;
-  border-color: rgba(255,239,225,.58);
-  background: rgba(255,255,255,.045);
-}
-.dyasse-crochet-hero .dyasse-hero-outline:hover {
-  background: rgba(255,255,255,.15);
-}
+.dyasse-eyebrow { display:flex;align-items:center;gap:.75rem;color:#781D35;font-size:10px;font-weight:750;line-height:1.7;letter-spacing:.19em;text-transform:uppercase; }
+.dyasse-container { width:min(100% - 2.5rem,80rem);margin-inline:auto; }
+@media(min-width:640px){.dyasse-container{width:min(100% - 4rem,80rem);}}
+.dyasse-stitch-pattern {background-color:#EDF7FC;background-image:repeating-linear-gradient(45deg,rgba(69,109,142,.075) 0 1px,transparent 1px 15px),repeating-linear-gradient(-45deg,rgba(69,109,142,.06) 0 1px,transparent 1px 15px);}
+.dyasse-button-primary {display:inline-flex;min-height:48px;align-items:center;justify-content:center;gap:.7rem;border:1px solid #781D35;border-radius:999px;background:#781D35;padding:.72rem 1.4rem;color:white;font-size:.875rem;font-weight:700;transition:background .2s,transform .2s;}
+.dyasse-button-primary:hover{background:#5C1428;transform:translateY(-1px);}
+.dyasse-button-secondary{display:inline-flex;min-height:48px;align-items:center;justify-content:center;gap:.7rem;border:1px solid #BBCCD7;border-radius:999px;background:rgba(255,255,255,.6);padding:.72rem 1.4rem;color:#182435;font-size:.875rem;font-weight:700;transition:background .2s,border-color .2s;}
+.dyasse-button-secondary:hover{background:white;border-color:#7A9CB2;}
+/* Real free-use Pexels image by Sam Lion — illustrative craft materials, not product photography. */
+.dyasse-hero-photo {background-color:#DDEFFC;background-image:url('https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=1600');background-size:cover;background-position:center center;}
+.dyasse-sky-hero {background:linear-gradient(115deg,#E6F4FD 0%,#F2F9FD 51%,#E2F2FB 100%);}
+.dyasse-admin-hero {background:linear-gradient(105deg,#E3F2FB,#F4FAFD);}
+.dyasse-soft-panel {box-shadow:0 12px 34px rgba(32,63,91,.055);}
+.dyasse-admin-shell ::selection {background:#D2EAF8;color:#182435;}
+.dyasse-admin-shell input,.dyasse-admin-shell textarea,.dyasse-admin-shell select{color-scheme:light;}
+.dyasse-admin-shell [aria-current="page"]{font-weight:800;}
