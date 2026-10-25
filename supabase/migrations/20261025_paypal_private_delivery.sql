@@ -31,6 +31,7 @@ create table if not exists public.paypal_orders (
   id uuid primary key default gen_random_uuid(),
   product_id uuid not null references public.products(id),
   paypal_order_id text not null unique,
+  checkout_claim_hash text not null,
   paypal_capture_id text unique,
   amount_cents integer not null check(amount_cents > 0),
   currency text not null default 'USD' check(currency = 'USD'),
