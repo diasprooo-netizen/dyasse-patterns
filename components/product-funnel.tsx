@@ -25,7 +25,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
 
   const details=[
     {icon:FileText,title:'Digital pattern',subtitle:'PDF instructions — not a finished handmade item'},
-    {icon:Download,title:'Digital delivery',subtitle:'Access your PDF through the payment receipt after purchase'},
+    {icon:Download,title:'Digital delivery',subtitle:'Get your PDF after confirmed payment; provider receipts may include a download link'},
     {icon:Headphones,title:'Questions about your pattern?',subtitle:'Use your purchase information when contacting support'},
   ]
 
