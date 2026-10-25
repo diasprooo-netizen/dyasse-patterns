@@ -62,7 +62,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
             <div><span className="block text-[10px] font-bold uppercase tracking-[.15em] text-[#8B8E88]">Pattern price</span><div className="mt-2"><PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency}/></div></div>
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
           </div>
-          <div className="mt-7"><BuyButtons slug={product.slug} gumroadLink={product.gumroad_link}/></div>
+          <div className="mt-7"><BuyButtons slug={product.slug} gumroadLink={product.gumroad_link} lemonCheckoutUrl={product.lemon_checkout_url}/></div>
           <div className="mt-7 divide-y divide-[#E8E1D9] border-y border-[#DDEAF2]">
             {details.map(({icon:Icon,title,subtitle})=><div key={title} className="flex items-center gap-4 py-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ECF6FC] text-[#9A7466]"><Icon size={19} strokeWidth={1.4}/></span>
