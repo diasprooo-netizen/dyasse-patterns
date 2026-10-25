@@ -70,14 +70,14 @@ export function AdminShell({children,email}:{children:ReactNode,email:string}){
        return <Link key={href} href={href} onClick={()=>setMobileOpen(false)}
         className={'group flex min-h-11 items-center gap-3 rounded-xl px-4 py-2.5 text-[13px] font-semibold transition '+
          (active?'bg-[#E0F0FB] text-[#172B3A]':'text-[#35444E] hover:bg-[#EBF5FB] hover:text-[#762538]')}>
-         <Icon size={18} strokeWidth={1.9}/><span className="flex-1">{label}</span>{active?<ChevronRight size={15} className="text-white"/>:null}
+         <Icon size={18} strokeWidth={1.9}/><span className="flex-1">{label}</span>{active?<ChevronRight size={15} className="text-[#496A85]"/>:null}
         </Link>
       })}
      </div>
     </div>)}
    </nav>
    <div className="mt-auto pt-8">
-    <Link href="/" className="flex items-center justify-between rounded-xl border border-[#E1EBF1] bg-[#F3F9FD] px-4 py-3 text-xs font-bold text-white transition hover:bg-[#EBF5FB]">View storefront <ExternalLink size={16}/></Link>
+    <Link href="/" className="flex items-center justify-between rounded-xl border border-[#E1EBF1] bg-[#F3F9FD] px-4 py-3 text-xs font-bold text-[#334251] transition hover:bg-[#EBF5FB]">View storefront <ExternalLink size={16}/></Link>
     <div className="mt-4 flex items-center gap-3 border-t border-[#E1EBF1] px-2 pt-5">
      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#526A76] text-xs font-black text-white">{initials}</span>
      <div className="min-w-0 flex-1"><p className="text-xs font-bold">Store administrator</p><p className="truncate text-[11px] text-[#667684]">{email}</p></div>
