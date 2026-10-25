@@ -1,0 +1,92 @@
+import { createHash, randomBytes } from 'node:crypto'
+import { NextRequest, NextResponse } from 'next/server'
+import { createServiceClient } from '@/lib/supabase/service'
+import { callPayPal, completedCapture, hasPayPalCredentials, paypalErrorResponse } from '@/lib/paypal-server'
+
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
+export async function POST(request: NextRequest) {
+  if (request.headers.get('origin') !== request.nextUrl.origin)
+    return NextResponse.json({ error: 'Origin not allowed' }, { status: 403 })
+  if (Number(request.headers.get('content-length') || 0) > 2048)
+    return NextResponse.json({ error: 'Invalid request' }, { status: 413 })
+  if (!hasPayPalCredentials())
+    return NextResponse.json({ error: 'PayPal not configured' }, { status: 503 })
+
+  let orderId: unknown
+  try { orderId = (await request.json() as { orderId?: unknown }).orderId } catch {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+  }
+  if (typeof orderId !== 'string' || !/^[A-Z0-9-]{8,40}$/.test(orderId))
+    return NextResponse.json({ error: 'Invalid order ID' }, { status: 400 })
+  const claim = request.cookies.get('dyasse_paypal_claim')?.value
+  if (!claim || !/^[a-f0-9]{64}$/.test(claim))
+    return NextResponse.json({ error: 'Checkout session expired' }, { status: 403 })
+
+  try {
+    const db = createServiceClient()
+    const { data: row, error } = await db.from('paypal_orders')
+      .select('id,product_id,amount_cents,status,checkout_claim_hash')
+      .eq('paypal_order_id', orderId).maybeSingle()
+    if (error || !row || row.checkout_claim_hash !== createHash('sha256').update(claim).digest('hex'))
+      return NextResponse.json({ error: 'Checkout order not found for this session' }, { status: 403 })
+    if (row.status !== 'created')
+      return NextResponse.json({ error: 'Order already processed. Check your PayPal receipt or contact support.' }, { status: 409 })
+
+    // The only authority to confirm a paid order is the PayPal server API,
+    // not the browser's onApprove event.
+    let paid
+    try {
+      paid = await callPayPal('/v2/checkout/orders/' + orderId + '/capture', 'POST', {}, orderId.slice(0, 36))
+    } catch {
+      // Safe recovery when PayPal completed the capture but the network reply was lost.
+      paid = await callPayPal('/v2/checkout/orders/' + orderId, 'GET')
+    }
+    const verified = completedCapture(paid, row.product_id, Number(row.amount_cents))
+    if (!verified) return NextResponse.json({ error: 'Payment not completed. No download was issued.' }, { status: 409 })
+
+    const token = randomBytes(32).toString('hex')
+    const tokenHash = createHash('sha256').update(token).digest('hex')
+    const expires = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString()
+    const { data: updated, error: updateError } = await db.from('paypal_orders').update({
+      status: 'completed',
+      paypal_capture_id: verified.id,
+      payer_email: verified.payerEmail,
+      download_token_hash: tokenHash,
+      download_token_expires_at: expires,
+      completed_at: new Date().toISOString(),
+    }).eq('id', row.id).eq('status', 'created').select('id').maybeSingle()
+
+    if (updateError || !updated) throw new Error('Payment succeeded, but secure delivery could not be persisted')
+    const downloadUrl = '/api/download/' + token
+
+    // Optional transactional email; immediate download remains available without it.
+    // Configure a verified sender domain + RESEND_API_KEY before claiming email delivery.
+    if (verified.payerEmail && process.env.RESEND_API_KEY && process.env.DYASSE_RECEIPT_FROM_EMAIL) {
+      try {
+        const origin = (process.env.NEXT_PUBLIC_SITE_URL || 'https://dyasse.com').replace(/\/$/, '')
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from: process.env.DYASSE_RECEIPT_FROM_EMAIL,
+            to: [verified.payerEmail],
+            subject: 'Dyasse Shop: your PDF crochet pattern download',
+            text: 'Thank you for your order! Download your PDF using the private link below (valid for 90 days):\n'
+              + origin + downloadUrl + '\n\nOrder: ' + orderId
+              + '\n\nThis is a digital pattern, not a finished physical item.',
+          }),
+        })
+      } catch (sendError) { console.error('Receipt email failed:', sendError) }
+    }
+    const response = NextResponse.json({ downloadUrl, orderId }, { headers: { 'Cache-Control': 'no-store' } })
+    response.cookies.delete('dyasse_paypal_claim')
+    return response
+  } catch (error) {
+    console.error('PayPal capture/delivery error:', error)
+    return NextResponse.json({
+      error: 'If PayPal took your payment, contact support with the PayPal order reference. Do not pay twice.',
+    }, { status: 503 })
+  }
+}
