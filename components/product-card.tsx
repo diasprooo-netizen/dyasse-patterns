@@ -20,9 +20,9 @@ export function ProductCard({ product }: { product: Product }) {
       <span aria-hidden="true" className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FFFEFB] text-[#384C53] shadow-sm transition-transform group-hover:-translate-y-0.5"><ArrowUpRight size={19}/></span>
     </Link>
     <div className="flex flex-1 flex-col p-6">
-      <p className="text-[10px] font-bold uppercase tracking-[.17em] text-[#A45E65]">{type} / Digital pattern</p>
+      <p className="text-[10px] font-bold uppercase tracking-[.17em] text-[#762538]">{type} / Digital pattern</p>
       <h3 className="mt-3 line-clamp-2 min-h-[3.3rem] font-serif text-[24px] leading-[1.22] tracking-[-.035em] text-[#293A4A]">
-        <Link href={href} className="transition hover:text-[#A9565F]">{product.title}</Link>
+        <Link href={href} className="transition hover:text-[#762538]">{product.title}</Link>
       </h3>
       <p className="mt-3 line-clamp-2 text-[13px] leading-6 text-[#6E7679]">{product.description.replace(/\s+/g,' ').slice(0,240)}</p>
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#EEE8E0] pt-5">
