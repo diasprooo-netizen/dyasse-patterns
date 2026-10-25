@@ -13,7 +13,7 @@ interface BuyButtonsProps {
 }
 export function BuyButtons({ slug, gumroadLink, lemonCheckoutUrl, paypalCheckoutEnabled, paypalPriceUsdCents }: BuyButtonsProps) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
-  if (paypalCheckoutEnabled && clientId && typeof paypalPriceUsdCents === 'number' && paypalPriceUsdCents > 0) {
+  if (paypalCheckoutEnabled && clientId && process.env.PAYPAL_CLIENT_SECRET && typeof paypalPriceUsdCents === 'number' && paypalPriceUsdCents > 0) {
     return <PayPalCheckout slug={slug} priceCents={paypalPriceUsdCents} clientId={clientId}/>
   }
   if (validLemonCheckoutUrl(lemonCheckoutUrl)) {
