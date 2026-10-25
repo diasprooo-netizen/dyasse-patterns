@@ -18,13 +18,13 @@ const faqs=[
   { question:'Are pattern photos proof of a finished handmade sample?', answer:'Only where a listing explicitly provides verified sample information. Decorative illustrations and listing photographs should not be used as a substitute for testing written instructions.' },
 ]
 export default function FAQ(){
- return <div className="bg-[#FFFDFD] text-[#203759]">
-  <section className="bg-[linear-gradient(120deg,#FBE9DB,#F2DCE6_65%,#E8E5FD)] px-5 py-20 sm:px-8">
+ return <div className="bg-white text-[#172231]">
+  <section className="bg-[#EAF6FC] px-5 py-20 sm:px-8">
    <div className="mx-auto max-w-4xl text-center">
     <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-[#80684f]"><ArrowLeft size={15}/> Back to home</Link>
     <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-[20px] bg-white text-[#b47c5b]"><HelpCircle size={29} strokeWidth={1.5}/></div>
     <p className="dyasse-eyebrow mt-6 justify-center">WE'RE HERE TO HELP</p>
-    <h1 className="mt-5 font-serif text-[clamp(3.25rem,6vw,5.4rem)] leading-[1.05] tracking-[-.055em]">A little clarity goes <em className="font-normal text-[#D94D65]">a long way.</em></h1>
+    <h1 className="mt-5 font-serif text-[clamp(3.25rem,6vw,5.4rem)] leading-[1.05] tracking-[-.055em]">A little clarity goes <em className="font-normal text-[#781D35]">a long way.</em></h1>
     <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-8 text-[#716254]">Digital patterns should be simple to understand and straightforward to download. Here are the essentials.</p>
    </div>
   </section>
