@@ -3,11 +3,11 @@ import type { Metadata } from 'next'
 import { ArrowUpRight, BookOpen, Heart, Leaf, PenLine, Scissors } from 'lucide-react'
 export const metadata: Metadata={title:'The story of dyasse',description:'Dyasse shop creates a thoughtful home for crochet and knitting PDF patterns.',alternates:{canonical:'/about'}}
 export default function About(){
- return <div className="bg-[#FFFDFD] text-[#203759]">
-  <section className="overflow-hidden bg-[linear-gradient(120deg,#FDE8DB,#F4D6E1_65%,#E7E1F9)] px-5 py-20 sm:px-8 lg:py-28">
+ return <div className="bg-white text-[#172231]">
+  <section className="overflow-hidden bg-[#EAF6FC] px-5 py-20 sm:px-8 lg:py-28">
     <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-[1.15fr_.85fr]">
       <div><p className="dyasse-eyebrow">A LITTLE ABOUT DYASSE</p>
-        <h1 className="mt-6 font-serif text-[clamp(3.6rem,6vw,6.4rem)] leading-[.99] tracking-[-.06em]">Good things are<br/><em className="font-normal text-[#D94D65]">made by hand.</em></h1>
+        <h1 className="mt-6 font-serif text-[clamp(3.6rem,6vw,6.4rem)] leading-[.99] tracking-[-.06em]">Good things are<br/><em className="font-normal text-[#781D35]">made by hand.</em></h1>
         <p className="mt-8 max-w-xl text-[17px] leading-9 text-[#6d5c50]">We love the details that turn a ball of yarn into something meaningful. Dyasse brings together crochet and knitting PDF patterns for makers who enjoy the process just as much as the result.</p>
         <Link href="/#collections" className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[#1D3657] px-6 text-sm font-semibold text-white">Explore our collections <ArrowUpRight size={17}/></Link>
       </div>
@@ -23,7 +23,7 @@ export default function About(){
   </section>
   <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
-      <div><p className="dyasse-eyebrow">OUR APPROACH</p><h2 className="mt-4 font-serif text-5xl leading-tight tracking-[-.05em]">Thoughtful <em className="font-normal text-[#ad7456]">by design.</em></h2>
+      <div><p className="dyasse-eyebrow">OUR APPROACH</p><h2 className="mt-4 font-serif text-5xl leading-tight tracking-[-.05em]">Thoughtful <em className="font-normal text-[#781D35]">by design.</em></h2>
       <p className="mt-5 text-[15px] leading-8 text-[#726255]">We want product pages that let you make an informed choice. Work through the instructions at your own pace, with clear expectations about what you will receive.</p></div>
       <div className="grid gap-5 sm:grid-cols-2">
       {[{I:PenLine,t:'Details that matter',d:'Materials, skill level and project information belong at the centre of a good pattern listing.'},
