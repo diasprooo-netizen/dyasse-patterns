@@ -14,6 +14,7 @@ export type Database = {
       qa_audits: Table
       newsletter_subscribers: Table
       checkout_clicks: Table
+      paypal_orders: Table
     }
     Views: Record<string, never>
     Functions: Record<string, never>

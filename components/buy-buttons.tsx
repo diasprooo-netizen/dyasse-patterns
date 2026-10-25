@@ -1,14 +1,21 @@
 import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { LemonCheckoutLink } from '@/components/lemon-checkout-link'
+import { PayPalCheckout } from '@/components/paypal-checkout'
 import { validLemonCheckoutUrl } from '@/lib/checkout'
 
 interface BuyButtonsProps {
   slug: string
   gumroadLink?: string | null
   lemonCheckoutUrl?: string | null
+  paypalCheckoutEnabled?: boolean
+  paypalPriceUsdCents?: number | null
 }
-export function BuyButtons({ slug, gumroadLink, lemonCheckoutUrl }: BuyButtonsProps) {
+export function BuyButtons({ slug, gumroadLink, lemonCheckoutUrl, paypalCheckoutEnabled, paypalPriceUsdCents }: BuyButtonsProps) {
+  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
+  if (paypalCheckoutEnabled && clientId && process.env.PAYPAL_CLIENT_SECRET && typeof paypalPriceUsdCents === 'number' && paypalPriceUsdCents > 0) {
+    return <PayPalCheckout slug={slug} priceCents={paypalPriceUsdCents} clientId={clientId}/>
+  }
   if (validLemonCheckoutUrl(lemonCheckoutUrl)) {
     return <LemonCheckoutLink checkoutUrl={lemonCheckoutUrl!}/>
   }
