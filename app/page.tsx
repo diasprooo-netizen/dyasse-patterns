@@ -4,6 +4,8 @@ import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, F
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { EtsyTestimonials } from '@/components/etsy-testimonials'
+import { CategoryCarousel } from '@/components/category-carousel'
+import { primaryCollection } from '@/lib/seo'
 
 export const dynamic='force-dynamic'
 export const metadata: Metadata = {
@@ -26,25 +28,31 @@ const more=[
 ]
 
 export default async function Home(){
- const products=(await getPublishedProducts()).slice(0,8)
+ const allProducts=await getPublishedProducts()
+ const products=allProducts.slice(0,8)
+ const categoryItems=collections.map(({href,title,sub,image})=>{
+   const slug=href.split('/').pop()
+   const representative=allProducts.find(product=>primaryCollection(product)===slug)
+   return {href,title,sub,image:representative?.image_url || image}
+ })
  return <div className="bg-white text-[#172231]">
    <section className="dyasse-sky-hero relative overflow-hidden">
-     <div className="mx-auto grid max-w-7xl lg:min-h-[510px] lg:grid-cols-[1.04fr_.96fr]">
-       <div className="relative z-10 px-5 pb-14 pt-16 sm:px-8 lg:pb-16 lg:pt-20">
+     <div className="mx-auto grid max-w-7xl lg:min-h-[405px] lg:grid-cols-[1.04fr_.96fr]">
+       <div className="relative z-10 px-5 pb-10 pt-10 sm:px-8 lg:pb-12 lg:pt-12">
          <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.18em] text-[#781D35]"><span className="h-px w-8 bg-[#781D35]"/>THE DYASSE CROCHET & KNITTING ATELIER</div>
-         <h1 className="mt-6 max-w-[690px] font-serif text-[clamp(3.1rem,5vw,5.3rem)] leading-[1.05] tracking-[-.055em] text-[#172231]">Beautiful patterns<br/>for a more <em className="font-normal">handmade</em> world.</h1>
-         <p className="mt-6 max-w-[570px] text-[15px] leading-8 text-[#3F4B57] sm:text-[17px]">Explore thoughtful crochet and knitting PDF patterns, from cozy accessories to baby booties and small handmade gifts. Make something meaningful, one stitch at a time.</p>
-         <div className="mt-8 flex flex-wrap gap-3">
+         <h1 className="mt-4 max-w-[690px] font-serif text-[clamp(2.55rem,4.1vw,4.35rem)] leading-[1.07] tracking-[-.055em] text-[#172231]">Beautiful patterns<br/>for a more <em className="font-normal">handmade</em> world.</h1>
+         <p className="mt-4 max-w-[570px] text-[15px] leading-7 text-[#3F4B57] sm:text-[17px]">Explore thoughtful crochet and knitting PDF patterns, from cozy accessories to baby booties and small handmade gifts. Make something meaningful, one stitch at a time.</p>
+         <div className="mt-6 flex flex-wrap gap-3">
            <Link href="/collections/crochet-patterns" className="dyasse-button-primary">Explore crochet patterns <ArrowRight size={17}/></Link>
            <Link href="/collections/knitting-patterns" className="dyasse-button-secondary">Knitting patterns <ArrowUpRight size={16}/></Link>
          </div>
-         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#D4E4EE] pt-5 text-xs text-[#354455]">
+         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#D4E4EE] pt-5 text-xs text-[#354455]">
            <span className="inline-flex items-center gap-2"><FileText size={16}/> Downloadable PDF patterns</span>
            <span className="inline-flex items-center gap-2"><Heart size={16}/> Thoughtful handmade projects</span>
            <span className="inline-flex items-center gap-2"><ShieldCheck size={16}/> Clear product details</span>
          </div>
        </div>
-       <div className="relative min-h-[300px] overflow-hidden lg:min-h-full">
+       <div className="relative min-h-[245px] overflow-hidden lg:min-h-full">
          <div aria-hidden="true" className="dyasse-hero-photo absolute inset-0"/>
          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#EAF5FC_0%,transparent_24%)] lg:bg-[linear-gradient(90deg,#EFF8FD_0%,transparent_29%)]"/>
          <div className="absolute bottom-6 left-6 border border-white/65 bg-white/90 p-4 shadow-sm backdrop-blur sm:left-10 lg:bottom-9">
@@ -63,19 +71,12 @@ export default async function Home(){
      </div>
    </section>
 
-   <section id="collections" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-14 pt-16 sm:px-8">
+   <section id="collections" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-12 pt-12 sm:px-8">
      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
        <div><p className="dyasse-eyebrow">FIND YOUR NEXT PROJECT</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,3vw,3.2rem)] tracking-[-.045em]">Shop by category</h2></div>
        <Link href="/#all-categories" className="inline-flex items-center gap-2 border-b border-[#781D35] pb-1 text-[13px] font-bold text-[#781D35]">View all categories <ArrowUpRight size={16}/></Link>
      </div>
-     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-       {collections.map(({href,title,sub,icon:Icon,image})=><Link href={href} key={href} className="group relative flex min-h-[175px] flex-col justify-between overflow-hidden rounded-[17px] border border-[#E1ECF2] bg-[#EDF5FA] p-5 transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(23,57,89,.09)]">
-         <div aria-hidden="true" className="absolute inset-y-0 right-0 w-[57%] bg-cover bg-center opacity-75" style={{backgroundImage:'url("'+image+'")'}}/>
-         <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,#F4F8FB_0%,#F4F8FB_43%,transparent_95%)]"/>
-         <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#781D35]"><Icon size={17} strokeWidth={1.6}/></span>
-         <div className="relative"><h3 className="max-w-[150px] font-serif text-[22px] leading-6 text-[#172231]">{title}</h3><p className="mt-1.5 max-w-[155px] text-[11px] leading-4 text-[#4A5E6B]">{sub}</p><ArrowRight size={17} className="mt-2 text-[#781D35] transition group-hover:translate-x-1"/></div>
-       </Link>)}
-     </div>
+     <CategoryCarousel items={categoryItems}/>
      <nav id="all-categories" aria-label="More categories" className="mt-5 flex flex-wrap gap-2">
        {more.map(x=><Link key={x.href} href={x.href} className="rounded-full border border-[#DAE8F0] bg-[#F5FAFC] px-4 py-2 text-xs font-semibold text-[#27384B] hover:border-[#AFCAD9]">{x.label} <span className="text-[#781D35]">↗</span></Link>)}
      </nav>
