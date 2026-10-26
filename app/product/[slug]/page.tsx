@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { ProductFunnel } from '@/components/product-funnel'
+import { ProductReviews } from '@/components/product-reviews'
 import { getProductBySlug, getRelatedProducts } from '@/lib/products'
 import { collectionSeo, primaryCollection, productSeoDescription, productSeoTitle, safeJsonLd, SITE_NAME, SITE_URL } from '@/lib/seo'
 
@@ -74,5 +75,6 @@ export default async function ProductPage({ params }: PageProps) {
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(graph) }} />
     <ProductFunnel product={product} upsells={related.upsells} crossSells={related.crossSells} />
+    <ProductReviews productId={product.id} />
   </>
 }
