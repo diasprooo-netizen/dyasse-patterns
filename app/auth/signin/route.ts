@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server"
 import { createServerClient } from "@supabase/ssr"
 
 function safeNextPath(value: FormDataEntryValue | null) {
-  if (typeof value !== "string") return "/admin"
+  if (typeof value !== "string") return "/account/orders"
   if (!value.startsWith("/") || value.startsWith("//")) return "/admin"
-  return value
+  return !value.includes("\\") && !value.includes("\r") && !value.includes("\n") ? value : "/account/orders"
 }
 
 export async function POST(request: NextRequest) {
