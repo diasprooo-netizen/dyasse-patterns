@@ -46,6 +46,9 @@ export function SiteHeader(){
         <div className="absolute right-0 top-[calc(100%+12px)] w-60 overflow-hidden rounded-2xl border border-[#E1EAF1] bg-white shadow-xl">
           <p className="truncate border-b border-[#E7EDF1] px-4 py-3 text-xs text-[#677A89]">{account.email}</p>
           <Link href={accountHref} className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-[#223248] hover:bg-[#F2F8FC]"><LayoutDashboard size={16}/>{account.isAdmin?'Open dashboard':'My account'}</Link>
+          <Link href="/account/profile" className="block px-4 py-3 text-sm font-semibold text-[#223248] hover:bg-[#F2F8FC]">Profile & contact details</Link>
+          <Link href="/account/orders" className="block px-4 py-3 text-sm font-semibold text-[#223248] hover:bg-[#F2F8FC]">My PDF orders</Link>
+          <Link href="/support" className="block px-4 py-3 text-sm font-semibold text-[#223248] hover:bg-[#F2F8FC]">Chat with support</Link>
           <SignOutButton/>
         </div>
       </details>:<Link href={accountHref} className="inline-flex min-h-11 items-center gap-2 px-2 text-[12px] font-semibold text-[#223248]"><UserRound size={17}/>{accountLabel}</Link>}
