@@ -13,12 +13,13 @@ export async function POST(request:NextRequest){
  try{
  const form=await request.formData()
  const email=String(form.get('email')||'').trim().toLowerCase()
+ const fullName=String(form.get('full_name')||'').trim()
  const password=String(form.get('password')||'')
  const confirm=String(form.get('confirm')||'')
- if(email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<8||password.length>128||password!==confirm)
+ if(fullName.length<2||fullName.length>100||email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<8||password.length>128||password!==confirm)
   return back(request,'error','Check email, password and confirmation. Minimum password length is 8.')
  const db=await createClient()
- const {error}=await db.auth.signUp({email,password,options:{emailRedirectTo:new URL('/account/login',request.url).toString()}})
+ const {error}=await db.auth.signUp({email,password,options:{emailRedirectTo:new URL('/account/login',request.url).toString(),data:{full_name:fullName}}})
  if(error)return back(request,'error','Unable to sign up. Please verify your information or try again.')
  return back(request,'message','Check your inbox for a confirmation email if email verification is enabled. Then sign in.')
  }catch{return back(request,'error','Sign up is temporarily unavailable.')}
