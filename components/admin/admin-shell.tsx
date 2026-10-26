@@ -14,6 +14,7 @@ const sections=[
  {title:'GROWTH & SALES',items:[
   {href:'/admin/gumroad',label:'Gumroad links',icon:Link2},
   {href:'/admin/analytics',label:'Analytics',icon:BarChart3},
+  {href:'/admin/orders',label:'PayPal orders',icon:Package},
   {href:'/admin/support',label:'Customer messages',icon:MessageCircle},
   {href:'/admin/reviews',label:'Buyer reviews',icon:Star},
   {href:'/admin/seo',label:'SEO audit',icon:SearchCheck},
@@ -31,6 +32,7 @@ const descriptions:Record<string,string>={
  '/admin/qa':'Check real samples before listing for sale',
  '/admin/gumroad':'Connect genuine digital purchase links',
  '/admin/analytics':'Track site activity without invented sales',
+ '/admin/orders':'Customer emails and paid order recovery',
  '/admin/support':'Reply to buyer messages and check order numbers',
  '/admin/reviews':'Moderate only real verified purchaser reviews',
  '/admin/seo':'Review product search-readiness',
