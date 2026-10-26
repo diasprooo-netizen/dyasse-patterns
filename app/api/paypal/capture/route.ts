@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
             to: [row.customer_email],
             subject: 'Dyasse Shop: your PDF crochet pattern download',
             text: 'Thank you for your order! Find your purchased PDF securely in your Dyasse account: \n'
-              + origin + downloadUrl + '\n\nOrder: ' + orderId
+              + origin + '/account/orders' + '\n\nOrder: ' + orderId
               + '\n\nThis is a digital pattern, not a finished physical item.',
           }),
         })
