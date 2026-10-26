@@ -2,6 +2,7 @@ import { createHash, randomBytes } from 'node:crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/service'
 import { callPayPal, hasPayPalCredentials, paypalErrorResponse } from '@/lib/paypal-server'
+import { customerIdentity } from '@/lib/customer'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -22,6 +23,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid product' }, { status: 400 })
 
   try {
+    const me = await customerIdentity()
+    if (!me) return NextResponse.json({ error: 'Sign in before buying.', signInUrl: '/account/login?next=/product/' + slug }, { status: 401 })
+    if (!me.name) return NextResponse.json({ error: 'Complete your name before buying.', profileUrl: '/account/profile?next=/product/' + slug }, { status: 403 })
     const db = createServiceClient()
     const { data: product, error } = await db.from('products')
       .select('id,title,slug,paypal_price_usd_cents,digital_file_path')
@@ -57,6 +61,8 @@ export async function POST(request: NextRequest) {
     const hash = createHash('sha256').update(claim).digest('hex')
     const { error: writeError } = await db.from('paypal_orders').insert({
       product_id: product.id,
+      customer_user_id: me.id,
+      customer_email: me.email,
       paypal_order_id: create.id,
       checkout_claim_hash: hash,
       amount_cents: cents, currency: 'USD', status: 'created',
