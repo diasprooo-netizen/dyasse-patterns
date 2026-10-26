@@ -1,0 +1,3 @@
+import { SupportChat } from '@/components/support-chat'
+export const metadata={title:'Support chat | dyasse shop',description:'Contact the Dyasse team about crochet PDF downloads, PayPal orders and pattern questions.'}
+export default function SupportPage(){return <main className="bg-[#F4FAFD] px-5 py-12"><div className="mx-auto max-w-5xl"><p className="text-xs font-bold uppercase tracking-widest text-[#781D35]">Customer care</p><h1 className="mt-3 font-serif text-4xl">Talk to the Dyasse team</h1><p className="my-6 max-w-2xl text-sm leading-7 text-[#566D80]">Questions about a PDF, a pattern or an order? Leave a message and your PayPal order number. Our team answers when available; messages stay saved in your account.</p><SupportChat/></div></main>}

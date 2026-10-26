@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
+import { SupportLauncher } from '@/components/support-launcher'
 
 export function SiteChrome({children}:{children:React.ReactNode}){
   const path=usePathname()
@@ -12,5 +13,6 @@ export function SiteChrome({children}:{children:React.ReactNode}){
     <SiteHeader/>
     <main id="main-content" className="min-h-[55vh]">{children}</main>
     <SiteFooter/>
+    <SupportLauncher/>
   </>
 }

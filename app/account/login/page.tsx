@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, LockKeyhole, UserRound } from 'lucide-react'
 export const metadata={title:'Sign in to Dyasse',robots:{index:false,follow:false}}
 type Props={searchParams?:{next?:string;error?:string}}
 function safeNext(value?:string){
- return value?.startsWith('/')&&!value.startsWith('//')&&!value.includes('\\')?value:'/admin'
+ return value?.startsWith('/')&&!value.startsWith('//')&&!value.includes('\\')?value:'/account/orders'
 }
 export default function LoginPage({searchParams}:Props){
  const next=safeNext(searchParams?.next)
@@ -15,7 +15,7 @@ export default function LoginPage({searchParams}:Props){
      <div className="relative"><LockKeyhole size={26} strokeWidth={1.4} className="text-[#8e6753]"/>
        <p className="mt-8 text-[10px] font-bold uppercase tracking-[.2em] text-[#a2775d]">A SPACE FOR MAKERS</p>
        <h1 className="mt-5 font-serif text-[clamp(2.5rem,4vw,4rem)] leading-[1.08] tracking-[-.05em]">Welcome <em className="font-normal text-[#a77455]">back.</em></h1>
-       <p className="mt-5 max-w-xs text-[15px] leading-8 text-[#706052]">Sign in to your Dyasse account. Pattern purchases and download receipts are provided by Gumroad.</p>
+       <p className="mt-5 max-w-xs text-[15px] leading-8 text-[#706052]">Sign in to your Dyasse account. Pattern purchases and download receipts are available from your Dyasse account after PayPal confirms payment.</p>
      </div>
      <Link href="/" className="relative mt-10 inline-flex items-center gap-2 text-sm font-semibold text-[#76543f]"><ArrowLeft size={16}/> Back to the studio</Link>
    </div>

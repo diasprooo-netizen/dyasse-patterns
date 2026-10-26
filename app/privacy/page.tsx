@@ -9,15 +9,16 @@ export default function Privacy(){
     <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-[#795e4b]"><ArrowLeft size={17}/> Back to home</Link>
     <p className="dyasse-eyebrow mt-12">YOUR INFORMATION MATTERS</p>
     <h1 className="mt-5 font-serif text-[clamp(3.2rem,6vw,5.8rem)] leading-[1.04] tracking-[-.05em]">Privacy should feel <em className="font-normal text-[#ad7456]">simple.</em></h1>
-    <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[#726153]">A straightforward summary of the services used on this pre-launch Dyasse site and what happens when you choose to sign in or buy a digital pattern.</p>
+    <p className="mt-6 max-w-2xl text-[16px] leading-8 text-[#726153]">A straightforward summary of the services used on this Dyasse site and what happens when you choose to sign in or buy a digital pattern.</p>
    </div>
   </section>
   <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8 lg:py-20">
    <div className="grid gap-5 sm:grid-cols-2">
-    {[{I:LockKeyhole,t:'Account access',d:'If you create a Dyasse account, its email, authentication and sign-in session are handled through Supabase Auth. Do not share account passwords.'},
+    {[{I:LockKeyhole,t:'Account access',d:'Before ordering a PDF you must create a Dyasse account. Supabase Auth stores your email, login credentials and session. Dyasse also stores your name and optional phone number for customer help. Do not share passwords.'},
       {I:Database,t:'Site analytics',d:'We use Vercel Analytics to understand general website usage. We do not present click or visitor counts as confirmed purchases.'},
-      {I:ShieldCheck,t:'Digital checkout',d:'Where a product is available for purchase, Gumroad handles the checkout and the PDF delivery. Their own terms and privacy notices apply to that transaction.'},
-      {I:Fingerprint,t:'Marketing email',d:'Our email newsletter is not currently accepting new subscriptions on this website. Previous Etsy customers are not automatically enrolled.'}
+      {I:ShieldCheck,t:'Digital checkout',d:'Where direct checkout is offered, PayPal handles your payment. Dyasse securely stores the registered email, PayPal order reference, amount, payment status, product purchased and a private PDF access record in Supabase so we can help recover your download. We do not store your card number. Other providers may have their own checkout notices.'},
+      {I:Fingerprint,t:'Marketing email',d:'Order emails and support replies are transactional, not consent for promotional emails. We do not automatically subscribe purchasers to marketing.'},
+      {I:ShieldCheck,t:'Buyer support and reviews',d:'Logged-in customers may share an optional PayPal order reference and support messages. Staff can read and reply to these private messages. Only accounts with a completed PayPal purchase can submit a product review; only approved reviews are displayed publicly without customer email or phone.'},
     ].map(({I,t,d})=><div key={t} className="rounded-[24px] border border-[#e8dbcd] bg-white p-7">
       <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#f1e7dc] text-[#ae7657]"><I size={23} strokeWidth={1.5}/></span>
       <h2 className="mt-5 font-serif text-[24px]">{t}</h2><p className="mt-3 text-sm leading-7 text-[#746357]">{d}</p>

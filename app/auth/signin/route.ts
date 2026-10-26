@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createServerClient } from "@supabase/ssr"
+import { createServiceClient } from "@/lib/supabase/service"
 
 function safeNextPath(value: FormDataEntryValue | null) {
-  if (typeof value !== "string") return "/admin"
+  if (typeof value !== "string") return "/account/orders"
   if (!value.startsWith("/") || value.startsWith("//")) return "/admin"
-  return value
+  return !value.includes("\\") && !value.includes("\r") && !value.includes("\n") ? value : "/account/orders"
 }
 
 export async function POST(request: NextRequest) {
@@ -57,7 +58,7 @@ export async function POST(request: NextRequest) {
     },
   })
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   })
@@ -67,5 +68,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.redirect(loginUrl, { status: 303 })
   }
 
+  if (data.user?.id && typeof data.user.user_metadata?.full_name === 'string') {
+    const name = data.user.user_metadata.full_name.trim()
+    if (name.length >= 2 && name.length <= 100) {
+      const db = createServiceClient()
+      const { data: existing } = await db.from('customer_profiles').select('user_id').eq('user_id',data.user.id).maybeSingle()
+      if (!existing) await db.from('customer_profiles').insert({user_id:data.user.id,full_name:name})
+    }
+  }
   return response
 }
