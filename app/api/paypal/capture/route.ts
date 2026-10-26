@@ -2,6 +2,7 @@ import { createHash, randomBytes } from 'node:crypto'
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/service'
 import { callPayPal, completedCapture, hasPayPalCredentials, paypalErrorResponse } from '@/lib/paypal-server'
+import { customerIdentity } from '@/lib/customer'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -25,11 +26,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Checkout session expired' }, { status: 403 })
 
   try {
+    const me = await customerIdentity()
+    if (!me) return NextResponse.json({ error: 'Sign in to finish your order.' }, { status: 401 })
     const db = createServiceClient()
     const { data: row, error } = await db.from('paypal_orders')
-      .select('id,product_id,amount_cents,status,checkout_claim_hash')
+      .select('id,product_id,amount_cents,status,checkout_claim_hash,customer_user_id,customer_email')
       .eq('paypal_order_id', orderId).maybeSingle()
-    if (error || !row || row.checkout_claim_hash !== createHash('sha256').update(claim).digest('hex'))
+    if (error || !row || row.customer_user_id !== me.id || row.checkout_claim_hash !== createHash('sha256').update(claim).digest('hex'))
       return NextResponse.json({ error: 'Checkout order not found for this session' }, { status: 403 })
     if (row.status !== 'created')
       return NextResponse.json({ error: 'Order already processed. Check your PayPal receipt or contact support.' }, { status: 409 })
@@ -63,17 +66,17 @@ export async function POST(request: NextRequest) {
 
     // Optional transactional email; immediate download remains available without it.
     // Configure a verified sender domain + RESEND_API_KEY before claiming email delivery.
-    if (verified.payerEmail && process.env.RESEND_API_KEY && process.env.DYASSE_RECEIPT_FROM_EMAIL) {
+    if (row.customer_email && process.env.RESEND_API_KEY && process.env.DYASSE_RECEIPT_FROM_EMAIL) {
       try {
-        const origin = (process.env.NEXT_PUBLIC_SITE_URL || 'https://dyasse.com').replace(/\/$/, '')
+        const origin = request.nextUrl.origin
         await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' },
           body: JSON.stringify({
             from: process.env.DYASSE_RECEIPT_FROM_EMAIL,
-            to: [verified.payerEmail],
+            to: [row.customer_email],
             subject: 'Dyasse Shop: your PDF crochet pattern download',
-            text: 'Thank you for your order! Download your PDF using the private link below (valid for 90 days):\n'
+            text: 'Thank you for your order! Find your purchased PDF securely in your Dyasse account: \n'
               + origin + downloadUrl + '\n\nOrder: ' + orderId
               + '\n\nThis is a digital pattern, not a finished physical item.',
           }),
