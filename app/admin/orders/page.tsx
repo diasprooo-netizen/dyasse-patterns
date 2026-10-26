@@ -26,6 +26,7 @@ export default async function AdminOrders(){
   <p className="mt-2 break-all text-xs"><strong>Registered email:</strong> {o.customer_email||'Legacy guest order (contact support)'}</p>
   <p className="mt-2 text-xs"><strong>Name:</strong> {buyers.get(o.customer_user_id)?.full_name||'—'}</p>
   {o.status==='completed'?<p className="mt-3 text-xs text-[#397757]">PDF accessible at /account/orders to the registered customer.</p>:null}
+  {o.customer_email&&o.status==='completed'?<a className="mt-3 inline-block rounded-full border border-[#CBDDE7] px-4 py-2 text-xs font-bold text-[#781D35]" href={'mailto:'+encodeURIComponent(o.customer_email)+'?subject='+encodeURIComponent('Your Dyasse Shop PDF order '+o.paypal_order_id)+'&body='+encodeURIComponent('Hello, your Dyasse digital pattern is ready. Sign in using this email at https://dyasse-patterns-diasprooo-netizen.vercel.app/account/orders to download your PDF again. PayPal order: '+o.paypal_order_id+'\nIf you need any help, reply here or use our support chat.')}>Prepare recovery email</a>:null}
  </article>)}</div>
  {!orders?.length&&!error?<p className="rounded-xl border bg-white p-5 text-sm">No orders recorded yet.</p>:null}
  </div>
