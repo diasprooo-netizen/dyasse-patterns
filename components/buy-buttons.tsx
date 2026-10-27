@@ -20,7 +20,7 @@ export async function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, l
   if (!me.name) return <div className="rounded-2xl border border-[#BCD7E8] bg-[#F0F8FD] p-5"><p className="mb-3 text-sm">Add your name to make sure we can identify and help recover your order.</p><Link href={'/account/profile?next='+encodeURIComponent(next)} className="inline-flex rounded-full bg-[#781D35] px-6 py-3 text-sm font-bold text-white">Complete customer details</Link></div>
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
   if (paypalCheckoutEnabled && clientId && process.env.PAYPAL_CLIENT_SECRET && typeof paypalPriceUsdCents === 'number' && paypalPriceUsdCents > 0) {
-    return <PayPalCheckout slug={slug} priceCents={paypalPriceUsdCents} clientId={clientId}/>
+    return <div className="space-y-4"><PayPalCheckout slug={slug} priceCents={paypalPriceUsdCents} clientId={clientId}/>{gumroadLink && gumroadCheckoutVerified?<Link href={'/go/'+encodeURIComponent(slug)} rel="nofollow sponsored" className="inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Prefer Gumroad checkout? <ExternalLink size={15}/></Link>:null}</div>
   }
   if (validLemonCheckoutUrl(lemonCheckoutUrl)) {
     return <LemonCheckoutLink checkoutUrl={lemonCheckoutUrl!}/>
