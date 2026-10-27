@@ -26,6 +26,7 @@ export function CartCheckout({ids,clientId,totalCents}:{ids:string[];clientId:st
     const data=await r.json() as {error?:string;accountUrl?:string}
     if(!r.ok||!data.accountUrl){setError(data.error||'Order needs review; do not pay again.');return}
     clearCart()
+    window.location.assign('/account/orders')
     setComplete(orderID)
    },
    onError:e=>{console.error('Cart PayPal error',e);setError('Payment interrupted. If PayPal charged you, do not pay twice; contact support.')}
