@@ -19,7 +19,6 @@ export function ProductCard({ product }: { product: Product }) {
         <span className="inline-flex items-center gap-1.5 border border-[#E4EEF4] bg-[#FFFEFB]/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-[#31475D] shadow-sm"><FileText size={12}/> PDF pattern</span>
         {product.is_featured || product.is_on_sale ? <SaleBadge badge={product.sale_badge} isFeatured={product.is_featured}/> : null}
       </div>
-      <div className="absolute bottom-4 left-4 z-10"><FavoriteButton productId={product.id} small/></div>
       <span aria-hidden="true" className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FFFEFB] text-[#384C53] shadow-sm transition-transform group-hover:-translate-y-0.5"><ArrowUpRight size={19}/></span>
     </Link>
     <div className="flex flex-1 flex-col p-6">
@@ -32,7 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
         <PriceDisplay price={product.paypal_checkout_enabled && product.paypal_price_usd_cents ? product.paypal_price_usd_cents / 100 : product.price} salePrice={product.paypal_checkout_enabled ? null : product.sale_price} currency={product.paypal_checkout_enabled ? 'USD' : product.currency} size="sm"/>
         <Link href={href} className="inline-flex min-h-10 items-center gap-1.5 text-xs font-bold text-[#781D35] hover:text-[#5F172A]">View pattern <ArrowUpRight size={15}/></Link>
       </div>
-      {product.paypal_checkout_enabled && product.paypal_price_usd_cents && <div className="mt-3 flex items-center justify-start"><AddToCart compact product={{id:product.id,slug:product.slug,title:product.title,image:product.image_url,priceCents:product.paypal_price_usd_cents}}/></div>}
+      <div className="mt-3 flex items-center gap-3"><FavoriteButton productId={product.id} small/>{product.paypal_checkout_enabled && product.paypal_price_usd_cents ? <AddToCart compact product={{id:product.id,slug:product.slug,title:product.title,image:product.image_url,priceCents:product.paypal_price_usd_cents}}/> : null}</div>
     </div>
   </article>
 }
