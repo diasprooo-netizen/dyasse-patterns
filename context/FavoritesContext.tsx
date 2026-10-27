@@ -1,10 +1,12 @@
 'use client'
 import React,{createContext,useContext,useEffect,useState} from 'react'
+import { usePathname } from 'next/navigation'
 type Context={ ids:string[];toggle:(id:string)=>Promise<void>;contains:(id:string)=>boolean;busy:string|null }
 const FavoritesContext=createContext<Context|undefined>(undefined)
 const KEY='dyasse-favorites-v1'
 const clean=(ids:unknown)=>Array.isArray(ids)?Array.from(new Set(ids.filter((v):v is string=>typeof v==='string'&&/^[0-9a-f-]{36}$/i.test(v)))).slice(0,200):[]
 export function FavoritesProvider({children}:{children:React.ReactNode}){
+ const pathname=usePathname()
  const [ids,setIds]=useState<string[]>([])
  const [busy,setBusy]=useState<string|null>(null)
  const [loaded,setLoaded]=useState(false)
@@ -32,7 +34,7 @@ export function FavoritesProvider({children}:{children:React.ReactNode}){
   }
   void load()
   return()=>{valid=false}
- },[])
+ },[pathname])
  useEffect(()=>{if(loaded)try{localStorage.setItem(KEY,JSON.stringify(ids))}catch{}},[ids,loaded])
  async function toggle(id:string){
   if(busy)return
