@@ -42,7 +42,29 @@ export function CartPageClient({clientId}:{clientId:string|null}){
      <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-[#EAF4FA]">{item.image&&<Image src={item.image} alt="" fill sizes="80px" className="object-cover"/>}</div>
      <div className="flex-1"><Link href={'/product/'+item.slug} className="text-sm font-semibold text-[#243547] hover:text-[#781D35]">{item.title}</Link>
       <p className="mt-1 text-xs text-[#5A7184]">1 digital PDF pattern</p>
-      <p className="mt-2 font-bold text-[#781D35]">${(quote?.items.find(p=>p.slug===item.slug)?.priceCents??item.priceCents)/100} USD</p>
+      <p className="mt-2 font-bold text-[#781D35]">{' USD</p>
+     </div>
+     <button type="button" onClick={()=>removeItem(item.id)} className="h-9 w-9 shrink-0 rounded-full border text-[#781D35]" aria-label={'Remove '+item.title}><Trash2 size={16} className="mx-auto"/></button>
+    </article>)}
+    <button onClick={clearCart} type="button" className="text-sm font-semibold text-[#781D35] underline underline-offset-4">Clear bag</button>
+   </div>
+   <aside className="self-start space-y-4">
+    <div className="rounded-2xl border bg-white p-6">
+     <h2 className="font-serif text-2xl">Order summary</h2>
+     <div className="mt-4 flex justify-between border-t pt-4 text-sm"><span>{items.length} distinct PDFs</span><strong>{quote?'$'+(quote.totalCents/100).toFixed(2):'Checking…'} USD</strong></div>
+     <p className="mt-3 text-xs text-[#627689]">USD pricing verified against the live catalog before charging. No duplicate digital items.</p>
+    </div>
+    {loading&&<p role="status" className="text-sm text-[#506577]">Verifying availability and prices…</p>}
+    {error&&<p role="alert" className="rounded-xl bg-red-50 p-4 text-sm text-red-700">{error} Remove unavailable items to continue.</p>}
+    {items.length>10&&<p className="rounded-xl bg-amber-50 p-4 text-sm">Checkout supports up to 10 different patterns per order.</p>}
+    {signedIn===false&&<Link href={'/account/login?next='+encodeURIComponent('/cart')} className="block rounded-full bg-[#781D35] px-5 py-3 text-center text-sm font-bold text-white">Sign in to check out</Link>}
+    {signedIn===true&&quote&&quote.items.length===items.length&&items.length<=10&&clientId&&<CartPayPalCheckout key={signature} slugs={slugs} clientId={clientId} totalCents={quote.totalCents}/>}
+    {!clientId&&<p className="text-sm text-[#7A4848]">PayPal checkout is temporarily unavailable.</p>}
+   </aside>
+  </div>}
+ </div>
+}
++((quote?.items.find(p=>p.slug===item.slug)?.priceCents??item.priceCents)/100).toFixed(2)} USD</p>
      </div>
      <button type="button" onClick={()=>removeItem(item.id)} className="h-9 w-9 shrink-0 rounded-full border text-[#781D35]" aria-label={'Remove '+item.title}><Trash2 size={16} className="mx-auto"/></button>
     </article>)}
