@@ -17,8 +17,9 @@ export function CartCheckout({ids,clientId,totalCents}:{ids:string[];clientId:st
    createOrder:async()=>{
     setError('')
     const r=await fetch('/api/cart/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({productIds:ids}),credentials:'same-origin'})
-    const data=await r.json() as {id?:string;error?:string}
+    const data=await r.json() as {id?:string;error?:string;amountCents?:number}
     if(!r.ok||!data.id)throw Error(data.error||'Could not create order')
+    if(data.amountCents!==totalCents)throw Error('Prices changed while shopping. Refresh your cart before paying.')
     return data.id
    },
    onApprove:async({orderID})=>{
@@ -31,7 +32,7 @@ export function CartCheckout({ids,clientId,totalCents}:{ids:string[];clientId:st
    },
    onError:e=>{console.error('Cart PayPal error',e);setError('Payment interrupted. If PayPal charged you, do not pay twice; contact support.')}
   }).render(slot.current).catch(()=>setError('PayPal is unavailable. Please contact support.'))
- },[ids.join(','),clearCart])
+ },[ids.join(','),totalCents,clearCart])
  if(complete)return <div role="status" className="rounded-2xl border border-[#BCDCC7] bg-[#F0FAF4] p-6"><h2 className="font-serif text-2xl">Payment confirmed</h2><p className="mt-2 text-sm">Each pattern is ready as a separate PDF in your account. PayPal order: {complete}</p><Link className="mt-4 inline-flex rounded-full bg-[#781D35] px-5 py-3 text-sm font-bold text-white" href="/account/orders">Download all your PDFs</Link></div>
  return <div className="space-y-3">
   <p className="text-sm font-bold">One secure PayPal payment · {'$'+(totalCents/100).toFixed(2)} USD</p>
