@@ -32,7 +32,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const savedCart = localStorage.getItem('cart')
     if (savedCart) {
       try {
-        setItems(JSON.parse(savedCart))
+        setItems((() => { const parsed = JSON.parse(savedCart); return Array.isArray(parsed) ? parsed.filter((x:CartItem) => x && typeof x.id === 'string' && x.type === 'digital' && x.quantity >= 1).slice(0,24).map((x:CartItem) => ({ ...x, quantity: 1 })) : [] })())
       } catch (error) {
         console.error('Failed to load cart from localStorage:', error)
       }
@@ -53,11 +53,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (existingItem) {
         return prevItems.map(item =>
           item.id === newItem.id
-            ? { ...item, quantity: item.quantity + newItem.quantity }
+            ? { ...item, quantity: item.type === 'digital' ? 1 : item.quantity + newItem.quantity }
             : item
         )
       }
-      return [...prevItems, newItem]
+      return [...prevItems, {...newItem,quantity:newItem.type==='digital'?1:newItem.quantity}].slice(0,24)
     })
   }
 
@@ -72,7 +72,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
     setItems(prevItems =>
       prevItems.map(item =>
-        item.id === id ? { ...item, quantity } : item
+        item.id === id ? { ...item, quantity: item.type === 'digital' ? 1 : quantity } : item
       )
     )
   }
