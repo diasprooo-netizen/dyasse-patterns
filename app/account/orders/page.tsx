@@ -31,26 +31,14 @@ export default async function OrdersPage(){
   {error?<p className="mt-6 rounded-xl bg-red-50 p-4 text-sm">Orders are temporarily unavailable. Please contact support.</p>:null}
   {!(orders?.length||cartOrders?.length)?<div className="mt-8 rounded-2xl border border-[#DCE8EF] bg-white p-8"><h2 className="font-serif text-2xl">No purchases yet</h2><p className="mt-3 text-sm text-[#617489]">When PayPal confirms your order, your PDF appears here.</p><Link href="/#collections" className="mt-5 inline-flex rounded-full bg-[#781D35] px-5 py-3 text-sm font-bold text-white">Browse patterns</Link></div>:null}
 {cartOrders?.length?<section className="mt-8"><h2 className="font-serif text-2xl">Multi-pattern orders</h2><p className="mt-2 text-sm text-[#52687B]">Every PDF you bought in a bundle can be downloaded separately.</p>
- <div className="mt-4 grid gap-4">{cartOrders.map(o=><article key={o.id} className="rounded-2xl border border-[#DCE8EF] bg-white p-6 shadow-sm">
- <p className="text-xs font-semibold text-[#677B89]">{new Date(o.created_at).toLocaleDateString('en-GB')} · {o.status.toUpperCase()}</p>
- <h3 className="mt-2 font-serif text-xl">{(bundleItems.get(o.id)||[]).length} PDF patterns · {'{const p=names.get(o.product_id);return <article key={o.id} className="rounded-2xl border border-[#DCE8EF] bg-white p-6 shadow-sm">
-   <p className="text-xs font-semibold text-[#677B89]">{new Date(o.created_at).toLocaleDateString('en-GB')} · {o.status.toUpperCase()}</p>
-   <h2 className="mt-2 font-serif text-xl">{p?.title||'Digital PDF crochet pattern'}</h2>
-   <p className="mt-3 break-all text-xs text-[#697E90]">PayPal order number: {o.paypal_order_id}</p>
-   <p className="mt-2 text-sm font-semibold">$ {(o.amount_cents/100).toFixed(2)} USD</p>
-   <div className="mt-5 flex flex-wrap gap-3">
-    {o.status==='completed'?<Link href={'/api/account/orders/'+o.id+'/download'} className="rounded-full bg-[#781D35] px-5 py-3 text-sm font-bold text-white">Download PDF again</Link>:<span className="text-sm text-[#785D4B]">Download only after confirmed payment</span>}
-    <Link href={'/support?order='+encodeURIComponent(o.paypal_order_id)} className="rounded-full border border-[#C7D8E4] px-5 py-3 text-sm font-semibold">Get help with this order</Link>
-    {o.status==='completed'&&p?<Link href={'/product/'+encodeURIComponent(p.slug)+'#reviews'} className="rounded-full border border-[#C7D8E4] px-5 py-3 text-sm font-semibold">Leave a review</Link>:null}
-   </div>
-  </article>})}</div>
- </div></main>
-}+(o.amount_cents/100).toFixed(2)} USD</h3>
- <p className="mt-2 break-all text-xs text-[#697E90]">PayPal order number: {o.paypal_order_id}</p>
- <div className="mt-4 grid gap-3">{(bundleItems.get(o.id)||[]).map(item=><div key={item.product_id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E4EBF1] p-3"><span className="text-sm font-semibold">{cartNames.get(item.product_id)?.title||'Digital PDF pattern'}</span>{o.status==='completed'?<Link href={'/api/cart/download/'+o.id+'/'+item.product_id} className="rounded-full bg-[#781D35] px-4 py-2 text-xs font-bold text-white">Download PDF</Link>:<span className="text-xs text-[#785D4B]">Not available until payment confirmation</span>}</div>)}</div>
- <Link href={'/support?order='+encodeURIComponent(o.paypal_order_id)} className="mt-4 inline-flex rounded-full border border-[#C7D8E4] px-5 py-3 text-sm font-semibold">Get help with this order</Link>
- </article>)}</div></section>:null}
-   <div className="mt-8 grid gap-4">{orders?.map(o=>{const p=names.get(o.product_id);return <article key={o.id} className="rounded-2xl border border-[#DCE8EF] bg-white p-6 shadow-sm">
+<div className="mt-4 grid gap-4">{cartOrders.map(o=><article key={o.id} className="rounded-2xl border border-[#DCE8EF] bg-white p-6 shadow-sm">
+<p className="text-xs font-semibold text-[#677B89]">{new Date(o.created_at).toLocaleDateString('en-GB')} · {o.status.toUpperCase()}</p>
+<h3 className="mt-2 font-serif text-xl">{(bundleItems.get(o.id)||[]).length} PDF patterns · {'$'+(o.amount_cents/100).toFixed(2)} USD</h3>
+<p className="mt-2 break-all text-xs text-[#697E90]">PayPal order number: {o.paypal_order_id}</p>
+<div className="mt-4 grid gap-3">{(bundleItems.get(o.id)||[]).map(item=><div key={item.product_id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E4EBF1] p-3"><span className="text-sm font-semibold">{cartNames.get(item.product_id)?.title||'Digital PDF pattern'}</span>{o.status==='completed'?<Link href={'/api/cart/download/'+o.id+'/'+item.product_id} className="rounded-full bg-[#781D35] px-4 py-2 text-xs font-bold text-white">Download PDF</Link>:<span className="text-xs text-[#785D4B]">Not available until payment confirmation</span>}</div>)}</div>
+<Link href={'/support?order='+encodeURIComponent(o.paypal_order_id)} className="mt-4 inline-flex rounded-full border border-[#C7D8E4] px-5 py-3 text-sm font-semibold">Get help with this order</Link>
+</article>)}</div></section>:null}
+  <div className="mt-8 grid gap-4">{orders?.map(o=>{const p=names.get(o.product_id);return <article key={o.id} className="rounded-2xl border border-[#DCE8EF] bg-white p-6 shadow-sm">
    <p className="text-xs font-semibold text-[#677B89]">{new Date(o.created_at).toLocaleDateString('en-GB')} · {o.status.toUpperCase()}</p>
    <h2 className="mt-2 font-serif text-xl">{p?.title||'Digital PDF crochet pattern'}</h2>
    <p className="mt-3 break-all text-xs text-[#697E90]">PayPal order number: {o.paypal_order_id}</p>
