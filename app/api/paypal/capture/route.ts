@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     if (!verified) return NextResponse.json({ error: 'Payment not completed. No download was issued.' }, { status: 409 })
 
     const { data: purchasedItems, error: itemError } = await db.from('paypal_order_items').select('product_id,unit_amount_cents').eq('order_id', row.id)
-    if (itemError || !purchasedItems?.length || purchasedItems.reduce((sum, item) => sum + Number(item.unit_amount_cents), 0) !== Number(row.amount_cents) || !purchasedItems.some(item => item.product_id === row.product_id))
+    if (itemError || (purchasedItems?.length && (purchasedItems.reduce((sum, item) => sum + Number(item.unit_amount_cents), 0) !== Number(row.amount_cents) || !purchasedItems.some(item => item.product_id === row.product_id))))
       throw new Error('Stored order items do not match confirmed total')
 
     const token = randomBytes(32).toString('hex')
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
     }).eq('id', row.id).eq('status', 'created').select('id').maybeSingle()
 
     if (updateError || !updated) throw new Error('Payment succeeded, but secure delivery could not be persisted')
-    const downloadUrl = purchasedItems.length > 1 ? '/account/orders' : '/api/download/' + token
+    const downloadUrl = (purchasedItems?.length || 0) > 1 ? '/account/orders' : '/api/download/' + token
     const multiple = purchasedItems.length > 1
 
     // Optional transactional email; immediate download remains available without it.
