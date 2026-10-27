@@ -19,6 +19,10 @@ export type Database = {
       support_conversations: Table
       support_messages: Table
       product_reviews: Table
+      customer_favorites: Table
+      customer_offer_preferences: Table
+      paypal_cart_orders: Table
+      paypal_cart_order_items: Table
     }
     Views: Record<string, never>
     Functions: Record<string, never>

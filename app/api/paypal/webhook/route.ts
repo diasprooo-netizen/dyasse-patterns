@@ -52,6 +52,11 @@ export async function POST(request: NextRequest) {
           .eq('paypal_capture_id', captureId)
           .eq('status', 'completed')
         if (error) throw new Error('Could not revoke refunded order')
+        const { error: cartError } = await db.from('paypal_cart_orders')
+          .update({ status: 'refunded' })
+          .eq('paypal_capture_id', captureId)
+          .eq('status','completed')
+        if (cartError) throw new Error('Could not revoke refunded cart')
       } else {
         console.error('Refund/reversal webhook missing capture ID; manual review required')
       }

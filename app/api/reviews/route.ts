@@ -15,7 +15,12 @@ export async function GET(request:NextRequest){
      db.from('paypal_orders').select('id').eq('customer_user_id',me.id).eq('product_id',productId).eq('status','completed').limit(1),
      db.from('product_reviews').select('id').eq('user_id',me.id).eq('product_id',productId).limit(1),
    ])
-   eligible=!!orders?.length
+   const { data:cartMatches }=await db.from('paypal_cart_order_items')
+     .select('cart_order_id').eq('product_id',productId).limit(250)
+   const cartIds=(cartMatches||[]).map(x=>x.cart_order_id)
+   const {data:paidCarts}=cartIds.length?await db.from('paypal_cart_orders')
+     .select('id').in('id',cartIds).eq('customer_user_id',me.id).eq('status','completed').limit(1):{data:[]}
+   eligible=!!orders?.length||!!paidCarts?.length
    alreadyReviewed=!!existing?.length
  }
  return NextResponse.json({reviews:reviews||[],eligible,alreadyReviewed,authenticated:!!me},{headers:{'Cache-Control':'private, no-store'}})
@@ -33,8 +38,17 @@ export async function POST(request:NextRequest){
  if(!/^[a-f0-9-]{36}$/i.test(productId)||!Number.isInteger(rating)||rating<1||rating>5||title.length<3||title.length>100||body.length<10||body.length>2000)return NextResponse.json({error:'Invalid review details'},{status:400})
  const db=createServiceClient()
  const {data:orders}=await db.from('paypal_orders').select('id').eq('customer_user_id',me.id).eq('product_id',productId).eq('status','completed').order('completed_at',{ascending:false}).limit(1)
- if(!orders?.length)return NextResponse.json({error:'Only verified purchasers can review this pattern'},{status:403})
- const {error}=await db.from('product_reviews').insert({user_id:me.id,product_id:productId,order_id:orders[0].id,rating,title,body,status:'pending'})
+ let cartOrderId:string|null=null
+ if(!orders?.length){
+  const {data:cartMatches}=await db.from('paypal_cart_order_items').select('cart_order_id').eq('product_id',productId).limit(250)
+  const ids=(cartMatches||[]).map(x=>x.cart_order_id)
+  if(ids.length){
+   const {data:paid}=await db.from('paypal_cart_orders').select('id').in('id',ids).eq('customer_user_id',me.id).eq('status','completed').order('completed_at',{ascending:false}).limit(1)
+   cartOrderId=paid?.[0]?.id||null
+  }
+ }
+ if(!orders?.length&&!cartOrderId)return NextResponse.json({error:'Only verified purchasers can review this pattern'},{status:403})
+ const {error}=await db.from('product_reviews').insert({user_id:me.id,product_id:productId,order_id:orders?.[0]?.id||null,cart_order_id:cartOrderId,rating,title,body,status:'pending'})
  if(error)return NextResponse.json({error:error.code==='23505'?'You already reviewed this pattern.':'Could not submit review'},{status:error.code==='23505'?409:503})
  return NextResponse.json({submitted:true,message:'Thanks. Your verified review is pending moderation.'},{status:201})
 }
