@@ -3,7 +3,7 @@ import { customerIdentity } from '@/lib/customer'
 import { createServiceClient } from '@/lib/supabase/service'
 export const runtime='nodejs'
 export const dynamic='force-dynamic'
-export async function GET(_request:NextRequest,{params}:{params:{id:string}}){
+export async function GET(request:NextRequest,{params}:{params:{id:string}}){
  const me=await customerIdentity()
  if(!me)return new NextResponse('Sign in to access your purchased pattern',{status:401})
  if(!/^[a-f0-9-]{36}$/.test(params.id))return new NextResponse('Not found',{status:404})
@@ -11,7 +11,15 @@ export async function GET(_request:NextRequest,{params}:{params:{id:string}}){
  const {data:order}=await db.from('paypal_orders')
    .select('product_id,status').eq('id',params.id).eq('customer_user_id',me.id).maybeSingle()
  if(!order||order.status!=='completed')return new NextResponse('This order has no active download. Contact support.',{status:404})
- const {data:product}=await db.from('products').select('digital_file_path').eq('id',order.product_id).maybeSingle()
+ const selected=request.nextUrl.searchParams.get('product')
+ let productId=order.product_id
+ if(selected){
+  if(!/^[a-f0-9-]{36}$/i.test(selected))return new NextResponse('Not found',{status:404})
+  const {data:item}=await db.from('paypal_order_items').select('product_id').eq('order_id',params.id).eq('product_id',selected).maybeSingle()
+  if(!item)return new NextResponse('Pattern not included in this order',{status:403})
+  productId=selected
+ }
+ const {data:product}=await db.from('products').select('digital_file_path').eq('id',productId).maybeSingle()
  const path=product?.digital_file_path
  if(typeof path!=='string'||!/^DYS-\d{4}\/Pattern\.pdf$/.test(path))return new NextResponse('File unavailable. Contact support.',{status:503})
  const {data,error}=await db.storage.from('dyasse-paid-patterns').createSignedUrl(path,60,{download:true})
