@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { customerIdentity, allowedNext } from '@/lib/customer'
+import { OfferPreferences } from '@/components/offer-preferences'
 export const dynamic='force-dynamic'
 export const metadata={title:'Your Dyasse profile',robots:{index:false,follow:false}}
 export default async function ProfilePage({searchParams}:{searchParams?:{next?:string;error?:string}}){
@@ -20,6 +21,7 @@ export default async function ProfilePage({searchParams}:{searchParams?:{next?:s
      <label className="grid gap-2 text-sm font-semibold">Phone (optional)<input name="phone" type="tel" maxLength={32} defaultValue={me.phone||''} autoComplete="tel" className="rounded-xl border border-[#D6E2ED] p-3 font-normal"/></label>
      <button type="submit" className="rounded-full bg-[#781D35] px-5 py-3 font-bold text-white">Save and continue</button>
    </form>
+   <OfferPreferences/>
    <div className="mt-6 flex gap-5 text-sm"><Link className="font-semibold text-[#781D35]" href="/account/orders">My orders</Link><Link className="font-semibold text-[#781D35]" href="/support">Get support</Link></div>
   </div>
  </main>
