@@ -36,7 +36,14 @@ export function CartPayPalCheckout({slugs,clientId,totalCents}:{slugs:string[];c
  },[slugs,clearCart])
  return <div className="rounded-2xl border border-[#C8DFEB] bg-white p-6">
   <h2 className="font-serif text-2xl">Secure one-time checkout</h2>
-  <p className="mt-2 text-sm text-[#52687B]">Pay ${(totalCents/100).toFixed(2)} USD for {slugs.length} digital {slugs.length===1?'pattern':'patterns'} in one PayPal order.</p>
+  <p className="mt-2 text-sm text-[#52687B]">Pay {' for {slugs.length} digital {slugs.length===1?'pattern':'patterns'} in one PayPal order.</p>
+  {confirmed?<p role="status" className="mt-5 text-sm font-semibold text-green-700">Payment confirmed. Opening your PDF downloads…</p>:<div ref={slot} className="mt-5 min-h-[50px]" aria-label="PayPal shopping bag checkout"/>}
+  <Script src={'https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(clientId)+'&currency=USD&intent=capture&components=buttons'} strategy="afterInteractive" onReady={initialize}/>
+  <p className="mt-4 text-xs leading-5 text-[#65798B]">Prices are checked on the server before payment. No physical shipping. After confirmed payment, each PDF will be available in Your downloads.</p>
+  {error && <p role="alert" className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-700">{error}</p>}
+ </div>
+}
++(totalCents/100).toFixed(2)} USD for {slugs.length} digital {slugs.length===1?'pattern':'patterns'} in one PayPal order.</p>
   {confirmed?<p role="status" className="mt-5 text-sm font-semibold text-green-700">Payment confirmed. Opening your PDF downloads…</p>:<div ref={slot} className="mt-5 min-h-[50px]" aria-label="PayPal shopping bag checkout"/>}
   <Script src={'https://www.paypal.com/sdk/js?client-id='+encodeURIComponent(clientId)+'&currency=USD&intent=capture&components=buttons'} strategy="afterInteractive" onReady={initialize}/>
   <p className="mt-4 text-xs leading-5 text-[#65798B]">Prices are checked on the server before payment. No physical shipping. After confirmed payment, each PDF will be available in Your downloads.</p>
