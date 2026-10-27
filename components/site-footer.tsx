@@ -15,6 +15,8 @@ const help=[
  {label:'FAQ',href:'/faq'},
  {label:'Contact & support',href:'/contact'},
  {label:'Live support chat',href:'/support'},
+ {label:'My favorites',href:'/favorites'},
+ {label:'Shopping bag',href:'/cart'},
  {label:'My orders & downloads',href:'/account/orders'},
  {label:'My profile',href:'/account/profile'},
  {label:'Privacy policy',href:'/privacy'},
