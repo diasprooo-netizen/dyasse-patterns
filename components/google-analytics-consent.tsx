@@ -24,7 +24,7 @@ export function GoogleAnalyticsConsent() {
   const [preferencesOpen, setPreferencesOpen] = useState(false)
 
   useEffect(() => {
-    if (!/^(www\\.)?dyasse\\.com$/i.test(window.location.hostname)) return
+    if (!/^(www\.)?dyasse\.com$/i.test(window.location.hostname)) return
     setOfficialSite(true)
     try {
       const stored = window.localStorage.getItem(storageKey)
