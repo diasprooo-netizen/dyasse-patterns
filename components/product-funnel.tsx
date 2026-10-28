@@ -5,6 +5,7 @@ import { BuyButtons } from '@/components/buy-buttons'
 import { PriceDisplay } from '@/components/price-display'
 import { productCoverAlt, productGalleryAlt } from '@/lib/image-seo'
 import { ProductCard } from '@/components/product-card'
+import { ProductDescription } from '@/components/product-description'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
 import { collectionSeo, primaryCollection, productSeoDescription } from '@/lib/seo'
@@ -87,7 +88,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <div><p className="dyasse-eyebrow">THE PROJECT NOTES</p><h2 className="mt-4 max-w-md font-serif text-[clamp(2.5rem,4vw,3.8rem)] leading-[1.1] tracking-[-.05em]">Everything you need<br/><em className="font-normal text-[#781D35]">to know.</em></h2></div>
           <div className="border border-[#DDEAF2] bg-white p-7 sm:p-10">
             <h3 className="font-serif text-[28px] text-[#172231]">About this pattern</h3>
-            <p className="mt-5 whitespace-pre-line break-words text-[15px] leading-8 text-[#65717A]">{product.description}</p>
+            <ProductDescription description={product.description}/>
           </div>
         </div>
         {(product.features.length>0||product.materials.length>0||product.what_you_will_learn.length>0)?<div className="mt-5 grid gap-5 md:grid-cols-3">
