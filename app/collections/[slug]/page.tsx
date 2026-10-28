@@ -121,6 +121,10 @@ export default async function Collection({params}:{params:{slug:string}}) {
   const c=collections[params.slug]
   if (!c) notFound()
   const Icon=c.icon
+  const relatedGuide = params.slug === 'keychains' ? { href: '/guides/crochet-keychain-patterns', label: 'Crochet keychain ideas and hardware' }
+    : params.slug === 'crochet-bags' ? { href: '/guides/choosing-yarn-for-crochet-bags', label: 'How to choose yarn for crochet bags' }
+    : params.slug === 'baby-shoes' ? { href: '/guides/crochet-baby-shoes-sizing', label: 'Crochet baby shoe sizing and gauge' }
+    : null
   const list=(await getPublishedProducts()).filter(p=>c.match(p))
   const canonical=SITE_URL+'/collections/'+params.slug
   const graph={
@@ -177,7 +181,10 @@ export default async function Collection({params}:{params:{slug:string}}) {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <h2 className="font-serif text-[clamp(2rem,3vw,2.6rem)] tracking-[-.04em]">{collectionGuides[params.slug].heading}</h2>
         <div className="mt-5 grid max-w-5xl gap-6 md:grid-cols-2">{collectionGuides[params.slug].paragraphs.map((paragraph,i)=><p key={i} className="text-[15px] leading-8 text-[#546878]">{paragraph}</p>)}</div>
-        <Link href="/guides/crochet-patterns-for-beginners" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Learn how to read crochet patterns <ArrowUpRight size={16}/></Link>
+        <div className="mt-6 flex flex-wrap gap-4">
+          {relatedGuide ? <Link href={relatedGuide.href} className="inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">{relatedGuide.label} <ArrowUpRight size={16}/></Link> : null}
+          <Link href="/guides/crochet-patterns-for-beginners" className="inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Learn how to read crochet patterns <ArrowUpRight size={16}/></Link>
+        </div>
       </div>
     </section> : null}
     <section className="border-t border-[#DCEAF2] bg-[#EDF7FC]">
