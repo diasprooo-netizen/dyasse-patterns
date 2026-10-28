@@ -123,7 +123,7 @@ export function GumroadLinkManager({ products }: { products: GumroadProduct[] })
         className="mt-3 rounded-full bg-[#465BE2] px-7 py-3 font-semibold text-white disabled:opacity-50">
         {busy ? 'Saving…' : 'Validate & save links'}
       </button>
-      <p className="mt-4 text-sm text-[#A36042]">Important: the catalog prices are largely in MAD; confirm that each Gumroad checkout uses a matching currency and amount before QA approval and publication.</p>
+      <p className="mt-4 text-sm text-[#A36042]">All catalog prices are in USD. Match the exact USD amount, verify the PDF and confirm the Gumroad product is published before enabling checkout.</p>
     </div>
 
     {status && <p role="status" className={'rounded-2xl p-4 text-sm ' + (status.ok ? 'bg-[#e9f4e9] text-[#235b32]' : 'bg-[#fff0ec] text-[#9a2727]')}>{status.text}</p>}
@@ -154,7 +154,7 @@ export function GumroadLinkManager({ products }: { products: GumroadProduct[] })
           </tr></thead>
           <tbody>{visible.map(p => <tr key={p.slug} className="border-b border-[#ede2d5]">
             <td className="max-w-[240px] p-3"><p className="font-semibold">{p.title}</p><p className="mt-1 break-all text-xs text-[#7B8DA4]">{p.slug}</p></td>
-            <td className="whitespace-nowrap p-3">{p.price.toFixed(2)} {p.currency}</td>
+            <td className="whitespace-nowrap p-3">{new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(p.price)}</td>
             <td className="p-3"><input aria-label={'Gumroad link for ' + p.title} value={links[p.slug] ?? ''} onChange={e => setLinks(a => ({ ...a, [p.slug]: e.target.value }))}
               placeholder="https://seller.gumroad.com/l/..." className="w-full min-w-[280px] rounded-lg border border-[#DDE4F1] p-3 text-xs" /></td>
             <td className="whitespace-nowrap p-3">{p.qa_verified ? 'QA ✓' : 'Needs QA'}<p className="mt-1 text-xs">{p.is_published ? 'Live' : 'Draft'}</p></td>
