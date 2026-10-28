@@ -4,11 +4,10 @@ import { BrandMark } from '@/components/brand-mark'
 
 const collections=[
  {label:'Crochet',href:'/collections/crochet-patterns'},
- {label:'Knitting',href:'/collections/knitting-patterns'},
+ {label:'Crochet accessories',href:'/collections/crochet-accessories'},
  {label:'Baby booties',href:'/collections/baby-shoes'},
  {label:'Bags & purses',href:'/collections/crochet-bags'},
  {label:'Small gifts',href:'/collections/keychains'},
- {label:'Amigurumi & plush',href:'/collections/amigurumi'},
 ]
 const help=[
  {label:'Our story',href:'/about'},
@@ -21,7 +20,9 @@ const help=[
 ]
 const guides=[
  {label:'Read crochet patterns',href:'/guides/crochet-patterns-for-beginners'},
- {label:'Read knitting patterns',href:'/guides/knitting-patterns-for-beginners'},
+ {label:'Crochet keychain pattern ideas',href:'/guides/crochet-keychain-patterns'},
+ {label:'Choose yarn for crochet bags',href:'/guides/choosing-yarn-for-crochet-bags'},
+ {label:'Crochet baby shoe sizing',href:'/guides/crochet-baby-shoes-sizing'},
 ]
 export function SiteFooter(){
  return <footer className="border-t border-[#DFECF4] bg-[#F5FAFD] text-[#172231]">
@@ -29,7 +30,7 @@ export function SiteFooter(){
    <div className="grid gap-10 border-b border-[#DCEAF2] pb-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
     <div>
       <BrandMark/>
-      <p className="mt-5 max-w-xs text-[13px] leading-7 text-[#586B7A]">A considered home for crochet and knitting PDF patterns, for people who love making something by hand.</p>
+      <p className="mt-5 max-w-xs text-[13px] leading-7 text-[#586B7A]">A considered home for crochet PDF patterns: miniature keychains, handmade bags, baby booties and wearable accessories.</p>
       <p className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-[#526677]"><FileText size={16}/> Digital patterns, not physical items</p>
     </div>
     <div><h2 className="text-xs font-bold uppercase tracking-[.15em] text-[#781D35]">Categories</h2><nav className="mt-5 grid gap-3">{collections.map(x=><Link href={x.href} key={x.href} className="w-fit text-[13px] text-[#314559] hover:text-[#781D35]">{x.label}</Link>)}</nav></div>
