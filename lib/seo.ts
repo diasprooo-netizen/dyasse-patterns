@@ -23,19 +23,19 @@ export const collectionSeo = {
   },
   'baby-shoes': {
     title: 'Crochet Baby Booties & Shoes PDF Patterns',
-    description: 'Explore crochet baby booties, sandals, clogs and little sneaker patterns. Digital PDF instructions for making baby footwear, not finished shoes.',
+    description: 'Browse downloadable crochet baby shoe patterns, starting with a watermelon Mary Jane design sized for 0–3 months. PDF instructions only; no finished shoes.',
     label: 'Baby booties & shoes',
     keyword: 'crochet baby booties pattern',
   },
   keychains: {
     title: 'Crochet Keychain Patterns & Small Gift PDFs',
-    description: 'Browse crochet keychain PDF patterns, mini charms and small handmade gift ideas. See materials and pattern details for each project.',
+    description: 'Explore 10 crochet keychain PDF patterns including miniature backpacks, sporty charms, cats, small hats and decorative keepsakes. Digital patterns only.',
     label: 'Crochet keychains',
     keyword: 'crochet keychain patterns',
   },
   'crochet-bags': {
     title: 'Crochet Bag & Purse PDF Patterns',
-    description: 'Discover crochet bag PDF patterns including small purses, clutch bags and practical pouches. Compare project materials and instructions before buying.',
+    description: 'Shop crochet bag PDF patterns for textured handbags, floral backpacks and a cherry pencil case. Compare construction, yarn and accessories before buying.',
     label: 'Crochet bags & purses',
     keyword: 'crochet bag pattern PDF',
   },
