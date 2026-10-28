@@ -24,6 +24,6 @@ export default function ImportCatalog(){
   <label className="block font-medium">Select catalog JSON</label><input accept=".json,application/json" type="file" required onChange={e=>setFile(e.target.files?.[0]??null)} className="w-full"/>
   <button disabled={!file||busy} className="rounded-full bg-[#445AE1] px-7 py-4 font-bold text-white disabled:opacity-50">{busy?'Importing…':'Import as drafts only'}</button></form>
   {status&&<p role="status" className="mt-6 rounded-xl bg-[#EEF2FF] p-4">{status}</p>}</div>
-  <p className="mt-5 text-sm text-[#70849D]">Original prices are MAD and images are unverified Etsy URLs. Review copy, actual product photography, checkout USD pricing, PDF testing and rights before publishing.</p>
+  <p className="mt-5 text-sm text-[#70849D]">Legacy source prices are automatically converted and stored in USD ($). Images are unverified Etsy URLs. Review copy, actual product photography, exact USD checkout amount, PDF testing and rights before publishing.</p>
  </div>
 }
