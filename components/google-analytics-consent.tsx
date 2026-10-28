@@ -1,48 +1,88 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Script from 'next/script'
 import Link from 'next/link'
 
 type Choice = 'unset' | 'accepted' | 'declined'
-type AnalyticsWindow = Window & {
+type GtagWindow = Window & {
   dataLayer?: unknown[][]
   gtag?: (...args: unknown[]) => void
+  __dyasseGtagInitialized?: string
 }
 
 const storageKey = 'dyasse-analytics-consent-v1'
 const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
+function isOfficialHost() {
+  return /^(www\.)?dyasse\.com$/i.test(window.location.hostname)
+}
+
 /**
- * Optional, consent-gated GA4 tag for the official storefront only.
- * No Google Analytics script or tracking cookie is loaded before opt-in.
- * GA4 Enhanced Measurement handles page load and browser-history page views.
+ * Initialize Google's dataLayer and configuration *before* requesting gtag.js.
+ * This follows the Google tag initialization order. No Google script is
+ * requested or measurement sent until the visitor opts in on dyasse.com.
  */
+function startConsentedAnalytics(id: string) {
+  const w = window as GtagWindow
+  if (w.__dyasseGtagInitialized === id) return
+  w.__dyasseGtagInitialized = id
+  w.dataLayer = w.dataLayer || []
+  w.gtag = w.gtag || ((...args: unknown[]) => { w.dataLayer?.push(args) })
+
+  // Ads consent remains denied: this storefront uses GA4 only for analytics.
+  w.gtag('consent', 'default', {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  })
+  w.gtag('consent', 'update', { analytics_storage: 'granted' })
+  w.gtag('js', new Date())
+
+  // Optional opt-in debug session: /?ga_debug=1 then Accept analytics.
+  // Google's DebugView shows test events; this does not skip consent.
+  const debug = new URLSearchParams(window.location.search).get('ga_debug') === '1'
+  w.gtag('config', id, debug ? { debug_mode: true } : {})
+
+  if (!document.getElementById('dyasse-ga4-script')) {
+    const script = document.createElement('script')
+    script.id = 'dyasse-ga4-script'
+    script.async = true
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`
+    document.head.appendChild(script)
+  }
+}
+
 export function GoogleAnalyticsConsent() {
   const [officialSite, setOfficialSite] = useState(false)
   const [choice, setChoice] = useState<Choice>('unset')
   const [preferencesOpen, setPreferencesOpen] = useState(false)
 
   useEffect(() => {
-    if (!/^(www\.)?dyasse\.com$/i.test(window.location.hostname)) return
+    if (!isOfficialHost()) return
     setOfficialSite(true)
     try {
       const stored = window.localStorage.getItem(storageKey)
       if (stored === 'accepted' || stored === 'declined') setChoice(stored)
     } catch {
-      // Storage can be unavailable in private browsing; leave choice unset.
+      // Browsers that block local storage can still select for this visit.
     }
   }, [])
+
+  useEffect(() => {
+    if (officialSite && choice === 'accepted' && measurementId) {
+      startConsentedAnalytics(measurementId)
+    }
+  }, [officialSite, choice])
 
   function choose(next: Exclude<Choice, 'unset'>) {
     const previouslyAccepted = choice === 'accepted'
     try { window.localStorage.setItem(storageKey, next) } catch {}
     setChoice(next)
     setPreferencesOpen(false)
-    // If someone revokes consent, reload to unload a previously inserted
-    // GA script rather than allowing history-based automatic tracking.
     if (previouslyAccepted && next === 'declined') {
-      // Withdraw the GA consent and remove first-party GA cookies we can access.
+      ;(window as GtagWindow).gtag?.('consent', 'update', { analytics_storage: 'denied' })
+      // Remove accessible first-party GA cookies before unloading its tag.
       for (const part of document.cookie.split(';')) {
         const name = part.trim().split('=')[0]
         if (!name || !(name === '_ga' || name.startsWith('_ga_') || name === '_gid')) continue
@@ -57,20 +97,6 @@ export function GoogleAnalyticsConsent() {
 
   const showChoices = choice === 'unset' || preferencesOpen
   return <>
-    {choice === 'accepted' ? <Script
-      id="dyasse-ga4-gtag"
-      src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`}
-      strategy="afterInteractive"
-      onReady={() => {
-        const analyticsWindow = window as AnalyticsWindow
-        if (!analyticsWindow.gtag) {
-          analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
-          analyticsWindow.gtag = (...args: unknown[]) => { analyticsWindow.dataLayer?.push(args) }
-          analyticsWindow.gtag('js', new Date())
-          analyticsWindow.gtag('config', measurementId)
-        }
-      }}
-    /> : null}
     {showChoices ? <section
       aria-label="Analytics cookie preferences"
       className="fixed bottom-4 left-4 z-[110] w-[calc(100%-2rem)] max-w-[410px] rounded-2xl border border-[#C8DBE8] bg-white p-5 text-[#25394A] shadow-[0_16px_55px_rgba(12,30,48,.18)] sm:bottom-6 sm:left-6"
