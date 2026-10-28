@@ -14,6 +14,7 @@ export interface Product {
   gallery_images: JsonArray
   gumroad_link: string | null
   gumroad_checkout_verified?: boolean
+  gumroad_is_published?: boolean
   lemon_checkout_url: string | null
   paypal_link: string | null
   paypal_price_usd_cents: number | null
