@@ -13,7 +13,7 @@ export default function ImportTop20(){
   const out=await res.json();setStatus(out.message+(res.ok?' Created: '+out.created+'; already present: '+out.skipped:''))
  }catch(e){setStatus(e instanceof Error?e.message:'Import failed')}finally{setBusy(false)}}
  return <main className="space-y-7"><Link href="/admin" className="underline">← Admin dashboard</Link><h1 className="mt-5 text-4xl font-bold">Import 20 best-selling Etsy patterns</h1>
- <p className="mt-5 text-[#70849D]">Use Dyasse_Etsy_Top20_DRAFT_Import.json from the migration pack. Titles, tags, original Etsy photos and MAD prices are preserved for review. Products are created as unpublished drafts. Previous entries are not overwritten.</p>
+ <p className="mt-5 text-[#70849D]">Use Dyasse_Etsy_Top20_DRAFT_Import.json from the migration pack. Titles, tags and source photos are retained for review; legacy prices are converted into USD ($) on import. Products are created as unpublished drafts. Previous entries are not overwritten.</p>
  <form onSubmit={submit} className="mt-8 space-y-5 rounded-[22px] border border-[#E0E7F2] bg-white p-8">
  <label className="block text-sm font-semibold" htmlFor="top20-file">Top20 migration JSON file</label><input id="top20-file" type="file" accept=".json,application/json" required onChange={e=>setFile(e.target.files?.[0]??null)}/>
  <button disabled={busy||!file} className="block rounded-full bg-[#445AE1] px-8 py-3 font-semibold text-white disabled:opacity-50">{busy?'Importing…':'Import 20 safe drafts'}</button>
