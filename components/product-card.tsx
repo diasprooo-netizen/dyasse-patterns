@@ -5,7 +5,7 @@ import { PriceDisplay } from '@/components/price-display'
 import { productCoverAlt } from '@/lib/image-seo'
 import { SaleBadge } from '@/components/sale-badge'
 import type { Product } from '@/types/product'
-import { primaryCollection } from '@/lib/seo'
+import { primaryCollection, productSeoDescription } from '@/lib/seo'
 import { PatternActions } from '@/components/pattern-actions'
 
 export function ProductCard({ product }: { product: Product }) {
@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
       <h3 className="mt-3 line-clamp-2 min-h-[3.3rem] font-serif text-[24px] leading-[1.22] tracking-[-.035em] text-[#172231]">
         <Link href={href} className="transition hover:text-[#781D35]">{product.title}</Link>
       </h3>
-      <p className="mt-3 line-clamp-2 text-[13px] leading-6 text-[#556979]">{product.description.replace(/\s+/g,' ').slice(0,240)}</p>
+      <p className="mt-3 line-clamp-2 text-[13px] leading-6 text-[#556979]">{productSeoDescription(product)}</p>
       <div className="mt-5"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled}/></div>
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#E0EBF2] pt-5">
         <PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency} size="sm"/>
