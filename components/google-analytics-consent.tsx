@@ -41,7 +41,16 @@ export function GoogleAnalyticsConsent() {
     setPreferencesOpen(false)
     // If someone revokes consent, reload to unload a previously inserted
     // GA script rather than allowing history-based automatic tracking.
-    if (previouslyAccepted && next === 'declined') window.location.reload()
+    if (previouslyAccepted && next === 'declined') {
+      // Withdraw the GA consent and remove first-party GA cookies we can access.
+      for (const part of document.cookie.split(';')) {
+        const name = part.trim().split('=')[0]
+        if (!name || !(name === '_ga' || name.startsWith('_ga_') || name === '_gid')) continue
+        document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax; Secure`
+        document.cookie = `${name}=; Max-Age=0; Path=/; Domain=.dyasse.com; SameSite=Lax; Secure`
+      }
+      window.location.reload()
+    }
   }
 
   if (!officialSite || !measurementId) return null
