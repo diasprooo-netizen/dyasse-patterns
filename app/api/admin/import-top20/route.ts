@@ -24,7 +24,7 @@ export async function POST(request:NextRequest){
    const price=Number(p.price)
    const title=clean(p.title,255)
    const description=clean(p.description_unverified,20000)
-   if(!title||!description||!images.length||!Number.isFinite(price)||price<=0||price>50000||p.currency!=='MAD')throw Error('One or more records have missing fields or invalid MAD prices.')
+   if(!title||!description||!images.length||!Number.isFinite(price)||price<=0||price>50000||p.currency!=='MAD')throw Error('One or more records have missing fields or invalid legacy prices.')
    return {
     title,slug,description,price:legacyPriceToUsd(price,'MAD'),currency:'USD',image_url:images[0],gallery_images:images.slice(1),
     tags:Array.isArray(p.tags)?p.tags.filter((x):x is string=>typeof x==='string').slice(0,30):[],
