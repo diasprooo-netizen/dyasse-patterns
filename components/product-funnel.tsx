@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight, BookOpen, Check, Download, FileText, Headphones, ShieldCheck } from 'lucide-react'
 import { BuyButtons } from '@/components/buy-buttons'
 import { PriceDisplay } from '@/components/price-display'
+import { productCoverAlt, productGalleryAlt } from '@/lib/image-seo'
 import { ProductCard } from '@/components/product-card'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
@@ -41,12 +42,12 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.04fr_.96fr] lg:items-start lg:gap-16">
         <div className="min-w-0">
           <div className="relative aspect-[4/4.5] overflow-hidden border border-[#DDEAF2] bg-[#EDF6FB] sm:aspect-[5/4.5]">
-            <Image src={product.image_url} alt={product.title} fill priority sizes="(min-width:1024px) 50vw,100vw" className="object-cover"/>
+            <Image src={product.image_url} alt={productCoverAlt(product)} fill priority sizes="(min-width:1024px) 50vw,100vw" className="object-cover"/>
             <span className="absolute left-5 top-5 inline-flex items-center gap-2 border border-[#DDEAF2] bg-[#FFFEFA]/95 px-4 py-2 text-[11px] font-bold uppercase tracking-[.11em] text-[#4E5E60]"><FileText size={15}/> PDF pattern</span>
           </div>
           {gallery.length>1?<div className="mt-3 grid grid-cols-4 gap-3">
             {gallery.slice(1,5).map((image,i)=><div className="relative aspect-square overflow-hidden border border-[#DDEAF2] bg-[#EAF5FC]" key={image}>
-              <Image src={image} alt={product.title+' — additional view '+(i+1)} fill sizes="120px" className="object-cover"/>
+              <Image src={image} alt={productGalleryAlt(product, i + 1)} fill sizes="120px" className="object-cover"/>
             </div>)}
           </div>:null}
           <div className="mt-5 flex items-start gap-3 border-l-2 border-[#BC9B8A] bg-[#EBF6FC] p-5 text-[13px] leading-6 text-[#66716F]">
