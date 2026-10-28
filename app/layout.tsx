@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import { GoogleAnalyticsConsent } from '@/components/google-analytics-consent'
 import { SiteChrome } from '@/components/site-chrome'
 import { CartProvider } from '@/context/CartContext'
 import { FavoritesProvider } from '@/context/FavoritesContext'
@@ -24,5 +25,5 @@ const websiteSchema = {
 }
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body className="min-h-screen bg-background font-sans text-foreground antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteSchema) }} /><CartProvider><FavoritesProvider><SiteChrome>{children}</SiteChrome><Toaster richColors position="bottom-right"/></FavoritesProvider></CartProvider>{process.env.NODE_ENV === 'production' && <Analytics />}</body></html>
+  return <html lang="en"><body className="min-h-screen bg-background font-sans text-foreground antialiased"><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteSchema) }} /><CartProvider><FavoritesProvider><SiteChrome>{children}</SiteChrome><Toaster richColors position="bottom-right"/></FavoritesProvider></CartProvider>{process.env.NODE_ENV === 'production' && <Analytics />}<GoogleAnalyticsConsent /></body></html>
 }
