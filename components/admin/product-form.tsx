@@ -47,7 +47,7 @@ type FormState = {
 }
 
 const emptyState: FormState = {
-  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'MAD', image_url: '', gallery_images: '', gumroad_link: '', lemon_checkout_url: '', paypal_link: '', paypal_price_usd_cents: '', paypal_checkout_enabled: false, digital_file_path: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
+  title: '', slug: '', description: '', price: '', sale_price: '', currency: 'USD', image_url: '', gallery_images: '', gumroad_link: '', lemon_checkout_url: '', paypal_link: '', paypal_price_usd_cents: '', paypal_checkout_enabled: false, digital_file_path: '', features: '', materials: '', what_you_will_learn: '', tags: '', category: '', seo_title: '', seo_description: '', is_published: false, is_featured: false, is_on_sale: false, sale_badge: '', upsell_product_ids: [], cross_sell_product_ids: [],
 }
 
 function linesToArray(value: string) {
@@ -66,7 +66,7 @@ function productToState(product?: Product): FormState {
     description: product.description,
     price: String(product.price),
     sale_price: product.sale_price === null ? '' : String(product.sale_price),
-    currency: product.currency,
+    currency: 'USD',
     image_url: product.image_url,
     gallery_images: arrayToLines(product.gallery_images),
     gumroad_link: product.gumroad_link ?? '',
@@ -125,7 +125,7 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
       description: form.description,
       price: Number(form.price),
       sale_price: form.sale_price ? Number(form.sale_price) : null,
-      currency: form.currency || 'MAD',
+      currency: 'USD',
       image_url: form.image_url,
       gallery_images: linesToArray(form.gallery_images),
       gumroad_link: form.gumroad_link || null,
@@ -172,9 +172,9 @@ export function ProductForm({ products, initialProduct, onSaved }: ProductFormPr
       <div className="grid gap-4 md:grid-cols-2">
         <TextField label="Title" value={form.title} onChange={(value) => update('title', value)} required placeholder="Crochet Market Bag PDF" />
         <TextField label="Slug" value={form.slug} onChange={(value) => update('slug', value)} required placeholder="crochet-market-bag" />
-        <TextField label="Price" value={form.price} onChange={(value) => update('price', value)} required type="number" placeholder="12" />
-        <TextField label="Sale Price" value={form.sale_price} onChange={(value) => update('sale_price', value)} type="number" placeholder="7" />
-        <TextField label="Currency" value={form.currency} onChange={(value) => update('currency', value)} placeholder="MAD" />
+        <TextField label="Price (USD $)" value={form.price} onChange={(value) => update('price', value)} required type="number" placeholder="12" />
+        <TextField label="Sale Price (USD $)" value={form.sale_price} onChange={(value) => update('sale_price', value)} type="number" placeholder="7" />
+        <div className="flex items-center rounded-2xl border border-[#D8E1F0] bg-[#F9FAFE] px-4 py-3 text-sm font-semibold text-[#223854]">Store currency: USD ($) — fixed worldwide</div>
         <TextField label="Category" value={form.category} onChange={(value) => update('category', value)} placeholder="Bags" />
         <TextField label="Main Image URL" value={form.image_url} onChange={(value) => update('image_url', value)} required placeholder="https://..." />
         <TextField label="Lemon Squeezy checkout link (temporary)" value={form.lemon_checkout_url} onChange={(value) => update('lemon_checkout_url', value)} placeholder="https://your-store.lemonsqueezy.com/checkout/buy/..." />

@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     const chunk = entries.slice(i, i + 10)
     const results = await Promise.all(chunk.map(async ({ slug, gumroad_link }) => {
       const { error } = await db.from('products')
-        .update({ gumroad_link: gumroad_link.trim(), updated_at: new Date().toISOString() }).eq('slug', slug)
+        .update({ gumroad_link: gumroad_link.trim(), gumroad_checkout_verified: false, gumroad_is_published: false, updated_at: new Date().toISOString() }).eq('slug', slug)
       return { slug, error }
     }))
     for (const result of results) {

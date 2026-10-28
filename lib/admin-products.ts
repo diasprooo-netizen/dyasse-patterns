@@ -109,6 +109,9 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
   const description = cleanString(input.description)
   const price = toNumber(input.price)
   const salePrice = input.sale_price === null || input.sale_price === undefined || String(input.sale_price) === '' ? null : toNumber(input.sale_price)
+  if (input.currency && cleanString(input.currency).toUpperCase() !== 'USD') {
+    return { ok: false, message: 'Prices must be entered in USD ($). Convert old MAD amounts before saving.' }
+  }
   const imageUrl = cleanString(input.image_url)
   const lemonCheckoutUrl = cleanOptionalString(input.lemon_checkout_url)
   const paypalPriceUsdCents = input.paypal_price_usd_cents == null ? null : toNumber(input.paypal_price_usd_cents)
@@ -141,7 +144,7 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
     description,
     price,
     sale_price: salePrice,
-    currency: cleanString(input.currency) || 'USD',
+    currency: 'USD',
     image_url: imageUrl,
     gallery_images: cleanArray(input.gallery_images),
     gumroad_link: cleanOptionalString(input.gumroad_link),
