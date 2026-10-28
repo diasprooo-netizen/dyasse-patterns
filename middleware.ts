@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
   const officialHost = host === 'dyasse.com' || host === 'www.dyasse.com'
 
   if (!officialHost && request.nextUrl.pathname === '/robots.txt') {
-    return new NextResponse('User-agent: *\\nDisallow: /\\n', {
+    return new NextResponse('User-agent: *\nDisallow: /\n', {
       status: 200,
       headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'public, max-age=300' },
     })
