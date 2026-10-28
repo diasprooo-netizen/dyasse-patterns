@@ -7,7 +7,7 @@ import { productCoverAlt, productGalleryAlt } from '@/lib/image-seo'
 import { ProductCard } from '@/components/product-card'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
-import { collectionSeo, primaryCollection } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productSeoDescription } from '@/lib/seo'
 import type { Product } from '@/types/product'
 
 function DetailList({ title, items }: {title:string;items:string[]}) {
@@ -59,7 +59,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <p className="dyasse-eyebrow">{collectionSeo[collection].label} / Digital PDF</p>
           <h1 className="mt-5 font-serif text-[clamp(2.6rem,4.2vw,4.6rem)] leading-[1.08] tracking-[-.055em] text-[#172231]">{product.title}</h1>
           {(product.is_featured||product.is_on_sale)?<div className="mt-5"><SaleBadge badge={product.sale_badge} isFeatured={product.is_featured}/></div>:null}
-          <p className="mt-6 line-clamp-4 text-[15px] leading-8 text-[#67747D]">{product.description}</p>
+          <p className="mt-6 line-clamp-4 text-[15px] leading-8 text-[#67747D]">{productSeoDescription(product)}</p>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#DDEAF2] py-6">
             <div><span className="block text-[10px] font-bold uppercase tracking-[.15em] text-[#8B8E88]">Pattern price</span><div className="mt-2"><PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency}/></div></div>
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
