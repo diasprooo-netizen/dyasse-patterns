@@ -9,8 +9,8 @@ import { primaryCollection } from '@/lib/seo'
 
 export const dynamic='force-dynamic'
 export const metadata: Metadata = {
- title:'Crochet & Knitting PDF Patterns | Dyasse Shop',
- description:'Discover modern digital crochet and knitting PDF patterns: baby booties, bags, keychains, amigurumi and cozy knit accessories. Only reviewed releases appear for sale.',
+ title:'Crochet PDF Patterns: Keychains, Bags & Accessories',
+ description:'Shop digital crochet PDF patterns for keychains, handmade bags, baby booties and accessories. Explore project photos, materials and secure PDF checkout.',
  alternates:{canonical:'/'},
 }
 
@@ -39,12 +39,12 @@ export default async function Home(){
    <section className="dyasse-sky-hero relative overflow-hidden">
      <div className="mx-auto grid max-w-7xl lg:min-h-[405px] lg:grid-cols-[1.04fr_.96fr]">
        <div className="relative z-10 px-5 pb-10 pt-10 sm:px-8 lg:pb-12 lg:pt-12">
-         <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.18em] text-[#781D35]"><span className="h-px w-8 bg-[#781D35]"/>THE DYASSE CROCHET & KNITTING ATELIER</div>
-         <h1 className="mt-4 max-w-[690px] font-serif text-[clamp(2.55rem,4.1vw,4.35rem)] leading-[1.07] tracking-[-.055em] text-[#172231]">Beautiful patterns<br/>for a more <em className="font-normal">handmade</em> world.</h1>
-         <p className="mt-4 max-w-[570px] text-[15px] leading-7 text-[#3F4B57] sm:text-[17px]">Explore thoughtful crochet and knitting PDF patterns, from cozy accessories to baby booties and small handmade gifts. Make something meaningful, one stitch at a time.</p>
+         <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.18em] text-[#781D35]"><span className="h-px w-8 bg-[#781D35]"/>THE DYASSE CROCHET PATTERN ATELIER</div>
+         <h1 className="mt-4 max-w-[690px] font-serif text-[clamp(2.55rem,4.1vw,4.35rem)] leading-[1.07] tracking-[-.055em] text-[#172231]">Crochet PDF patterns<br/>for a more <em className="font-normal">handmade</em> world.</h1>
+         <p className="mt-4 max-w-[570px] text-[15px] leading-7 text-[#3F4B57] sm:text-[17px]">Discover crochet PDF patterns for miniature keychains, stylish handmade bags, baby booties and accessories. Choose a project, view materials and download the instructions after checkout.</p>
          <div className="mt-6 flex flex-wrap gap-3">
            <Link href="/collections/crochet-patterns" className="dyasse-button-primary">Explore crochet patterns <ArrowRight size={17}/></Link>
-           <Link href="/collections/knitting-patterns" className="dyasse-button-secondary">Knitting patterns <ArrowUpRight size={16}/></Link>
+           <Link href="/collections/keychains" className="dyasse-button-secondary">Crochet keychain patterns <ArrowUpRight size={16}/></Link>
          </div>
          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 border-t border-[#D4E4EE] pt-5 text-xs text-[#354455]">
            <span className="inline-flex items-center gap-2"><FileText size={16}/> Downloadable PDF patterns</span>
@@ -93,10 +93,18 @@ export default async function Home(){
           <div className="p-8 sm:p-10"><div className="dyasse-eyebrow"><Sparkles size={15}/> From the studio</div>
             <h3 className="mt-4 font-serif text-[clamp(2rem,4vw,3rem)] leading-[1.14] text-[#172231]">The first patterns are being prepared.</h3>
             <p className="mt-4 max-w-xl text-sm leading-7 text-[#526475]">We're reviewing PDF instructions, photographs and checkout details before release. Only verified designs will appear here for purchase — no placeholders or untested files.</p>
-            <Link href="/guides/crochet-patterns-for-beginners" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#781D35]">Explore the beginner guide <ArrowUpRight size={17}/></Link>
+            <Link href="/collections/keychains" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#781D35]">Shop crochet keychain patterns <ArrowUpRight size={17}/></Link>
           </div>
           <div className="dyasse-hero-photo min-h-[190px] bg-center"/>
          </div>}
+     </div>
+   </section>
+
+   <section aria-labelledby="shop-crochet-patterns" className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+     <div className="max-w-4xl">
+       <p className="dyasse-eyebrow">DIGITAL CROCHET PATTERN LIBRARY</p>
+       <h2 id="shop-crochet-patterns" className="mt-3 font-serif text-[clamp(2rem,3vw,2.9rem)] tracking-[-.04em]">Find your next crochet PDF pattern</h2>
+       <p className="mt-4 text-[15px] leading-8 text-[#4A5F70]">Browse downloadable crochet instructions by the project you want to make. Discover <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/keychains">crochet keychain patterns</Link> for miniature bag charms, <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/crochet-bags">crochet bag patterns</Link> for handbags and pouches, and <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/baby-shoes">crochet baby booties patterns</Link>. Each product page shows its actual design, digital format and project information so you can select the PDF that suits you.</p>
      </div>
    </section>
 
@@ -105,7 +113,7 @@ export default async function Home(){
    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
      <div className="grid items-center gap-9 rounded-[24px] border border-[#DDECF4] bg-[#EAF6FC] p-8 sm:p-11 lg:grid-cols-[.9fr_1.1fr]">
        <div><p className="dyasse-eyebrow">LEARN THE LITTLE DETAILS</p><h2 className="mt-4 font-serif text-[clamp(2.3rem,4vw,3.3rem)] leading-[1.12]">Create with confidence.</h2>
-         <p className="mt-4 text-[15px] leading-8 text-[#435468]">Learn pattern abbreviations, stitch counts and gauge before you choose your next project.</p>
+         <p className="mt-4 text-[15px] leading-8 text-[#435468]">Learn crochet abbreviations, read stitch counts and check gauge before you choose your next PDF pattern.</p>
        </div>
        <div className="grid gap-3">
          <Link href="/guides/crochet-patterns-for-beginners" className="flex items-center justify-between gap-5 rounded-xl bg-white px-6 py-5 font-semibold text-[#172231] shadow-sm">How to read crochet patterns <ArrowUpRight size={18} className="text-[#781D35]"/></Link>

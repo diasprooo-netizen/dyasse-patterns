@@ -21,14 +21,14 @@ const collections: Record<string, Collection> = {
     theme: 'bg-[#E5F3FC] text-[#172231]', icon: Layers3, eyebrow: 'THE KNITTING EDIT',
   },
   'baby-shoes': {
-    label: 'Baby footwear', tagline: 'Tiny projects, thoughtful details.',
+    label: 'Crochet baby booties patterns', tagline: 'Tiny projects, thoughtful details.',
     intro: 'Baby shoes, booties and sandals in downloadable pattern form. Review measurements and sizing details before a purchase.',
     match: v => /baby|booties|sandal|clog|shoe|sneaker/i.test(v),
     theme: 'bg-[#EDF7FC] text-[#172231]', icon: Footprints, eyebrow: 'LITTLE BEGINNINGS',
   },
   'crochet-bags': {
     label: 'Crochet bags & purses', tagline: 'A bag worth making yourself.',
-    intro: 'Browse crochet bag PDF patterns for pouches, clutches and everyday accessories. Each released design includes its own project details and required materials.',
+    intro: 'Shop crochet bag patterns for handbags, backpacks, purses and pencil cases. Explore photos, materials, sizing and PDF instructions before you make your next handmade bag.',
     match: v => /crochet bags & cases/i.test(v) || (/crochet/i.test(v) && /bag|purse|clutch|pouch/i.test(v)),
     theme: 'bg-[#E8F3FA] text-[#172231]', icon: Layers3, eyebrow: 'BAGS & PURSES',
   },
@@ -51,11 +51,55 @@ const collections: Record<string, Collection> = {
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Layers3, eyebrow: 'THE BEADED EDIT',
   },
   'keychains': {
-    label: 'Keychains & gifts', tagline: 'Small makes. So much heart.',
-    intro: 'Little crochet charms and quick handmade gifts. Find individual digital instructions as they are approved for release.',
+    label: 'Crochet keychain patterns', tagline: 'Small makes. So much heart.',
+    intro: 'Shop crochet keychain PDF patterns for miniature charms, little crochet bags, sports keychains and tiny gifts. Each download includes instructions for the project pictured.',
     match: v => /keychain|key ring|keyring/i.test(v),
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Gift, eyebrow: 'SMALL & LOVELY',
   },
+}
+const collectionGuides: Record<string, { heading: string; paragraphs: string[] }> = {
+  'crochet-patterns': {
+    heading: 'How to choose a crochet PDF pattern',
+    paragraphs: [
+      'Start with the type of project you want to make, whether that is a miniature crochet keychain, a structured bag, a wearable accessory or baby booties. Open the individual pattern to check the materials, hook size, finished dimensions and techniques actually listed for that design.',
+      'Every available item here is a digital PDF pattern, not a finished handmade product. Use the photos and written project notes to compare designs before choosing a download.'
+    ]
+  },
+  keychains: {
+    heading: 'Choosing a mini crochet keychain pattern',
+    paragraphs: [
+      'Small crochet keychains are a way to explore detailed construction in a compact project. Compare the miniature backpacks, sports charms, little hats and character designs in this collection, and check whether a pattern needs keyrings, jump rings, wire or other hardware.',
+      'Look at the individual PDF listing for yarn weight, hook size, assembly steps and safety information. The finished keychain is not included with a digital pattern purchase.'
+    ]
+  },
+  'crochet-bags': {
+    heading: 'Crochet handbag, backpack and pouch PDF patterns',
+    paragraphs: [
+      'A crochet bag pattern is more than a stitch repeat. Check the base shape, yarn weight, handle construction and any zipper, drawstring or lining requirements before picking a design. This collection includes different bag styles, from textured handbags to decorative backpacks and a cherry pencil case.',
+      'Each product page identifies the particular project and what is included in the digital instructions. Materials and hardware are bought separately.'
+    ]
+  },
+  'baby-shoes': {
+    heading: 'Crochet baby shoes: check the size before starting',
+    paragraphs: [
+      'Baby shoe PDF patterns are sized projects, not ready-made footwear. Read the listed age range and any finished measurements, then check the actual gauge and materials for your chosen pattern. Age ranges are indicative; measuring the intended foot is more reliable.',
+      'Avoid loose decorations or unsecured hardware on items intended for babies, and always follow the safety information supplied with the pattern.'
+    ]
+  },
+  'crochet-accessories': {
+    heading: 'Wearable crochet patterns and accessories',
+    paragraphs: [
+      'Browse crochet PDF patterns for hats, bun covers and decorative hair accessories. For wearable projects, pay particular attention to measurements, stretch, yarn choice and any elastic, bead or attachment requirements.',
+      'Look through the product images and project notes to understand the finished design before purchasing its written instructions.'
+    ]
+  },
+  amigurumi: {
+    heading: 'Small amigurumi and crochet character projects',
+    paragraphs: [
+      'Amigurumi patterns often combine individually made shapes, stuffing and careful assembly. Read the materials and finishing notes to understand the construction before starting.',
+      'Patterns are supplied as PDF instructions; the finished item, stuffing and hardware are not shipped.'
+    ]
+  }
 }
 export function generateStaticParams() { return Object.keys(collections).map(slug=>({slug})) }
 export async function generateMetadata({params}:{params:{slug:string}}):Promise<Metadata>{
@@ -128,6 +172,13 @@ export default async function Collection({params}:{params:{slug:string}}) {
           <div aria-hidden="true" className="flex h-36 w-36 items-center justify-center rounded-[35px] bg-[#E5EAE3] text-[#68806D]"><BookOpen size={62} strokeWidth={.95}/></div>
         </div>}
     </section>
+    {list.length>0 && collectionGuides[params.slug] ? <section className="border-t border-[#E0ECF3] bg-white">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
+        <h2 className="font-serif text-[clamp(2rem,3vw,2.6rem)] tracking-[-.04em]">{collectionGuides[params.slug].heading}</h2>
+        <div className="mt-5 grid max-w-5xl gap-6 md:grid-cols-2">{collectionGuides[params.slug].paragraphs.map((paragraph,i)=><p key={i} className="text-[15px] leading-8 text-[#546878]">{paragraph}</p>)}</div>
+        <Link href="/guides/crochet-patterns-for-beginners" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Learn how to read crochet patterns <ArrowUpRight size={16}/></Link>
+      </div>
+    </section> : null}
     <section className="border-t border-[#DCEAF2] bg-[#EDF7FC]">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <h2 className="font-serif text-3xl tracking-[-.04em]">Plan your next project</h2>

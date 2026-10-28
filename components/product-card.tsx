@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, FileText } from 'lucide-react'
 import { PriceDisplay } from '@/components/price-display'
+import { productCoverAlt } from '@/lib/image-seo'
 import { SaleBadge } from '@/components/sale-badge'
 import type { Product } from '@/types/product'
 import { primaryCollection } from '@/lib/seo'
@@ -12,7 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
   const href = '/product/' + encodeURIComponent(product.slug)
   return <article className="group flex h-full flex-col overflow-hidden rounded-[17px] border border-[#DCEAF2] bg-white shadow-[0_4px_16px_rgba(37,45,46,.025)] transition duration-200 hover:-translate-y-1 hover:border-[#9DC7DF] hover:shadow-[0_20px_40px_rgba(38,44,40,.075)]">
     <Link href={href} aria-label={'View ' + product.title} className="relative block aspect-[4/4.55] overflow-hidden bg-[#EAF5FC]">
-      <Image src={product.image_url} alt={product.title} fill sizes="(min-width:1280px) 25vw,(min-width:768px) 33vw,(min-width:640px) 50vw,100vw"
+      <Image src={product.image_url} alt={productCoverAlt(product)} fill sizes="(min-width:1280px) 25vw,(min-width:768px) 33vw,(min-width:640px) 50vw,100vw"
         className="object-cover transition-transform duration-500 group-hover:scale-[1.035]"/>
       <div className="absolute left-4 top-4 flex flex-wrap gap-2">
         <span className="inline-flex items-center gap-1.5 border border-[#E4EEF4] bg-[#FFFEFB]/95 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.12em] text-[#31475D] shadow-sm"><FileText size={12}/> PDF pattern</span>

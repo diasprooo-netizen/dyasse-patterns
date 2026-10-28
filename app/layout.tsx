@@ -9,11 +9,11 @@ import { SITE_URL, IS_OFFICIAL_DOMAIN, safeJsonLd } from '@/lib/seo'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: { default: 'Crochet & Knitting PDF Patterns | Dyasse Shop', template: '%s | Dyasse Shop' },
-  description: 'Browse original digital crochet and knitting PDF patterns for baby booties, bags, keychains, amigurumi, hats and accessories. See materials and project details before buying.',
+  title: { default: 'Crochet PDF Patterns: Keychains, Bags & Accessories | Dyasse Shop', template: '%s | Dyasse Shop' },
+  description: 'Shop crochet PDF patterns for miniature keychains, handmade bags, baby booties and accessories. Browse designs, materials and digital downloads.',
   robots: { index: IS_OFFICIAL_DOMAIN, follow: IS_OFFICIAL_DOMAIN },
-  openGraph: { type: 'website', url: '/', siteName: 'Dyasse Shop', title: 'Crochet & Knitting PDF Patterns | Dyasse Shop', description: 'Digital crochet and knitting PDF patterns for baby shoes, bags, handmade gifts and accessories.' },
-  twitter: { card: 'summary', title: 'Dyasse Shop — Crochet & Knitting PDF Patterns', description: 'Crochet and knitting PDF patterns, project details and digital download guidance.' },
+  openGraph: { type: 'website', url: '/', siteName: 'Dyasse Shop', title: 'Crochet PDF Patterns | Dyasse Shop', description: 'Digital crochet PDF patterns for keychains, bags, baby booties and accessories.', images: [{ url: 'https://i.etsystatic.com/23569609/r/il/bb2470/8566334075/il_fullxfull.8566334075_kuyx.jpg', alt: 'Black and white crochet soccer ball keychain pattern from Dyasse Shop' }] },
+  twitter: { card: 'summary_large_image', title: 'Dyasse Shop — Crochet PDF Patterns', description: 'Crochet keychain, bag and baby booties PDF patterns for your next handmade project.', images: ['https://i.etsystatic.com/23569609/r/il/bb2470/8566334075/il_fullxfull.8566334075_kuyx.jpg'] },
 }
 const websiteSchema = {
  '@context': 'https://schema.org',
