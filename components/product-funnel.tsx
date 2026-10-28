@@ -64,7 +64,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
           </div>
           <div className="mt-7"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled} variant="detail"/></div>
-          <div className="mt-5"><BuyButtons slug={product.slug} gumroadLink={product.gumroad_link} gumroadCheckoutVerified={product.gumroad_checkout_verified} lemonCheckoutUrl={product.lemon_checkout_url} paypalCheckoutEnabled={product.paypal_checkout_enabled} paypalPriceUsdCents={product.paypal_price_usd_cents}/></div>
+          <div className="mt-5"><BuyButtons slug={product.slug} gumroadLink={product.gumroad_link} gumroadCheckoutVerified={product.gumroad_checkout_verified} gumroadIsPublished={product.gumroad_is_published} lemonCheckoutUrl={product.lemon_checkout_url} paypalCheckoutEnabled={product.paypal_checkout_enabled} paypalPriceUsdCents={product.paypal_price_usd_cents}/></div>
           <div className="mt-7 divide-y divide-[#E8E1D9] border-y border-[#DDEAF2]">
             {details.map(({icon:Icon,title,subtitle})=><div key={title} className="flex items-center gap-4 py-4">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ECF6FC] text-[#9A7466]"><Icon size={19} strokeWidth={1.4}/></span>
