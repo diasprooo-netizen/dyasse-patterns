@@ -23,6 +23,10 @@ function DetailList({ title, items }: {title:string;items:string[]}) {
 export function ProductFunnel({product,upsells,crossSells}:{product:Product;upsells:Product[];crossSells:Product[]}) {
   const gallery=[product.image_url,...product.gallery_images].filter(Boolean)
   const collection=primaryCollection(product)
+  const relatedGuide = collection === 'keychains' ? { href:'/guides/crochet-keychain-patterns', label:'Crochet keychain ideas and materials' }
+    : collection === 'crochet-bags' ? { href:'/guides/choosing-yarn-for-crochet-bags', label:'Choosing yarn for crochet bags' }
+    : collection === 'baby-shoes' ? { href:'/guides/crochet-baby-shoes-sizing', label:'Baby shoe sizing and gauge guide' }
+    : null
   const related=[...upsells,...crossSells].filter((p,i,a)=>p.id!==product.id&&a.findIndex(q=>q.id===p.id)===i).slice(0,4)
 
   const details=[
@@ -100,6 +104,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <Link href="/faq" className="dyasse-button-secondary !border-[#A7B6AA] !bg-white">Digital download FAQ <ArrowUpRight size={17}/></Link>
         </div>
         <nav aria-label="Related pattern resources" className="mt-7 flex flex-wrap gap-3">
+          {relatedGuide ? <Link href={relatedGuide.href} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">{relatedGuide.label} <ArrowUpRight size={14} className="inline"/></Link> : null}
           <Link href={'/collections/'+collection} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">More {collectionSeo[collection].label.toLowerCase()} <ArrowUpRight size={14} className="inline"/></Link>
           <Link href={collection==='knitting-patterns'?'/guides/knitting-patterns-for-beginners':'/guides/crochet-patterns-for-beginners'} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">How to read a pattern <ArrowUpRight size={14} className="inline"/></Link>
         </nav>
