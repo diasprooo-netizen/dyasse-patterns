@@ -42,9 +42,8 @@ export default async function ProductPage({ params }: PageProps) {
   const col = primaryCollection(product)
   const url = `${SITE_URL}/product/${encodeURIComponent(product.slug)}`
 
-  // No unverified Offer prices, aggregate ratings or reviews: Gumroad may
-  // charge USD while some legacy catalog rows still say MAD. Product markup
-  // can include a verified Offer after checkout prices have been reconciled.
+  // Do not publish structured-data Offers until the USD amount and paid PDF
+  // delivery have been verified against Gumroad. Avoid unverified reviews.
   const graph = {
     '@context': 'https://schema.org',
     '@graph': [
