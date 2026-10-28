@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCurrentAdminState } from '@/lib/admin-products'
 import { createClient } from '@/lib/supabase/server'
+import { legacyPriceToUsd } from '@/lib/currency'
 export const runtime='nodejs'
 export async function POST(request:NextRequest){
  const admin=await getCurrentAdminState()
@@ -17,14 +18,14 @@ export async function POST(request:NextRequest){
    const images=Array.isArray(p.images_unverified)?p.images_unverified.filter((v):v is string=>typeof v==='string'&&v.startsWith('https://')).slice(0,12):[]
    const tags=Array.isArray(p.tags)?p.tags.filter((v):v is string=>typeof v==='string').slice(0,30):[]
    return {title:clean(p.title,250),slug:clean(p.slug,255),description:clean(p.description_unverified,16000),
-    price:Number(p.price)||0,currency:clean(p.currency,3)||'MAD',
+    price:legacyPriceToUsd(Number(p.price),clean(p.currency,3)),currency:'USD',
     image_url:images[0]||'',gallery_images:images.slice(1),
     category:clean(p.category,120)||null,tags,seo_title:clean(p.seo_title_draft,200)||null,
     seo_description:null,gumroad_link:null,
     is_published:false,is_featured:false,is_on_sale:false,
     qa_verified:false,test_evidence_url:null}
   })
-  if(records.some(p=>!p.title||!p.slug||!p.description||p.price<0||p.price>100000))
+  if(records.some(p=>!p.title||!p.slug||!p.description||p.price<=0||p.price>10000))
    return NextResponse.json({message:'Invalid product fields.'},{status:400})
   const db=await createClient()
   const {error}=await db.from('products').upsert(records,{onConflict:'slug',ignoreDuplicates:true})
