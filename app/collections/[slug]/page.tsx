@@ -4,56 +4,57 @@ import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, BookOpen, Footprints, Gift, Layers3, Scissors } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
-import { collectionSeo, safeJsonLd, SITE_URL } from '@/lib/seo'
+import { collectionSeo, primaryCollection, safeJsonLd, SITE_URL } from '@/lib/seo'
+import type { Product } from '@/types/product'
 
-type Collection = { label: string; tagline: string; intro: string; match: (value: string) => boolean; theme: string; icon: typeof Scissors; eyebrow: string }
+type Collection = { label: string; tagline: string; intro: string; match: (product: Product) => boolean; theme: string; icon: typeof Scissors; eyebrow: string }
 const collections: Record<string, Collection> = {
   'crochet-patterns': {
     label: 'Crochet patterns', tagline: 'Made with every little stitch.',
     intro: 'Discover crochet ideas for bags, keepsakes and everyday accessories. Only ready-to-purchase PDF patterns appear below.',
-    match: v => /crochet|amigurumi|baby shoes|keychain|bag|plush|booties/i.test(v),
+    match: p => !['knitting-patterns', 'beaded-bags'].includes(primaryCollection(p)),
     theme: 'bg-[#E4F2FA] text-[#172231]', icon: Scissors, eyebrow: 'THE CROCHET EDIT',
   },
   'knitting-patterns': {
     label: 'Knitting patterns', tagline: 'For the cosy things in life.',
     intro: 'Hats, headbands, scarves and textured projects. Browse patterns with clear project details when releases are available.',
-    match: v => /knit|beanie|cable|headband|scarf|cowl/i.test(v),
+    match: p => primaryCollection(p) === 'knitting-patterns',
     theme: 'bg-[#E5F3FC] text-[#172231]', icon: Layers3, eyebrow: 'THE KNITTING EDIT',
   },
   'baby-shoes': {
     label: 'Crochet baby booties patterns', tagline: 'Tiny projects, thoughtful details.',
     intro: 'Baby shoes, booties and sandals in downloadable pattern form. Review measurements and sizing details before a purchase.',
-    match: v => /baby|booties|sandal|clog|shoe|sneaker/i.test(v),
+    match: p => primaryCollection(p) === 'baby-shoes',
     theme: 'bg-[#EDF7FC] text-[#172231]', icon: Footprints, eyebrow: 'LITTLE BEGINNINGS',
   },
   'crochet-bags': {
     label: 'Crochet bags & purses', tagline: 'A bag worth making yourself.',
     intro: 'Shop crochet bag patterns for handbags, backpacks, purses and pencil cases. Explore photos, materials, sizing and PDF instructions before you make your next handmade bag.',
-    match: v => /crochet bags & cases/i.test(v) || (/crochet/i.test(v) && /bag|purse|clutch|pouch/i.test(v)),
+    match: p => primaryCollection(p) === 'crochet-bags',
     theme: 'bg-[#E8F3FA] text-[#172231]', icon: Layers3, eyebrow: 'BAGS & PURSES',
   },
   'amigurumi': {
     label: 'Amigurumi & plush', tagline: 'Small characters, big imagination.',
     intro: 'Find amigurumi crochet PDF patterns for plush toys and little decorative makes. Read the full project details before choosing your next make.',
-    match: v => /crochet toys & decor|amigurumi|plush/i.test(v),
+    match: p => primaryCollection(p) === 'amigurumi',
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Gift, eyebrow: 'THE PLUSH EDIT',
   },
   'crochet-accessories': {
     label: 'Crochet accessories', tagline: 'Wear it. Gift it. Make it.',
     intro: 'Discover crochet wearable PDF patterns and accessories for handmade projects. Check materials, sizing and technique details in each released pattern.',
-    match: v => /crochet wearables/i.test(v),
+    match: p => primaryCollection(p) === 'crochet-accessories',
     theme: 'bg-[#E8F3FA] text-[#172231]', icon: Scissors, eyebrow: 'CROCHET ACCESSORIES',
   },
   'beaded-bags': {
     label: 'Beaded bag patterns', tagline: 'A little sparkle, made stitch by stitch.',
     intro: 'Explore beaded purse and evening bag PDF patterns. Each listing identifies the digital instructions and the materials to consider.',
-    match: v => /beaded bags/i.test(v),
+    match: p => primaryCollection(p) === 'beaded-bags',
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Layers3, eyebrow: 'THE BEADED EDIT',
   },
   'keychains': {
     label: 'Crochet keychain patterns', tagline: 'Small makes. So much heart.',
     intro: 'Shop crochet keychain PDF patterns for miniature charms, little crochet bags, sports keychains and tiny gifts. Each download includes instructions for the project pictured.',
-    match: v => /keychain|key ring|keyring/i.test(v),
+    match: p => primaryCollection(p) === 'keychains',
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Gift, eyebrow: 'SMALL & LOVELY',
   },
 }
@@ -105,7 +106,7 @@ export function generateStaticParams() { return Object.keys(collections).map(slu
 export async function generateMetadata({params}:{params:{slug:string}}):Promise<Metadata>{
   const c=collections[params.slug]
   if(!c)return {title:'Collection not found',robots:{index:false}}
-  const products=(await getPublishedProducts()).filter(p=>c.match([p.title,p.category??'',...p.tags].join(' ')))
+  const products=(await getPublishedProducts()).filter(p=>c.match(p))
   const seo=collectionSeo[params.slug as keyof typeof collectionSeo]
   return {
     title:seo.title,
@@ -120,7 +121,11 @@ export default async function Collection({params}:{params:{slug:string}}) {
   const c=collections[params.slug]
   if (!c) notFound()
   const Icon=c.icon
-  const list=(await getPublishedProducts()).filter(p=>c.match([p.title,p.category??'',...p.tags].join(' ')))
+  const relatedGuide = params.slug === 'keychains' ? { href: '/guides/crochet-keychain-patterns', label: 'Crochet keychain ideas and hardware' }
+    : params.slug === 'crochet-bags' ? { href: '/guides/choosing-yarn-for-crochet-bags', label: 'How to choose yarn for crochet bags' }
+    : params.slug === 'baby-shoes' ? { href: '/guides/crochet-baby-shoes-sizing', label: 'Crochet baby shoe sizing and gauge' }
+    : null
+  const list=(await getPublishedProducts()).filter(p=>c.match(p))
   const canonical=SITE_URL+'/collections/'+params.slug
   const graph={
     '@context':'https://schema.org',
@@ -176,7 +181,10 @@ export default async function Collection({params}:{params:{slug:string}}) {
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
         <h2 className="font-serif text-[clamp(2rem,3vw,2.6rem)] tracking-[-.04em]">{collectionGuides[params.slug].heading}</h2>
         <div className="mt-5 grid max-w-5xl gap-6 md:grid-cols-2">{collectionGuides[params.slug].paragraphs.map((paragraph,i)=><p key={i} className="text-[15px] leading-8 text-[#546878]">{paragraph}</p>)}</div>
-        <Link href="/guides/crochet-patterns-for-beginners" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Learn how to read crochet patterns <ArrowUpRight size={16}/></Link>
+        <div className="mt-6 flex flex-wrap gap-4">
+          {relatedGuide ? <Link href={relatedGuide.href} className="inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">{relatedGuide.label} <ArrowUpRight size={16}/></Link> : null}
+          <Link href="/guides/crochet-patterns-for-beginners" className="inline-flex items-center gap-2 text-sm font-semibold text-[#781D35] underline underline-offset-4">Learn how to read crochet patterns <ArrowUpRight size={16}/></Link>
+        </div>
       </div>
     </section> : null}
     <section className="border-t border-[#DCEAF2] bg-[#EDF7FC]">

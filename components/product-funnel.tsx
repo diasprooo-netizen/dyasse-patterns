@@ -5,9 +5,10 @@ import { BuyButtons } from '@/components/buy-buttons'
 import { PriceDisplay } from '@/components/price-display'
 import { productCoverAlt, productGalleryAlt } from '@/lib/image-seo'
 import { ProductCard } from '@/components/product-card'
+import { ProductDescription } from '@/components/product-description'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
-import { collectionSeo, primaryCollection } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productSeoDescription } from '@/lib/seo'
 import type { Product } from '@/types/product'
 
 function DetailList({ title, items }: {title:string;items:string[]}) {
@@ -23,6 +24,10 @@ function DetailList({ title, items }: {title:string;items:string[]}) {
 export function ProductFunnel({product,upsells,crossSells}:{product:Product;upsells:Product[];crossSells:Product[]}) {
   const gallery=[product.image_url,...product.gallery_images].filter(Boolean)
   const collection=primaryCollection(product)
+  const relatedGuide = collection === 'keychains' ? { href:'/guides/crochet-keychain-patterns', label:'Crochet keychain ideas and materials' }
+    : collection === 'crochet-bags' ? { href:'/guides/choosing-yarn-for-crochet-bags', label:'Choosing yarn for crochet bags' }
+    : collection === 'baby-shoes' ? { href:'/guides/crochet-baby-shoes-sizing', label:'Baby shoe sizing and gauge guide' }
+    : null
   const related=[...upsells,...crossSells].filter((p,i,a)=>p.id!==product.id&&a.findIndex(q=>q.id===p.id)===i).slice(0,4)
 
   const details=[
@@ -59,7 +64,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <p className="dyasse-eyebrow">{collectionSeo[collection].label} / Digital PDF</p>
           <h1 className="mt-5 font-serif text-[clamp(2.6rem,4.2vw,4.6rem)] leading-[1.08] tracking-[-.055em] text-[#172231]">{product.title}</h1>
           {(product.is_featured||product.is_on_sale)?<div className="mt-5"><SaleBadge badge={product.sale_badge} isFeatured={product.is_featured}/></div>:null}
-          <p className="mt-6 line-clamp-4 text-[15px] leading-8 text-[#67747D]">{product.description}</p>
+          <p className="mt-6 line-clamp-4 text-[15px] leading-8 text-[#67747D]">{productSeoDescription(product)}</p>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#DDEAF2] py-6">
             <div><span className="block text-[10px] font-bold uppercase tracking-[.15em] text-[#8B8E88]">Pattern price</span><div className="mt-2"><PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency}/></div></div>
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
@@ -83,7 +88,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <div><p className="dyasse-eyebrow">THE PROJECT NOTES</p><h2 className="mt-4 max-w-md font-serif text-[clamp(2.5rem,4vw,3.8rem)] leading-[1.1] tracking-[-.05em]">Everything you need<br/><em className="font-normal text-[#781D35]">to know.</em></h2></div>
           <div className="border border-[#DDEAF2] bg-white p-7 sm:p-10">
             <h3 className="font-serif text-[28px] text-[#172231]">About this pattern</h3>
-            <p className="mt-5 whitespace-pre-line break-words text-[15px] leading-8 text-[#65717A]">{product.description}</p>
+            <ProductDescription description={product.description}/>
           </div>
         </div>
         {(product.features.length>0||product.materials.length>0||product.what_you_will_learn.length>0)?<div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -100,6 +105,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
           <Link href="/faq" className="dyasse-button-secondary !border-[#A7B6AA] !bg-white">Digital download FAQ <ArrowUpRight size={17}/></Link>
         </div>
         <nav aria-label="Related pattern resources" className="mt-7 flex flex-wrap gap-3">
+          {relatedGuide ? <Link href={relatedGuide.href} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">{relatedGuide.label} <ArrowUpRight size={14} className="inline"/></Link> : null}
           <Link href={'/collections/'+collection} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">More {collectionSeo[collection].label.toLowerCase()} <ArrowUpRight size={14} className="inline"/></Link>
           <Link href={collection==='knitting-patterns'?'/guides/knitting-patterns-for-beginners':'/guides/crochet-patterns-for-beginners'} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">How to read a pattern <ArrowUpRight size={14} className="inline"/></Link>
         </nav>

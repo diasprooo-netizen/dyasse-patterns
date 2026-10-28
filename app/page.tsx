@@ -16,15 +16,15 @@ export const metadata: Metadata = {
 
 const collections=[
  {href:'/collections/crochet-patterns',title:'Crochet patterns',sub:'Handmade accessories & gifts',icon:Scissors,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/knitting-patterns',title:'Knitting patterns',sub:'Warm textures & timeless knits',icon:Layers3,image:'https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'https://images.pexels.com/photos/5788489/pexels-photo-5788489.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'https://images.pexels.com/photos/5602969/pexels-photo-5602969.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/keychains',title:'Small gifts',sub:'Little makes, lots of heart',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
 ]
 const more=[
- {href:'/collections/amigurumi',label:'Amigurumi & plush'},
- {href:'/collections/crochet-accessories',label:'Crochet accessories'},
- {href:'/collections/beaded-bags',label:'Beaded bags'},
+ {href:'/guides/crochet-keychain-patterns',label:'Crochet keychain ideas'},
+ {href:'/guides/choosing-yarn-for-crochet-bags',label:'Yarn for crochet bags'},
+ {href:'/guides/crochet-baby-shoes-sizing',label:'Crochet baby shoe sizing'},
 ]
 
 export default async function Home(){
@@ -77,7 +77,7 @@ export default async function Home(){
        <Link href="/#all-categories" className="inline-flex items-center gap-2 border-b border-[#781D35] pb-1 text-[13px] font-bold text-[#781D35]">View all categories <ArrowUpRight size={16}/></Link>
      </div>
      <CategoryCarousel items={categoryItems}/>
-     <nav id="all-categories" aria-label="More categories" className="mt-5 flex flex-wrap gap-2">
+     <nav id="all-categories" aria-label="Crochet project guides" className="mt-5 flex flex-wrap gap-2">
        {more.map(x=><Link key={x.href} href={x.href} className="rounded-full border border-[#DAE8F0] bg-[#F5FAFC] px-4 py-2 text-xs font-semibold text-[#27384B] hover:border-[#AFCAD9]">{x.label} <span className="text-[#781D35]">↗</span></Link>)}
      </nav>
    </section>
@@ -117,7 +117,7 @@ export default async function Home(){
        </div>
        <div className="grid gap-3">
          <Link href="/guides/crochet-patterns-for-beginners" className="flex items-center justify-between gap-5 rounded-xl bg-white px-6 py-5 font-semibold text-[#172231] shadow-sm">How to read crochet patterns <ArrowUpRight size={18} className="text-[#781D35]"/></Link>
-         <Link href="/guides/knitting-patterns-for-beginners" className="flex items-center justify-between gap-5 rounded-xl bg-white px-6 py-5 font-semibold text-[#172231] shadow-sm">How to read knitting patterns <ArrowUpRight size={18} className="text-[#781D35]"/></Link>
+         <Link href="/guides/choosing-yarn-for-crochet-bags" className="flex items-center justify-between gap-5 rounded-xl bg-white px-6 py-5 font-semibold text-[#172231] shadow-sm">Choosing yarn for crochet bags <ArrowUpRight size={18} className="text-[#781D35]"/></Link>
        </div>
      </div>
    </section>

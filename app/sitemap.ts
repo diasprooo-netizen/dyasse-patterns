@@ -20,6 +20,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/', '/about', '/contact', '/faq', '/privacy',
     '/guides/crochet-patterns-for-beginners',
     '/guides/knitting-patterns-for-beginners',
+    '/guides/crochet-keychain-patterns',
+    '/guides/choosing-yarn-for-crochet-bags',
+    '/guides/crochet-baby-shoes-sizing',
   ].map(path => ({
     url: SITE_URL + path,
     changeFrequency: 'monthly' as const,

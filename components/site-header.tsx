@@ -9,10 +9,10 @@ import { useFavorites } from '@/context/FavoritesContext'
 
 const navigation=[
  {href:'/collections/crochet-patterns',label:'Crochet'},
- {href:'/collections/knitting-patterns',label:'Knitting'},
+ {href:'/collections/crochet-accessories',label:'Accessories'},
  {href:'/collections/baby-shoes',label:'Baby booties'},
  {href:'/collections/crochet-bags',label:'Bags & purses'},
- {href:'/collections/keychains',label:'Small gifts'},
+ {href:'/collections/keychains',label:'Keychain patterns'},
 ]
 type AccountState={authenticated:boolean;isAdmin:boolean;email:string|null}
 
