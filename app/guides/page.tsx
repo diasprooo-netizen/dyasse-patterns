@@ -82,7 +82,7 @@ export default function CrochetGuidesIndex() {
         <p className="mt-6 max-w-3xl text-[16px] leading-8 text-[#4F6475]">Find clear guidance on reading crochet PDF instructions, choosing yarn and finishing miniature accessories. These resources are free to read, and each guide links to relevant digital patterns when available.</p>
       </div>
     </header>
-    <main className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
+    <section aria-label="Free crochet project guides" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
       <div className="grid gap-5 md:grid-cols-2">
         {guides.map(({href,title,label,description,Icon}) => <article key={href} className="flex flex-col border border-[#DCEAF2] bg-[#FAFDFF] p-7 transition hover:border-[#B7CFDF] sm:p-9">
           <div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[.14em] text-[#781D35]">{label}</span><Icon size={26} className="text-[#8E7481]" strokeWidth={1.3}/></div>
@@ -103,6 +103,6 @@ export default function CrochetGuidesIndex() {
           </div>
         </div>
       </section>
-    </main>
+    </section>
   </div>
 }
