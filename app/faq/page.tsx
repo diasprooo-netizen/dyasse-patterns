@@ -4,18 +4,18 @@ import { ArrowLeft, ArrowUpRight, BookOpen, Download, FileText, HelpCircle, Mail
 
 export const metadata: Metadata = {
   title: 'Frequently asked questions',
-  description: 'Clear answers about Dyasse digital crochet and knitting PDF patterns, digital downloads and buyer support.',
+  description: 'How to buy, receive and download digital crochet PDF patterns from Dyasse Shop. Learn about Gumroad guest checkout, included materials and pattern support.',
   alternates: { canonical: '/faq' },
 }
 
 const faqs=[
   { question:'Am I buying a finished item?', answer:'No. Dyasse patterns are digital PDF instructions for you to make the item yourself. Yarn, hooks, needles, accessories, and the finished handmade product are not included unless an individual listing explicitly says otherwise.' },
-  { question:'How do I receive my PDF?', answer:'Before direct PayPal payment, create a free Dyasse account and provide your name and email. Confirmed PayPal orders show a private PDF download link immediately, and the same purchased PDF remains available from My Orders when signed in. For Gumroad or Lemon Squeezy purchases, follow the provider receipt and download instructions. Nothing is sent by post.' },
-  { question:'Can I leave a review?', answer:'Yes. Signed-in customers with a completed PayPal order may leave a one-to-five star rating and their honest feedback on that product. Reviews are shown after moderation; we do not publish emails or phone numbers.' },
+  { question:'How do I receive my PDF?', answer:'For available Gumroad patterns, select Buy & download PDF to open Gumroad checkout. After successful payment, Gumroad provides the PDF download link on the confirmation page and in your purchase receipt email. No physical package is shipped.' },
+  { question:'Can I leave a review?', answer:'Where a verified review form is available for an eligible purchase, customers may share genuine feedback. Reviews are moderated before appearing on Dyasse Shop, and customer email addresses are not published.' },
   { question:'Are all the patterns available right now?', answer:'Not yet. A pattern appears publicly only after it has passed our release checks and has a working checkout link. If a collection has no products, its releases are still being prepared.' },
   { question:'Do I need to know how to crochet or knit?', answer:'Each available product page should describe the project, materials and skill expectations. Check these details before checkout. A beginner-level project can still require some familiarity with basic stitches.' },
-  { question:'What if I have trouble downloading?', answer:'For direct PayPal orders, sign in and use My Orders to download the PDF again, even if the confirmation page was closed. For other checkout providers, open your receipt and follow its download link. If you lose access, open the support chat and tell us your PayPal order reference. Include the pattern title and your order reference, but never share your password or bank details.' },
-  { question:'Can I request help with a pattern?', answer:'Yes. Use the customer support chat on this website; our team can reply to your messages. Replies appear when a team member is available. Tell us which pattern, version and step you need help with, and include a clear description or photo if relevant.' },
+  { question:'What if I have trouble downloading?', answer:'First open the Gumroad receipt email and follow its download link. If you cannot find the receipt, check the spam folder and confirm which email you used for checkout. Contact Dyasse Shop with the pattern name and Gumroad order reference so we can help. Do not share passwords or bank card details.' },
+  { question:'Can I request help with a pattern?', answer:'Yes. Contact Dyasse Shop with the pattern title and the row, round, page number or technique you need help with. A clear photo or description can help identify where the instructions are confusing.' },
   { question:'Are pattern photos proof of a finished handmade sample?', answer:'Only where a listing explicitly provides verified sample information. Decorative illustrations and listing photographs should not be used as a substitute for testing written instructions.' },
 ]
 export default function FAQ(){
