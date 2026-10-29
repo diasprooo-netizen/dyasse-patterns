@@ -19,6 +19,7 @@ const help=[
  {label:'Privacy policy',href:'/privacy'},
 ]
 const guides=[
+ {label:'All crochet guides',href:'/guides'},
  {label:'Read crochet patterns',href:'/guides/crochet-patterns-for-beginners'},
  {label:'Crochet keychain pattern ideas',href:'/guides/crochet-keychain-patterns'},
  {label:'Choose yarn for crochet bags',href:'/guides/choosing-yarn-for-crochet-bags'},
