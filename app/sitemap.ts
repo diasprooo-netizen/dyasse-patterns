@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const staticPages: MetadataRoute.Sitemap = [
-    '/', '/about', '/contact', '/faq', '/privacy',
+    '/', '/about', '/contact', '/faq', '/privacy', '/guides',
     '/guides/crochet-patterns-for-beginners',
     '/guides/knitting-patterns-for-beginners',
     '/guides/crochet-keychain-patterns',

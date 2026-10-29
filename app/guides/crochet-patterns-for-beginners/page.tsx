@@ -76,7 +76,8 @@ export default function CrochetGuide(){
       <Link href="/collections/crochet-patterns">All crochet PDF patterns →</Link>
       <Link href="/collections/baby-shoes">Crochet baby booties →</Link>
       <Link href="/collections/crochet-bags">Crochet bag patterns →</Link>
-      <Link href="/collections/amigurumi">Amigurumi patterns →</Link>
+      <Link href="/collections/keychains">Crochet keychain patterns →</Link>
+      <Link href="/guides">More crochet project guides →</Link>
       <Link href="/faq">Download & pattern support →</Link>
     </nav>
    </aside>

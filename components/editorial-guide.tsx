@@ -48,7 +48,8 @@ export function EditorialGuide({
           <Link href="/" className="hover:text-[#781D35]">Home</Link><span>/</span>
           <Link href="/collections/crochet-patterns" className="hover:text-[#781D35]">Crochet patterns</Link><span>/</span><span>{eyebrow}</span>
         </nav>
-        <p className="mt-12 text-xs font-bold uppercase tracking-[.18em] text-[#781D35]">{eyebrow}</p>
+        <Link href="/guides" className="mt-8 inline-flex items-center gap-2 text-xs font-semibold text-[#781D35] underline underline-offset-4">Explore all crochet guides</Link>
+        <p className="mt-5 text-xs font-bold uppercase tracking-[.18em] text-[#781D35]">{eyebrow}</p>
         <h1 className="mt-5 max-w-4xl font-serif text-[clamp(2.8rem,5vw,4.8rem)] leading-[1.09] tracking-[-.045em]">{title}</h1>
         <p className="mt-6 max-w-3xl text-base leading-8 text-[#4C6170]">{description}</p>
       </div>

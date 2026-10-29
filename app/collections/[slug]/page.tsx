@@ -1,9 +1,11 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, BookOpen, Footprints, Gift, Layers3, Scissors } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
+import { productCoverAlt } from '@/lib/image-seo'
 import { collectionSeo, primaryCollection, safeJsonLd, SITE_URL } from '@/lib/seo'
 import type { Product } from '@/types/product'
 
@@ -113,7 +115,8 @@ export async function generateMetadata({params}:{params:{slug:string}}):Promise<
     description:seo.description,
     alternates:{canonical:'/collections/'+params.slug},
     robots: {index:products.length>0,follow:true},
-    openGraph:{title:seo.title,description:seo.description,url:'/collections/'+params.slug,type:'website'}
+    openGraph:{title:seo.title,description:seo.description,url:'/collections/'+params.slug,type:'website',images:products[0]?.image_url ? [{url:products[0].image_url,alt:productCoverAlt(products[0])}] : []},
+    twitter:{card:'summary_large_image',title:seo.title,description:seo.description,images:products[0]?.image_url ? [products[0].image_url] : []}
   }
 }
 export const dynamic='force-dynamic'
@@ -126,6 +129,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
     : params.slug === 'baby-shoes' ? { href: '/guides/crochet-baby-shoes-sizing', label: 'Crochet baby shoe sizing and gauge' }
     : null
   const list=(await getPublishedProducts()).filter(p=>c.match(p))
+  const heroProduct = list.find(p => Boolean(p.image_url))
   const canonical=SITE_URL+'/collections/'+params.slug
   const graph={
     '@context':'https://schema.org',
@@ -153,11 +157,14 @@ export default async function Collection({params}:{params:{slug:string}}) {
           <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#4A5F70]">{c.intro}</p>
           <Link href="/#collections" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-8"><ArrowLeft size={16}/> All collections</Link>
         </div>
-        <div aria-hidden="true" className="relative hidden h-[290px] items-center justify-center md:flex">
+        {heroProduct ? <div className="relative hidden aspect-[5/4] overflow-hidden border border-white/80 bg-white shadow-sm md:block">
+          <Image src={heroProduct.image_url} alt={productCoverAlt(heroProduct)} fill sizes="(min-width:1024px) 36vw, 50vw" className="object-cover" priority/>
+          <span className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] bg-white/95 px-3 py-2 text-[11px] font-semibold text-[#384B5A]">{heroProduct.title}</span>
+        </div> : <div aria-hidden="true" className="relative hidden h-[290px] items-center justify-center md:flex">
           <div className="absolute h-64 w-64 rotate-12 rounded-[65px] border-2 border-white/80 bg-white/25" />
           <div className="absolute h-48 w-48 -rotate-12 rounded-full border border-current opacity-25" />
           <Icon className="relative" size={115} strokeWidth={.8}/>
-        </div>
+        </div>}
       </div>
     </section>
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
@@ -192,6 +199,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
         <h2 className="font-serif text-3xl tracking-[-.04em]">Plan your next project</h2>
         <p className="mt-4 max-w-3xl text-[15px] leading-8 text-[#667279]">Every listing is for downloadable instructions, not a finished handmade item. Before selecting a pattern, review its materials, project size, techniques and delivery details. Unreviewed drafts are not offered for sale.</p>
         <div className="mt-7 flex flex-wrap gap-3">
+          <Link href="/guides" className="rounded-full border border-[#D4C8BA] bg-white px-5 py-3 text-sm font-bold text-[#354857] hover:bg-[#E8E1D8]">Explore crochet project guides</Link>
           <Link href="/guides/crochet-patterns-for-beginners" className="rounded-full border border-[#D4C8BA] bg-white px-5 py-3 text-sm font-bold text-[#354857] hover:bg-[#E8E1D8]">Crochet pattern reading guide</Link>
           <Link href="/guides/knitting-patterns-for-beginners" className="rounded-full border border-[#D4C8BA] bg-white px-5 py-3 text-sm font-bold text-[#354857] hover:bg-[#E8E1D8]">Knitting pattern reading guide</Link>
           <Link href="/faq" className="rounded-full border border-[#D4C8BA] bg-white px-5 py-3 text-sm font-bold text-[#354857] hover:bg-[#E8E1D8]">PDF download FAQ</Link>
