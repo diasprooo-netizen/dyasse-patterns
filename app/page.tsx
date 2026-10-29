@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, Footprints, Gift, Heart, Layers3, Scissors, ShieldCheck, Sparkles } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
@@ -19,7 +20,7 @@ const collections=[
  {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'https://images.pexels.com/photos/5788489/pexels-photo-5788489.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'https://images.pexels.com/photos/5602969/pexels-photo-5602969.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/keychains',title:'Small gifts',sub:'Little makes, lots of heart',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
 ]
 const more=[
  {href:'/guides/crochet-keychain-patterns',label:'Crochet keychain ideas'},
@@ -32,7 +33,7 @@ export default async function Home(){
  const products=allProducts.slice(0,8)
  const categoryItems=collections.map(({href,title,sub,image})=>{
    const slug=href.split('/').pop()
-   const representative=allProducts.find(product=>primaryCollection(product)===slug)
+   const representative=slug==='crochet-patterns' ? allProducts[0] : allProducts.find(product=>primaryCollection(product)===slug)
    return {href,title,sub,image:representative?.image_url || image}
  })
  return <div className="bg-white text-[#172231]">
@@ -53,7 +54,7 @@ export default async function Home(){
          </div>
        </div>
        <div className="relative min-h-[245px] overflow-hidden lg:min-h-full">
-         <div aria-hidden="true" className="dyasse-hero-photo absolute inset-0"/>
+         {products[0]?.image_url ? <Image src={products[0].image_url} alt={products[0].title + ' crochet PDF pattern design from Dyasse Shop'} fill priority sizes="(min-width:1024px) 47vw, 100vw" className="object-cover"/> : <div aria-hidden="true" className="dyasse-hero-photo absolute inset-0"/>}
          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#EAF5FC_0%,transparent_24%)] lg:bg-[linear-gradient(90deg,#EFF8FD_0%,transparent_29%)]"/>
          <div className="absolute bottom-6 left-6 border border-white/65 bg-white/90 p-4 shadow-sm backdrop-blur sm:left-10 lg:bottom-9">
            <p className="font-serif text-xl italic text-[#172231]">A little more handmade.</p>
@@ -74,11 +75,12 @@ export default async function Home(){
    <section id="collections" className="mx-auto max-w-7xl scroll-mt-24 px-5 pb-12 pt-12 sm:px-8">
      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
        <div><p className="dyasse-eyebrow">FIND YOUR NEXT PROJECT</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,3vw,3.2rem)] tracking-[-.045em]">Shop by category</h2></div>
-       <Link href="/#all-categories" className="inline-flex items-center gap-2 border-b border-[#781D35] pb-1 text-[13px] font-bold text-[#781D35]">View all categories <ArrowUpRight size={16}/></Link>
+       <Link href="/guides" className="inline-flex items-center gap-2 border-b border-[#781D35] pb-1 text-[13px] font-bold text-[#781D35]">Explore crochet guides <ArrowUpRight size={16}/></Link>
      </div>
      <CategoryCarousel items={categoryItems}/>
      <nav id="all-categories" aria-label="Crochet project guides" className="mt-5 flex flex-wrap gap-2">
        {more.map(x=><Link key={x.href} href={x.href} className="rounded-full border border-[#DAE8F0] bg-[#F5FAFC] px-4 py-2 text-xs font-semibold text-[#27384B] hover:border-[#AFCAD9]">{x.label} <span className="text-[#781D35]">↗</span></Link>)}
+       <Link href="/guides" className="rounded-full border border-[#C9DCE7] bg-white px-4 py-2 text-xs font-bold text-[#781D35] hover:border-[#AFCAD9]">All crochet guides ↗</Link>
      </nav>
    </section>
 
