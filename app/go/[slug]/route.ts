@@ -11,6 +11,10 @@ export async function GET(request:NextRequest,{params}:{params:{slug:string}}) {
   try {target=new URL(data.gumroad_link)} catch {return new NextResponse('Invalid checkout link',{status:503})}
   const allowed=(target.hostname==='gumroad.com'||target.hostname.endsWith('.gumroad.com'))&&target.protocol==='https:'
   if(!allowed) return new NextResponse('Checkout unavailable',{status:503})
+  // Gumroad's documented `wanted=true` parameter opens the secure payment form
+  // immediately, skipping a second click on the Gumroad product page.
+  // Preserve any existing variant/coupon parameters on the verified product URL.
+  target.searchParams.set('wanted', 'true')
   try {const admin=createServiceClient();await admin.from('checkout_clicks').insert({product_id:data.id})} catch {}
   return NextResponse.redirect(target,302)
 }
