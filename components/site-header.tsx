@@ -13,7 +13,7 @@ const navigation=[
  {href:'/collections/baby-shoes',label:'Baby booties'},
  {href:'/collections/crochet-bags',label:'Bags & purses'},
  {href:'/collections/keychains',label:'Keychain patterns'},
- {href:'/guides',label:'Crochet guides'},
+ {href:'/guides',label:'Pattern guides'},
 ]
 type AccountState={authenticated:boolean;isAdmin:boolean;email:string|null}
 
