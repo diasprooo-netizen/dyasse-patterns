@@ -40,6 +40,44 @@ const coverAltBySlug: Record<string, string> = {
     'Watermelon themed crochet baby Mary Jane shoes with green soles and button straps',
   'yellow-kitty-keychain-crochet-pattern-pdf-big-eye-cat-amigurumi':
     'Yellow amigurumi cat crochet keychain with oversized eyes and curled tail',
+'purple-crochet-sun-visor-pattern-pdf-adjustable-double-brim-with-flower-us-terms':
+    'Deep plum crochet sun visor with structured brim and flower detail',
+  'amigurumi-mouse-keychain-crochet-pattern-pdf':
+    'Grey crocheted amigurumi mouse keychain with pink ears and metal keyring',
+  'avocado-crossbody-bag-crochet-pattern-pdf-fruit-purse-digital-download':
+    'Green avocado-shaped crochet crossbody purse with a round brown centre and strap',
+  'crochet-bucket-hat-pattern-pdf-burgundy-bow-sun-hat-with-mesh-brim-for-women':
+    'Burgundy crochet bucket hat with open mesh brim and a large matching bow',
+  'crochet-heart-keychain-pattern-pdf-coquette-lace-amigurumi-bag-charm':
+    'Blue crochet heart keychain with cream lace trim and ribbon bow',
+  'crochet-cow-baby-booties-pattern-pdf-newborn-farm-animal-shoes-0-3-month-tutorial':
+    'White crochet baby bootie decorated with pink cow ears and muzzle',
+  'crochet-glasses-case-pattern-pdf-cat-eyeglass-pouch-with-wrist-strap':
+    'Cat-shaped crochet glasses pouch with green eyes and beige pointed ears',
+  'crescent-moon-crochet-pattern-pdf-kawaii-moon-plush-amigurumi':
+    'Soft yellow crochet crescent moon plush with embroidered eyes and pink cheeks',
+  'crochet-lion-keychain-pattern-pdf-8-petal-flower-amigurumi-bag-charm':
+    'Amigurumi lion face keychain surrounded by blue crochet flower petals',
+  'mint-crochet-bucket-hat-pattern-pdf-lace-sun-hat-with-scalloped-brim-flower':
+    'Mint green crochet sun hat with scalloped brim and cream flower embellishment',
+  'penguin-coin-purse-crochet-pattern-pdf-navy-kiss-clasp-pouch':
+    'Navy crochet penguin coin purse with a white face and silver kiss clasp',
+  'crochet-dolphin-pattern-pdf-rainbow-amigurumi-sea-animal-ocean-nursery-crochet':
+    'Pastel rainbow crochet dolphin amigurumi plush with green fins',
+  'crochet-baby-sandals-pattern-pdf-red-gold-t-strap-shoes-double-sole-and-headband-set':
+    'Red crochet baby sandals with gold trim and flower embellishments beside matching headband',
+  'strawberry-airpods-pro-case-crochet-pattern-pdf-kawaii-earbud-keychain-cover':
+    'Red strawberry crochet AirPods case with green leaf top and white earbuds',
+  'bumblebee-keychain-crochet-pattern-pdf':
+    'Yellow and black striped amigurumi bumblebee crochet keychain with metal split ring',
+  'crochet-bunny-coaster-pattern-pdf-3d-sleeping-bunny-mug-rug-easter-decor':
+    'Cream crochet sleeping bunny on a yellow scalloped coaster',
+  'crochet-turtle-mug-rug-pattern-pdf-animal-coaster-with-3d-amigurumi-head':
+    'Turquoise turtle crochet mug rug with three-dimensional turtle head beside a cup',
+  'crochet-vintage-car-keychain-pattern-pdf-retro-amigurumi-auto-bag-charm':
+    'Blue miniature vintage car crochet keychain with silver front grille',
+  'crochet-owl-pattern-pdf-chubby-woodland-amigurumi-with-tapestry-crochet-belly':
+    'Blue and cream crochet woodland owl amigurumi with large round eyes'
 }
 
 export function productCoverAlt(product: Product): string {
@@ -47,6 +85,8 @@ export function productCoverAlt(product: Product): string {
 }
 
 export function productGalleryAlt(product: Product, galleryIndex: number): string {
-  const shortName = product.title.split(/\s*(?:Pattern|PDF|Tutorial|\|)/i)[0].trim()
-  return `${shortName} crochet pattern — additional design image ${galleryIndex} of ${product.gallery_images.length}`
+  const subject = productCoverAlt(product)
+  // Describe only the item pictured; alternate gallery views may be lifestyle,
+  // detail or assembly photos, so do not invent specific angles or attributes.
+  return `${subject} — additional product photo ${galleryIndex + 1}`
 }
