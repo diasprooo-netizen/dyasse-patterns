@@ -3,6 +3,7 @@ import { customerIdentity } from '@/lib/customer'
 import { ExternalLink } from 'lucide-react'
 import { LemonCheckoutLink } from '@/components/lemon-checkout-link'
 import { PaymentMethodChoice } from '@/components/payment-method-choice'
+import { PayPalCheckout } from '@/components/paypal-checkout'
 import { validLemonCheckoutUrl } from '@/lib/checkout'
 
 interface BuyButtonsProps {
@@ -49,7 +50,7 @@ export async function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, g
     return <div className="rounded-2xl border border-[#BCD7E8] bg-[#F0F8FD] p-5">
       {!me ? <Link href={'/account/login?next=' + encodeURIComponent(next)} className="font-semibold text-[#781D35] underline">Sign in to purchase with PayPal</Link>
        : !me.name ? <Link href={'/account/profile?next=' + encodeURIComponent(next)} className="font-semibold text-[#781D35] underline">Complete your account to buy with PayPal</Link>
-       : <PaymentMethodChoice slug={slug} clientId={clientId!} priceCents={paypalPriceUsdCents!} signInUrl={null} profileUrl={null} />}
+       : <PayPalCheckout slug={slug} clientId={clientId!} priceCents={paypalPriceUsdCents!} />}
     </div>
   }
   if (validLemonCheckoutUrl(lemonCheckoutUrl)) return <LemonCheckoutLink checkoutUrl={lemonCheckoutUrl!}/>
