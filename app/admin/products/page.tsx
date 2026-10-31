@@ -16,7 +16,7 @@ export default async function AdminProductsPage(){
     <div><h2 className="text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">{products.length} digital patterns</h2>
      <p className="mt-3 max-w-xl text-sm leading-7 text-[#496176]">Review, search, edit and prepare releases. Each imported product stays private until the exact PDF and Gumroad checkout are verified.</p>
     </div>
-    <Link href="/admin/gumroad" className="inline-flex items-center gap-2 rounded-full bg-[#781D35] px-5 py-3 text-xs font-bold text-white">Gumroad manager <ArrowUpRight size={17}/></Link>
+    <div className="flex flex-wrap gap-3"><Link href="/admin/pdf-bulk-upload" className="inline-flex items-center gap-2 rounded-full bg-[#781D35] px-5 py-3 text-xs font-bold text-white">Upload all private PDFs <ArrowUpRight size={17}/></Link><Link href="/admin/gumroad" className="inline-flex items-center gap-2 rounded-full bg-[#781D35] px-5 py-3 text-xs font-bold text-white">Gumroad manager <ArrowUpRight size={17}/></Link></div>
    </div>
    <div className="mt-7 flex flex-wrap gap-3 text-xs font-semibold">
     <span className="rounded-full border border-[#C6DEEC] bg-white/65 px-4 py-2">{draftCount} drafts</span>
