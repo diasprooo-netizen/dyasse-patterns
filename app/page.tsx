@@ -24,6 +24,7 @@ const collections=[
  {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
 ]
 const more=[
+ {href:'/guides/knitting-patterns-for-beginners',label:'How to read knitting PDFs'},
  {href:'/guides/crochet-keychain-patterns',label:'Crochet keychain ideas'},
  {href:'/guides/choosing-yarn-for-crochet-bags',label:'Yarn for crochet bags'},
  {href:'/guides/crochet-baby-shoes-sizing',label:'Crochet baby shoe sizing'},
@@ -130,7 +131,7 @@ export default async function Home(){
    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
      <div className="grid items-center gap-9 rounded-[24px] border border-[#DDECF4] bg-[#EAF6FC] p-8 sm:p-11 lg:grid-cols-[.9fr_1.1fr]">
        <div><p className="dyasse-eyebrow">LEARN THE LITTLE DETAILS</p><h2 className="mt-4 font-serif text-[clamp(2.3rem,4vw,3.3rem)] leading-[1.12]">Create with confidence.</h2>
-         <p className="mt-4 text-[15px] leading-8 text-[#435468]">Learn crochet abbreviations, read stitch counts and check gauge before you choose your next PDF pattern.</p>
+         <p className="mt-4 text-[15px] leading-8 text-[#435468]">Learn crochet abbreviations, read stitch counts and check gauge. Knitting too? Explore our free row-by-row knitting PDF guide.</p>
        </div>
        <div className="grid gap-3">
          <Link href="/guides/crochet-patterns-for-beginners" className="flex items-center justify-between gap-5 rounded-xl bg-white px-6 py-5 font-semibold text-[#172231] shadow-sm">How to read crochet patterns <ArrowUpRight size={18} className="text-[#781D35]"/></Link>
