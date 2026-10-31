@@ -32,7 +32,8 @@ export async function getStudioPreviewProducts(limit = 36): Promise<StudioPrevie
     // unverified ZIP attachments or private digital-download URLs.
     return data
       .filter(item => typeof item.image_url === 'string' &&
-        /^https:\/\/(i\.etsystatic\.com|[^/]+\.supabase\.co)\//.test(item.image_url))
+        (/^https:\/\/(i\.etsystatic\.com|[^/]+\.supabase\.co)\//.test(item.image_url) ||
+          /^https:\/\/dyasse\.com\/images\/catalog\/[A-Za-z0-9_]+__\d{2}\.webp$/.test(item.image_url)))
       .map(item => ({
         id: item.id as string,
         title: item.title as string,
