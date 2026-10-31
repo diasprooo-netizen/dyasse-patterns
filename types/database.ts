@@ -10,6 +10,7 @@ export type Database = {
   public: {
     Tables: {
       products: Table
+      product_asset_intake: Table
       admin_users: Table
       qa_audits: Table
       newsletter_subscribers: Table
