@@ -12,6 +12,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'i.etsystatic.com' },
       { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'dyasse.com', pathname: '/images/catalog/**' },
       { protocol: 'https', hostname: '**.supabase.co' },
     ],
   },
