@@ -39,7 +39,7 @@ const coverAltBySlug: Record<string, string> = {
   'watermelon-baby-mary-jane-crochet-pattern-03-month-prewalker-shoes-pdf':
     'Watermelon themed crochet baby Mary Jane shoes with green soles and button straps',
   'yellow-kitty-keychain-crochet-pattern-pdf-big-eye-cat-amigurumi':
-    'Yellow amigurumi cat crochet keychain with oversized eyes and curled tail',,
+    'Yellow amigurumi cat crochet keychain with oversized eyes and curled tail',
 'purple-crochet-sun-visor-pattern-pdf-adjustable-double-brim-with-flower-us-terms':
     'Deep plum crochet sun visor with structured brim and flower detail',
   'amigurumi-mouse-keychain-crochet-pattern-pdf':
