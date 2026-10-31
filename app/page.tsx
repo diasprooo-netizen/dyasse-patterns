@@ -3,6 +3,7 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, Footprints, Gift, Heart, Layers3, Scissors, ShieldCheck, Sparkles } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
+import { getStudioPreviewProducts } from '@/lib/studio-preview'
 import { ProductCard } from '@/components/product-card'
 import { EtsyTestimonials } from '@/components/etsy-testimonials'
 import { CategoryCarousel } from '@/components/category-carousel'
@@ -31,6 +32,7 @@ const more=[
 export default async function Home(){
  const allProducts=await getPublishedProducts()
  const products=allProducts.slice(0,8)
+ const studioPreview=await getStudioPreviewProducts(4)
  const categoryItems=collections.map(({href,title,sub,image})=>{
    const slug=href.split('/').pop()
    const representative=slug==='crochet-patterns' ? allProducts[0] : allProducts.find(product=>primaryCollection(product)===slug)
@@ -109,6 +111,19 @@ export default async function Home(){
        <p className="mt-4 text-[15px] leading-8 text-[#4A5F70]">Browse downloadable crochet instructions by the project you want to make. Discover <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/keychains">crochet keychain patterns</Link> for miniature bag charms, <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/crochet-bags">crochet bag patterns</Link> for handbags and pouches, and <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/baby-shoes">crochet baby booties patterns</Link>. Each product page shows its actual design, digital format and project information so you can select the PDF that suits you.</p>
      </div>
    </section>
+
+  {studioPreview.length > 0 ? <section aria-labelledby="studio-preview-heading" className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+      <div><p className="dyasse-eyebrow">FROM THE STUDIO</p><h2 id="studio-preview-heading" className="mt-2 font-serif text-[clamp(2rem,3vw,3rem)] tracking-[-.045em]">New designs on the way</h2><p className="mt-2 max-w-xl text-sm text-[#5D6F80]">A first look at patterns undergoing final review. Not yet available for purchase.</p></div>
+      <Link href="/studio-preview" className="inline-flex items-center gap-2 text-sm font-bold text-[#781D35]">Explore upcoming patterns <ArrowUpRight size={16}/></Link>
+    </div>
+    <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+      {studioPreview.map(item=><Link key={item.id} href="/studio-preview" className="group overflow-hidden rounded-lg border border-[#DDEAF2] bg-white">
+        <div className="relative aspect-[4/4.2] overflow-hidden bg-[#EDF6FB]"><Image src={item.image_url} alt={item.title+' design preview'} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover transition-transform group-hover:scale-[1.025]"/></div>
+        <div className="p-3 sm:p-4"><p className="text-[10px] font-bold uppercase tracking-widest text-[#781D35]">Coming soon</p><h3 className="mt-2 text-sm font-semibold leading-6 text-[#26394B]">{item.title}</h3></div>
+      </Link>)}
+    </div>
+  </section> : null}
 
    <EtsyTestimonials/>
 
