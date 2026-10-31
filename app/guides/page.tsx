@@ -4,12 +4,12 @@ import { ArrowUpRight, BookOpen, BriefcaseBusiness, Gift, Footprints, Scissors }
 import { SITE_URL, safeJsonLd } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Crochet Guides: Keychains, Bags, Baby Shoes & PDF Patterns',
-  description: 'Free crochet project guides from Dyasse Shop. Learn how to read PDF patterns, choose yarn for crochet bags and plan keychains or baby shoes before you make.',
+  title: 'Crochet & Knitting PDF Pattern Guides for Beginners',
+  description: 'Free crochet and knitting PDF pattern guides. Learn to read knitting rows and crochet abbreviations, choose yarn and understand sizing.',
   alternates: { canonical: '/guides' },
   openGraph: {
-    title: 'Crochet Project Guides | Dyasse Shop',
-    description: 'Practical crochet learning guides for PDF patterns, tiny keychains, bags and baby shoes.',
+    title: 'Crochet & Knitting PDF Guides | Dyasse Shop',
+    description: 'Practical guides to reading crochet and knitting PDF patterns, yarn, keychains, bags and baby shoe sizing.',
     type: 'website',
     url: '/guides',
   },
@@ -21,6 +21,13 @@ const guides = [
     title: 'How to read a crochet PDF pattern',
     label: 'Read the instructions',
     description: 'Learn US crochet abbreviations, increases, decreases, stitch counts and what to check before buying a digital pattern.',
+    Icon: BookOpen,
+  },
+  {
+    href: '/guides/knitting-patterns-for-beginners',
+    title: 'How to read a knitting pattern PDF',
+    label: 'Knitting instructions',
+    description: 'Follow a counted row-by-row example, learn knit and purl abbreviations, cable terms and how to check the numbers in a PDF pattern.',
     Icon: BookOpen,
   },
   {
@@ -51,7 +58,7 @@ export default function CrochetGuidesIndex() {
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
-      { '@type': 'CollectionPage', '@id': url + '#page', url, name: 'Crochet Project Guides', description: metadata.description, inLanguage: 'en' },
+      { '@type': 'CollectionPage', '@id': url + '#page', url, name: 'Crochet and Knitting PDF Pattern Guides', description: metadata.description, inLanguage: 'en' },
       {
         '@type': 'ItemList',
         itemListElement: guides.map((guide, i) => ({
@@ -65,7 +72,7 @@ export default function CrochetGuidesIndex() {
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
-          { '@type': 'ListItem', position: 2, name: 'Crochet guides', item: url },
+          { '@type': 'ListItem', position: 2, name: 'Pattern guides', item: url },
         ],
       },
     ],
@@ -75,14 +82,14 @@ export default function CrochetGuidesIndex() {
     <header className="border-b border-[#DCEAF2] bg-[#EAF6FC] px-5 py-16 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
         <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-[#657988]">
-          <Link href="/" className="hover:text-[#781D35]">Home</Link><span>/</span><span>Crochet guides</span>
+          <Link href="/" className="hover:text-[#781D35]">Home</Link><span>/</span><span>Pattern guides</span>
         </nav>
         <p className="mt-10 text-xs font-bold uppercase tracking-[.19em] text-[#781D35]">THE DYASSE LEARNING LIBRARY</p>
-        <h1 className="mt-4 max-w-4xl font-serif text-[clamp(2.8rem,5vw,4.7rem)] leading-tight tracking-[-.05em]">Crochet guides for your next project</h1>
-        <p className="mt-6 max-w-3xl text-[16px] leading-8 text-[#4F6475]">Find clear guidance on reading crochet PDF instructions, choosing yarn and finishing miniature accessories. These resources are free to read, and each guide links to relevant digital patterns when available.</p>
+        <h1 className="mt-4 max-w-4xl font-serif text-[clamp(2.8rem,5vw,4.7rem)] leading-tight tracking-[-.05em]">Crochet &amp; knitting PDF guides</h1>
+        <p className="mt-6 max-w-3xl text-[16px] leading-8 text-[#4F6475]">Learn to read knitting and crochet PDF instructions, understand stitch counts, choose yarn and plan projects. These free guides link to published patterns when they are available.</p>
       </div>
     </header>
-    <section aria-label="Free crochet project guides" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
+    <section aria-label="Free crochet and knitting project guides" className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
       <div className="grid gap-5 md:grid-cols-2">
         {guides.map(({href,title,label,description,Icon}) => <article key={href} className="flex flex-col border border-[#DCEAF2] bg-[#FAFDFF] p-7 transition hover:border-[#B7CFDF] sm:p-9">
           <div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[.14em] text-[#781D35]">{label}</span><Icon size={26} className="text-[#8E7481]" strokeWidth={1.3}/></div>
