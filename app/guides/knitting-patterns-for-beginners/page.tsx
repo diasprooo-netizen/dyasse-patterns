@@ -6,7 +6,7 @@ export const metadata: Metadata = {
  title:'How to Read a Knitting Pattern PDF: Rows & Abbreviations',
  description:'Learn how to read a knitting pattern PDF, decode K/P and cable abbreviations, follow a worked row-by-row example, and check stitch counts and gauge.',
  alternates:{canonical:'/guides/knitting-patterns-for-beginners'},
- openGraph:{type:'article',title:'How to Read Knitting Patterns: Beginner PDF Guide',description:'Understand a knitting PDF with clear abbreviations, a counted row-by-row example, cable guidance and gauge checks.',url:'/guides/knitting-patterns-for-beginners'},
+ openGraph:{type:'article',title:'How to Read a Knitting Pattern PDF: Rows & Abbreviations',description:'Understand a knitting PDF with clear abbreviations, a counted row-by-row example, cable guidance and gauge checks.',url:'/guides/knitting-patterns-for-beginners'},
 }
 const terms=[
  ['CO','Cast on: make the initial stitches on your needles.'],
