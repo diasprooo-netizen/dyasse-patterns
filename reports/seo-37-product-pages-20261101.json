@@ -1,0 +1,192 @@
+{
+  "date": "2026-11-01",
+  "purpose": "Seller-approved 37 product pages: distinct, grounded SEO title and meta description; preserve price, PDF, slug and Gumroad fields.",
+  "google_guidance": "Titles should be distinct, descriptive and concise; descriptions should accurately summarize specific page content, not keyword-stuffed.",
+  "products": [
+    {
+      "sku": "DYS-0002",
+      "seo_title": "Raffia Crochet Clutch Bag Pattern PDF | Dumpling Purse",
+      "seo_description": "Crochet a structured raffia dumpling clutch with an oval base, 26 cm flex frame and lining. The PDF covers shaping, frame fitting and finishing."
+    },
+    {
+      "sku": "DYS-0004",
+      "seo_title": "Criss Cross Crochet Baby Sandals Pattern PDF",
+      "seo_description": "Make criss-cross crochet baby sandals with double soles and adjustable ankle straps. The PDF includes stitch counts, sole assembly and finishing."
+    },
+    {
+      "sku": "DYS-0006",
+      "seo_title": "Sage Green Crochet Baby Clogs Pattern PDF | 0–9 Months",
+      "seo_description": "Crochet sage green baby clogs with rounded toes, eyelet details and double soles. Downloadable US-terms pattern covers baby sizes from 0 to 9 months."
+    },
+    {
+      "sku": "DYS-0010",
+      "seo_title": "No-Curl Garter Knit Headband Pattern PDF",
+      "seo_description": "Knit a comfortable garter-stitch headband with a twisted front and edges that lie flat. PDF instructions cover sizing, construction and finishing."
+    },
+    {
+      "sku": "DYS-0012",
+      "seo_title": "Scalloped Crochet Baby Booties Pattern PDF | Ribbon",
+      "seo_description": "Create newborn crochet booties with scalloped edging and a ribbon accent. Follow this PDF for shaping, sole measurements and finishing steps."
+    },
+    {
+      "sku": "DYS-0026",
+      "seo_title": "Alpine Stitch Crochet Blanket Pattern PDF | 8 Sizes",
+      "seo_description": "Make a textured Alpine stitch crochet blanket with a ribbed border. This PDF includes eight blanket sizes, from baby to king, and US crochet terms."
+    },
+    {
+      "sku": "DYS-0027",
+      "seo_title": "Vintage Scooter Crochet Keychain Pattern PDF",
+      "seo_description": "Crochet a miniature retro scooter keychain with wheels, seat and headlight details. PDF instructions explain the flat-stuffed body and assembly."
+    },
+    {
+      "sku": "DYS-0030",
+      "seo_title": "Vintage Car Crochet Keychain Pattern PDF | Retro Charm",
+      "seo_description": "Make a retro miniature crochet car keychain with shaped panels and grille details. The PDF includes stitch guidance, assembly and finishing."
+    },
+    {
+      "sku": "DYS-0032",
+      "seo_title": "Chevron Bobble Crochet Tote Bag Pattern PDF",
+      "seo_description": "Crochet a structured tote bag with raised chevron bobble texture and wooden ring handles. PDF pattern explains the base, stitchwork and assembly."
+    },
+    {
+      "sku": "DYS-0040",
+      "seo_title": "Cable & Lace Knit Hat Pattern PDF | Charts & Braids",
+      "seo_description": "Knit a cable-and-lace beanie with a folded ribbed brim, central braid and optional pom-pom. Pattern PDF includes written directions and charts."
+    },
+    {
+      "sku": "DYS-0041",
+      "seo_title": "Safari Lion Crochet Keychain Pattern PDF | Amigurumi",
+      "seo_description": "Crochet a small safari lion amigurumi keychain with mane and facial details. Downloadable PDF includes shaping, assembly and finishing guidance."
+    },
+    {
+      "sku": "DYS-0047",
+      "seo_title": "God Letter Crochet Keychain Pattern PDF | Tassel",
+      "seo_description": "Crochet the word God into a small keychain with a tassel and reinforced ring attachment. PDF instructions cover lettering, assembly and finishing."
+    },
+    {
+      "sku": "DYS-0056",
+      "seo_title": "Twisted Knit Headband Pattern PDF | No-Curl Ear Warmer",
+      "seo_description": "Make a flat-knit twisted headband with tidy edges and a comfortable ear-warmer fit. PDF pattern covers knit construction and the twist seam."
+    },
+    {
+      "sku": "DYS-0065",
+      "seo_title": "Crescent Moon Plush Crochet Pattern PDF | Amigurumi",
+      "seo_description": "Crochet a soft crescent moon plush with embroidered face details and pink cheeks. Amigurumi PDF includes shaping, stuffing and assembly guidance."
+    },
+    {
+      "sku": "DYS-0067",
+      "seo_title": "Mouse Crochet Keychain Pattern PDF | Amigurumi",
+      "seo_description": "Make a small mouse amigurumi keychain with pink ears, an embroidered nose and a metal ring. PDF pattern explains continuous rounds and finishing."
+    },
+    {
+      "sku": "DYS-0070",
+      "seo_title": "Backpacker Bee Crochet Keychain Pattern PDF",
+      "seo_description": "Crochet a charming bee keychain wearing a tiny bucket hat and backpack. US-terms amigurumi PDF guides the body, accessories and final assembly."
+    },
+    {
+      "sku": "DYS-0072",
+      "seo_title": "Mary Jane Crochet Baby Shoes Pattern PDF | Flowers",
+      "seo_description": "Make blush pink crochet Mary Jane baby shoes with flower appliqués and button straps. PDF includes sole shaping, sizing and finishing details."
+    },
+    {
+      "sku": "DYS-0088",
+      "seo_title": "Chunky Crochet Bow Bag Pattern PDF | Shoulder Purse",
+      "seo_description": "Crochet a sculptural bow-shaped shoulder bag in chunky tube yarn. The PDF explains the functional pouch, bow tails, strap and ring attachment."
+    },
+    {
+      "sku": "DYS-0106",
+      "seo_title": "Ribbed Knit Beanie Pattern PDF | Folded Brim",
+      "seo_description": "Knit a classic adult ribbed beanie with a folded brim using worsted-weight yarn. Beginner-friendly PDF covers knitting in the round and finishing."
+    },
+    {
+      "sku": "DYS-0110",
+      "seo_title": "Avocado Crochet Crossbody Bag Pattern PDF",
+      "seo_description": "Crochet an avocado-shaped crossbody purse with layered leaves, a raised pit and cord strap. PDF covers stitch counts, panels and assembly."
+    },
+    {
+      "sku": "DYS-0114",
+      "seo_title": "Penguin Crochet Coin Purse Pattern PDF | Kiss Clasp",
+      "seo_description": "Make a navy penguin crochet coin purse with mirrored wings and a metal kiss-clasp. PDF includes colorwork, frame hole mapping and assembly."
+    },
+    {
+      "sku": "DYS-0116",
+      "seo_title": "Woodland Owl Crochet Amigurumi Pattern PDF",
+      "seo_description": "Crochet a chubby woodland owl amigurumi with a contrasting tapestry-style belly. PDF covers the rounded body, face details and assembly."
+    },
+    {
+      "sku": "DYS-0117",
+      "seo_title": "Crochet Puppy Wall Organizer Pattern PDF | 3 Pockets",
+      "seo_description": "Crochet a puppy-themed hanging wall organizer with three storage pockets. PDF pattern covers the shaped panels, construction and secure assembly."
+    },
+    {
+      "sku": "DYS-0125",
+      "seo_title": "Cat Crochet Glasses Case Pattern PDF | Wrist Strap",
+      "seo_description": "Crochet a cat-themed eyeglasses pouch with pointed ears and a practical wrist strap. PDF instructions cover the case shape, assembly and finish."
+    },
+    {
+      "sku": "DYS-0129",
+      "seo_title": "Burgundy Crochet Bucket Hat Pattern PDF | Bow",
+      "seo_description": "Make an adult burgundy crochet bucket hat with an open mesh brim and oversized bow. PDF includes shaping and fit guidance for a 55–57 cm head."
+    },
+    {
+      "sku": "DYS-0137",
+      "seo_title": "Coquette Lace Heart Crochet Keychain Pattern PDF",
+      "seo_description": "Crochet a three-dimensional heart bag charm with delicate lace trim and a ribbon bow. PDF pattern includes heart shaping and keyring assembly."
+    },
+    {
+      "sku": "DYS-0139",
+      "seo_title": "Strawberry Crochet AirPods Pro Case Pattern PDF",
+      "seo_description": "Crochet a strawberry-inspired cover for an AirPods Pro case with green leaf detailing and a keychain attachment. PDF includes shaping and assembly."
+    },
+    {
+      "sku": "DYS-0141",
+      "seo_title": "Mint Crochet Bucket Hat Pattern PDF | Scalloped Brim",
+      "seo_description": "Crochet an airy mint bucket hat with a scalloped lace brim and layered flower. US-terms PDF includes adult sizes S, M and L plus finishing."
+    },
+    {
+      "sku": "DYS-0143",
+      "seo_title": "Purple Crochet Sun Visor Pattern PDF | Double Brim",
+      "seo_description": "Make a purple crochet sun visor with a structured double brim, adjustable closure and layered flower. PDF covers shaping and finishing."
+    },
+    {
+      "sku": "DYS-0146",
+      "seo_title": "Bumblebee Crochet Keychain Pattern PDF | Amigurumi",
+      "seo_description": "Crochet a striped amigurumi bumblebee keychain with a metal split ring. PDF pattern covers the body, facial details and final assembly."
+    },
+    {
+      "sku": "DYS-0148",
+      "seo_title": "Rainbow Dolphin Crochet Amigurumi Pattern PDF",
+      "seo_description": "Crochet a pastel rainbow dolphin amigurumi with a curved body, fins and white underbelly. Intermediate PDF covers shaping and assembly."
+    },
+    {
+      "sku": "DYS-0149",
+      "seo_title": "Cow Crochet Baby Booties Pattern PDF | Newborn",
+      "seo_description": "Make cow-themed crochet newborn booties with animal ear and muzzle accents. Digital pattern covers the shoe construction and finishing."
+    },
+    {
+      "sku": "DYS-0151",
+      "seo_title": "Crochet Turtle Mug Rug Pattern PDF | 3D Head",
+      "seo_description": "Crochet a turtle-shaped mug rug with a flat cotton coaster and three-dimensional amigurumi head. PDF includes stitchwork and assembly."
+    },
+    {
+      "sku": "DYS-0152",
+      "seo_title": "Lion Flower Crochet Keychain Pattern PDF | 8 Petals",
+      "seo_description": "Crochet a lion-face keychain framed by an eight-petal flower in blue yarn. PDF includes the face, flower construction and ring attachment."
+    },
+    {
+      "sku": "DYS-0156",
+      "seo_title": "Blue Whale Crochet Keychain Pattern PDF",
+      "seo_description": "Crochet a little blue whale amigurumi keychain with a contrasting white belly. PDF includes continuous-round construction and finishing."
+    },
+    {
+      "sku": "DYS-0157",
+      "seo_title": "Red & Gold Crochet Baby Sandals PDF | Headband Set",
+      "seo_description": "Crochet red-and-gold baby T-strap sandals with a matching floral headband. US-terms PDF includes double soles and 3–6 month sizing."
+    },
+    {
+      "sku": "DYS-0158",
+      "seo_title": "Sleeping Bunny Crochet Coaster Pattern PDF | 3D",
+      "seo_description": "Crochet a sleeping bunny mug rug with a raised amigurumi bunny and scalloped coaster. PDF covers the shaped pieces and secure assembly."
+    }
+  ]
+}
