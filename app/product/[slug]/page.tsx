@@ -43,13 +43,23 @@ export default async function ProductPage({ params }: PageProps) {
   const col = primaryCollection(product)
   const url = `${SITE_URL}/product/${encodeURIComponent(product.slug)}`
 
-  // Product snippets show an Offer only when Gumroad checkout is live, the
-  // seller has approved QA, and the catalog is priced in USD. Never invent
-  // buyer ratings, stock claims for unfinished drafts, or reviews.
+  // An Offer is eligible when the live site offers direct PayPal checkout
+  // with a private PDF path OR a verified published Gumroad checkout.
+  // Gumroad drafts alone must never create search-facing purchase offers.
+  const paypalReady = product.paypal_checkout_enabled &&
+    !!process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID && !!process.env.PAYPAL_CLIENT_SECRET &&
+    Number.isSafeInteger(product.paypal_price_usd_cents) &&
+    Number(product.paypal_price_usd_cents) > 0 &&
+    typeof product.digital_file_path === 'string' &&
+    /^DYS-\\d{4}\\/Pattern\\.pdf$/.test(product.digital_file_path)
+  const gumroadReady = !!product.gumroad_link &&
+    product.gumroad_is_published && product.gumroad_checkout_verified
   const hasVerifiedOffer = product.is_published && product.qa_verified &&
-    product.gumroad_is_published && product.gumroad_checkout_verified &&
-    product.currency === 'USD' && product.price > 0
-  const currentPrice = product.is_on_sale && product.sale_price != null && product.sale_price < product.price
+    product.currency === 'USD' && product.price > 0 &&
+    (paypalReady || gumroadReady)
+  // The structured offer must reflect the real server-validated PayPal amount.
+  const currentPrice = paypalReady ? Number(product.paypal_price_usd_cents) / 100
+    : product.is_on_sale && product.sale_price != null && product.sale_price < product.price
     ? product.sale_price : product.price
   const graph = {
     '@context': 'https://schema.org',
@@ -68,7 +78,7 @@ export default async function ProductPage({ params }: PageProps) {
           url,
           price: Number(currentPrice.toFixed(2)),
           priceCurrency: 'USD',
-          availability: 'https://schema.org/InStock',
+          availability: 'https://schema.org/OnlineOnly',
           seller: { '@type': 'Organization', name: SITE_NAME },
         } } : {}),
         category: collectionSeo[col].label,
