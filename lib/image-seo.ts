@@ -77,7 +77,43 @@ const coverAltBySlug: Record<string, string> = {
   'crochet-vintage-car-keychain-pattern-pdf-retro-amigurumi-auto-bag-charm':
     'Blue miniature vintage car crochet keychain with silver front grille',
   'crochet-owl-pattern-pdf-chubby-woodland-amigurumi-with-tapestry-crochet-belly':
-    'Blue and cream crochet woodland owl amigurumi with large round eyes'
+    'Blue and cream crochet woodland owl amigurumi with large round eyes',
+  'crochet-raffia-clutch-pattern-pdf-dumpling-flex-frame-purse-tutorial-summer-bag':
+    'Natural raffia crochet dumpling clutch purse with a rounded body and flex frame closure',
+  'crochet-baby-sandals-pattern-pdf-criss-cross-double-sole-tutorial':
+    'Crochet baby sandals with criss-cross front straps and double-layer soles',
+  'crochet-baby-clog-pattern-structured-sage-green-shoes-tutorial-pdf-download':
+    'Sage green crochet baby clogs with rounded toes and structured soles',
+  'no-curl-knit-headband-pattern-flat-ear-warmer-pdf-for-beginners':
+    'Textured garter stitch knit headband with a twisted front and flat edges',
+  'crochet-baby-booties-pattern-pdf-scalloped-newborn-shoes-with-ribbon':
+    'Crochet newborn baby booties with scalloped edging and ribbon detail',
+  'alpine-blanket-crochet-pattern-pdf-seamless-luxury-throw-8-sizes-baby-to-king-ribbed-border':
+    'Alpine stitch crochet blanket with textured rows and a ribbed border',
+  'crochet-scooter-keychain-pattern-pdf-retro-moped-bag-charm-2d-amigurumi-gift':
+    'Miniature blue crochet retro scooter keychain with black wheels and a yellow headlight',
+  'structured-crochet-tote-bag-pattern-pdf-chevron-bobble-bag-with-wooden-ring-handles':
+    'Structured crochet tote bag with raised chevron bobble texture and wooden ring handles',
+  'advanced-cable-knit-hat-pattern-lace-charts-folded-brim-beanie-pdf-download':
+    'Cable and lace knit beanie with a folded ribbed brim and a central braid motif',
+  'crochet-lion-keychain-pattern-pdf-safari-amigurumi-bag-charm-jungle-baby-shower-gift':
+    'Little safari lion amigurumi crochet keychain with mane and keyring',
+  'god-crochet-keychain-pattern-pdf-christian-faith-gift-digital-download':
+    'Crocheted God word keychain with blue tassel and metal keyring',
+  'twisted-knit-headband-pattern-pdf-easy-no-curl-ear-warmer-beginner-flat-edge-tutorial':
+    'Twisted flat-knit headband with soft textured stitches and no-curl edges',
+  'crochet-bee-keychain-pattern-pdf-backpacker-amigurumi-with-bucket-hat-and-backpack':
+    'Amigurumi crochet bee keychain wearing a tiny bucket hat and backpack',
+  'crochet-baby-mary-jane-shoes-pattern-pdf-flower-baby-booties-tutorial':
+    'Blush pink crochet baby Mary Jane shoes with flower appliques and button straps',
+  'crochet-bow-bag-pattern-pdf-chunky-yarn-shoulder-purse-coquette-ribbon-bag-diy':
+    'Chunky crochet shoulder purse shaped like a large bow with tails and a strap',
+  'ribbed-knit-hat-pattern-pdf-beginner-adult-folded-brim-beanie':
+    'Ribbed knitted adult beanie hat with a wide folded brim',
+  'crochet-puppy-wall-organizer-pattern-pdf-dog-nursery-storage-hanging-pocket-decor':
+    'Puppy-themed crochet hanging wall organizer with three storage pockets',
+  'blue-whale-crochet-keychain-pattern-pdf-amigurumi-bag-charm':
+    'Blue amigurumi whale crochet keychain with a contrasting white belly'
 }
 
 export function productCoverAlt(product: Product): string {
