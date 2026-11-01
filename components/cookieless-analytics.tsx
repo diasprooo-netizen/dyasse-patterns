@@ -7,9 +7,22 @@ type GtagWindow = Window & { gtag?: (...args: unknown[]) => void }
 
 const CONSENT_KEY = 'dyasse-analytics-consent-v2'
 const LEGACY_CONSENT_KEY = 'dyasse-analytics-consent-v1'
+const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
 function onOfficialSite() {
   return /^(www\.)?dyasse\.com$/i.test(window.location.hostname)
+}
+
+function sendConsentedLandingPage() {
+  if (!measurementId || !/^G-[A-Z0-9]+$/i.test(measurementId)) return
+  const analyticsWindow = window as GtagWindow
+  analyticsWindow.gtag?.('event', 'page_view', {
+    send_to: measurementId,
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: window.location.pathname + window.location.search,
+    ...(new URLSearchParams(window.location.search).get('ga_debug') === '1' ? { debug_mode: true } : {}),
+  })
 }
 
 function updateGoogleConsent(allowAnalytics: boolean) {
@@ -27,8 +40,9 @@ function updateGoogleConsent(allowAnalytics: boolean) {
  * defaulting to denied. Visitors can opt in to first-party analytics cookies.
  * Advertising storage/usage stays denied in either case.
  *
- * GA4 Enhanced Measurement already tracks browser history changes, so do NOT
- * send additional page_view events here (that would duplicate SPA navigation).
+ * The initial page_view is sent only after analytics consent is granted.
+ * GA4 Enhanced Measurement tracks subsequent Next.js history navigation;
+ * do not manually send those route events or they would be duplicated.
  * Vercel Web Analytics separately provides cookieless traffic measurement.
  */
 export function CookielessAnalytics() {
@@ -47,6 +61,7 @@ export function CookielessAnalytics() {
 
     if (stored === 'allowed') {
       updateGoogleConsent(true)
+      sendConsentedLandingPage()
       setChoice('allowed')
     } else if (stored === 'denied') {
       setChoice('denied')
@@ -62,6 +77,7 @@ export function CookielessAnalytics() {
   function choose(allow: boolean) {
     if (!onOfficialSite()) return
     updateGoogleConsent(allow)
+    if (allow && choice !== 'allowed') sendConsentedLandingPage()
     try { window.localStorage.setItem(CONSENT_KEY, allow ? 'allowed' : 'denied') } catch {}
     setChoice(allow ? 'allowed' : 'denied')
     setEditing(false)
