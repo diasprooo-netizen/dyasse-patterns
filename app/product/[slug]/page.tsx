@@ -51,7 +51,7 @@ export default async function ProductPage({ params }: PageProps) {
     Number.isSafeInteger(product.paypal_price_usd_cents) &&
     Number(product.paypal_price_usd_cents) > 0 &&
     typeof product.digital_file_path === 'string' &&
-    /^DYS-\\d{4}\\/Pattern\\.pdf$/.test(product.digital_file_path)
+    /^DYS-\d{4}\/Pattern\.pdf$/.test(product.digital_file_path)
   const gumroadReady = !!product.gumroad_link &&
     product.gumroad_is_published && product.gumroad_checkout_verified
   const hasVerifiedOffer = product.is_published && product.qa_verified &&
