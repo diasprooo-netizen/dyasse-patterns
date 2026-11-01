@@ -28,7 +28,7 @@ const gaBootstrap = gaConfigured ? `
     window.gtag('set', 'allow_ad_personalization_signals', false);
     window.gtag('js', new Date());
     window.gtag('config', '${gaMeasurementId}', {
-      send_page_view: true,
+      send_page_view: false,
       ...(new URLSearchParams(window.location.search).get('ga_debug') === '1' ? { debug_mode: true } : {})
     });
   }
