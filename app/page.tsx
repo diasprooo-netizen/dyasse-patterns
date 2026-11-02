@@ -32,7 +32,20 @@ const more=[
 
 export default async function Home(){
  const allProducts=await getPublishedProducts()
- const products=allProducts.slice(0,8)
+ // Merchandising for the direct-shop launch: show verified, seasonal and visually
+ // distinctive digital patterns first, rather than the latest imported eight.
+ const launchSlugs=[
+   'christmas-tree-keychain-crochet-pattern-pdf-mini-holiday-tree-ornament-festive-crochet-pattern',
+   'crochet-bow-bag-pattern-pdf-chunky-yarn-shoulder-purse-coquette-ribbon-bag-diy',
+   'crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf',
+   'baby-giraffe-amigurumi-pattern-pdf-overalls-plush-toy-crochet-tutorial-english-nursery-gift',
+   'crochet-baby-sandals-pattern-pdf-criss-cross-double-sole-tutorial',
+   'strawberry-airpods-pro-case-crochet-pattern-pdf-kawaii-earbud-keychain-cover',
+   'crescent-moon-crochet-pattern-pdf-kawaii-moon-plush-amigurumi',
+   'ribbed-knit-hat-pattern-pdf-beginner-adult-folded-brim-beanie',
+ ]
+ const priority=launchSlugs.flatMap(slug=>{const p=allProducts.find(x=>x.slug===slug);return p?[p]:[]})
+ const products=[...priority,...allProducts.filter(p=>!launchSlugs.includes(p.slug))].slice(0,8)
  const studioPreview=await getStudioPreviewProducts(4)
  const categoryItems=collections.map(({href,title,sub,image})=>{
    const slug=href.split('/').pop()
