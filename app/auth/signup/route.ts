@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 export const runtime = 'nodejs'
-function back(request: NextRequest, key:string, message:string) {
+function safeNext(value:unknown){
+ return typeof value==='string'&&value.startsWith('/')&&!value.startsWith('//')&&!value.includes('\\')&&!value.includes('\r')&&!value.includes('\n')?value:'/account/orders'
+}
+function back(request: NextRequest, key:string, message:string, next='/account/orders') {
  const url=new URL('/account/signup',request.url)
  url.searchParams.set(key,message)
+ url.searchParams.set('next',safeNext(next))
  return NextResponse.redirect(url,{status:303})
 }
 export async function POST(request:NextRequest){
@@ -16,11 +20,12 @@ export async function POST(request:NextRequest){
  const fullName=String(form.get('full_name')||'').trim()
  const password=String(form.get('password')||'')
  const confirm=String(form.get('confirm')||'')
+ const next=safeNext(form.get('next'))
  if(fullName.length<2||fullName.length>100||email.length>254||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||password.length<8||password.length>128||password!==confirm)
-  return back(request,'error','Check email, password and confirmation. Minimum password length is 8.')
+  return back(request,'error','Check email, password and confirmation. Minimum password length is 8.',next)
  const db=await createClient()
- const {error}=await db.auth.signUp({email,password,options:{emailRedirectTo:new URL('/account/login',request.url).toString(),data:{full_name:fullName}}})
- if(error)return back(request,'error','Unable to sign up. Please verify your information or try again.')
- return back(request,'message','Check your inbox for a confirmation email if email verification is enabled. Then sign in.')
+ const {error}=await db.auth.signUp({email,password,options:{emailRedirectTo:new URL('/account/login?next='+encodeURIComponent(next),request.url).toString(),data:{full_name:fullName}}})
+ if(error)return back(request,'error','Unable to sign up. Please verify your information or try again.',next)
+ return back(request,'message','Check your inbox for a confirmation email if email verification is enabled. Then sign in.',next)
  }catch{return back(request,'error','Sign up is temporarily unavailable.')}
 }
