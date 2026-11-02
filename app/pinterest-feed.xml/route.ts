@@ -56,7 +56,6 @@ export async function GET() {
           '<description>' + escapeXml(description) + '</description>',
           '<pubDate>' + published + '</pubDate>',
           '<media:content url="' + escapeXml(image) + '" medium="image" type="' + mediaMime(image) + '" />',
-          '<enclosure url="' + escapeXml(image) + '" type="' + mediaMime(image) + '" />',
           '</item>',
         ].join('\n')
       }).join('\n')
