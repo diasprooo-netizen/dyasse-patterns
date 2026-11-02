@@ -48,7 +48,7 @@ export async function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, g
     const me = await customerIdentity()
     const next = '/product/' + encodeURIComponent(slug)
     return <div className="rounded-2xl border border-[#BCD7E8] bg-[#F0F8FD] p-5">
-      {!me ? <Link href={'/account/login?next=' + encodeURIComponent(next)} className="font-semibold text-[#781D35] underline">Sign in to purchase with PayPal</Link>
+      {!me ? <div className="space-y-2 text-sm"><p className="font-semibold text-[#263847]">Secure PDF checkout · A free account is required for PayPal purchases.</p><div className="flex flex-wrap gap-x-4 gap-y-2"><Link href={'/account/signup?next=' + encodeURIComponent(next)} className="font-bold text-[#781D35] underline underline-offset-4">Create a free account</Link><Link href={'/account/login?next=' + encodeURIComponent(next)} className="font-semibold text-[#263847] underline underline-offset-4">Already registered? Sign in</Link></div></div>
        : !me.name ? <Link href={'/account/profile?next=' + encodeURIComponent(next)} className="font-semibold text-[#781D35] underline">Complete your account to buy with PayPal</Link>
        : <PayPalCheckout slug={slug} clientId={clientId!} priceCents={paypalPriceUsdCents!} />}
     </div>
