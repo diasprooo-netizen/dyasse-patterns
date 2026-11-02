@@ -36,6 +36,8 @@ const gaBootstrap = gaConfigured ? `
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // Pinterest website-claim code from the seller's verification file.
+  other: { 'p:domain_verify': 'a0af1bd1feb8136add284518f1977505' },
   title: { default: 'Crochet PDF Patterns: Keychains, Bags & Accessories | Dyasse Shop', template: '%s | Dyasse Shop' },
   description: 'Shop crochet PDF patterns for miniature keychains, handmade bags, baby booties and accessories. Browse designs, materials and digital downloads.',
   robots: { index: IS_OFFICIAL_DOMAIN, follow: IS_OFFICIAL_DOMAIN },
