@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowUpRight, BookOpen, Check, Download, FileText, Headphones, ShieldCheck } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, BookOpen, Check, Download, FileText, Headphones, Share2, ShieldCheck } from 'lucide-react'
 import { BuyButtons } from '@/components/buy-buttons'
 import { PriceDisplay } from '@/components/price-display'
 import { productCoverAlt, productGalleryAlt } from '@/lib/image-seo'
@@ -8,7 +8,7 @@ import { ProductCard } from '@/components/product-card'
 import { ProductDescription } from '@/components/product-description'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
-import { collectionSeo, primaryCollection, productSeoDescription } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productSeoDescription, SITE_URL } from '@/lib/seo'
 import type { Product } from '@/types/product'
 
 function DetailList({ title, items }: {title:string;items:string[]}) {
@@ -23,6 +23,13 @@ function DetailList({ title, items }: {title:string;items:string[]}) {
 
 export function ProductFunnel({product,upsells,crossSells}:{product:Product;upsells:Product[];crossSells:Product[]}) {
   const gallery=[product.image_url,...product.gallery_images].filter(Boolean)
+  // One-click organic Pinterest sharing: always send traffic to the canonical
+  // Dyasse Shop product page, never to the original Etsy listing.
+  const pinterestShareUrl='https://www.pinterest.com/pin/create/button/?'+new URLSearchParams({
+    url: SITE_URL+'/product/'+encodeURIComponent(product.slug),
+    media: product.image_url,
+    description: product.title+' — digital PDF pattern by Dyasse Shop',
+  }).toString()
   const collection=primaryCollection(product)
   const relatedGuide = collection === 'keychains' ? { href:'/guides/crochet-keychain-patterns', label:'Crochet keychain ideas and materials' }
     : collection === 'crochet-bags' ? { href:'/guides/choosing-yarn-for-crochet-bags', label:'Choosing yarn for crochet bags' }
@@ -70,6 +77,10 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
           </div>
           <div className="mt-7"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled} variant="detail"/></div>
+          <a href={pinterestShareUrl} target="_blank" rel="noopener noreferrer nofollow" aria-label={'Save '+product.title+' on Pinterest'}
+            className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-[#D6E4ED] bg-white px-4 py-3 text-xs font-bold text-[#5A2733] transition-colors hover:border-[#781D35] hover:bg-[#FFF5F7]">
+            <Share2 size={16} aria-hidden="true" /> Save this pattern idea on Pinterest <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
           <div className="mt-5"><BuyButtons slug={product.slug} gumroadLink={product.gumroad_link} gumroadCheckoutVerified={product.gumroad_checkout_verified} gumroadIsPublished={product.gumroad_is_published} lemonCheckoutUrl={product.lemon_checkout_url} paypalCheckoutEnabled={product.paypal_checkout_enabled} paypalPriceUsdCents={product.paypal_price_usd_cents} digitalFilePath={product.digital_file_path}/></div>
           <div className="mt-7 divide-y divide-[#E8E1D9] border-y border-[#DDEAF2]">
             {details.map(({icon:Icon,title,subtitle})=><div key={title} className="flex items-center gap-4 py-4">
