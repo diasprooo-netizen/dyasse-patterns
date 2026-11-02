@@ -1,0 +1,1251 @@
+{
+  "date": "2026-11-02",
+  "scope": "77 newly released PDF products",
+  "method": "Read-only public page extraction. PayPal checkout button display is verified; real buyer payment and private download were not executed.",
+  "counts": {
+    "loaded": 77,
+    "title": 77,
+    "meta_description": 77,
+    "canonical": 77,
+    "robots": 77,
+    "paypal": 77,
+    "usd": 77,
+    "og": 77,
+    "no_etsy": 77
+  },
+  "errors": [],
+  "pages": [
+    {
+      "sku": "DYS-0034",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-ribbed-puff-cuff-slippers-0-6-months-pdf",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0035",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-blue-white-newborn-shoes-0-3-months-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0037",
+      "url": "https://dyasse.com/product/christmas-tree-keychain-crochet-pattern-pdf-mini-holiday-tree-ornament-festive-crochet-pattern",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0038",
+      "url": "https://dyasse.com/product/crochet-baby-slides-pattern-pdf-sporty-striped-baby-sandals-double-sole-elastic-strap-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0039",
+      "url": "https://dyasse.com/product/crochet-pineapple-keychain-pattern-pdf-tropical-fruit-bag-charm-mini-pineapple-crochet-digital-downl",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0042",
+      "url": "https://dyasse.com/product/crochet-baby-shoes-pattern-pdf-mary-jane-booties-double-sole-and-headband",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0045",
+      "url": "https://dyasse.com/product/crochet-bucket-bag-pattern-pearl-strap-drawstring-purse-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0046",
+      "url": "https://dyasse.com/product/crochet-baby-set-pattern-pdf-pink-teddy-bear-hat-and-sandals",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0050",
+      "url": "https://dyasse.com/product/crochet-baby-beanie-pattern-pdf-pink-ribbed-pom-baby-hat-newborn-winter-cap-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0051",
+      "url": "https://dyasse.com/product/crochet-ballerina-flats-baby-shoes-pattern-pdf-flower-pearl-slippers-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0052",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-red-beige-braided-toe-shoes-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0053",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-lattice-toe-infant-shoes-tutorial-pink-and-blue",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0054",
+      "url": "https://dyasse.com/product/crochet-clutch-bag-pattern-pdf-metallic-gold-dumpling-evening-purse-flex-frame-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0055",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-blue-heart-buckle-open-toe-thong-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0057",
+      "url": "https://dyasse.com/product/navy-blue-pearl-bow-baby-sandals-crochet-pattern-double-sole-headband-set-pdf",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0059",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-t-bar-shoes-tutorial-star-bow-infant-3-6m-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0060",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-pdf-rainbow-toe-prewalker-shoes-lace-tie-newborn-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0063",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-red-beige-criss-cross-double-sole-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0064",
+      "url": "https://dyasse.com/product/crochet-slipper-pattern-pdf-white-rust-honeycomb-adult-footwear-cozy-indoor-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0066",
+      "url": "https://dyasse.com/product/round-crochet-bag-pattern-pdf-structured-tambourine-crossbody-purse-chunky-cord-handbag-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0068",
+      "url": "https://dyasse.com/product/beaded-crochet-slipper-pattern-pdf-adult-women-lattice-house-shoes-red-slippers-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0071",
+      "url": "https://dyasse.com/product/baby-mary-jane-booties-crochet-pattern-pdf-yellow-ribbon-t-strap-shoes-0-3m",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0073",
+      "url": "https://dyasse.com/product/crochet-baby-loafer-pattern-pdf-red-navy-button-strap-slippers-classic-infant-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0074",
+      "url": "https://dyasse.com/product/chunky-crochet-backpack-pattern-pdf-structured-drawstring-mochila",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0076",
+      "url": "https://dyasse.com/product/pearl-beaded-clutch-pattern-pdf-bridal-wedding-purse-kiss-lock-evening-bag-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0077",
+      "url": "https://dyasse.com/product/crochet-hobo-tote-bag-pattern-pdf-raffia-tote-with-integrated-handles",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0078",
+      "url": "https://dyasse.com/product/beaded-flap-bag-pattern-pdf-structured-black-purse-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0081",
+      "url": "https://dyasse.com/product/pearl-beaded-phone-bag-pattern-pdf-envelope-flap-crossbody-pouch-tutorial-diy-smartphone-purse",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0083",
+      "url": "https://dyasse.com/product/boho-skullcap-crochet-pattern-pdf-sequin-mesh-hair-net-cowrie-shell-festival-cap-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0084",
+      "url": "https://dyasse.com/product/crochet-clutch-bag-pattern-pdf-metallic-purple-flex-frame-purse-braided-strap-handbag-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0086",
+      "url": "https://dyasse.com/product/golden-crystal-beaded-clutch-pattern-right-angle-weave-evening-purse-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0089",
+      "url": "https://dyasse.com/product/crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0090",
+      "url": "https://dyasse.com/product/crochet-baby-sandal-pattern-pdf-rainbow-boho-structured-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0091",
+      "url": "https://dyasse.com/product/crochet-butterfly-bow-pattern-pdf-ribbed-hair-bow-applique-two-tone-baby-headband-clip",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0092",
+      "url": "https://dyasse.com/product/crochet-hair-bandana-pattern-pdf-gold-mesh-headscarf-tutorial-boho-triangle-kerchief-summer-festival",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0093",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-fuchsia-bow-buckle-strap-baby-girl-summer-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0095",
+      "url": "https://dyasse.com/product/crochet-baby-boots-pattern-pdf-two-tone-winter-booties-buckle-strap-infant-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0096",
+      "url": "https://dyasse.com/product/baby-booties-crochet-pattern-pdf-floral-mary-jane-baby-shoes",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0099",
+      "url": "https://dyasse.com/product/kawaii-crochet-pencil-case-pattern-zipper-pouch-pdf",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0102",
+      "url": "https://dyasse.com/product/santa-baby-booties-crochet-pattern-christmas-infant-shoes-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0103",
+      "url": "https://dyasse.com/product/crochet-baby-sneakers-pattern-pdf-forest-green-wrap-strap-booties-modern-infant-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0105",
+      "url": "https://dyasse.com/product/crochet-hobo-bag-pattern-pdf-geometric-origami-shoulder-purse-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0111",
+      "url": "https://dyasse.com/product/adult-crochet-sandals-pattern-pdf-pearl-flower-crochet-shoes-rubber-sole-summer-footwear",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0113",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-pdf-ribbed-infant-shoes-daisy-bow-tutorial-3-sizes",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0119",
+      "url": "https://dyasse.com/product/crochet-baby-espadrilles-pattern-pdf-mesh-toe-newborn-sandals-tutorial-diy-infant-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0120",
+      "url": "https://dyasse.com/product/crochet-chicken-egg-basket-pattern-pdf-chunky-easter-hen-kitchen-decor",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0122",
+      "url": "https://dyasse.com/product/mini-penguin-crochet-pattern-pdf-kawaii-amigurumi-toy-tiny-chubby-plush-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0123",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-butterfly-t-strap-shoes-double-sole-couture-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0124",
+      "url": "https://dyasse.com/product/crochet-bee-pattern-pdf-bumblebee-amigurumi-toy-baby-shower-gift-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0126",
+      "url": "https://dyasse.com/product/beaded-bag-pattern-pdf-leopard-crystal-kiss-lock-clutch-evening-purse-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0127",
+      "url": "https://dyasse.com/product/miniature-woven-basket-pattern-daisy-trim-pearl-handle-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0128",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-pdf-rainbow-moccasin-shoes-easy-0-6-months-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0132",
+      "url": "https://dyasse.com/product/crochet-mesh-skullcap-pattern-pdf-beaded-hair-net-boho-headpiece",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0133",
+      "url": "https://dyasse.com/product/crochet-watermelon-baby-sandals-pattern-pdf-hot-pink-double-sole-shoes-with-floral-headband",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0134",
+      "url": "https://dyasse.com/product/crochet-clutch-bag-pattern-emerald-ribbed-dumpling-evening-purse-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0135",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-pearl-princess-booties-double-sole-and-buckle-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0136",
+      "url": "https://dyasse.com/product/crochet-sling-bag-pattern-cloud-puff-stitch-phone-pouch-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0142",
+      "url": "https://dyasse.com/product/pearl-beaded-clutch-pattern-pdf-bridal-wedding-purse-right-angle-weave-evening-bag-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0144",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-rust-criss-cross-infant-shoes-double-sole-buckle-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0145",
+      "url": "https://dyasse.com/product/crochet-baby-slides-pattern-pdf-sporty-summer-infant-sandals-double-sole-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0147",
+      "url": "https://dyasse.com/product/baby-giraffe-amigurumi-pattern-pdf-overalls-plush-toy-crochet-tutorial-english-nursery-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0150",
+      "url": "https://dyasse.com/product/mustard-mesh-crochet-tote-bag-pattern-pdf-macrame-cord-market-bag-beach-shoulder-purse-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0154",
+      "url": "https://dyasse.com/product/crochet-shell-bandana-pattern-pdf-lace-triangle-headscarf-boho-hair-kerchief-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0159",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-strappy-gladiator-booties-summer-newborn-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0160",
+      "url": "https://dyasse.com/product/striped-crochet-hobo-bag-pattern-pdf-origami-fold-geometric-tote",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0161",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-boho-booties-pink-bow-summer-shoes-newborn-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0162",
+      "url": "https://dyasse.com/product/crochet-baby-sandals-pattern-pdf-rainbow-bow-infant-shoes-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0165",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-pdf-ballerina-shoes-and-headband-set-with-satin-bow",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0166",
+      "url": "https://dyasse.com/product/crochet-baby-booties-pattern-pdf-mary-jane-t-bar-shoe-tutorial-digital-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0168",
+      "url": "https://dyasse.com/product/crochet-gladiator-sandal-pattern-pdf-sage-green-boho-footwear-pre-made-sole-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0170",
+      "url": "https://dyasse.com/product/crochet-cockatiel-pattern-pdf-amigurumi-bird-pair-parrot-plush-tutorial-pet-lover-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0172",
+      "url": "https://dyasse.com/product/crochet-sunflower-pattern-pdf-potted-plant-amigurumi-easy-floral-desk-decor-gift",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0173",
+      "url": "https://dyasse.com/product/crying-duck-crochet-pattern-pdf-chunky-chenille-amigurumi-plush-easy-duck-toy-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0174",
+      "url": "https://dyasse.com/product/crochet-cat-keychain-pattern-pdf-chubby-amigurumi-bag-charm-kawaii-plush-tutorial",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0175",
+      "url": "https://dyasse.com/product/mint-crochet-baby-booties-pattern-t-strap-newborn-shoes-tutorial-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0176",
+      "url": "https://dyasse.com/product/tuxedo-baby-loafers-crochet-pattern-black-white-bowtie-booties-pdf-download",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    },
+    {
+      "sku": "DYS-0177",
+      "url": "https://dyasse.com/product/baby-mary-jane-espadrille-booties-crochet-pattern-pdf-summer-baby-shoes-heart-charm-0-6m",
+      "checks": {
+        "loaded": true,
+        "title": true,
+        "meta_description": true,
+        "canonical": true,
+        "robots": true,
+        "paypal": true,
+        "usd": true,
+        "og": true,
+        "no_etsy": true
+      },
+      "errors": []
+    }
+  ]
+}
