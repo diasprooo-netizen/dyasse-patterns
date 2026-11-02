@@ -34,6 +34,10 @@ export function SiteFooter(){
       <BrandMark/>
       <p className="mt-5 max-w-xs text-[13px] leading-7 text-[#586B7A]">Crochet PDF patterns for keychains, bags, baby booties and accessories, with free crochet and knitting instruction guides.</p>
       <p className="mt-4 inline-flex items-center gap-2 text-xs font-medium text-[#526677]"><FileText size={16}/> Digital patterns, not physical items</p>
+      <a href="https://www.pinterest.com/TopStor/" target="_blank" rel="noopener noreferrer"
+        className="mt-5 flex w-fit items-center gap-2 text-xs font-bold text-[#781D35] underline-offset-4 hover:underline">
+        Follow our crochet ideas on Pinterest <ArrowUpRight size={14} aria-hidden="true"/>
+      </a>
     </div>
     <div><h2 className="text-xs font-bold uppercase tracking-[.15em] text-[#781D35]">Categories</h2><nav className="mt-5 grid gap-3">{collections.map(x=><Link href={x.href} key={x.href} className="w-fit text-[13px] text-[#314559] hover:text-[#781D35]">{x.label}</Link>)}</nav></div>
     <div><h2 className="text-xs font-bold uppercase tracking-[.15em] text-[#781D35]">Helpful guides</h2><nav className="mt-5 grid gap-3">{guides.map(x=><Link href={x.href} key={x.href} className="w-fit text-[13px] text-[#314559] hover:text-[#781D35]">{x.label}</Link>)}</nav></div>
