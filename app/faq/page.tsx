@@ -4,29 +4,31 @@ import { ArrowLeft, ArrowUpRight, BookOpen, Download, FileText, HelpCircle, Mail
 
 export const metadata: Metadata = {
   title: 'Frequently asked questions',
-  description: 'How to buy, receive and download digital crochet PDF patterns from Dyasse Shop. Learn about Gumroad guest checkout, included materials and pattern support.',
+  description: 'Buy digital crochet PDF patterns on Dyasse Shop. How PayPal checkout, accounts, downloads and pattern support work.',
   alternates: { canonical: '/faq' },
 }
 
 const faqs=[
-  { question:'Am I buying a finished item?', answer:'No. Dyasse patterns are digital PDF instructions for you to make the item yourself. Yarn, hooks, needles, accessories, and the finished handmade product are not included unless an individual listing explicitly says otherwise.' },
-  { question:'How do I receive my PDF?', answer:'For available Gumroad patterns, select Buy & download PDF to open Gumroad checkout. After successful payment, Gumroad provides the PDF download link on the confirmation page and in your purchase receipt email. No physical package is shipped.' },
+  { question:'Am I buying a finished item?', answer:'No. You are buying a digital PDF crochet or knitting pattern, not a completed handmade product. Yarn, hooks, needles, accessories and the finished item are not included.' },
+  { question:'How do I buy a pattern directly from Dyasse Shop?', answer:'Choose a released pattern and open its product page. For PayPal checkout, create a free Dyasse account or sign in, complete your name in your account profile and follow the PayPal payment steps. The website verifies payment before enabling the PDF download.' },
+  { question:'Can I purchase without creating a Dyasse account?', answer:'A free Dyasse account is currently required for purchases through our direct PayPal checkout so we can connect your PDF to your order. On selected patterns where a verified Gumroad checkout link is offered, you may be able to buy as a guest on Gumroad instead.' },
+  { question:'How do I receive my PDF after paying with PayPal?', answer:'Once PayPal confirms your payment and our checkout successfully completes, you can download the PDF and find your purchases in Account → Orders. Save the file to your device. A receipt email may not be available, so use your account order history to retrieve your purchase.' },
+  { question:'What if PayPal charged me but I cannot download?', answer:'Do not pay a second time. Open Account → Orders first. If the order or PDF is missing, contact Dyasse Shop and share your PayPal order reference, pattern title and the email you used for your account. Never send passwords or card details.' },
+  { question:'What currency will I pay in?', answer:'Released patterns on Dyasse Shop are priced in US dollars (USD). Your payment provider or bank may convert the final charge to your local currency.' },
+  { question:'Are all listed patterns available immediately?', answer:'Only reviewed, released digital patterns are shown for sale. A payment option appears when its checkout and PDF file have been configured. Some designs shown as coming soon are not yet available for purchase.' },
   { question:'Can I leave a review?', answer:'Where a verified review form is available for an eligible purchase, customers may share genuine feedback. Reviews are moderated before appearing on Dyasse Shop, and customer email addresses are not published.' },
-  { question:'Are all the patterns available right now?', answer:'Not yet. A pattern appears publicly only after it has passed our release checks and has a working checkout link. If a collection has no products, its releases are still being prepared.' },
-  { question:'Do I need to know how to crochet or knit?', answer:'Each available product page should describe the project, materials and skill expectations. Check these details before checkout. A beginner-level project can still require some familiarity with basic stitches.' },
-  { question:'What if I have trouble downloading?', answer:'First open the Gumroad receipt email and follow its download link. If you cannot find the receipt, check the spam folder and confirm which email you used for checkout. Contact Dyasse Shop with the pattern name and Gumroad order reference so we can help. Do not share passwords or bank card details.' },
-  { question:'Can I request help with a pattern?', answer:'Yes. Contact Dyasse Shop with the pattern title and the row, round, page number or technique you need help with. A clear photo or description can help identify where the instructions are confusing.' },
-  { question:'Are pattern photos proof of a finished handmade sample?', answer:'Only where a listing explicitly provides verified sample information. Decorative illustrations and listing photographs should not be used as a substitute for testing written instructions.' },
+  { question:'What if I need help understanding a pattern?', answer:'Contact Dyasse Shop with the pattern title, page number and the row, round or technique you need help with. A brief description or photo of the issue can help us answer accurately.' },
+  { question:'Are the listing photos a guarantee of a tested sample?', answer:'Not automatically. Please read the individual product details and materials list. Product images should match the listed design, but do not replace testing the written instructions.' },
 ]
 export default function FAQ(){
- return <div className="bg-[#FFFDFD] text-[#203759]">
-  <section className="bg-[linear-gradient(120deg,#FBE9DB,#F2DCE6_65%,#E8E5FD)] px-5 py-20 sm:px-8">
+ return <div className="bg-white text-[#172231]">
+  <section className="bg-[#EAF6FC] px-5 py-20 sm:px-8">
    <div className="mx-auto max-w-4xl text-center">
     <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-[#80684f]"><ArrowLeft size={15}/> Back to home</Link>
     <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-[20px] bg-white text-[#b47c5b]"><HelpCircle size={29} strokeWidth={1.5}/></div>
     <p className="dyasse-eyebrow mt-6 justify-center">WE'RE HERE TO HELP</p>
     <h1 className="mt-5 font-serif text-[clamp(3.25rem,6vw,5.4rem)] leading-[1.05] tracking-[-.055em]">A little clarity goes <em className="font-normal text-[#D94D65]">a long way.</em></h1>
-    <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-8 text-[#716254]">Digital patterns should be simple to understand and straightforward to download. Here are the essentials.</p>
+    <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-8 text-[#716254]">Find out how to shop directly from Dyasse, pay securely, and access your PDF knitting or crochet pattern.</p>
    </div>
   </section>
   <section className="mx-auto max-w-4xl px-5 py-16 sm:px-8 lg:py-20">
@@ -43,7 +45,7 @@ export default function FAQ(){
       <p className="max-w-2xl pb-7 pl-9 pr-8 text-[15px] leading-8 text-[#726255]">{item.answer}</p>
      </details>)}
    </div>
-   <div className="mt-12 flex flex-wrap items-center justify-between gap-5 rounded-[26px] bg-[#342b24] px-7 py-9 text-white sm:px-10">
+   <div className="mt-12 flex flex-wrap items-center justify-between gap-5 rounded-[26px] bg-[#263847] px-7 py-9 text-white sm:px-10">
      <div><Mail size={25} strokeWidth={1.5} className="text-[#d7ac8b]"/><h3 className="mt-3 font-serif text-2xl">Still have a question?</h3><p className="mt-2 max-w-md text-sm leading-7 text-[#e0d1c3]">For order-specific support, use our contact page and include your purchase reference.</p></div>
      <Link href="/contact" className="inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-bold text-[#342b24]">Contact information <ArrowUpRight size={17}/></Link>
    </div>
