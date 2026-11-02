@@ -11,7 +11,12 @@ export async function customerIdentity() {
     db.from('customer_profiles').select('full_name,phone').eq('user_id',user.id).maybeSingle(),
     db.from('admin_users').select('user_id').eq('user_id',user.id).maybeSingle(),
   ])
-  return { id:user.id, email:user.email.toLowerCase(), name:String(profile?.full_name||'').trim(), phone:profile?.phone??null, isAdmin:!!admin }
+  const verifiedProfileName = typeof profile?.full_name === 'string' ? profile.full_name.trim() : ''
+  // New signups already provide a name to Supabase Auth. A customer_profiles row
+  // may not exist yet; do not block their first checkout for that reason.
+  const signupName = typeof user.user_metadata?.full_name === 'string'
+    ? user.user_metadata.full_name.trim().slice(0, 100) : ''
+  return { id:user.id, email:user.email.toLowerCase(), name:verifiedProfileName || signupName, phone:profile?.phone??null, isAdmin:!!admin }
 }
 export function allowedNext(next:unknown, fallback='/account/orders') {
   return typeof next==='string' && next.startsWith('/') && !next.startsWith('//') && !next.includes('\\') && !next.includes('\r') && !next.includes('\n') ? next : fallback
