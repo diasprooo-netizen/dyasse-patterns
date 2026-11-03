@@ -50,7 +50,7 @@ function saleCurrency(raw: RecordData) {
 function normalizeSale(raw: RecordData): SaleRow {
   const saleId = asText(raw.id, 120)
   const price = amount(raw.price)
-  if (!saleId || !/^[\w-]{5,120}$/.test(saleId) || price === null)
+  if (!saleId || !/^[A-Za-z0-9_-]{5,120}={0,2}$/.test(saleId) || price === null)
     throw new Error('Gumroad sale is missing a valid ID or price')
   const email = asText(raw.email ?? raw.purchase_email, 254)?.toLowerCase() ?? null
   return {
@@ -96,7 +96,7 @@ async function upsertVerifiedSale(raw: RecordData) {
  * purchase status: only its sale ID is a hint to fetch the authenticated sale.
  */
 export async function importGumroadSale(saleId: string) {
-  if (!/^[\w-]{5,120}$/.test(saleId)) throw new Error('Invalid sale ID')
+  if (!/^[A-Za-z0-9_-]{5,120}={0,2}$/.test(saleId)) throw new Error('Invalid sale ID')
   const result = await apiGet('sales/' + encodeURIComponent(saleId))
   const raw = result.sale
   if (!raw || typeof raw !== 'object' || Array.isArray(raw))
