@@ -39,8 +39,8 @@ export default async function AnalyticsPage(){
    </section>
    <section className="rounded-[24px] border border-[#E0E7F2] bg-white p-7 sm:p-8">
     <h3 className="flex items-center gap-3 text-xl font-extrabold text-[#243957]"><ShieldCheck className="text-[#17A47D]"/> Confirmed sales</h3>
-    <p className="mt-4 text-sm leading-7 text-[#74849D]">Sales, payments and refunds must come from Gumroad. Until a secure integration exists we deliberately do not show made-up revenue or conversion rates.</p>
-    <a href="https://app.gumroad.com/" target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#E86A65] px-5 text-xs font-bold text-white hover:bg-[#D25257]">Open Gumroad Sales <ExternalLink size={15}/></a>
+    <p className="mt-4 text-sm leading-7 text-[#74849D]">Verified Gumroad sales are imported with the private Gumroad API. PayPal orders are tracked separately. Only confirmed transactions count as revenue.</p>
+    <a href="/admin/gumroad-sales" className="mt-7 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#E86A65] px-5 text-xs font-bold text-white hover:bg-[#D25257]">View verified Gumroad sales <ExternalLink size={15}/></a>
    </section>
   </div>
   <div className="rounded-2xl border border-[#D8E5F2] bg-[#EDF3FB] p-5 text-xs leading-6 text-[#657995]">Only double opt-in/valid consented contacts can be used for marketing; <Link className="font-bold underline" href="/admin/subscribers">review subscribers</Link>. Importing Etsy buyer email addresses is not enabled.</div>
