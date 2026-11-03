@@ -95,6 +95,6 @@ export function AdminDashboard({products,stats,adminEmail}:{products:Product[],s
     <Link href={'/admin/preview/'+encodeURIComponent(p.slug)} className="inline-flex items-center gap-1 text-xs font-semibold text-[#781D35]">Preview <ArrowUpRight size={15}/></Link>
    </div>)}</div>:<p className="p-8 text-sm text-[#7A8BA5]">Your catalog is empty. Import drafts to start.</p>}
   </section>
-  <div className="flex items-start gap-3 rounded-2xl border border-[#DBE5F4] bg-[#EAF6FC] p-5"><ShieldAlert size={20} className="mt-0.5 shrink-0 text-[#5069B8]"/><p className="text-xs leading-6 text-[#637793]">Actual orders, sales and refunds remain in Gumroad; no revenue is shown here until a verified integration exists. The product database is managed through Supabase.</p></div>
+  <div className="flex items-start gap-3 rounded-2xl border border-[#DBE5F4] bg-[#EAF6FC] p-5"><ShieldAlert size={20} className="mt-0.5 shrink-0 text-[#5069B8]"/><p className="text-xs leading-6 text-[#637793]">PayPal and verified Gumroad sales now have separate dashboards. Gumroad reporting remains unavailable until its private API access token is configured and the first sync succeeds. Customer accounts are shown separately from email marketing subscribers.</p></div>
  </div>
 }
