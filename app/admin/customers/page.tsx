@@ -19,7 +19,7 @@ export default async function AdminCustomers({searchParams}:{searchParams?:{page
   db.from('gumroad_sales').select('buyer_email,status').eq('status','paid')
  ])
  const users=usersResult.data?.users??[]
- const total=typeof usersResult.data?.total==='number'?usersResult.data.total:users.length
+ const total=usersResult.data && 'total' in usersResult.data && typeof usersResult.data.total==='number' ? usersResult.data.total : users.length
  const profiles=new Map((profilesResult.data??[]).map(p=>[p.user_id,p.full_name]))
  const adminIds=new Set((adminsResult.data??[]).map(a=>a.user_id))
  const counts=new Map<string,{paypal:number;gumroad:number}>()
