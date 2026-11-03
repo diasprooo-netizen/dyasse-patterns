@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   try {
     const form = await request.formData()
     const saleId = form.get('sale_id')
-    if (typeof saleId !== 'string' || !/^[\w-]{5,120}$/.test(saleId))
+    if (typeof saleId !== 'string' || !/^[A-Za-z0-9_-]{5,120}={0,2}$/.test(saleId))
       return NextResponse.json({ error: 'Invalid sale ID' }, { status: 400 })
     await importGumroadSale(saleId)
     return NextResponse.json({ received: true })
