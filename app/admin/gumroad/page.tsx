@@ -15,6 +15,7 @@ export default async function GumroadAdminPage(){
    <h2 className="mt-3 text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">Your Gumroad catalog, connected.</h2>
    <p className="mt-4 max-w-2xl text-sm leading-7 text-[#E4DDFF]">Manage authentic purchase URLs for your existing digital PDFs. Files, payments, delivery and confirmed sales remain inside your Gumroad account.</p>
   </section>
+  <Link href="/admin/gumroad-sales" className="flex items-center gap-3 rounded-xl border border-[#CCDDEA] bg-[#E8F5FC] px-5 py-4 text-sm font-bold text-[#284460] hover:bg-[#D8EBF8]">View actual Gumroad sales, revenue and sync →</Link>
   <Link href="/admin/gumroad-file-transfer" className="inline-flex items-center gap-3 rounded-xl border border-[#CCDDEA] bg-[#E8F5FC] px-5 py-4 text-sm font-bold text-[#284460] hover:bg-[#D8EBF8]"><FileDown size={19}/> Secure PDF file handoff for Gumroad drafts →</Link>
   <GumroadLinkManager products={rows}/>
   <div className="flex items-start gap-3 rounded-2xl border border-[#DBE5F2] bg-[#EAF1FB] p-5 text-sm leading-7 text-[#617797]"><ShieldCheck size={21} className="mt-1 shrink-0"/> Adding a link does not publish a pattern. Verify the exact PDF, price and buyer access before any release.</div>
