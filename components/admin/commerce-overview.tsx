@@ -11,7 +11,7 @@ export async function CommerceOverview() {
   db.from('paypal_orders').select('id,amount_cents,status').eq('status','completed'),
   db.from('paypal_cart_orders').select('id,amount_cents,status').eq('status','completed'),
  ])
- const accountCount=typeof auth.data?.total==='number'?auth.data.total:(auth.data?.users.length??0)
+ const accountCount=auth.data && 'total' in auth.data && typeof auth.data.total==='number' ? auth.data.total : (auth.data?.users.length??0)
  const gr=(gumroad.data??[]).filter(x=>x.status==='paid')
  const grUSD=gr.filter(x=>x.currency==='USD').reduce((a,x)=>a+x.price_cents,0)
  const pp=[...(paypal.data??[]),...(cart.data??[])]
