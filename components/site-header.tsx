@@ -41,7 +41,7 @@ export function SiteHeader(){
  return <header className="sticky top-0 z-[70] border-b border-[#DCEAF2] bg-white/95 backdrop-blur-xl">
   <div className="mx-auto flex min-h-[76px] max-w-[1380px] items-center justify-between gap-5 px-5 sm:px-8">
     <BrandMark/>
-    <nav aria-label="Main navigation" className="hidden items-center gap-3 2xl:gap-5 xl:flex">
+    <nav aria-label="Main navigation" className="hidden items-center gap-5 2xl:flex">
       {navigation.map(item=><Link key={item.href} href={item.href} className={'py-3 text-[12px] font-semibold transition hover:text-[#781D35] '+(pathname===item.href?'text-[#781D35]':'text-[#253449]')}>{item.label}</Link>)}
     </nav>
     <div className="hidden items-center gap-3 md:flex">
@@ -65,9 +65,9 @@ export function SiteHeader(){
       <Link href="/cart" aria-label={"Cart ("+totalItems+")"} className="inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-xs font-bold text-[#781D35] hover:bg-[#FFF0F3]"><ShoppingBag size={19}/>{totalItems}</Link>
       <Link href="/#collections" className="dyasse-button-primary !min-h-[42px] !px-5 !text-[12px]">Explore patterns <ArrowRight size={15}/></Link>
     </div>
-    <button type="button" aria-expanded={menu} aria-controls="site-mobile-nav" aria-label={menu?'Close menu':'Open menu'} onClick={()=>setMenu(x=>!x)} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#DFEBF3] bg-white text-[#172231] xl:hidden">{menu?<X size={21}/>:<Menu size={21}/>}</button>
+    <button type="button" aria-expanded={menu} aria-controls="site-mobile-nav" aria-label={menu?'Close menu':'Open menu'} onClick={()=>setMenu(x=>!x)} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#DFEBF3] bg-white text-[#172231] 2xl:hidden">{menu?<X size={21}/>:<Menu size={21}/>}</button>
   </div>
-  <div id="site-mobile-nav" hidden={!menu} className="border-t border-[#DDEAF2] bg-white px-5 py-5 shadow-lg xl:hidden">
+  <div id="site-mobile-nav" hidden={!menu} className="border-t border-[#DDEAF2] bg-white px-5 py-5 shadow-lg 2xl:hidden">
     <div className="mx-auto max-w-6xl">
       <form action="/search" role="search" className="mb-3 flex items-center gap-2 rounded-xl border border-[#E2EDF3] bg-[#F6FAFD] px-4 py-3"><Search size={17}/><input type="search" name="q" aria-label="Search patterns" placeholder="Search patterns..." className="min-w-0 flex-1 bg-transparent text-sm text-[#172231] outline-none"/></form>
       <nav aria-label="Mobile navigation" className="grid">
