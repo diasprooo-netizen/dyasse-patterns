@@ -131,23 +131,41 @@ const collectionGuides: Record<string, { heading: string; paragraphs: string[] }
     ]
   }
 }
+// Avoid rendering the entire crochet catalog into a single >1 MB HTML document.
+// Each numbered page is an independently crawlable URL with a self-canonical.
+const CROCHET_PAGE_SIZE = 36
+function requestedPage(value: unknown): number {
+  if (typeof value !== 'string' || !/^[1-9]\d{0,2}$/.test(value)) return 1
+  const parsed = Number(value)
+  return Number.isSafeInteger(parsed) ? parsed : 1
+}
 export function generateStaticParams() { return Object.keys(collections).map(slug=>({slug})) }
-export async function generateMetadata({params}:{params:{slug:string}}):Promise<Metadata>{
+export async function generateMetadata({params,searchParams}:{params:{slug:string},searchParams?:{page?:string}}):Promise<Metadata>{
   const c=collections[params.slug]
   if(!c)return {title:'Collection not found',robots:{index:false}}
   const products=(await getPublishedProducts()).filter(p=>c.match(p))
   const seo=collectionSeo[params.slug as keyof typeof collectionSeo]
+  const isPaginated=params.slug==='crochet-patterns'
+  const page=isPaginated?requestedPage(searchParams?.page):1
+  const pageCount=Math.max(1,Math.ceil(products.length/CROCHET_PAGE_SIZE))
+  if (isPaginated && page>pageCount) return {title:'Collection page not found',robots:{index:false,follow:true}}
+  const path='/collections/'+params.slug+(isPaginated&&page>1?'?page='+page:'')
+  const title=isPaginated&&page>1?'Crochet PDF Patterns – Page '+page:seo.title
+  const description=isPaginated&&page>1
+    ?'Browse page '+page+' of '+pageCount+' of our crochet PDF patterns, including baby booties, handbags, keychains and handmade accessories. Every item is a digital download.'
+    :seo.description
+  const cover=products[(page-1)*CROCHET_PAGE_SIZE]??products[0]
   return {
-    title:seo.title,
-    description:seo.description,
-    alternates:{canonical:'/collections/'+params.slug},
-    robots: {index:products.length>0,follow:true},
-    openGraph:{title:seo.title,description:seo.description,url:'/collections/'+params.slug,type:'website',images:products[0]?.image_url ? [{url:products[0].image_url,alt:productCoverAlt(products[0])}] : []},
-    twitter:{card:'summary_large_image',title:seo.title,description:seo.description,images:products[0]?.image_url ? [products[0].image_url] : []}
+    title,
+    description,
+    alternates:{canonical:path},
+    robots:{index:products.length>0,follow:true},
+    openGraph:{title,description,url:path,type:'website',images:cover?.image_url?[{url:cover.image_url,alt:productCoverAlt(cover)}]:[]},
+    twitter:{card:'summary_large_image',title,description,images:cover?.image_url?[cover.image_url]:[]}
   }
 }
 export const dynamic='force-dynamic'
-export default async function Collection({params}:{params:{slug:string}}) {
+export default async function Collection({params,searchParams}:{params:{slug:string},searchParams?:{page?:string}}) {
   const c=collections[params.slug]
   if (!c) notFound()
   const Icon=c.icon
@@ -156,8 +174,15 @@ export default async function Collection({params}:{params:{slug:string}}) {
     : params.slug === 'baby-shoes' ? { href: '/guides/crochet-baby-shoes-sizing', label: 'Crochet baby shoe sizing and gauge' }
     : null
   const list=(await getPublishedProducts()).filter(p=>c.match(p))
+  const isPaginated=params.slug==='crochet-patterns'
+  const page=isPaginated?requestedPage(searchParams?.page):1
+  const pageCount=isPaginated?Math.max(1,Math.ceil(list.length/CROCHET_PAGE_SIZE)):1
+  if (isPaginated && page>pageCount) notFound()
+  const visibleProducts=isPaginated
+    ?list.slice((page-1)*CROCHET_PAGE_SIZE,page*CROCHET_PAGE_SIZE)
+    :list
   const heroProduct = list.find(p => Boolean(p.image_url))
-  const canonical=SITE_URL+'/collections/'+params.slug
+  const canonical=SITE_URL+'/collections/'+params.slug+(isPaginated&&page>1?'?page='+page:'')
   const graph={
     '@context':'https://schema.org',
     '@graph':[
@@ -166,7 +191,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
         {'@type':'ListItem',position:1,name:'Home',item:SITE_URL+'/'},
         {'@type':'ListItem',position:2,name:c.label,item:canonical},
       ]},
-      ...(list.length>0?[{'@type':'ItemList',itemListElement:list.map((p,i)=>({'@type':'ListItem',position:i+1,name:p.title,url:SITE_URL+'/product/'+encodeURIComponent(p.slug)}))}]:[])
+      ...(visibleProducts.length>0?[{'@type':'ItemList',itemListElement:visibleProducts.map((p,i)=>({'@type':'ListItem',position:isPaginated?(page-1)*CROCHET_PAGE_SIZE+i+1:i+1,name:p.title,url:SITE_URL+'/product/'+encodeURIComponent(p.slug)}))}]:[])
     ]
   }
   return <div className="bg-white text-[#172231]">
@@ -201,7 +226,7 @@ export default async function Collection({params}:{params:{slug:string}}) {
         <span className="rounded-full border border-[#DCEAF2] px-4 py-2 text-xs font-semibold text-[#7C786D]">{list.length} available</span>
       </div>
       {list.length ?
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{list.map(p=><ProductCard key={p.id} product={p}/>)}</div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{visibleProducts.map(p=><ProductCard key={p.id} product={p}/>)}</div>
       : <div className="grid gap-8 overflow-hidden rounded-[6px] border border-[#DAEAF2] bg-white p-8 sm:p-12 md:grid-cols-[1fr_auto] md:items-center">
           <div><p className="dyasse-eyebrow">A NOTE FROM THE STUDIO</p>
             <h3 className="mt-4 max-w-lg font-serif text-[clamp(2rem,4vw,3rem)] leading-[1.12] tracking-[-.04em]">We're putting the finishing touches on this collection.</h3>
@@ -210,6 +235,16 @@ export default async function Collection({params}:{params:{slug:string}}) {
           </div>
           <div aria-hidden="true" className="flex h-36 w-36 items-center justify-center rounded-[35px] bg-[#E5EAE3] text-[#68806D]"><BookOpen size={62} strokeWidth={.95}/></div>
         </div>}
+      {isPaginated && pageCount>1 ? <nav aria-label="Crochet pattern catalog pages" className="mt-10 flex flex-wrap items-center justify-center gap-2">
+        {page>1 ? <Link href={'/collections/crochet-patterns'+(page-1===1?'':'?page='+(page-1))} className="rounded-full border border-[#CFDFE9] bg-white px-4 py-2 text-sm font-semibold text-[#314A5E]">Previous</Link> : null}
+        {Array.from({length:pageCount},(_,i)=>{
+          const number=i+1
+          return <Link key={number} href={'/collections/crochet-patterns'+(number===1?'':'?page='+number)}
+            aria-current={number===page?'page':undefined}
+            className={'rounded-full border px-4 py-2 text-sm font-bold '+(number===page?'border-[#781D35] bg-[#781D35] text-white':'border-[#CFDFE9] bg-white text-[#314A5E] hover:border-[#781D35]')}>{number}</Link>
+        })}
+        {page<pageCount ? <Link href={'/collections/crochet-patterns?page='+(page+1)} className="rounded-full border border-[#CFDFE9] bg-white px-4 py-2 text-sm font-semibold text-[#314A5E]">Next</Link> : null}
+      </nav> : null}
     </section>
     {list.length>0 && collectionGuides[params.slug] ? <section className="border-t border-[#E0ECF3] bg-white">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
