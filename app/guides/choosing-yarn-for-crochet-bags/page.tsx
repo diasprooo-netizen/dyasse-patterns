@@ -52,6 +52,16 @@ const sections: GuideSection[] = [
 ]
 const related: GuideLink[] = [
   {
+    "href": "/product/crochet-bow-bag-pattern-pdf-chunky-yarn-shoulder-purse-coquette-ribbon-bag-diy",
+    "label": "Chunky crochet bow bag PDF",
+    "context": "Chunky tube yarn shoulder purse with bow tails and ring attachment."
+  },
+  {
+    "href": "/product/crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf",
+    "label": "3D crochet rose bag PDF",
+    "context": "Sculptural rose-shaped clutch with gold O-ring handles."
+  },
+  {
     "href": "/collections/crochet-bags",
     "label": "Crochet bag PDF patterns",
     "context": "See the four released handbag, backpack and pouch designs."
