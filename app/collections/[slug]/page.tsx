@@ -17,6 +17,12 @@ const collections: Record<string, Collection> = {
     match: p => !['knitting-patterns', 'beaded-bags'].includes(primaryCollection(p)),
     theme: 'bg-[#E4F2FA] text-[#172231]', icon: Scissors, eyebrow: 'THE CROCHET EDIT',
   },
+  'christmas-crochet': {
+    label: 'Christmas crochet patterns', tagline: 'Small handmade ideas for the holidays.',
+    intro: 'Shop Christmas crochet pattern PDFs for a miniature layered tree keychain ornament and Santa-inspired baby booties. Compare finished project photos, materials and digital instructions before choosing a holiday make.',
+    match: p => /christmas tree keychain|santa baby booties/i.test(p.title),
+    theme: 'bg-[#EDF7FC] text-[#172231]', icon: Gift, eyebrow: 'HOLIDAY CROCHET PATTERNS',
+  },
   'knitting-patterns': {
     label: 'Knitting patterns', tagline: 'For the cosy things in life.',
     intro: 'Hats, headbands, scarves and textured projects. Browse patterns with clear project details when releases are available.',
@@ -61,6 +67,13 @@ const collections: Record<string, Collection> = {
   },
 }
 const collectionGuides: Record<string, { heading: string; paragraphs: string[] }> = {
+  'christmas-crochet': {
+    heading: 'Pick the right Christmas crochet PDF pattern',
+    paragraphs: [
+      'For a small ornament or bag charm, the Christmas tree keychain pattern builds a miniature layered tree with a star, trunk and optional beads. Review the materials and attachment instructions on its product page: yarn, stuffing and keyring parts are not supplied with the PDF.',
+      'For a baby-themed holiday project, the Santa baby booties use a different shoe construction. Compare the size and finishing details before beginning, and keep small decorations and loose hardware away from babies. Both listings are digital instructions, not finished goods.'
+    ]
+  },
   'crochet-patterns': {
     heading: 'How to choose a crochet PDF pattern',
     paragraphs: [
@@ -94,6 +107,20 @@ const collectionGuides: Record<string, { heading: string; paragraphs: string[] }
     paragraphs: [
       'Browse crochet PDF patterns for hats, bun covers and decorative hair accessories. For wearable projects, pay particular attention to measurements, stretch, yarn choice and any elastic, bead or attachment requirements.',
       'Look through the product images and project notes to understand the finished design before purchasing its written instructions.'
+    ]
+  },
+  'knitting-patterns': {
+    heading: 'Compare knitting hats, scarves and headband PDFs',
+    paragraphs: [
+      'Look at the documented yarn weight, gauge, needle size and completed measurements for each knitting pattern. Ribbed hats, twisted headbands and cable scarves involve different stitch techniques, so choose by construction as well as finished appearance.',
+      'Need help with row-by-row instructions or knitting abbreviations? Read our free guide before purchasing a knitting PDF. The finished garment, yarn and tools are not included.'
+    ]
+  },
+  'beaded-bags': {
+    heading: 'Choosing a beaded bag PDF project',
+    paragraphs: [
+      'Beaded evening bags vary by bead size, cord or thread, frame shape, closures and finishing technique. Compare the actual product images and individual materials lists before buying instructions for a purse.',
+      'Each item is a digital pattern rather than a finished handbag or materials kit. Use the product listing to confirm what the selected PDF includes.'
     ]
   },
   amigurumi: {
