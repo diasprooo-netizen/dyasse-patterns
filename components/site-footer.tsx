@@ -8,6 +8,8 @@ const collections=[
  {label:'Baby booties',href:'/collections/baby-shoes'},
  {label:'Bags & purses',href:'/collections/crochet-bags'},
  {label:'Small gifts',href:'/collections/keychains'},
+ {label:'Amigurumi PDF patterns',href:'/collections/amigurumi'},
+ {label:'Knitting PDF patterns',href:'/collections/knitting-patterns'},
 ]
 const help=[
  {label:'Our story',href:'/about'},
