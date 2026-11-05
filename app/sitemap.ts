@@ -11,6 +11,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const products = await getPublishedProducts()
   const activeCollections = new Set(products.map(primaryCollection))
+  // Include the seasonal collection only while its verified patterns are available.
+  if (products.some(p => /christmas tree keychain|santa baby booties/i.test(p.title))) {
+    activeCollections.add('christmas-crochet')
+  }
   // Include the main crochet collection as the parent for all crochet projects.
   if (products.some(p => primaryCollection(p) !== 'knitting-patterns' && primaryCollection(p) !== 'beaded-bags')) {
     activeCollections.add('crochet-patterns')
