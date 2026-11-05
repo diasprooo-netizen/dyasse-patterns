@@ -22,6 +22,9 @@ const collections=[
  {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'https://images.pexels.com/photos/5788489/pexels-photo-5788489.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'https://images.pexels.com/photos/5602969/pexels-photo-5602969.jpeg?auto=compress&cs=tinysrgb&w=640'},
  {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/amigurumi',title:'Amigurumi PDF patterns',sub:'Crochet plush & tiny characters',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/knitting-patterns',title:'Knitting PDF patterns',sub:'Hats, scarves & headbands',icon:Layers3,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/christmas-crochet',title:'Christmas crochet',sub:'Tree ornaments & Santa booties',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
 ]
 const more=[
  {href:'/guides/knitting-patterns-for-beginners',label:'How to read knitting PDFs'},
@@ -46,10 +49,13 @@ export default async function Home(){
  ]
  const priority=launchSlugs.flatMap(slug=>{const p=allProducts.find(x=>x.slug===slug);return p?[p]:[]})
  const products=[...priority,...allProducts.filter(p=>!launchSlugs.includes(p.slug))].slice(0,8)
+ const christmasProducts=allProducts.filter(p=>/christmas tree keychain|santa baby booties/i.test(p.title))
  const studioPreview=await getStudioPreviewProducts(4)
  const categoryItems=collections.map(({href,title,sub,image})=>{
    const slug=href.split('/').pop()
-   const representative=slug==='crochet-patterns' ? allProducts[0] : allProducts.find(product=>primaryCollection(product)===slug)
+   const representative=slug==='crochet-patterns' ? allProducts[0]
+     : slug==='christmas-crochet' ? christmasProducts[0]
+     : allProducts.find(product=>primaryCollection(product)===slug)
    return {href,title,sub,image:representative?.image_url || image}
  })
  return <div className="bg-white text-[#172231]">
@@ -118,11 +124,21 @@ export default async function Home(){
      </div>
    </section>
 
+   {christmasProducts.length > 0 ? <section aria-labelledby="holiday-patterns-heading" className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+     <div className="flex flex-wrap items-end justify-between gap-5">
+       <div><p className="dyasse-eyebrow">HANDMADE HOLIDAY IDEAS · DIGITAL PDF PATTERNS</p>
+         <h2 id="holiday-patterns-heading" className="mt-2 font-serif text-[clamp(2rem,3vw,3rem)] tracking-[-.04em]">Christmas crochet PDF patterns</h2>
+         <p className="mt-3 max-w-2xl text-sm leading-7 text-[#4A6071]">Make a miniature Christmas tree keychain or Santa-inspired baby booties. Compare the real finished design, required materials and pattern details before buying downloadable crochet instructions.</p></div>
+       <Link href="/collections/christmas-crochet" className="inline-flex items-center gap-2 text-sm font-bold text-[#781D35] underline underline-offset-4">Explore Christmas crochet patterns <ArrowUpRight size={16}/></Link>
+     </div>
+     <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{christmasProducts.slice(0,4).map(p=><ProductCard key={p.id} product={p}/>)}</div>
+   </section> : null}
+
    <section aria-labelledby="shop-crochet-patterns" className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
      <div className="max-w-4xl">
        <p className="dyasse-eyebrow">DIGITAL CROCHET PATTERN LIBRARY</p>
        <h2 id="shop-crochet-patterns" className="mt-3 font-serif text-[clamp(2rem,3vw,2.9rem)] tracking-[-.04em]">Find your next crochet PDF pattern</h2>
-       <p className="mt-4 text-[15px] leading-8 text-[#4A5F70]">Browse downloadable crochet instructions by the project you want to make. Discover <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/keychains">crochet keychain patterns</Link> for miniature bag charms, <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/crochet-bags">crochet bag patterns</Link> for handbags and pouches, and <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/baby-shoes">crochet baby booties patterns</Link>. Each product page shows its actual design, digital format and project information so you can select the PDF that suits you.</p>
+       <p className="mt-4 text-[15px] leading-8 text-[#4A5F70]">Browse downloadable crochet instructions by the project you want to make. Discover <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/keychains">crochet keychain patterns</Link> for miniature bag charms, <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/crochet-bags">crochet bag patterns</Link> for handbags and pouches, and <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/baby-shoes">crochet baby booties patterns</Link>. Discover <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/amigurumi">amigurumi crochet PDF patterns</Link> for small plush characters and <Link className="font-semibold text-[#781D35] underline underline-offset-4" href="/collections/knitting-patterns">knitting PDF patterns</Link> for scarves, headbands and hats. Each product page shows its actual design, digital format and project information so you can select the PDF that suits you.</p>
      </div>
    </section>
 
