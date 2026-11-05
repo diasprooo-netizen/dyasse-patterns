@@ -116,8 +116,22 @@ const coverAltBySlug: Record<string, string> = {
     'Blue amigurumi whale crochet keychain with a contrasting white belly'
 }
 
+function cleanFallbackAlt(title: string): string {
+  return title
+    // Remove format-only parentheticals in full before stripping format words.
+    // Otherwise `(PDF)` becomes `()` and `(PDF Download)` becomes `( Download)`.
+    .replace(/\(\s*(?:PDF(?:\s+Download)?|Digital(?:\s+Download)?|Download|Tutorial)\s*\)/gi, '')
+    .replace(/\b(?:Digital Download|PDF|Download|Tutorial)\b/gi, '')
+    .replace(/\(\s*\)/g, '')
+    .replace(/\s+\)/g, ')')
+    .replace(/\s+([,;:.!?])/g, '$1')
+    .replace(/[,\s;:–-]+$/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 export function productCoverAlt(product: Product): string {
-  return coverAltBySlug[product.slug] ?? product.title.replace(/\s*(PDF|Digital Download|Tutorial)\b/gi, '').trim()
+  return coverAltBySlug[product.slug] ?? cleanFallbackAlt(product.title)
 }
 
 export function productGalleryAlt(product: Product, galleryIndex: number): string {
