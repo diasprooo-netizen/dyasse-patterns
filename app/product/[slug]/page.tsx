@@ -78,7 +78,7 @@ export default async function ProductPage({ params }: PageProps) {
           url,
           price: Number(currentPrice.toFixed(2)),
           priceCurrency: 'USD',
-          availability: 'https://schema.org/OnlineOnly',
+          availability: 'https://schema.org/InStock',
           seller: { '@type': 'Organization', name: SITE_NAME },
         } } : {}),
         category: collectionSeo[col].label,
