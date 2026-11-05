@@ -44,7 +44,7 @@ const collections: Record<string, Collection> = {
   'amigurumi': {
     label: 'Amigurumi & plush', tagline: 'Small characters, big imagination.',
     intro: 'Find amigurumi crochet PDF patterns for plush toys and little decorative makes. Read the full project details before choosing your next make.',
-    match: p => primaryCollection(p) === 'amigurumi',
+    match: p => primaryCollection(p) === 'amigurumi' || /\bamigurumi\b|\bplush\b/i.test(p.title),
     theme: 'bg-[#EAF6FC] text-[#172231]', icon: Gift, eyebrow: 'THE PLUSH EDIT',
   },
   'crochet-accessories': {
