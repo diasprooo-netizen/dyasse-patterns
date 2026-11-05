@@ -53,7 +53,17 @@ const related: GuideLink[] = [
   {
     "href": "/collections/keychains",
     "label": "All crochet keychain patterns",
-    "context": "Compare the 10 currently available miniature PDF projects."
+    "context": "Browse miniature crochet keychains, ornaments and bag charms."
+  },
+  {
+    "href": "/product/christmas-tree-keychain-crochet-pattern-pdf-mini-holiday-tree-ornament-festive-crochet-pattern",
+    "label": "Christmas tree crochet keychain PDF",
+    "context": "Layered mini holiday tree with optional beads and reinforced keyring loop."
+  },
+  {
+    "href": "/product/mini-penguin-crochet-pattern-pdf-kawaii-amigurumi-toy-tiny-chubby-plush-tutorial",
+    "label": "Mini penguin amigurumi PDF pattern",
+    "context": "A small stuffed penguin with round-by-round shaping and assembly."
   },
   {
     "href": "/product/crochet-soccer-ball-keychain-pattern-football-charm-pdf",
