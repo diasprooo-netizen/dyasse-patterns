@@ -71,7 +71,11 @@ export function primaryCollection(product: Product): CollectionSlug {
   const cat = (product.category || '').toLowerCase()
   const title = product.title.toLowerCase()
   if (/knitting/.test(cat) || /\b(knit|knitting)\b/.test(title)) return 'knitting-patterns'
-  if (/baby footwear/.test(cat) || /\b(baby|booties|baby shoes)\b/.test(title)) return 'baby-shoes'
+  // A baby-themed blanket or plush is not footwear. Require an actual shoe
+  // term in the title as well as a baby/infant context (or footwear category).
+  const footwear = /\b(?:boot(?:ie|ies|s)?|shoes?|sandals?|slides?|sneakers?|clogs?|loafers?|moccasins?|espadrilles?|mary[ -]?janes?)\b/.test(title)
+  const intendedForBaby = /\b(?:baby|infant|newborn|prewalker)\b/.test(title) || /baby footwear/.test(cat)
+  if (footwear && intendedForBaby && !/\badult\b/.test(title)) return 'baby-shoes'
   if (/keychains/.test(cat) || /keychain|key ring|keyring/.test(title)) return 'keychains'
   if (/beaded bag/.test(cat)) return 'beaded-bags'
   if (/bags & cases/.test(cat)) return 'crochet-bags'
