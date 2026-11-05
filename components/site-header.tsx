@@ -12,7 +12,9 @@ const navigation=[
  {href:'/collections/crochet-accessories',label:'Accessories'},
  {href:'/collections/baby-shoes',label:'Baby booties'},
  {href:'/collections/crochet-bags',label:'Bags & purses'},
- {href:'/collections/keychains',label:'Keychain patterns'},
+ {href:'/collections/keychains',label:'Keychains'},
+ {href:'/collections/amigurumi',label:'Amigurumi'},
+ {href:'/collections/knitting-patterns',label:'Knitting'},
  {href:'/guides',label:'Pattern guides'},
 ]
 type AccountState={authenticated:boolean;isAdmin:boolean;email:string|null}
@@ -39,8 +41,8 @@ export function SiteHeader(){
  return <header className="sticky top-0 z-[70] border-b border-[#DCEAF2] bg-white/95 backdrop-blur-xl">
   <div className="mx-auto flex min-h-[76px] max-w-[1380px] items-center justify-between gap-5 px-5 sm:px-8">
     <BrandMark/>
-    <nav aria-label="Main navigation" className="hidden items-center gap-6 xl:flex">
-      {navigation.map(item=><Link key={item.href} href={item.href} className={'py-3 text-[13px] font-semibold transition hover:text-[#781D35] '+(pathname===item.href?'text-[#781D35]':'text-[#253449]')}>{item.label}</Link>)}
+    <nav aria-label="Main navigation" className="hidden items-center gap-3 2xl:gap-5 xl:flex">
+      {navigation.map(item=><Link key={item.href} href={item.href} className={'py-3 text-[12px] font-semibold transition hover:text-[#781D35] '+(pathname===item.href?'text-[#781D35]':'text-[#253449]')}>{item.label}</Link>)}
     </nav>
     <div className="hidden items-center gap-3 md:flex">
       <form action="/search" method="get" role="search" className="hidden h-11 items-center gap-2 rounded-full border border-[#E0ECF3] bg-[#F5F9FC] px-4 lg:flex">
