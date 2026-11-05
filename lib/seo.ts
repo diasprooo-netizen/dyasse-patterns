@@ -15,6 +15,12 @@ export const collectionSeo = {
     label: 'Crochet patterns',
     keyword: 'crochet patterns PDF',
   },
+  'christmas-crochet': {
+    title: 'Christmas Crochet PDF Patterns: Tree Ornament & Baby Booties',
+    description: 'Shop festive crochet PDF patterns for a mini Christmas tree ornament keychain and Santa baby booties. Explore the actual designs, materials and digital downloads.',
+    label: 'Christmas crochet patterns',
+    keyword: 'christmas crochet patterns PDF',
+  },
   'knitting-patterns': {
     title: 'Knitting PDF Patterns: Headbands, Hats & Scarves',
     description: 'Explore knitting PDF patterns for ribbed hats, twisted headbands, cable-knit scarves and textured accessories. Check yarn, sizing and instructions.',
