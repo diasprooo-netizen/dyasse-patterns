@@ -92,7 +92,9 @@ export default function KnittingGuide(){
     <p className="mt-3 text-sm leading-7 text-[#68758A]">Choose a project by style, materials and the techniques you want to practise.</p>
     <nav aria-label="Related knitting resources" className="mt-6 grid gap-3 text-sm font-bold text-[#385A89]">
       <Link href="/guides">All crochet and knitting guides →</Link>
-      <Link href="/collections/knitting-patterns">Knitting PDF patterns (when available) →</Link>
+      <Link href="/collections/knitting-patterns">Shop knitting PDF patterns →</Link>
+      <Link href="/product/ribbed-knit-hat-pattern-pdf-beginner-adult-folded-brim-beanie">Ribbed knit beanie PDF pattern →</Link>
+      <Link href="/product/reversible-knit-scarf-pattern-pdf-beginner-2-row-repeat-easy-modern-winter-gift-scarf">Beginner reversible knit scarf PDF →</Link>
       <Link href="/collections/crochet-patterns">Crochet patterns →</Link>
       <Link href="/guides/crochet-patterns-for-beginners">How to read crochet patterns →</Link>
       <Link href="/faq">PDF download help →</Link>
