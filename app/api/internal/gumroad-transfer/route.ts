@@ -318,7 +318,7 @@ export async function POST(request: NextRequest) {
       const existing = actualFiles[0] && typeof actualFiles[0] === 'object' &&
         !Array.isArray(actualFiles[0]) ? actualFiles[0] as Record<string, unknown> : {}
       const fileName = typeof existing.name === 'string'
-        ? existing.name.replace(/\\.pdf$/i, '') : ''
+        ? existing.name.replace(/\.pdf$/i, '') : ''
       const fileBytes = Number(existing.size)
       const fileType = String(existing.filetype ?? existing.mime_type ?? existing.content_type ?? '').toLowerCase()
       if (fileName !== job.catalog_id + '__Pattern' ||
@@ -355,7 +355,7 @@ export async function POST(request: NextRequest) {
       const entry = Array.isArray(published.files) ? published.files[0] : null
       const metadata = entry && typeof entry === 'object' && !Array.isArray(entry)
         ? entry as Record<string, unknown> : {}
-      const name = typeof metadata.name === 'string' ? metadata.name.replace(/\\.pdf$/i, '') : ''
+      const name = typeof metadata.name === 'string' ? metadata.name.replace(/\.pdf$/i, '') : ''
       if (name !== job.catalog_id + '__Pattern' || Number(metadata.size) !== bytes.length)
         reject('GUMROAD_EXISTING_FILE_CHANGED')
     }
