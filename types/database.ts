@@ -16,6 +16,7 @@ export type Database = {
       newsletter_subscribers: Table
       checkout_clicks: Table
       gumroad_sales: Table
+      gumroad_transfer_jobs: Table
       paypal_orders: Table
       customer_profiles: Table
       support_conversations: Table
