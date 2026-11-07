@@ -16,6 +16,7 @@ type GumroadProduct = {
   id?: string
   name?: string
   short_url?: string
+  custom_permalink?: string | null
   published?: boolean
   price?: number | string
   currency?: string
@@ -27,6 +28,8 @@ type GumroadResponse = {
   message?: string
   product?: GumroadProduct
   products?: GumroadProduct[]
+  next_page_key?: string | null
+  next_page_url?: string | null
   upload_id?: string
   key?: string
   parts?: Array<{ part_number: number; presigned_url: string }>
@@ -56,15 +59,51 @@ function countContent(product: GumroadProduct) {
     Array.isArray(product.files) ? product.files.length : 0,
   )
 }
-function matchesShortLink(actual: string | undefined, expected: string) {
-  if (!actual) return false
+function gumroadCode(link: string) {
   try {
-    const a = new URL(actual)
-    const b = new URL(expected)
-    return a.protocol === 'https:' &&
-      (a.hostname === 'gumroad.com' || a.hostname.endsWith('.gumroad.com')) &&
-      a.pathname === b.pathname && a.pathname.startsWith('/l/')
-  } catch { return false }
+    const url = new URL(link)
+    if (url.protocol !== 'https:' || !(
+      url.hostname === 'gumroad.com' || url.hostname === 'gum.co' ||
+      url.hostname.endsWith('.gumroad.com')
+    )) return null
+    const segments = url.pathname.split('/').filter(Boolean)
+    if (segments.length === 2 && segments[0] === 'l') return segments[1]
+    if (segments.length === 1) return segments[0]
+    return null
+  } catch { return null }
+}
+function matchesShortLink(actual: string | undefined, expected: string) {
+  const targetCode = gumroadCode(expected)
+  return Boolean(targetCode && actual && gumroadCode(actual) === targetCode)
+}
+async function findGumroadProduct(expectedLink: string): Promise<GumroadProduct> {
+  const code = gumroadCode(expectedLink)
+  if (!code) reject('GUMROAD_BAD_EXPECTED_LINK')
+  let cursor: string | null = null
+  const seenCursors = new Set<string>()
+  const matching: GumroadProduct[] = []
+  for (let page = 0; page < 30; page++) {
+    const suffix = cursor ? '?page_key=' + encodeURIComponent(cursor) : ''
+    const batch = await gumroad('GET', '/products' + suffix)
+    if (!Array.isArray(batch.products)) reject('GUMROAD_CATALOG_UNAVAILABLE')
+    const hits = batch.products.filter(p =>
+      matchesShortLink(p.short_url, expectedLink) || p.custom_permalink === code)
+    matching.push(...hits)
+    if (matching.length > 1) reject('GUMROAD_IDENTITY_NOT_UNIQUE')
+    if (matching.length === 1 && matching[0].id) return matching[0]
+    let next = typeof batch.next_page_key === 'string' ? batch.next_page_key : null
+    if (!next && batch.next_page_url) {
+      try {
+        const url = new URL(batch.next_page_url)
+        if (url.hostname === 'api.gumroad.com') next = url.searchParams.get('page_key')
+      } catch { /* no usable cursor */ }
+    }
+    if (!next) reject('GUMROAD_PRODUCT_NOT_IN_CATALOG')
+    if (seenCursors.has(next)) reject('GUMROAD_PAGINATION_LOOP')
+    seenCursors.add(next)
+    cursor = next
+  }
+  reject('GUMROAD_PAGE_LIMIT')
 }
 function cleanName(name: string | undefined) {
   return (name ?? '').trim().replace(/\s+/g, ' ').toLocaleLowerCase('en-US')
@@ -188,11 +227,9 @@ export async function POST(request: NextRequest) {
         product.gumroad_is_published || product.gumroad_checkout_verified) {
       reject('CATALOG_REVIEW_REQUIRED')
     }
-    const catalog = await gumroad('GET', '/products')
-    if (!Array.isArray(catalog.products)) reject('GUMROAD_CATALOG_UNAVAILABLE')
-    const matches = catalog.products.filter(p => matchesShortLink(p.short_url, job.expected_gumroad_link))
-    if (matches.length !== 1 || !matches[0].id) reject('GUMROAD_IDENTITY_NOT_UNIQUE')
-    const remote = await gumroadProduct(matches[0].id)
+    const matched = await findGumroadProduct(job.expected_gumroad_link)
+    if (!matched.id) reject('GUMROAD_PRODUCT_NOT_FOUND')
+    const remote = await gumroadProduct(matched.id)
     if (cleanName(remote.name) !== cleanName(product.title)) reject('GUMROAD_NAME_MISMATCH')
     if (remote.published || countContent(remote) > 0) reject('GUMROAD_EXISTING_CONTENT_REVIEW')
     if (asPrice(remote) !== job.expected_price_cents ||
