@@ -117,6 +117,12 @@ export async function POST(request: NextRequest) {
     }
     const discovered = []
     const unmatched = []
+    const duplicateNameCount = new Map<string, number>()
+    for (const p of gumroad) {
+      if (p.published || !p.name) continue
+      const k = normalize(p.name) + '::' + String(p.price)
+      duplicateNameCount.set(k, (duplicateNameCount.get(k) ?? 0) + 1)
+    }
     for (const remote of gumroad) {
       if (!remote.name || !remote.short_url || remote.published) continue
       const code = permalinkCode(remote.short_url)
@@ -124,6 +130,10 @@ export async function POST(request: NextRequest) {
           /^[a-zA-Z0-9_-]+$/.test(remote.custom_permalink)
           ? remote.custom_permalink : null)
       if (!code || knownCodes.has(code)) continue
+      if ((duplicateNameCount.get(normalize(remote.name) + '::' + String(remote.price)) ?? 0) !== 1) {
+        unmatched.push({ code, reason: 'duplicate_gumroad_identity' })
+        continue
+      }
       const matches = byName.get(normalize(remote.name)) ?? []
       const matching = matches.filter(p => !p.gumroad_link && p.qa_verified === true &&
         p.is_published === true && p.currency === 'USD' &&
