@@ -199,7 +199,9 @@ export async function POST(request: NextRequest) {
         (remote.currency && remote.currency.toUpperCase() !== 'USD')) {
       reject('GUMROAD_PRICE_MISMATCH')
     }
-    gumroadProductId = remote.id
+    const remoteId = remote.id
+    if (!remoteId) reject('GUMROAD_PRODUCT_NOT_FOUND')
+    gumroadProductId = remoteId
     const { data: listed, error: listError } = await db.storage.from(BUCKET)
       .list(job.catalog_id, { limit: 20, search: 'Pattern.pdf' })
     const file = listed?.find(x => x.name === 'Pattern.pdf')
@@ -222,7 +224,7 @@ export async function POST(request: NextRequest) {
     }
     bytesCount = bytes.length
     stage = 'uploading'
-    await db.from('gumroad_transfer_jobs').update({ stage, file_size_bytes: bytes.length, gumroad_product_id: remote.id }).eq('id', job.id)
+    await db.from('gumroad_transfer_jobs').update({ stage, file_size_bytes: bytes.length, gumroad_product_id: remoteId }).eq('id', job.id)
     const fileUrl = await uploadPDF(bytes, job.catalog_id + '__Pattern.pdf')
     stage = 'attaching'
     await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
@@ -230,14 +232,14 @@ export async function POST(request: NextRequest) {
     // because we strictly verified that the draft has NO prior content.
     const attach = new URLSearchParams()
     attach.append('files[][url]', fileUrl)
-    await gumroad('PUT', '/products/' + encodeURIComponent(remote.id), attach)
-    const withFile = await gumroadProduct(remote.id)
+    await gumroad('PUT', '/products/' + encodeURIComponent(remoteId), attach)
+    const withFile = await gumroadProduct(remoteId)
     if (countContent(withFile) < 1) reject('GUMROAD_ATTACHMENT_UNCONFIRMED')
     stage = 'attached'
     await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
-    const enabled = await gumroad('PUT', '/products/' + encodeURIComponent(remote.id) + '/enable')
+    const enabled = await gumroad('PUT', '/products/' + encodeURIComponent(remoteId) + '/enable')
     const published = enabled.product?.published === true
-      ? enabled.product : await gumroadProduct(remote.id)
+      ? enabled.product : await gumroadProduct(remoteId)
     if (!published.published) reject('GUMROAD_PUBLISH_UNCONFIRMED')
     if (countContent(published) < 1) reject('GUMROAD_PUBLISHED_FILE_MISSING')
     stage = 'published'
@@ -257,13 +259,13 @@ export async function POST(request: NextRequest) {
     if (updateError || !updated) reject('SITE_LINK_UPDATE_FAILED')
     await db.from('gumroad_transfer_jobs').update({
       status: 'published', stage: 'complete', error_code: null,
-      gumroad_product_id: remote.id, file_size_bytes: bytes.length,
+      gumroad_product_id: remoteId, file_size_bytes: bytes.length,
       finished_at: new Date().toISOString(),
     }).eq('id', job.id)
     return json({ ok: true, catalogId: job.catalog_id, published: true, linked: true, pdfBytes: bytes.length })
   } catch (error) {
     const code = error instanceof TransferError ? error.code : 'TRANSFER_UNEXPECTED_ERROR'
-    const status = stage === 'attached' || stage === 'published' ? 'attached_needs_review' : 'failed'
+    const status = ['attaching', 'attached', 'published'].includes(stage) ? 'attached_needs_review' : 'failed'
     try {
       await db.from('gumroad_transfer_jobs').update({
         status, stage, error_code: code, gumroad_product_id: gumroadProductId ?? null,
