@@ -53,11 +53,9 @@ function json(body: object, status = 200) {
   return NextResponse.json(body, { status, headers: NO_STORE })
 }
 function countContent(product: GumroadProduct) {
-  const fileInfo = product.file_info
-  return Math.max(
-    fileInfo && typeof fileInfo === 'object' ? Object.keys(fileInfo).length : 0,
-    Array.isArray(product.files) ? product.files.length : 0,
-  )
+  // 'file_info' may contain product characteristics such as Size/Length;
+  // only 'files' is authoritative for actual buyer-downloadable attachments.
+  return Array.isArray(product.files) ? product.files.length : 0
 }
 function gumroadCode(link: string) {
   try {
@@ -250,6 +248,20 @@ export async function POST(request: NextRequest) {
           fields: Object.keys(entry).filter(k => !/url|token|secret|key|auth/i.test(k)).slice(0, 16),
         }
       })
+      const fileMetadata = (Array.isArray(remote.files) ? remote.files : [])
+        .slice(0, 12).map(value => {
+          const item = value && typeof value === 'object' && !Array.isArray(value)
+            ? value as Record<string, unknown> : {}
+          const rawName = item.name ?? item.file_name ?? item.filename ?? item.display_name
+          const rawBytes = item.size ?? item.file_size ?? item.file_size_bytes ?? item.bytes
+          const rawMime = item.content_type ?? item.mime_type ?? item.type
+          return {
+            name: typeof rawName === 'string' ? rawName.slice(0, 160) : null,
+            bytes: Number.isSafeInteger(Number(rawBytes)) ? Number(rawBytes) : null,
+            type: typeof rawMime === 'string' ? rawMime.slice(0, 80) : null,
+            fields: Object.keys(item).filter(key => !/url|token|secret|auth|key|path/i.test(key)).slice(0, 20),
+          }
+        })
       const { data: pdfInfo } = await db.storage.from(BUCKET)
         .list(job.catalog_id, { limit: 20, search: 'Pattern.pdf' })
       const source = pdfInfo?.find(x => x.name === 'Pattern.pdf')
@@ -265,6 +277,7 @@ export async function POST(request: NextRequest) {
         sourcePDFBytes: Number(source?.metadata?.size ?? 0),
         files: info, hasFileArray: Array.isArray(remote.files),
         fileArrayCount: Array.isArray(remote.files) ? remote.files.length : 0,
+        attachmentMetadata: fileMetadata,
       })
     }
     if (remote.published || countContent(remote) > 0) reject('GUMROAD_EXISTING_CONTENT_REVIEW')
