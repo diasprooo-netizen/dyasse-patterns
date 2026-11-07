@@ -194,8 +194,12 @@ export async function POST(request: NextRequest) {
   const origin = request.headers.get('origin')
   if (origin && origin !== request.nextUrl.origin) return json({ error: 'forbidden' }, 403)
   let id: unknown
-  try { id = (await request.json() as { jobId?: unknown }).jobId }
-  catch { return json({ error: 'invalid request' }, 400) }
+  let inspectOnly = false
+  try {
+    const payload = await request.json() as { jobId?: unknown; inspectOnly?: unknown }
+    id = payload.jobId
+    inspectOnly = payload.inspectOnly === true
+  } catch { return json({ error: 'invalid request' }, 400) }
   if (typeof id !== 'string' || !UUID.test(id)) return json({ error: 'invalid request' }, 400)
 
   const db = createServiceClient()
@@ -231,6 +235,38 @@ export async function POST(request: NextRequest) {
     if (!matched.id) reject('GUMROAD_PRODUCT_NOT_FOUND')
     const remote = await gumroadProduct(matched.id)
     if (cleanName(remote.name) !== cleanName(product.title)) reject('GUMROAD_NAME_MISMATCH')
+    if (inspectOnly) {
+      const info = Object.entries(remote.file_info ?? {}).slice(0, 15).map(([key, value]) => {
+        const entry = value && typeof value === 'object' && !Array.isArray(value)
+          ? value as Record<string, unknown> : {}
+        const name = entry.name ?? entry.file_name ?? entry.filename
+        const bytes = entry.size ?? entry.file_size ?? entry.file_size_bytes
+        const mime = entry.type ?? entry.mime_type ?? entry.content_type
+        return {
+          key: key.slice(0, 120),
+          name: typeof name === 'string' ? name.slice(0, 120) : null,
+          bytes: Number.isSafeInteger(Number(bytes)) ? Number(bytes) : null,
+          type: typeof mime === 'string' ? mime.slice(0, 80) : null,
+          fields: Object.keys(entry).filter(k => !/url|token|secret|key|auth/i.test(k)).slice(0, 16),
+        }
+      })
+      const { data: pdfInfo } = await db.storage.from(BUCKET)
+        .list(job.catalog_id, { limit: 20, search: 'Pattern.pdf' })
+      const source = pdfInfo?.find(x => x.name === 'Pattern.pdf')
+      await db.from('gumroad_transfer_jobs').update({
+        status: 'failed', stage: 'inspected', error_code: 'AUDIT_ONLY',
+        gumroad_product_id: remote.id, finished_at: new Date().toISOString(),
+      }).eq('id', job.id)
+      return json({
+        ok: true, inspected: true, catalogId: job.catalog_id,
+        gumroadPublished: Boolean(remote.published),
+        gumroadPriceCents: asPrice(remote), expectedPriceCents: job.expected_price_cents,
+        fileCount: countContent(remote),
+        sourcePDFBytes: Number(source?.metadata?.size ?? 0),
+        files: info, hasFileArray: Array.isArray(remote.files),
+        fileArrayCount: Array.isArray(remote.files) ? remote.files.length : 0,
+      })
+    }
     if (remote.published || countContent(remote) > 0) reject('GUMROAD_EXISTING_CONTENT_REVIEW')
     if (asPrice(remote) !== job.expected_price_cents ||
         (remote.currency && remote.currency.toUpperCase() !== 'USD')) {
