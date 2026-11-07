@@ -280,7 +280,7 @@ export async function POST(request: NextRequest) {
         attachmentMetadata: fileMetadata,
       })
     }
-    if (remote.published || countContent(remote) > 0) reject('GUMROAD_EXISTING_CONTENT_REVIEW')
+    if (remote.published) reject('GUMROAD_ALREADY_PUBLISHED_REVIEW')
     if (asPrice(remote) !== job.expected_price_cents ||
         (remote.currency && remote.currency.toUpperCase() !== 'USD')) {
       reject('GUMROAD_PRICE_MISMATCH')
@@ -309,25 +309,56 @@ export async function POST(request: NextRequest) {
       reject('PDF_SHA256_MISMATCH')
     }
     bytesCount = bytes.length
-    stage = 'uploading'
-    await db.from('gumroad_transfer_jobs').update({ stage, file_size_bytes: bytes.length, gumroad_product_id: remoteId }).eq('id', job.id)
-    const fileUrl = await uploadPDF(bytes, job.catalog_id + '__Pattern.pdf')
-    stage = 'attaching'
-    await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
-    // Gumroad's files[][url] is a FULL REPLACEMENT. This is safe only
-    // because we strictly verified that the draft has NO prior content.
-    const attach = new URLSearchParams()
-    attach.append('files[][url]', fileUrl)
-    await gumroad('PUT', '/products/' + encodeURIComponent(remoteId), attach)
-    const withFile = await gumroadProduct(remoteId)
-    if (countContent(withFile) < 1) reject('GUMROAD_ATTACHMENT_UNCONFIRMED')
-    stage = 'attached'
-    await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
+    const actualFiles = Array.isArray(remote.files) ? remote.files : []
+    let reusedExisting = false
+    if (actualFiles.length) {
+      // Previous seller uploads are preserved ONLY when uniquely matched
+      // to the exact original catalog ID, original PDF byte size, and PDF filetype.
+      if (actualFiles.length !== 1) reject('GUMROAD_MULTIFILE_REVIEW')
+      const existing = actualFiles[0] && typeof actualFiles[0] === 'object' &&
+        !Array.isArray(actualFiles[0]) ? actualFiles[0] as Record<string, unknown> : {}
+      const fileName = typeof existing.name === 'string'
+        ? existing.name.replace(/\\.pdf$/i, '') : ''
+      const fileBytes = Number(existing.size)
+      const fileType = String(existing.filetype ?? existing.mime_type ?? existing.content_type ?? '').toLowerCase()
+      if (fileName !== job.catalog_id + '__Pattern' ||
+          fileBytes !== bytes.length ||
+          !fileType.includes('pdf')) reject('GUMROAD_EXISTING_PDF_NOT_MATCHED')
+      reusedExisting = true
+      stage = 'attached'
+      await db.from('gumroad_transfer_jobs').update({
+        stage, file_size_bytes: bytes.length, gumroad_product_id: remoteId,
+      }).eq('id', job.id)
+    } else {
+      stage = 'uploading'
+      await db.from('gumroad_transfer_jobs').update({
+        stage, file_size_bytes: bytes.length, gumroad_product_id: remoteId,
+      }).eq('id', job.id)
+      const fileUrl = await uploadPDF(bytes, job.catalog_id + '__Pattern.pdf')
+      stage = 'attaching'
+      await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
+      // Gumroad files[][url] is FULL REPLACEMENT, safe only for EMPTY drafts.
+      const attach = new URLSearchParams()
+      attach.append('files[][url]', fileUrl)
+      await gumroad('PUT', '/products/' + encodeURIComponent(remoteId), attach)
+      const withFile = await gumroadProduct(remoteId)
+      if (countContent(withFile) < 1) reject('GUMROAD_ATTACHMENT_UNCONFIRMED')
+      stage = 'attached'
+      await db.from('gumroad_transfer_jobs').update({ stage }).eq('id', job.id)
+    }
     const enabled = await gumroad('PUT', '/products/' + encodeURIComponent(remoteId) + '/enable')
     const published = enabled.product?.published === true
       ? enabled.product : await gumroadProduct(remoteId)
     if (!published.published) reject('GUMROAD_PUBLISH_UNCONFIRMED')
     if (countContent(published) < 1) reject('GUMROAD_PUBLISHED_FILE_MISSING')
+    if (reusedExisting) {
+      const entry = Array.isArray(published.files) ? published.files[0] : null
+      const metadata = entry && typeof entry === 'object' && !Array.isArray(entry)
+        ? entry as Record<string, unknown> : {}
+      const name = typeof metadata.name === 'string' ? metadata.name.replace(/\\.pdf$/i, '') : ''
+      if (name !== job.catalog_id + '__Pattern' || Number(metadata.size) !== bytes.length)
+        reject('GUMROAD_EXISTING_FILE_CHANGED')
+    }
     stage = 'published'
     // Only after real Gumroad file attachment and seller publication,
     // enable the existing link on dyasse.com.
@@ -348,7 +379,8 @@ export async function POST(request: NextRequest) {
       gumroad_product_id: remoteId, file_size_bytes: bytes.length,
       finished_at: new Date().toISOString(),
     }).eq('id', job.id)
-    return json({ ok: true, catalogId: job.catalog_id, published: true, linked: true, pdfBytes: bytes.length })
+    return json({ ok: true, catalogId: job.catalog_id, published: true, linked: true,
+      pdfBytes: bytes.length, reusedExistingPdf: reusedExisting })
   } catch (error) {
     const code = error instanceof TransferError ? error.code : 'TRANSFER_UNEXPECTED_ERROR'
     const status = ['attaching', 'attached', 'published'].includes(stage) ? 'attached_needs_review' : 'failed'
