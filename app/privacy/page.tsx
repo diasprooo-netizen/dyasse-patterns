@@ -25,11 +25,25 @@ export default function Privacy(){
       <h2 className="mt-5 font-serif text-[24px]">{t}</h2><p className="mt-3 text-sm leading-7 text-[#746357]">{d}</p>
     </div>)}
    </div>
-   <div className="mt-8 rounded-[24px] border border-[#e3d2bd] bg-[#f2e7d8] p-7">
-     <h2 className="font-serif text-[25px]">About this notice</h2>
-     <p className="mt-3 text-sm leading-8 text-[#715d4e]">This notice describes current account, analytics consent and checkout functionality. For privacy questions, data access or deletion requests, use the contact page. More detailed business contact and record-retention terms are still being prepared. Google Analytics operates under Google's privacy terms and Gumroad operates under Gumroad's privacy terms.</p>
+   <div className="mt-8 rounded-[24px] border border-[#DCEAF2] bg-[#EDF6FA] p-7">
+     <h2 className="font-serif text-[25px]">Analytics choices and future advertising</h2>
+     <p className="mt-3 text-sm leading-8 text-[#536B7C]">
+       The existing consent banner controls optional Google Analytics cookies only. Choosing to allow analytics does not grant consent to advertising cookies or personalized ads. Advertising storage and personalization remain denied. If we introduce Google AdSense advertising, this analytics preference control alone is not a certified advertising consent platform. Additional consent and partner disclosures may be needed before serving ads, particularly for visitors in the EEA, the UK and Switzerland.
+     </p>
      <div id="analytics-preferences" className="mt-5"><AnalyticsPreferencesButton /></div>
-     <Link href="/contact" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#80543e] underline underline-offset-8">Contact and support information <ArrowUpRight size={17}/></Link>
+   </div>
+   <div className="mt-6 rounded-[24px] border border-[#e3d2bd] bg-[#f2e7d8] p-7">
+     <h2 className="font-serif text-[25px]">Your questions and data requests</h2>
+     <p className="mt-3 text-sm leading-8 text-[#715d4e]">
+       For access, correction or deletion requests concerning a Dyasse account, sign in to that account and send a message through our support chat. This helps us identify the account concerned without asking for passwords or full payment-card details. If your purchase was made through Gumroad, follow the contact information in your Gumroad receipt for questions about information handled by Gumroad. PayPal and other payment providers may retain their own records under their respective privacy terms and legal obligations.
+     </p>
+     <p className="mt-3 text-sm leading-8 text-[#715d4e]">
+       This page describes our currently implemented account, checkout, support and analytics features. Support conversations and order records may need to be kept for order assistance and applicable legal requirements. You can ask what information we hold and request its correction or deletion, subject to those requirements.
+     </p>
+     <Link href="/support" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#80543e] underline underline-offset-8">Open secure Dyasse support chat <ArrowUpRight size={17}/></Link>
+     <span className="mx-3 text-[#967968]" aria-hidden="true">·</span>
+     <Link href="/contact" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#80543e] underline underline-offset-8">Other ways to get help <ArrowUpRight size={17}/></Link>
+     <p className="mt-5 text-xs text-[#79675B]">Notice last reviewed: 8 November 2026</p>
    </div>
   </section>
  </div>
