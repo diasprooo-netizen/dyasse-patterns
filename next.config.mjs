@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // Serve responsive WebP variants instead of transferring full-resolution
-    // Etsy originals for each small product card; keep transformation sizes
-    // conservative to control Vercel image-processing usage.
+    // Serve responsive WebP variants for remote catalog images; keep
+    // transformation sizes conservative to control image-processing usage.
     unoptimized: false,
     formats: ['image/webp'],
     deviceSizes: [320, 480, 640, 768, 1024, 1200],
