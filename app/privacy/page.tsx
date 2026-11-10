@@ -30,6 +30,9 @@ export default function Privacy(){
      <p className="mt-3 text-sm leading-8 text-[#536B7C]">
        The existing consent banner controls optional Google Analytics cookies only. Choosing to allow analytics does not grant consent to advertising cookies or personalized ads. Advertising storage and personalization remain denied. If we introduce Google AdSense advertising, this analytics preference control alone is not a certified advertising consent platform. Additional consent and partner disclosures may be needed before serving ads, particularly for visitors in the EEA, the UK and Switzerland.
      </p>
+     <p className="mt-3 text-sm leading-8 text-[#536B7C]">
+       On the dedicated Rose Bag promotional page, Dyasse also records anonymous aggregate counts of page loads and outbound checkout clicks, grouped by a limited source label (Facebook, Instagram, TikTok, Pinterest or direct/other). These counters do not save visitor email addresses, IP addresses, cookies or persistent visitor identifiers. They are used to understand where visitors move from a product page to the independent payment provider; a click is not a completed purchase.
+     </p>
      <div id="analytics-preferences" className="mt-5"><AnalyticsPreferencesButton /></div>
    </div>
    <div className="mt-6 rounded-[24px] border border-[#e3d2bd] bg-[#f2e7d8] p-7">
