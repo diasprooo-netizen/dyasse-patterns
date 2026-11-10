@@ -14,6 +14,7 @@ const sections=[
  {title:'GROWTH & SALES',items:[
   {href:'/admin/gumroad',label:'Gumroad links',icon:Link2},
   {href:'/admin/analytics',label:'Analytics',icon:BarChart3},
+  {href:'/admin/funnel',label:'Rose Bag funnel',icon:BarChart3},
   {href:'/admin/orders',label:'All orders',icon:Package},
   {href:'/admin/gumroad-sales',label:'Gumroad sales',icon:BarChart3},
   {href:'/admin/customers',label:'Registered customers',icon:Users},
@@ -35,6 +36,7 @@ const descriptions:Record<string,string>={
  '/admin/qa':'Check real samples before listing for sale',
  '/admin/gumroad':'Connect genuine digital purchase links',
  '/admin/analytics':'Track site activity without invented sales',
+ '/admin/funnel':'Track Rose Bag landing visits, checkout clicks and verified paid orders',
  '/admin/orders':'PayPal and Gumroad transactions, kept distinct',
  '/admin/gumroad-sales':'Verified Gumroad payments, refunds and sales sync',
  '/admin/customers':'Supabase Auth registrations and customer activity',
