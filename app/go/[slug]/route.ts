@@ -15,6 +15,9 @@ export async function GET(request:NextRequest,{params}:{params:{slug:string}}) {
   // immediately, skipping a second click on the Gumroad product page.
   // Preserve any existing variant/coupon parameters on the verified product URL.
   target.searchParams.set('wanted', 'true')
-  try {const admin=createServiceClient();await admin.from('checkout_clicks').insert({product_id:data.id})} catch {}
+  // Anonymous source label only: no visitor IDs, emails or IPs stored.
+  const supplied=request.nextUrl.searchParams.get('utm_source')?.toLowerCase() || 'direct'
+  const source=['facebook','instagram','tiktok','pinterest','direct'].includes(supplied)?supplied:'other'
+  try {const admin=createServiceClient();await admin.from('checkout_clicks').insert({product_id:data.id,source})} catch {}
   return NextResponse.redirect(target,302)
 }
