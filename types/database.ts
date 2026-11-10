@@ -15,6 +15,7 @@ export type Database = {
       qa_audits: Table
       newsletter_subscribers: Table
       checkout_clicks: Table
+      marketing_funnel_events: Table
       gumroad_sales: Table
       gumroad_transfer_jobs: Table
       paypal_orders: Table
