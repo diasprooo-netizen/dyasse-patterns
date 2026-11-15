@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const staticPages: MetadataRoute.Sitemap = [
-    '/', '/about', '/contact', '/faq', '/privacy', '/guides',
+    '/', '/about', '/contact', '/faq', '/privacy', '/guides', '/patterns',
     '/guides/crochet-patterns-for-beginners',
     '/guides/knitting-patterns-for-beginners',
     '/guides/crochet-keychain-patterns',
@@ -41,6 +41,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }))
 
+  // Products deeper in the catalog are linked by regular HTML pagination.
+  // Add those distinct, self-canonical pages to the sitemap as well.
+  // Keep the size consistent with CROCHET_PAGE_SIZE in the collection route.
+  const crochetCount = products.filter(p => primaryCollection(p) !== 'knitting-patterns' && primaryCollection(p) !== 'beaded-bags').length
+  const crochetPageCount = Math.ceil(crochetCount / 36)
+  const paginatedCollections: MetadataRoute.Sitemap = Array.from(
+    { length: Math.max(0, crochetPageCount - 1) },
+    (_, i) => ({
+      url: SITE_URL + '/collections/crochet-patterns?page=' + (i + 2),
+      changeFrequency: 'weekly' as const,
+    }),
+  )
+
   const productPages = products.map(p => ({
     url: SITE_URL + '/product/' + encodeURIComponent(p.slug),
     lastModified: new Date(p.updated_at ?? p.created_at),
@@ -49,5 +62,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     images: [...new Set([p.image_url, ...p.gallery_images].filter((url): url is string => Boolean(url)))],
   }))
 
-  return [...staticPages, ...collections, ...productPages]
+  return [...staticPages, ...collections, ...paginatedCollections, ...productPages]
 }

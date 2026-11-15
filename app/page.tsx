@@ -102,6 +102,7 @@ export default async function Home(){
      <CategoryCarousel items={categoryItems}/>
      <nav id="all-categories" aria-label="Crochet project guides" className="mt-5 flex flex-wrap gap-2">
        {more.map(x=><Link key={x.href} href={x.href} className="rounded-full border border-[#DAE8F0] bg-[#F5FAFC] px-4 py-2 text-xs font-semibold text-[#27384B] hover:border-[#AFCAD9]">{x.label} <span className="text-[#781D35]">↗</span></Link>)}
+       <Link href="/patterns" className="rounded-full border border-[#C9DCE7] bg-white px-4 py-2 text-xs font-bold text-[#781D35] hover:border-[#AFCAD9]">Browse all {allProducts.length} released PDF patterns ↗</Link>
        <Link href="/guides" className="rounded-full border border-[#C9DCE7] bg-white px-4 py-2 text-xs font-bold text-[#781D35] hover:border-[#AFCAD9]">All crochet guides ↗</Link>
      </nav>
    </section>
