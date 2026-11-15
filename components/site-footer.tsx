@@ -3,6 +3,7 @@ import { ArrowUpRight, FileText } from 'lucide-react'
 import { BrandMark } from '@/components/brand-mark'
 
 const collections=[
+ {label:'All released PDF patterns',href:'/patterns'},
  {label:'Crochet',href:'/collections/crochet-patterns'},
  {label:'Crochet accessories',href:'/collections/crochet-accessories'},
  {label:'Baby booties',href:'/collections/baby-shoes'},
