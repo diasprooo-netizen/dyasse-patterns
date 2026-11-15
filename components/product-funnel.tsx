@@ -118,6 +118,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
         <nav aria-label="Related pattern resources" className="mt-7 flex flex-wrap gap-3">
           {relatedGuide ? <Link href={relatedGuide.href} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">{relatedGuide.label} <ArrowUpRight size={14} className="inline"/></Link> : null}
           <Link href={'/collections/'+collection} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">More {collectionSeo[collection].label.toLowerCase()} <ArrowUpRight size={14} className="inline"/></Link>
+          <Link href="/patterns" className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">Browse all released patterns <ArrowUpRight size={14} className="inline"/></Link>
           <Link href={collection==='knitting-patterns'?'/guides/knitting-patterns-for-beginners':'/guides/crochet-patterns-for-beginners'} className="border-b border-[#AE726B] pb-2 text-sm font-semibold text-[#5C6E6A]">How to read a pattern <ArrowUpRight size={14} className="inline"/></Link>
         </nav>
       </div>
