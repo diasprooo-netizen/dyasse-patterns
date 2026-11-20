@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 
 import { createClient, hasSupabaseConfig } from '@/lib/supabase/server'
 import type { Product } from '@/types/product'
@@ -52,44 +53,82 @@ export function normalizeProducts(rows: Record<string, unknown>[] | null | undef
   return (rows ?? []).map(normalizeProduct)
 }
 
-export async function getPublishedProducts(): Promise<Product[]> {
-  if (!hasSupabaseConfig()) return []
+/**
+ * Only errors that could be temporary are retried. Never turn a failed
+ * Supabase read into an empty catalog or a false product 404.
+ */
+type ReadResult = {
+  error: { code?: string; message: string } | null
+  status: number
+}
+const TRANSIENT_CODES = new Set(['57014', 'PGRST000', 'PGRST001', 'PGRST002', 'PGRST003'])
+function isTransient(result: ReadResult): boolean {
+  return result.status === 0 || result.status === 408 || result.status === 429 ||
+    result.status >= 500 || TRANSIENT_CODES.has(result.error?.code || '')
+}
 
-  const supabase = await createClient()
-  const { data, error } = await supabase
-    .from('products')
-    .select(productSelect)
-    .eq('is_published', true)
-    .eq('qa_verified', true)
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Failed to load published products:', error.message)
-    return []
+async function withCatalogRetry<T extends ReadResult>(
+  operation: string,
+  read: () => PromiseLike<T>,
+): Promise<T> {
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      const result = await read()
+      if (!result.error) return result
+      console.error('Catalog query failed', {
+        operation, attempt, status: result.status, code: result.error.code || 'unknown',
+      })
+      if (!isTransient(result) || attempt === 2) throw new Error('Catalog temporarily unavailable')
+    } catch (error) {
+      if (attempt === 2 || (error instanceof Error && error.message === 'Catalog temporarily unavailable')) {
+        throw error
+      }
+      console.warn('Retrying catalog read after network failure', { operation, attempt })
+    }
   }
-
-  return normalizeProducts(data as Record<string, unknown>[])
+  throw new Error('Catalog temporarily unavailable')
 }
 
-export async function getProductBySlug(slug: string): Promise<Product> {
-  if (!hasSupabaseConfig()) notFound()
+/** Memoize only within a server render/request, not across publication changes. */
+export const getPublishedProducts = cache(async (): Promise<Product[]> => {
+  if (!hasSupabaseConfig()) throw new Error('Catalog is not configured')
 
   const supabase = await createClient()
-  const { data, error } = await supabase
-    .from('products')
-    .select(productSelect)
-    .eq('slug', slug)
-    .eq('is_published', true)
-    .eq('qa_verified', true)
-    .maybeSingle()
+  const { data, error } = await withCatalogRetry('published-products', () =>
+    supabase.from('products').select(productSelect)
+      .eq('is_published', true).eq('qa_verified', true)
+      .order('created_at', { ascending: false })
+      .abortSignal(AbortSignal.timeout(8000)),
+  )
+  if (error || !data) throw new Error('Catalog temporarily unavailable')
+  return normalizeProducts(data as Record<string, unknown>[])
+})
 
-  if (error || !data) notFound()
+/** A real no-match is 404; database errors are not product deletions. */
+export const getProductBySlug = cache(async (slug: string): Promise<Product> => {
+  if (!hasSupabaseConfig()) throw new Error('Catalog is not configured')
 
+  const supabase = await createClient()
+  const { data, error } = await withCatalogRetry('product-by-slug', () =>
+    supabase.from('products').select(productSelect)
+      .eq('slug', slug).eq('is_published', true).eq('qa_verified', true)
+      .abortSignal(AbortSignal.timeout(8000)).maybeSingle(),
+  )
+  if (error) throw new Error('Catalog temporarily unavailable')
+  if (!data) notFound()
   return normalizeProduct(data as Record<string, unknown>)
-}
+})
 
 export async function getRelatedProducts(product: Product): Promise<{ upsells: Product[]; crossSells: Product[] }> {
-  const products = await getPublishedProducts()
+  // Related items are optional: if a catalog-wide read is unavailable,
+  // keep the already-loaded primary product page and checkout usable.
+  let products: Product[]
+  try {
+    products = await getPublishedProducts()
+  } catch (error) {
+    console.error('Related products unavailable; keeping product page visible', error)
+    return { upsells: [], crossSells: [] }
+  }
   const byId = new Map(products.map((item) => [item.id, item]))
   const selectedUpsells = product.upsell_product_ids.map((id) => byId.get(id)).filter((item): item is Product => Boolean(item))
   const selectedCrossSells = product.cross_sell_product_ids.map((id) => byId.get(id)).filter((item): item is Product => Boolean(item))
