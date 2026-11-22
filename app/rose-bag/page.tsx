@@ -7,7 +7,7 @@ import { RoseFunnelView } from '@/components/rose-funnel-view'
 
 export const dynamic = 'force-dynamic'
 const SLUG = 'crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf'
-const SOURCES = new Set(['facebook', 'instagram', 'tiktok', 'pinterest'])
+const SOURCES = new Set(['facebook', 'instagram', 'tiktok', 'pinterest', 'google'])
 export const metadata: Metadata = {
   title: 'Crochet Rose Bag PDF Pattern | Make the 3D Flower Handbag',
   description: 'Make a sculptural red rose handbag with a downloadable crochet PDF pattern. See the real bag photos, details and guest checkout.',
