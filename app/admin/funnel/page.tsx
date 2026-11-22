@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 export const metadata = { title: 'Rose Bag sales funnel | Dyasse manager', robots: { index: false, follow: false } }
 
 const ROSE_BAG_ID = 'df4fb26c-d274-4b1a-b5e2-b94a62c2a4d3'
-const sources = ['facebook','instagram','tiktok','pinterest','direct','other'] as const
+const sources = ['facebook','instagram','tiktok','pinterest','google','direct','other'] as const
 const price = (cents: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(cents / 100)
 
 export default async function RoseBagFunnelDashboard() {
@@ -76,9 +76,9 @@ export default async function RoseBagFunnelDashboard() {
     <section className="rounded-2xl border border-[#DDE8F0] bg-white p-6 sm:p-8">
       <h3 className="font-serif text-2xl">Use these direct campaign links</h3>
       <p className="mt-2 text-sm leading-7 text-[#5A7081]">Put the right link in each social profile, Pin destination or ad. Each link reaches the same fast one-product page and records a source label.</p>
-      <div className="mt-5 space-y-3">{(['facebook','instagram','tiktok','pinterest'] as const).map(source=><div key={source} className="rounded-xl border border-[#E0EAF0] bg-[#F8FBFD] p-4">
+      <div className="mt-5 space-y-3">{(['facebook','instagram','tiktok','pinterest','google'] as const).map(source=><div key={source} className="rounded-xl border border-[#E0EAF0] bg-[#F8FBFD] p-4">
         <p className="text-xs font-extrabold capitalize text-[#781D35]">{source}</p>
-        <p className="mt-2 break-all font-mono text-xs leading-6">https://dyasse.com/rose-bag?utm_source={source}&amp;utm_medium=social&amp;utm_campaign=rose_bag</p>
+        <p className="mt-2 break-all font-mono text-xs leading-6">https://dyasse.com/rose-bag?utm_source={source}&amp;utm_medium={source === 'google' ? 'cpc' : 'social'}&amp;utm_campaign={source === 'google' ? 'rose_bag_search' : 'rose_bag'}</p>
       </div>)}</div>
     </section>
     <p className="text-xs leading-6 text-[#64798A]">Verified purchases do not currently include a reliably matched marketing source: Gumroad processes guest checkout off-site, and its sales feed is imported separately. A missing Gumroad sync can make paid-order totals look lower than actual. No visitor emails, IP addresses or tracking IDs are stored in the new event counters.</p>

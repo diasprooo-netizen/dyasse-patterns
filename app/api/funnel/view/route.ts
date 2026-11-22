@@ -4,7 +4,7 @@ import { createServiceClient } from '@/lib/supabase/service'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 const ROSE_BAG_ID = 'df4fb26c-d274-4b1a-b5e2-b94a62c2a4d3'
-const sources = new Set(['facebook','instagram','tiktok','pinterest','direct','other'])
+const sources = new Set(['facebook','instagram','tiktok','pinterest','google','direct','other'])
 
 export async function POST(request: NextRequest) {
   if (request.headers.get('origin') !== request.nextUrl.origin)

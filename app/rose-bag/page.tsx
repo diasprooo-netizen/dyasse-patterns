@@ -7,7 +7,7 @@ import { RoseFunnelView } from '@/components/rose-funnel-view'
 
 export const dynamic = 'force-dynamic'
 const SLUG = 'crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf'
-const SOURCES = new Set(['facebook', 'instagram', 'tiktok', 'pinterest'])
+const SOURCES = new Set(['facebook', 'instagram', 'tiktok', 'pinterest', 'google'])
 export const metadata: Metadata = {
   title: 'Crochet Rose Bag PDF Pattern | Make the 3D Flower Handbag',
   description: 'Make a sculptural red rose handbag with a downloadable crochet PDF pattern. See the real bag photos, details and guest checkout.',
@@ -20,7 +20,12 @@ export default async function RoseBagOffer({ searchParams }: { searchParams?: { 
   const source = typeof searchParams?.utm_source === 'string' && SOURCES.has(searchParams.utm_source.toLowerCase())
     ? searchParams.utm_source.toLowerCase() : 'direct'
   const guestAvailable = Boolean(product.gumroad_link && product.gumroad_is_published && product.gumroad_checkout_verified)
-  const checkoutUrl = '/go/' + SLUG + '?utm_source=' + encodeURIComponent(source)
+  const checkoutTags = new URLSearchParams({
+    utm_source: source,
+    utm_campaign: source === 'google' ? 'rose_bag_search' : 'rose_bag',
+  })
+  if (source !== 'direct') checkoutTags.set('utm_medium', source === 'google' ? 'cpc' : 'social')
+  const checkoutUrl = '/go/' + SLUG + '?' + checkoutTags.toString()
   const productUrl = '/product/' + SLUG
   const price = product.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
   const photos = [product.image_url, ...product.gallery_images].filter((src): src is string => Boolean(src)).slice(0, 5)
