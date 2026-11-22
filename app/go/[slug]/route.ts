@@ -17,7 +17,7 @@ export async function GET(request:NextRequest,{params}:{params:{slug:string}}) {
   target.searchParams.set('wanted', 'true')
   // Anonymous source label only: no visitor IDs, emails or IPs stored.
   const supplied=request.nextUrl.searchParams.get('utm_source')?.toLowerCase() || 'direct'
-  const source=['facebook','instagram','tiktok','pinterest','direct'].includes(supplied)?supplied:'other'
+  const source=['facebook','instagram','tiktok','pinterest','google','direct'].includes(supplied)?supplied:'other'
   try {const admin=createServiceClient();await admin.from('checkout_clicks').insert({product_id:data.id,source})} catch {}
   return NextResponse.redirect(target,302)
 }
