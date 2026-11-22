@@ -204,7 +204,7 @@ export default async function Collection({params,searchParams}:{params:{slug:str
             <Link href="/" className="hover:underline">Home</Link><span>/</span><span>{c.label}</span>
           </nav>
           <p className="mt-12 text-[10px] font-bold uppercase tracking-[.22em]">{c.eyebrow}</p>
-          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.2rem,6vw,5.7rem)] leading-[1.07] tracking-[-.055em] text-[#172231]">{c.label}<span className="text-[#781D35]">.</span></h1>
+          <h1 className="mt-4 max-w-xl font-serif text-[clamp(3.2rem,6vw,5.7rem)] leading-[1.07] tracking-[-.055em] text-[#172231]">{c.label}{page > 1 ? ' – Page ' + page : ''}<span className="text-[#781D35]">.</span></h1>
           <p className="mt-6 font-serif text-[26px] italic font-normal opacity-80">{c.tagline}</p>
           <p className="mt-5 max-w-xl text-[15px] leading-8 text-[#4A5F70]">{c.intro}</p>
           <Link href="/#collections" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-8"><ArrowLeft size={16}/> All collections</Link>
