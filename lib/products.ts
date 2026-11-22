@@ -1,3 +1,4 @@
+import { primaryCollection } from '@/lib/seo'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
@@ -132,12 +133,18 @@ export async function getRelatedProducts(product: Product): Promise<{ upsells: P
   const byId = new Map(products.map((item) => [item.id, item]))
   const selectedUpsells = product.upsell_product_ids.map((id) => byId.get(id)).filter((item): item is Product => Boolean(item))
   const selectedCrossSells = product.cross_sell_product_ids.map((id) => byId.get(id)).filter((item): item is Product => Boolean(item))
-  const fallback = products
-    .filter((item) => item.id !== product.id && (item.is_featured || item.category === product.category))
-    .slice(0, 3)
+  // Link neighboring patterns within each collection so older designs are
+  // reachable from their peers. Keep explicitly curated suggestions first.
+  const collection = primaryCollection(product)
+  const peers = products.filter(item => primaryCollection(item) === collection)
+    .sort((a, b) => a.slug.localeCompare(b.slug, 'en'))
+  const position = peers.findIndex(item => item.id === product.id)
+  const orderedPeers = peers.slice(position + 1).concat(peers.slice(0, Math.max(position, 0)))
+  const curatedIds = new Set([...selectedUpsells, ...selectedCrossSells].map(item => item.id))
+  const fallback = orderedPeers.filter(item => item.id !== product.id && !curatedIds.has(item.id)).slice(0, 3)
 
   return {
-    upsells: selectedUpsells.length > 0 ? selectedUpsells : fallback,
+    upsells: selectedUpsells.length > 0 || selectedCrossSells.length > 0 ? selectedUpsells : fallback,
     crossSells: selectedCrossSells.length > 0 ? selectedCrossSells : fallback,
   }
 }
