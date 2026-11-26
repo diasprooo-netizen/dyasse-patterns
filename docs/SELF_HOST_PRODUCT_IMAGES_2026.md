@@ -8,7 +8,7 @@ Remove runtime dependence on `i.etsystatic.com` from the Dyasse Shop product cat
 
 ## Source audit, 2026-11-26
 
-- `public.products`: 177 rows; 172 `is_published=true AND qa_verified=true`. Total **139 Etsy-hosted primary** and **568 Etsy gallery** references across all 177 rows (including unpublished).
+- `public.products`: 177 rows; 172 `is_published=true AND qa_verified=true`. Total **139 Etsy-hosted primary** and **568 Etsy gallery** references across all 177 rows (including unpublished). Each of these **707 Etsy image URLs is unique** in the current database: there are no duplicate external image URLs across the catalog (SQL checked).
 - Among those 172: **134 Etsy-hosted primary images** and **556 Etsy-hosted gallery image references**.
 - Three other source groups already host primary images on Supabase or dyasse.com: 19 Supabase and 19 dyasse.com.
 - `dyasse-product-images` already contains **135 owned WebP photos** for 19 designs. On 2026-11-26, 135/135 public image URLs independently returned **HTTP 200**.
