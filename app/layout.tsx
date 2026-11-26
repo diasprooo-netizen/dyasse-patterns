@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 const websiteSchema = {
  '@context': 'https://schema.org',
  '@graph': [
-  { '@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop',url:SITE_URL },
+  { '@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop',url:SITE_URL,logo:{'@type':'ImageObject',url:SITE_URL+'/icon.svg'} },
   { '@type':'WebSite','@id':SITE_URL+'/#website',name:'Dyasse Shop',url:SITE_URL,publisher:{'@id':SITE_URL+'/#organization'},inLanguage:'en' },
  ],
 }
