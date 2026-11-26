@@ -29,8 +29,8 @@ const limit = value('--limit') ? Number(value('--limit')) : Infinity
 if (!Number.isFinite(limit) && limit !== Infinity || limit < 1) throw Error('Invalid --limit')
 if (apply && !manifestPath && !allowLegacy) throw Error('Applying requires a Drive manifest or --legacy-source')
 const URL_ROOT = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').replace(/\/$/, '')
-const SECRET = process.env.SUPABASE_SERVICE_ROLE_KEY
-if (!URL_ROOT || !SECRET) throw Error('Missing SUPABASE_URL and/or SUPABASE_SERVICE_ROLE_KEY')
+const SECRET = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+if (!URL_ROOT || !SECRET) throw Error('Missing SUPABASE_URL and/or SUPABASE_SECRET_KEY / SUPABASE_SERVICE_ROLE_KEY')
 if (!URL_ROOT.startsWith('https://ouvdzdhpinteofjyccfe.supabase.co')) {
   throw Error('Project guard: refusing to touch a different Supabase project')
 }
