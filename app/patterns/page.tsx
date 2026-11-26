@@ -7,7 +7,7 @@ import { collectionSeo, primaryCollection, type CollectionSlug } from '@/lib/seo
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'All Crochet & Knitting PDF Patterns | Browse the Dyasse Catalog',
+  title: 'All Crochet & Knitting PDF Patterns',
   description: 'Browse all released Dyasse Shop crochet, knitting and beaded pattern PDFs by project type. Find bag, keychain, baby shoe, toy and accessory designs.',
   alternates: { canonical: '/patterns' },
 }
