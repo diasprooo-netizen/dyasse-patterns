@@ -11,7 +11,7 @@ Remove runtime dependence on `i.etsystatic.com` from the Dyasse Shop product cat
 - `public.products`: 177 rows; 172 `is_published=true AND qa_verified=true`. Total **139 Etsy-hosted primary** and **568 Etsy gallery** references across all 177 rows (including unpublished).
 - Among those 172: **134 Etsy-hosted primary images** and **556 Etsy-hosted gallery image references**.
 - Three other source groups already host primary images on Supabase or dyasse.com: 19 Supabase and 19 dyasse.com.
-- `dyasse-product-images` already contains 135 photos for 19 distinct designs.
+- `dyasse-product-images` already contains **135 owned WebP photos** for 19 designs. On 2026-11-26, 135/135 public image URLs independently returned **HTTP 200**.
 - A separate group of **75 WebP images for 19 designs** is **already self-hosted** under `https://dyasse.com/images/catalog/` (not in the Supabase bucket). Every one of those 75 URLs was checked on 2026-11-26 and returned **HTTP 200**. Skip re-uploading or re-mapping them; they are not part of the Etsy external images migration.
 - Google Drive contains `Dyasse_Product_Photos_Staging` (75 WebP files) and `Dyasse_Products2_Product_by_Product_V2` (44 product review archives) plus unmatched archives. **Do not assume those ZIPs are already mapped to every product.** Inspection of the Watermelon Baby Mary Jane ZIP showed **a pattern PDF and one image extracted from that PDF, explicitly labeled `NOT_LISTING_PHOTOS`**. It is not safe to substitute that image for the Etsy listing cover without visual verification. The separate unmatched-image ZIP also contains an image marked for manual review.
 - There may be five additional unpublished rows with Etsy source photos; the script checks every row rather than published only.
