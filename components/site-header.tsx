@@ -63,7 +63,7 @@ export function SiteHeader(){
       </details>:<Link href={accountHref} className="inline-flex min-h-11 items-center gap-2 px-2 text-[12px] font-semibold text-[#223248]"><UserRound size={17}/>{accountLabel}</Link>}
 <Link href="/favorites" aria-label={"Favorites ("+favorites.length+")"} className="inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-xs font-bold text-[#781D35] hover:bg-[#FFF0F3]"><Heart size={19}/>{favorites.length}</Link>
       <Link href="/cart" aria-label={"Cart ("+totalItems+")"} className="inline-flex min-h-11 items-center gap-1 rounded-full px-3 text-xs font-bold text-[#781D35] hover:bg-[#FFF0F3]"><ShoppingBag size={19}/>{totalItems}</Link>
-      <Link href="/#collections" className="dyasse-button-primary !min-h-[42px] !px-5 !text-[12px]">Explore patterns <ArrowRight size={15}/></Link>
+      <Link href="/patterns" className="dyasse-button-primary !min-h-[42px] !px-5 !text-[12px]">All PDF patterns <ArrowRight size={15}/></Link>
     </div>
     <button type="button" aria-expanded={menu} aria-controls="site-mobile-nav" aria-label={menu?'Close menu':'Open menu'} onClick={()=>setMenu(x=>!x)} className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#DFEBF3] bg-white text-[#172231] 2xl:hidden">{menu?<X size={21}/>:<Menu size={21}/>}</button>
   </div>
