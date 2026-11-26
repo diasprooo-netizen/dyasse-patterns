@@ -71,6 +71,7 @@ export function SiteHeader(){
     <div className="mx-auto max-w-6xl">
       <form action="/search" role="search" className="mb-3 flex items-center gap-2 rounded-xl border border-[#E2EDF3] bg-[#F6FAFD] px-4 py-3"><Search size={17}/><input type="search" name="q" aria-label="Search patterns" placeholder="Search patterns..." className="min-w-0 flex-1 bg-transparent text-sm text-[#172231] outline-none"/></form>
       <nav aria-label="Mobile navigation" className="grid">
+       <Link href="/patterns" onClick={()=>setMenu(false)} className="flex items-center justify-between border-b border-[#E8F0F5] py-3.5 text-[15px] font-bold text-[#781D35]">All PDF patterns <ArrowRight size={16}/></Link>
        {navigation.map(x=><Link key={x.href} href={x.href} onClick={()=>setMenu(false)} className="flex items-center justify-between border-b border-[#E8F0F5] py-3.5 text-[15px] font-semibold text-[#243649]">{x.label}<ArrowRight size={16}/></Link>)}
        <Link href="/favorites" onClick={()=>setMenu(false)} className="flex items-center justify-between border-b border-[#E8F0F5] py-3.5 text-[15px] font-semibold text-[#243649]">Favorites ({favorites.length})<Heart size={17}/></Link>
        <Link href="/cart" onClick={()=>setMenu(false)} className="flex items-center justify-between border-b border-[#E8F0F5] py-3.5 text-[15px] font-semibold text-[#243649]">Shopping cart ({totalItems})<ShoppingBag size={17}/></Link>
