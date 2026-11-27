@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { EditorialGuide, type GuideLink, type GuideSection } from '@/components/editorial-guide'
 
 export const metadata: Metadata = {
-  title: "Choosing Yarn for Crochet Bags: Structure, Gauge & Handles",
+  title: "Yarn for Crochet Bags: Structure & Gauge",
   description: "Understand what to check before choosing yarn for a crochet handbag, backpack or pouch, with practical examples from Dyasse Shop PDF bag patterns.",
   alternates: { canonical: '/guides/choosing-yarn-for-crochet-bags' },
   openGraph: { type: 'article', title: "Choosing Yarn for Crochet Bags: Structure, Gauge & Handles", description: "Understand what to check before choosing yarn for a crochet handbag, backpack or pouch, with practical examples from Dyasse Shop PDF bag patterns.", url: '/guides/choosing-yarn-for-crochet-bags' },

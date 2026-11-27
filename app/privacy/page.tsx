@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { AnalyticsPreferencesButton } from '@/components/cookieless-analytics'
 import type { Metadata } from 'next'
 import { ArrowLeft, ArrowUpRight, Database, Fingerprint, LockKeyhole, ShieldCheck } from 'lucide-react'
-export const metadata: Metadata={title:'Privacy at dyasse',description:'How Dyasse Shop handles digital checkout, functional account cookies and privacy-friendly optional Google Analytics consent and cookieless Vercel site analytics.',alternates:{canonical:'/privacy'}}
+export const metadata: Metadata={title:'Privacy at dyasse',description:'How Dyasse handles digital checkout, account cookies, optional Google Analytics consent, and cookieless Vercel site analytics.',alternates:{canonical:'/privacy'}}
 export default function Privacy(){
  return <div className="bg-[#fcfaf7] text-[#352c25]">
   <section className="bg-[#f1e9dd] px-5 py-20 sm:px-8">
