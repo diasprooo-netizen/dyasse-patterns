@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, type ReactNode } from 'react'
-import { ArrowUpRight, BarChart3, Boxes, ChevronRight, ClipboardCheck, ExternalLink, FileDown, FilePlus2, LayoutDashboard, Link2, LogOut, Menu, Package, SearchCheck, Users, MessageCircle, Star, X } from 'lucide-react'
+import { ArrowUpRight, BarChart3, Boxes, ChevronRight, ClipboardCheck, ExternalLink, LayoutDashboard, Link2, LogOut, Menu, Package, SearchCheck, Users, MessageCircle, Star, X } from 'lucide-react'
 
 const sections=[
  {title:'WORKSPACE',items:[
@@ -24,15 +24,11 @@ const sections=[
   {href:'/admin/seo',label:'SEO audit',icon:SearchCheck},
   {href:'/admin/subscribers',label:'Audience',icon:Users},
  ]},
- {title:'OPERATIONS',items:[
-  {href:'/admin/import',label:'Catalog import',icon:FileDown},
-  {href:'/admin/import-top20',label:'Top 20 import',icon:FilePlus2},
- ]},
 ]
 const descriptions:Record<string,string>={
  '/admin':'A clear view of your pattern business',
  '/admin/products':'Manage listings, pricing and releases',
- '/admin/top20':'Prioritized products from Etsy history',
+ '/admin/top20':'Curated products awaiting Dyasse review',
  '/admin/qa':'Check real samples before listing for sale',
  '/admin/gumroad':'Connect genuine digital purchase links',
  '/admin/analytics':'Track site activity without invented sales',
@@ -45,8 +41,6 @@ const descriptions:Record<string,string>={
  '/admin/favorites':'Anonymous save counts and opt-in audience metrics',
  '/admin/seo':'Review product search-readiness',
  '/admin/subscribers':'Consent-based customer communication',
- '/admin/import':'Add draft listings safely',
- '/admin/import-top20':'Import the bestselling shortlist',
 }
 export function AdminShell({children,email}:{children:ReactNode,email:string}){
  const pathname=usePathname()

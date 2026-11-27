@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 function inspect(p: Product) {
   const cleanTitle = productDisplayTitle(p)
   const marketplaceTitle = (p.title.match(/,/g) || []).length >= 2
-  const etsyHosted = /https?:\/\/i\.etsystatic\.com\//i.test(p.image_url)
+  const externalHosted = Boolean(p.image_url) && !/^https:\/\/(?:dyasse\.com\/images\/catalog\/|ouvdzdhpinteofjyccfe\.supabase\.co\/storage\/v1\/object\/public\/dyasse-product-images\/)/i.test(p.image_url)
   const checkoutInstructions = /(?:download (?:from|on)|purchases and reviews|after etsy confirms|on etsy)/i.test(p.description)
   const badMarketplaceText = /\bfull etsy description\b/i.test(p.description) || checkoutInstructions
 
@@ -22,7 +22,7 @@ function inspect(p: Product) {
   ]
   const warnings = [
     ...(marketplaceTitle ? ['Imported marketplace-style title: use the edited title in shopper copy and future listings.'] : []),
-    ...(etsyHosted ? ['Main image still depends on Etsy hosting; schedule verified self-hosted photo migration.'] : []),
+    ...(externalHosted ? ['Main image uses an unsupported host; move it to Dyasse-owned media before release.'] : []),
     ...(badMarketplaceText ? ['Description includes marketplace-specific directions; replace them before release.'] : []),
   ]
   return {checks,warnings,passed:checks.filter(([,pass])=>pass).length}
@@ -34,7 +34,7 @@ export default async function SeoAudit() {
   const products = await listAdminProducts()
   const findings = products.map(product => ({product, audit:inspect(product)}))
   const withMarketTitles = findings.filter(x => x.audit.warnings.some(w => w.startsWith('Imported marketplace-style'))).length
-  const withEtsyImages = findings.filter(x => x.audit.warnings.some(w => w.startsWith('Main image'))).length
+  const withExternalImages = findings.filter(x => x.audit.warnings.some(w => w.startsWith('Main image'))).length
   const withCheckoutIssues = findings.filter(x => x.audit.warnings.some(w => w.startsWith('Description includes'))).length
 
   return <main className="space-y-7">
@@ -44,7 +44,7 @@ export default async function SeoAudit() {
       These are mechanical pre-publication checks, not a Google ranking score or proof a PDF has been fully tested. A long description is not automatically helpful; a shorter, factual product-specific description can be better than repeated search phrases.
     </p>
     <div className="grid gap-3 md:grid-cols-3">
-      {[['Marketplace-style source titles',withMarketTitles],['Etsy-hosted main images',withEtsyImages],['Marketplace-only directions',withCheckoutIssues]].map(([label,count])=>
+      {[['Marketplace-style source titles',withMarketTitles],['Externally hosted main images',withExternalImages],['Marketplace-only directions',withCheckoutIssues]].map(([label,count])=>
         <div key={String(label)} className="rounded-xl border border-[#DEE9F1] bg-[#F6FBFD] p-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-[#536A7E]">{label}</p>
           <p className="mt-2 font-serif text-3xl text-[#1E3559]">{count}</p>

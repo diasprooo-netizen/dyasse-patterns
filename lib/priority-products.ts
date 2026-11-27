@@ -1,6 +1,5 @@
-// Seller-curated slug shortlist selected from the 2026 Etsy Order Items export.
-// Do not commit private unit counts, reviews, buyer emails, or payment details to GitHub.
-export const ETSY_TOP20_SLUGS = [
+// Curated Dyasse priority products. This is a fixed internal review queue.
+export const PRIORITY_PRODUCT_SLUGS = [
   'crochet-baby-clog-pattern-structured-sage-green-shoes-tutorial-pdf-download',
   'crochet-scooter-keychain-pattern-pdf-retro-moped-bag-charm-2d-amigurumi-gift',
   'beginner-knit-beanie-pattern-pdf-adult-everyday-hat',
@@ -22,4 +21,4 @@ export const ETSY_TOP20_SLUGS = [
   'crochet-baby-sandals-pattern-pdf-criss-cross-platform-sole-tutorial',
   'ribbed-knit-hat-pattern-pdf-beginner-adult-folded-brim-beanie',
 ] as const
-export const ETSY_TOP20_SET: ReadonlySet<string> = new Set(ETSY_TOP20_SLUGS)
+export const PRIORITY_PRODUCT_SET: ReadonlySet<string> = new Set(PRIORITY_PRODUCT_SLUGS)

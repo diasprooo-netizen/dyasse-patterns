@@ -1,23 +1,23 @@
 import Link from 'next/link'
 import { ArrowUpRight, Medal, ShieldCheck } from 'lucide-react'
 import { requireAdmin, listAdminProducts } from '@/lib/admin-products'
-import { ETSY_TOP20_SLUGS } from '@/lib/etsy-top20'
+import { PRIORITY_PRODUCT_SLUGS } from '@/lib/priority-products'
 export const dynamic='force-dynamic'
 export default async function Top20Queue(){
  const admin=await requireAdmin()
  if(!admin.isAdmin)return <p className="text-red-700">Access denied.</p>
  const all=await listAdminProducts()
  const bySlug=new Map(all.map(p=>[p.slug,p]))
- const rows=ETSY_TOP20_SLUGS.map((slug,index)=>({rank:index+1,slug,product:bySlug.get(slug)}))
+ const rows=PRIORITY_PRODUCT_SLUGS.map((slug,index)=>({rank:index+1,slug,product:bySlug.get(slug)}))
  const imported=rows.filter(r=>Boolean(r.product)).length
  const qa=rows.filter(r=>r.product?.qa_verified).length
  const checkout=rows.filter(r=>r.product?.gumroad_link).length
  return <div className="space-y-7">
   <section className="relative overflow-hidden rounded-[26px] bg-[linear-gradient(110deg,#1E3460,#4955B2_55%,#A262C2)] p-8 text-white sm:p-10">
    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15"><Medal size={27}/></span>
-   <p className="mt-5 text-[11px] font-bold uppercase tracking-[.18em] text-[#DADEFF]">ETSY SALES HISTORY</p>
+   <p className="mt-5 text-[11px] font-bold uppercase tracking-[.18em] text-[#DADEFF]">DYASSE REVIEW PRIORITIES</p>
    <h2 className="mt-3 text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">Top 20 launch priorities</h2>
-   <p className="mt-4 max-w-2xl text-sm leading-7 text-[#DFE5FF]">Patterns prioritized by historical Etsy sales. High demand does not prove that the instructions or images have passed technical review.</p>
+   <p className="mt-4 max-w-2xl text-sm leading-7 text-[#DFE5FF]">Curated patterns for independent PDF, imagery, and checkout verification. Priority does not prove that instructions or images have passed technical review.</p>
   </section>
   <div className="grid gap-4 sm:grid-cols-3">{[
    {title:'Selected products',value:imported,color:'bg-[#E9EDFF] text-[#5064DB]'},
