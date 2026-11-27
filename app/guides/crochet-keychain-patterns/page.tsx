@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { EditorialGuide, type GuideLink, type GuideSection } from '@/components/editorial-guide'
 
 export const metadata: Metadata = {
-  title: "Crochet Keychain Patterns: Mini Gifts & Project Ideas",
-  description: "A practical guide to choosing miniature crochet keychain PDF patterns: pick a design, check its hardware and materials, and compare small projects before you start.",
+  title: "Crochet Keychain Patterns & Mini Gifts",
+  description: "Choose a miniature crochet keychain PDF pattern: compare project details, hardware, yarn, materials and assembly before you start.",
   alternates: { canonical: '/guides/crochet-keychain-patterns' },
   openGraph: { type: 'article', title: "Crochet Keychain Patterns: Mini Gifts & Project Ideas", description: "A practical guide to choosing miniature crochet keychain PDF patterns: pick a design, check its hardware and materials, and compare small projects before you start.", url: '/guides/crochet-keychain-patterns' },
 }

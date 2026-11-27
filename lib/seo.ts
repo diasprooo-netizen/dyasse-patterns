@@ -10,7 +10,7 @@ export const IS_OFFICIAL_DOMAIN = /^https:\/\/(www\.)?dyasse\.com$/i.test(SITE_U
 
 export const collectionSeo = {
   'crochet-patterns': {
-    title: 'Crochet PDF Patterns: Bags, Gifts & Accessories',
+    title: 'Crochet PDF Patterns: Bags & Accessories',
     description: 'Discover crochet PDF patterns for baby booties, bags, keychains, wearables and home decor. Compare project details, materials and construction before buying.',
     label: 'Crochet patterns',
     keyword: 'crochet patterns PDF',
@@ -99,7 +99,7 @@ export function productSeoTitle(product: Product): string {
   // Prefer the edited title and never carry comma-separated marketplace keywords
   // into H1s, cards, image names or structured data. Reserve room for | Dyasse.
   const clean = raw.replace(/\s*\|\s*Dyasse( Shop)?$/i, '').split(',')[0].trim()
-  return shorten(clean.replace(/\s*\|\s*/g, ' — '), 52)
+  return shorten(clean.replace(/\s*\|\s*/g, ' — '), 51)
 }
 
 /** Display the already-edited, comma-free SEO title instead of the old marketplace title. */

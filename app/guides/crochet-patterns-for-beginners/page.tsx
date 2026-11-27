@@ -4,7 +4,7 @@ import { safeJsonLd, SITE_URL } from '@/lib/seo'
 import { GuideDeepDive, guideEvidence, guideImagesForSchema } from '@/components/guide-deep-dive'
 
 export const metadata: Metadata = {
- title:'How to Read Crochet Patterns: Beginner PDF Guide',
+ title:'Read Crochet Patterns: Beginner PDF Guide',
  description:'Learn crochet pattern abbreviations, gauge, stitch counts, rounds and rows. A clear beginner guide to reading crochet PDF instructions before you start.',
  alternates:{canonical:'/guides/crochet-patterns-for-beginners'},
  openGraph:{type:'article',title:'How to Read Crochet Patterns: Beginner PDF Guide',description:'Understand crochet instructions, abbreviations, gauge and stitch counts before starting a PDF pattern.',url:'/guides/crochet-patterns-for-beginners'},
