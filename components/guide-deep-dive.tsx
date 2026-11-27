@@ -282,7 +282,7 @@ export const guideEvidence: Record<string, GuideEvidence> = {
       },
       {
         "src": "/images/catalog/Penguin_Coin_Purse__01.webp",
-        "href": "/product/penguin-coin-purse-crochet-pattern-pdf",
+        "href": "/product/penguin-coin-purse-crochet-pattern-pdf-navy-kiss-clasp-pouch",
         "alt": "Small penguin crochet coin purse with contrasting face detail",
         "caption": "A small purse can have very different shaping and closure needs"
       }
