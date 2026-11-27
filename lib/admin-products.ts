@@ -32,6 +32,20 @@ function cleanArray(value: unknown): string[] {
   return value.map((item) => cleanString(item)).filter(Boolean)
 }
 
+function ownedProductImageUrl(value: string): boolean {
+  try {
+    const url = new URL(value)
+    if (url.protocol !== 'https:' || url.username || url.password) return false
+    return (
+      (url.hostname === 'dyasse.com' && url.pathname.startsWith('/images/catalog/')) ||
+      (url.hostname === 'ouvdzdhpinteofjyccfe.supabase.co' &&
+        url.pathname.startsWith('/storage/v1/object/public/dyasse-product-images/'))
+    )
+  } catch {
+    return false
+  }
+}
+
 function toNumber(value: unknown) {
   const number = Number(value)
   return Number.isFinite(number) ? number : NaN
@@ -140,6 +154,16 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
   }
   if (input.is_published && (cleanString(input.seo_title).match(/,/g) || []).length >= 2) {
     return { ok: false, message: 'Write one readable SEO title rather than a list of repeated search phrases.' }
+  }
+
+  // Public product images must be served by Dyasse's own domain or its
+  // dedicated public Supabase image bucket. Drafts may retain source photos
+  // for staff matching, but cannot be published with third-party hosts.
+  if (input.is_published && (
+    !ownedProductImageUrl(imageUrl) ||
+    cleanArray(input.gallery_images).some(url => !ownedProductImageUrl(url))
+  )) {
+    return { ok: false, message: 'Publish only with verified images hosted on dyasse.com or dyasse-product-images. Upload external images to owned storage first.' }
   }
 
   if (lemonCheckoutUrl && !validLemonCheckoutUrl(lemonCheckoutUrl)) {
