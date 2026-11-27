@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowLeft, ArrowUpRight, BookOpen, CheckCircle2 } from 'lucide-react'
 import { safeJsonLd, SITE_URL } from '@/lib/seo'
+import { GuideDeepDive, guideEvidence, guideImagesForSchema } from '@/components/guide-deep-dive'
 
 export type GuideSection = { title: string; paragraphs: string[]; bullets?: string[] }
 export type GuideLink = { href: string; label: string; context: string }
@@ -16,6 +17,7 @@ export function EditorialGuide({
   related: GuideLink[]
 }) {
   const url = SITE_URL + '/guides/' + slug
+  const evidence = guideEvidence[slug]
   const graph = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -25,6 +27,8 @@ export function EditorialGuide({
         url,
         headline: title,
         description,
+        image: guideImagesForSchema(slug),
+        ...(evidence ? { datePublished: evidence.published, dateModified: evidence.modified } : {}),
         inLanguage: 'en',
         mainEntityOfPage: url,
         author: { '@type': 'Organization', '@id': SITE_URL + '/#organization', name: 'Dyasse Shop' },
@@ -34,7 +38,7 @@ export function EditorialGuide({
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
-          { '@type': 'ListItem', position: 2, name: 'Crochet patterns', item: SITE_URL + '/collections/crochet-patterns' },
+          { '@type': 'ListItem', position: 2, name: 'Pattern guides', item: SITE_URL + '/guides' },
           { '@type': 'ListItem', position: 3, name: title, item: url },
         ],
       },
@@ -46,7 +50,7 @@ export function EditorialGuide({
       <div className="mx-auto max-w-5xl">
         <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-xs font-semibold text-[#667987]">
           <Link href="/" className="hover:text-[#781D35]">Home</Link><span>/</span>
-          <Link href="/collections/crochet-patterns" className="hover:text-[#781D35]">Crochet patterns</Link><span>/</span><span>{eyebrow}</span>
+          <Link href="/guides" className="hover:text-[#781D35]">Pattern guides</Link><span>/</span><span>{eyebrow}</span>
         </nav>
         <Link href="/guides" className="mt-8 inline-flex items-center gap-2 text-xs font-semibold text-[#781D35] underline underline-offset-4">Explore all crochet guides</Link>
         <p className="mt-5 text-xs font-bold uppercase tracking-[.18em] text-[#781D35]">{eyebrow}</p>
@@ -85,5 +89,6 @@ export function EditorialGuide({
         <Link href="/collections/crochet-patterns" className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-[#405669]"><ArrowLeft size={15}/> See all crochet patterns</Link>
       </aside>
     </div>
+    <GuideDeepDive slug={slug}/>
   </article>
 }

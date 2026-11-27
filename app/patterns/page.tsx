@@ -2,9 +2,9 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, BookOpen, FileText } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
-import { collectionSeo, primaryCollection, type CollectionSlug } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productDisplayTitle, safeJsonLd, SITE_URL, type CollectionSlug } from '@/lib/seo'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'All Crochet & Knitting PDF Patterns',
@@ -28,7 +28,21 @@ export default async function AllPatterns() {
       .sort((a,b) => a.title.localeCompare(b.title, 'en')),
   })).filter(group => group.items.length > 0)
 
+  const listingSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'CollectionPage', '@id': SITE_URL + '/patterns#page', name: 'Dyasse crochet and knitting patterns', url: SITE_URL + '/patterns' },
+      { '@type': 'ItemList',
+        itemListElement: products.map((product, index) => ({
+          '@type': 'ListItem', position: index + 1,
+          name: productDisplayTitle(product),
+          url: SITE_URL + '/product/' + encodeURIComponent(product.slug),
+        })),
+      },
+    ],
+  }
   return <div className="min-h-screen bg-white text-[#172231]">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:safeJsonLd(listingSchema)}}/>
     <section className="border-b border-[#DCE9F1] bg-[#EAF6FC] px-5 py-14 sm:px-8 lg:py-20">
       <div className="mx-auto max-w-6xl">
         <Link href="/" className="inline-flex items-center gap-2 text-xs font-semibold text-[#31546C]">Home <ArrowRight size={14}/></Link>
@@ -69,7 +83,7 @@ export default async function AllPatterns() {
             <Link prefetch={false} href={'/product/'+encodeURIComponent(product.slug)}
               className="inline-flex items-start gap-2 text-[13px] leading-6 text-[#34495B] hover:text-[#781D35] hover:underline">
               <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#B99286]"/>
-              <span>{product.title}</span>
+              <span>{productDisplayTitle(product)}</span>
             </Link>
           </li>)}
         </ul>

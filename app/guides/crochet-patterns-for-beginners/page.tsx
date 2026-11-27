@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { safeJsonLd, SITE_URL } from '@/lib/seo'
+import { GuideDeepDive, guideEvidence, guideImagesForSchema } from '@/components/guide-deep-dive'
 
 export const metadata: Metadata = {
  title:'How to Read Crochet Patterns: Beginner PDF Guide',
@@ -30,10 +31,10 @@ const checks=[
 export default function CrochetGuide(){
  const url=SITE_URL+'/guides/crochet-patterns-for-beginners'
  const schema={'@context':'https://schema.org','@graph':[
- {'@type':'Article',headline:'How to Read Crochet Patterns: A Beginner Guide',description:metadata.description,url,mainEntityOfPage:url,author:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop'},publisher:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop',logo:{'@type':'ImageObject',url:SITE_URL+'/icon.svg'}}},
+ {'@type':'Article',headline:'How to Read Crochet Patterns: A Beginner Guide',description:metadata.description,url,mainEntityOfPage:url,image:guideImagesForSchema('crochet-patterns-for-beginners'),datePublished:guideEvidence['crochet-patterns-for-beginners'].published,dateModified:guideEvidence['crochet-patterns-for-beginners'].modified,author:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop'},publisher:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop',logo:{'@type':'ImageObject',url:SITE_URL+'/icon.svg'}}},
  {'@type':'BreadcrumbList',itemListElement:[
   {'@type':'ListItem',position:1,name:'Home',item:SITE_URL+'/'},
-  {'@type':'ListItem',position:2,name:'Crochet patterns',item:SITE_URL+'/collections/crochet-patterns'},
+  {'@type':'ListItem',position:2,name:'Pattern guides',item:SITE_URL+'/guides'},
   {'@type':'ListItem',position:3,name:'How to read crochet patterns',item:url},
  ]}
  ]}
@@ -41,7 +42,7 @@ export default function CrochetGuide(){
   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:safeJsonLd(schema)}}/>
   <header className="bg-[linear-gradient(115deg,#FCE8DE,#F4DEEC,#E9E8FF)] px-5 py-16 sm:px-8 lg:py-24">
    <div className="mx-auto max-w-4xl">
-    <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-xs font-semibold text-[#6A5971]"><Link href="/">Home</Link><span>/</span><Link href="/collections/crochet-patterns">Crochet patterns</Link><span>/</span><span>Beginner guide</span></nav>
+    <nav aria-label="Breadcrumb" className="flex flex-wrap gap-2 text-xs font-semibold text-[#6A5971]"><Link href="/">Home</Link><span>/</span><Link href="/guides">Pattern guides</Link><span>/</span><span>Beginner guide</span></nav>
     <p className="mt-10 text-xs font-extrabold uppercase tracking-[.2em] text-[#B35767]">CROCHET LEARNING CENTRE</p>
     <h1 className="mt-5 font-serif text-[clamp(3rem,6vw,5rem)] leading-[1.07] tracking-[-.05em]">How to read a crochet pattern</h1>
     <p className="mt-7 max-w-3xl text-[17px] leading-9 text-[#5F627A]">A beginner-friendly guide to crochet pattern abbreviations, row and round instructions, stitch counts and choosing the right PDF project.</p>
@@ -82,5 +83,5 @@ export default function CrochetGuide(){
     </nav>
    </aside>
   </div>
- </article>
+ <GuideDeepDive slug="crochet-patterns-for-beginners"/></article>
 }

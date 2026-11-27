@@ -2,7 +2,8 @@ import { primaryCollection } from '@/lib/seo'
 import { notFound } from 'next/navigation'
 import { cache } from 'react'
 
-import { createClient, hasSupabaseConfig } from '@/lib/supabase/server'
+import { hasSupabaseConfig } from '@/lib/supabase/server'
+import { createCatalogClient } from '@/lib/supabase/catalog'
 import type { Product } from '@/types/product'
 
 const productSelect = '*'
@@ -94,7 +95,7 @@ async function withCatalogRetry<T extends ReadResult>(
 export const getPublishedProducts = cache(async (): Promise<Product[]> => {
   if (!hasSupabaseConfig()) throw new Error('Catalog is not configured')
 
-  const supabase = await createClient()
+  const supabase = createCatalogClient()
   const { data, error } = await withCatalogRetry('published-products', () =>
     supabase.from('products').select(productSelect)
       .eq('is_published', true).eq('qa_verified', true)
@@ -109,7 +110,7 @@ export const getPublishedProducts = cache(async (): Promise<Product[]> => {
 export const getProductBySlug = cache(async (slug: string): Promise<Product> => {
   if (!hasSupabaseConfig()) throw new Error('Catalog is not configured')
 
-  const supabase = await createClient()
+  const supabase = createCatalogClient()
   const { data, error } = await withCatalogRetry('product-by-slug', () =>
     supabase.from('products').select(productSelect)
       .eq('slug', slug).eq('is_published', true).eq('qa_verified', true)

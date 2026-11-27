@@ -15,6 +15,13 @@ const nextConfig = {
       { protocol: 'https', hostname: 'ouvdzdhpinteofjyccfe.supabase.co', pathname: '/storage/v1/object/public/dyasse-product-images/**' },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/our-story', destination: '/about', permanent: true },
+      // Query parameters, including genuine campaign attribution, survive this redirect.
+      { source: '/rose-bag', destination: '/product/crochet-rose-bag-pattern-3d-floral-clutch-with-gold-o-ring-handles-pdf', permanent: true },
+    ]
+  },
 }
 
 export default nextConfig
