@@ -8,7 +8,8 @@ import { ProductCard } from '@/components/product-card'
 import { ProductDescription } from '@/components/product-description'
 import { SaleBadge } from '@/components/sale-badge'
 import { PatternActions } from '@/components/pattern-actions'
-import { collectionSeo, primaryCollection, productSeoDescription, SITE_URL } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productDisplayTitle, productSeoDescription, SITE_URL } from '@/lib/seo'
+import { productStudioNote } from '@/lib/product-studio-notes'
 import type { Product } from '@/types/product'
 
 function DetailList({ title, items }: {title:string;items:string[]}) {
@@ -23,12 +24,14 @@ function DetailList({ title, items }: {title:string;items:string[]}) {
 
 export function ProductFunnel({product,upsells,crossSells}:{product:Product;upsells:Product[];crossSells:Product[]}) {
   const gallery=[product.image_url,...product.gallery_images].filter(Boolean)
+  const displayTitle = productDisplayTitle(product)
+  const studioNote = productStudioNote(product.slug)
   // One-click organic Pinterest sharing: always send traffic to the canonical
   // Dyasse Shop product page, never to the original Etsy listing.
   const pinterestShareUrl='https://www.pinterest.com/pin/create/button/?'+new URLSearchParams({
     url: SITE_URL+'/product/'+encodeURIComponent(product.slug),
     media: product.image_url,
-    description: product.title+' — digital PDF pattern by Dyasse Shop',
+    description: displayTitle+' — digital PDF pattern by Dyasse Shop',
   }).toString()
   const collection=primaryCollection(product)
   const relatedGuide = collection === 'keychains' ? { href:'/guides/crochet-keychain-patterns', label:'Crochet keychain ideas and materials' }
@@ -49,7 +52,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
         <Link href="/" className="inline-flex items-center gap-1 hover:text-[#781D35]"><ArrowLeft size={14}/>Home</Link>
         <span>/</span>
         <Link href={'/collections/'+collection} className="hover:text-[#781D35]">{collectionSeo[collection].label}</Link>
-        <span>/</span><span className="max-w-[240px] truncate text-[#781D35]">{product.title}</span>
+        <span>/</span><span className="max-w-[240px] truncate text-[#781D35]">{displayTitle}</span>
       </nav>
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.04fr_.96fr] lg:items-start lg:gap-16">
         <div className="min-w-0">
@@ -69,7 +72,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
         </div>
         <div className="lg:sticky lg:top-32">
           <p className="dyasse-eyebrow">{collectionSeo[collection].label} / Digital PDF</p>
-          <h1 className="mt-5 font-serif text-[clamp(2.6rem,4.2vw,4.6rem)] leading-[1.08] tracking-[-.055em] text-[#172231]">{product.title}</h1>
+          <h1 className="mt-5 font-serif text-[clamp(2.6rem,4.2vw,4.6rem)] leading-[1.08] tracking-[-.055em] text-[#172231]">{displayTitle}</h1>
           {(product.is_featured||product.is_on_sale)?<div className="mt-5"><SaleBadge badge={product.sale_badge} isFeatured={product.is_featured}/></div>:null}
           <p className="mt-6 line-clamp-4 text-[15px] leading-8 text-[#67747D]">{productSeoDescription(product)}</p>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-[#DDEAF2] py-6">
@@ -77,7 +80,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
           </div>
           <div className="mt-7"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled} variant="detail"/></div>
-          <a href={pinterestShareUrl} target="_blank" rel="noopener noreferrer nofollow" aria-label={'Save '+product.title+' on Pinterest'}
+          <a href={pinterestShareUrl} target="_blank" rel="noopener noreferrer nofollow" aria-label={'Save '+displayTitle+' on Pinterest'}
             className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-[#D6E4ED] bg-white px-4 py-3 text-xs font-bold text-[#5A2733] transition-colors hover:border-[#781D35] hover:bg-[#FFF5F7]">
             <Share2 size={16} aria-hidden="true" /> Save this pattern idea on Pinterest <ArrowUpRight size={14} aria-hidden="true" />
           </a>
@@ -92,6 +95,32 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
         </div>
       </div>
     </section>
+
+    {studioNote ? <section aria-labelledby="studio-notes-title" className="border-t border-[#DDEAF2] bg-white">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:py-20">
+        <p className="dyasse-eyebrow">A CLOSER LOOK AT THIS DESIGN</p>
+        <h2 id="studio-notes-title" className="mt-3 font-serif text-[clamp(2rem,3vw,2.8rem)] leading-tight text-[#172231]">Making notes for this pattern</h2>
+        <p className="mt-5 max-w-4xl text-[15px] leading-8 text-[#536B79]">{studioNote.introduction}</p>
+        <div className="mt-9 grid gap-8 lg:grid-cols-2">
+          <div className="rounded-xl border border-[#DBE9F0] bg-[#F4FAFD] p-6 sm:p-8">
+            <h3 className="font-serif text-2xl text-[#172231]">Check before buying</h3>
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-7 text-[#526B79]">
+              {studioNote.checkBeforeBuying.map(item=><li key={item}>{item}</li>)}
+            </ul>
+          </div>
+          <div className="rounded-xl border border-[#DBE9F0] bg-white p-6 sm:p-8">
+            <h3 className="font-serif text-2xl text-[#172231]">Questions specific to this design</h3>
+            <div className="mt-4 divide-y divide-[#E1EBF0]">
+              {studioNote.questions.map(q=><details key={q.question} className="py-3">
+                <summary className="cursor-pointer text-sm font-bold leading-7 text-[#283A4A]">{q.question}</summary>
+                <p className="mt-2 text-sm leading-7 text-[#536B79]">{q.answer}</p>
+              </details>)}
+            </div>
+          </div>
+        </div>
+        <p className="mt-6 text-xs leading-6 text-[#637784]">Project notes are buying guidance based on this design’s listed features. They are not a substitute for checking the actual PDF instructions, measurements and material requirements.</p>
+      </div>
+    </section> : null}
 
     <section className="border-y border-[#E6DED3] bg-[#F0F8FD]">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-24">
