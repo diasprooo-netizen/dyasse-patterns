@@ -1,9 +1,7 @@
 import Link from 'next/link'
-import { customerIdentity } from '@/lib/customer'
 import { ExternalLink } from 'lucide-react'
 import { LemonCheckoutLink } from '@/components/lemon-checkout-link'
-import { PaymentMethodChoice } from '@/components/payment-method-choice'
-import { PayPalCheckout } from '@/components/paypal-checkout'
+import { CheckoutAccountChoice } from '@/components/checkout-account-choice'
 import { validLemonCheckoutUrl } from '@/lib/checkout'
 
 interface BuyButtonsProps {
@@ -17,25 +15,23 @@ interface BuyButtonsProps {
   digitalFilePath?: string | null
 }
 
-export async function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, gumroadIsPublished, lemonCheckoutUrl, paypalCheckoutEnabled, paypalPriceUsdCents, digitalFilePath }: BuyButtonsProps) {
+// This component must remain cookie-free and safe to render in a public
+// ISR product page. Only the client-side checkout gate reads account state.
+export function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, gumroadIsPublished, lemonCheckoutUrl, paypalCheckoutEnabled, paypalPriceUsdCents, digitalFilePath }: BuyButtonsProps) {
   const gumroadReady = !!(gumroadLink && gumroadIsPublished && gumroadCheckoutVerified)
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
-  // The live PayPal endpoint also re-checks the published product, USD amount,
-  // authenticated customer and actual private PDF file before creating an order.
+  // Server-side capability check; payment APIs still validate the product,
+  // actual amount, private PDF path, customer identity, and provider response.
   const paypalReady = !!(paypalCheckoutEnabled && clientId && process.env.PAYPAL_CLIENT_SECRET
     && Number.isSafeInteger(paypalPriceUsdCents) && Number(paypalPriceUsdCents) > 0
     && typeof digitalFilePath === 'string' && /^DYS-\d{4}\/Pattern\.pdf$/.test(digitalFilePath))
 
-  // Preserve guest Gumroad checkout. An account is only needed for PayPal PDF delivery.
-  if (gumroadReady && paypalReady) {
-    const me = await customerIdentity()
-    const next = '/product/' + encodeURIComponent(slug)
-    return <PaymentMethodChoice
+  if (paypalReady) {
+    return <CheckoutAccountChoice
       slug={slug}
       clientId={clientId!}
       priceCents={paypalPriceUsdCents!}
-      signInUrl={!me ? '/account/login?next=' + encodeURIComponent(next) : null}
-      profileUrl={me && !me.name ? '/account/profile?next=' + encodeURIComponent(next) : null}
+      hasGumroad={gumroadReady}
     />
   }
 
@@ -44,16 +40,8 @@ export async function BuyButtons({ slug, gumroadLink, gumroadCheckoutVerified, g
     Buy & download PDF on Gumroad <ExternalLink size={18} />
   </Link>
 
-  if (paypalReady) {
-    const me = await customerIdentity()
-    const next = '/product/' + encodeURIComponent(slug)
-    return <div className="rounded-2xl border border-[#BCD7E8] bg-[#F0F8FD] p-5">
-      {!me ? <div className="space-y-2 text-sm"><p className="font-semibold text-[#263847]">Secure PDF checkout · A free account is required for PayPal purchases.</p><div className="flex flex-wrap gap-x-4 gap-y-2"><Link href={'/account/signup?next=' + encodeURIComponent(next)} className="font-bold text-[#781D35] underline underline-offset-4">Create a free account</Link><Link href={'/account/login?next=' + encodeURIComponent(next)} className="font-semibold text-[#263847] underline underline-offset-4">Already registered? Sign in</Link></div></div>
-       : !me.name ? <Link href={'/account/profile?next=' + encodeURIComponent(next)} className="font-semibold text-[#781D35] underline">Complete your account to buy with PayPal</Link>
-       : <PayPalCheckout slug={slug} clientId={clientId!} priceCents={paypalPriceUsdCents!} />}
-    </div>
-  }
   if (validLemonCheckoutUrl(lemonCheckoutUrl)) return <LemonCheckoutLink checkoutUrl={lemonCheckoutUrl!}/>
+
   return <p className="rounded-2xl border border-[#DDEAF2] bg-[#F0F8FD] p-4 text-sm text-[#46596A]">
     Secure checkout will be available once the pattern PDF, price and payment delivery are reviewed.
   </p>
