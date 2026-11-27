@@ -1,0 +1,40 @@
+name: dyasse live production SEO snapshot (curl)
+on:
+  push:
+    branches:
+      - audit/dyasse-live-seo-snapshot-20261127
+    paths:
+      - .github/workflows/live-seo-curl-snapshot.yml
+      - scripts/live_seo_curl_snapshot.py
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    name: Browser and Googlebot curl diagnostic
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out audit branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Compile and execute no-JS curl diagnostic
+        run: |
+          python3 -m py_compile scripts/live_seo_curl_snapshot.py
+          python3 scripts/live_seo_curl_snapshot.py
+      - name: Upload requested Markdown report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dyasse-live-seo-snapshot
+          path: dyasse-live-seo-snapshot.md
+          retention-days: 14
+      - name: Save audit report to this audit branch only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dyasse-live-seo-snapshot.md
+          if ! git diff --cached --quiet; then
+            git commit -m "audit: save production dual user-agent SEO snapshot"
+            git push origin HEAD:refs/heads/audit/dyasse-live-seo-snapshot-20261127
+          fi
