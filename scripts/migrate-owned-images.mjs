@@ -73,8 +73,22 @@ async function sourceBytes(url, slug) {
   if (local) return { bytes: await readFile(path.resolve(String(local))), source: 'local-drive-file' }
   if (!allowLegacy) throw Error('No verified Drive asset mapping for this URL')
   if (!fromEtsy(url)) throw Error('Legacy source URL is not the expected Etsy image CDN')
-  const r = await fetch(url, { signal: AbortSignal.timeout(25000), redirect: 'follow' })
-  if (!r.ok) throw Error('Legacy one-time download HTTP ' + r.status)
+  // Retry only network/HTTP transients. An invalid image or permanent 403/404
+  // stays a manual Drive-asset recovery task; never substitute another photo.
+  let r
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(25000), redirect: 'follow' })
+      if (res.ok) { r = res; break }
+      if (![408, 429, 500, 502, 503, 504].includes(res.status) || attempt === 3) {
+        throw Error('Legacy one-time download HTTP ' + res.status)
+      }
+    } catch (error) {
+      if (attempt === 3 || /Legacy one-time download HTTP/.test(String(error))) throw error
+    }
+    await new Promise(resolve => setTimeout(resolve, 500 * attempt))
+  }
+  if (!r) throw Error('Source image unavailable after retry')
   if (new URL(r.url).hostname !== 'i.etsystatic.com') throw Error('Unexpected redirect host')
   const size = Number(r.headers.get('content-length') || 0)
   if (size > 9_000_000) throw Error('Image too large')
