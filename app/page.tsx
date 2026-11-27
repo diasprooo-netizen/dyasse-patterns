@@ -5,14 +5,14 @@ import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, F
 import { getPublishedProducts } from '@/lib/products'
 import { getStudioPreviewProducts } from '@/lib/studio-preview'
 import { ProductCard } from '@/components/product-card'
-import { EtsyTestimonials } from '@/components/etsy-testimonials'
+import { ShopConfidence } from '@/components/shop-confidence'
 import { CategoryCarousel } from '@/components/category-carousel'
 import { primaryCollection } from '@/lib/seo'
 
 export const dynamic='force-dynamic'
 export const metadata: Metadata = {
- title:'Crochet PDF Patterns: Keychains, Bags & Accessories',
- description:'Shop digital crochet PDF patterns for keychains, handmade bags, baby booties and accessories. Explore project photos, materials and secure PDF checkout.',
+ title:'Crochet & Knitting PDF Patterns',
+ description:'Browse crochet and knitting PDF patterns for bags, keychains, baby booties and more. See design photos, project details and digital delivery information.',
  alternates:{canonical:'/'},
 }
 
@@ -156,7 +156,7 @@ export default async function Home(){
     </div>
   </section> : null}
 
-   <EtsyTestimonials/>
+   <ShopConfidence/>
 
    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
      <div className="grid items-center gap-9 rounded-[24px] border border-[#DDECF4] bg-[#EAF6FC] p-8 sm:p-11 lg:grid-cols-[.9fr_1.1fr]">
