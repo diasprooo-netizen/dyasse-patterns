@@ -37,7 +37,19 @@ if (!URL_ROOT.startsWith('https://ouvdzdhpinteofjyccfe.supabase.co')) {
 }
 const bucket = 'dyasse-product-images'
 const publicPrefix = URL_ROOT + '/storage/v1/object/public/' + bucket + '/'
-const db = createClient(URL_ROOT, SECRET, { auth: { persistSession: false, autoRefreshToken: false } })
+// The project's pinned supabase-js 2.49.x may send new sb_secret keys in an
+// Authorization: Bearer header. For this maintenance-only client, the gateway
+// expects the key in 'apikey', not a bearer JWT. Legacy JWT secrets are unaffected.
+const maintenanceFetch = (input, init) => {
+  if (!SECRET.startsWith('sb_secret_')) return fetch(input, init)
+  const headers = new Headers(init?.headers)
+  if (headers.get('authorization') === 'Bearer ' + SECRET) headers.delete('authorization')
+  return fetch(input, { ...init, headers })
+}
+const db = createClient(URL_ROOT, SECRET, {
+  auth: { persistSession: false, autoRefreshToken: false },
+  global: { fetch: maintenanceFetch },
+})
 const manifest = manifestPath ? JSON.parse(await readFile(manifestPath, 'utf8')) : {}
 if (typeof manifest !== 'object' || !manifest || Array.isArray(manifest)) throw Error('Manifest must be an object')
 const outdir = path.resolve('migration-reports')
