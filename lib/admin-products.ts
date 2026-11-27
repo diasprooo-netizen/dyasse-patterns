@@ -130,6 +130,18 @@ export async function saveProduct(input: ProductInput, productId?: string): Prom
     return { ok: false, message: 'Title, slug, description, price, and main image URL are required.' }
   }
 
+  // Prevent new public listings from inheriting marketplace checkout copy.
+  // Draft imports remain editable and pre-existing product URLs are untouched.
+  if (input.is_published && /\b(?:after etsy confirms|download (?:from|on) etsy|purchases and reviews|full etsy description)\b/i.test(description)) {
+    return { ok: false, message: 'Remove Etsy-specific download or marketplace instructions before publishing to Dyasse Shop.' }
+  }
+  if (input.is_published && !productId && (title.match(/,/g) || []).length >= 2) {
+    return { ok: false, message: 'Use a natural product title, not a comma-separated marketplace keyword list, before publishing.' }
+  }
+  if (input.is_published && (cleanString(input.seo_title).match(/,/g) || []).length >= 2) {
+    return { ok: false, message: 'Write one readable SEO title rather than a list of repeated search phrases.' }
+  }
+
   if (lemonCheckoutUrl && !validLemonCheckoutUrl(lemonCheckoutUrl)) {
     return { ok: false, message: 'Use a valid Lemon Squeezy checkout/buy link from your live product, not a cart or store URL.' }
   }
