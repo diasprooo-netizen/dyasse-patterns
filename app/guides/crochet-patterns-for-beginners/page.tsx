@@ -30,7 +30,7 @@ const checks=[
 export default function CrochetGuide(){
  const url=SITE_URL+'/guides/crochet-patterns-for-beginners'
  const schema={'@context':'https://schema.org','@graph':[
- {'@type':'Article',headline:'How to Read Crochet Patterns: A Beginner Guide',description:metadata.description,url,mainEntityOfPage:url,author:{'@type':'Organization',name:'Dyasse Shop'},publisher:{'@type':'Organization',name:'Dyasse Shop'}},
+ {'@type':'Article',headline:'How to Read Crochet Patterns: A Beginner Guide',description:metadata.description,url,mainEntityOfPage:url,author:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop'},publisher:{'@type':'Organization','@id':SITE_URL+'/#organization',name:'Dyasse Shop',logo:{'@type':'ImageObject',url:SITE_URL+'/icon.svg'}}},
  {'@type':'BreadcrumbList',itemListElement:[
   {'@type':'ListItem',position:1,name:'Home',item:SITE_URL+'/'},
   {'@type':'ListItem',position:2,name:'Crochet patterns',item:SITE_URL+'/collections/crochet-patterns'},
