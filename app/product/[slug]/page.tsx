@@ -79,7 +79,7 @@ export default async function ProductPage({ params }: PageProps) {
           price: Number(currentPrice.toFixed(2)),
           priceCurrency: 'USD',
           availability: 'https://schema.org/InStock',
-          seller: { '@type': 'Organization', name: SITE_NAME },
+          seller: { '@type': 'Organization', '@id': SITE_URL + '/#organization', name: SITE_NAME, logo: SITE_URL + '/icon.svg' },
         } } : {}),
         category: collectionSeo[col].label,
         additionalProperty: [{ '@type': 'PropertyValue', name: 'Product format', value: 'Digital PDF crochet or knitting instructions; no physical product' }],
