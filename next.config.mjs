@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // Serve responsive WebP variants for remote catalog images; keep
-    // transformation sizes conservative to control image-processing usage.
-    unoptimized: false,
+    // Bypass Vercel's paid image optimizer: production currently returns HTTP 402
+    // OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED for some catalog covers.
+    // Serve verified public Dyasse/Supabase image URLs directly instead.
+    unoptimized: true,
     formats: ['image/webp'],
     deviceSizes: [320, 480, 640, 768, 1024, 1200],
     imageSizes: [64, 128, 256],
