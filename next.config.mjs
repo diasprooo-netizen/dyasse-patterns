@@ -9,10 +9,9 @@ const nextConfig = {
     imageSizes: [64, 128, 256],
     minimumCacheTTL: 604800,
     remotePatterns: [
-      { protocol: 'https', hostname: 'i.etsystatic.com' },
-      { protocol: 'https', hostname: 'images.pexels.com' },
+      // Images now live only in the owner's own domain or product-media bucket.
       { protocol: 'https', hostname: 'dyasse.com', pathname: '/images/catalog/**' },
-      { protocol: 'https', hostname: '**.supabase.co' },
+      { protocol: 'https', hostname: 'ouvdzdhpinteofjyccfe.supabase.co', pathname: '/storage/v1/object/public/dyasse-product-images/**' },
     ],
   },
 }
