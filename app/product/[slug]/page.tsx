@@ -6,7 +6,9 @@ import { ProductReviews } from '@/components/product-reviews'
 import { getProductBySlug, getRelatedProducts } from '@/lib/products'
 import { collectionSeo, primaryCollection, productDisplayTitle, productSeoDescription, productSeoTitle, safeJsonLd, SITE_NAME, SITE_URL } from '@/lib/seo'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
+// Generate product ISR pages on first request, then revalidate hourly.
+export function generateStaticParams() { return [] }
 
 type PageProps = { params: { slug: string } }
 
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = productSeoDescription(product)
   const url = `/product/${encodeURIComponent(product.slug)}`
   return {
-    title,
+    title: { absolute: `${title} | Dyasse` },
     description,
     alternates: { canonical: url },
     openGraph: {
@@ -82,7 +84,10 @@ export default async function ProductPage({ params }: PageProps) {
           seller: { '@type': 'Organization', '@id': SITE_URL + '/#organization', name: SITE_NAME, logo: SITE_URL + '/icon.svg' },
         } } : {}),
         category: collectionSeo[col].label,
-        additionalProperty: [{ '@type': 'PropertyValue', name: 'Product format', value: 'Digital PDF crochet or knitting instructions; no physical product' }],
+        additionalProperty: [
+          { '@type': 'PropertyValue', name: 'Product format', value: 'Digital PDF crochet or knitting instructions; no physical product' },
+          { '@type': 'PropertyValue', name: 'Delivery method', value: 'Digital download after verified payment; no physical shipping' },
+        ],
       },
       {
         '@type': 'BreadcrumbList',

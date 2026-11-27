@@ -54,6 +54,11 @@ export default function About(){
           <p className="mt-4 text-sm leading-7 text-[#526B7A]">If a stitch count, diagram or assembly instruction is unclear, please <Link href="/contact" className="font-semibold text-[#781D35] underline underline-offset-4">contact Dyasse</Link> with the pattern name and exact page, row or round. This makes the problem specific enough to review and, where needed, correct.</p>
         </article>
       </div>
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <section className="border border-[#D9E7EE] bg-white p-6"><h3 className="font-serif text-2xl">Who runs this shop?</h3><p className="mt-3 text-sm leading-7 text-[#526B7A]">Dyasse Shop is the seller and support contact for these digital crochet and knitting patterns. We do not publish an unverified designer biography or pretend that every sample has been physically tested.</p></section>
+        <section className="border border-[#D9E7EE] bg-white p-6"><h3 className="font-serif text-2xl">How a listing is reviewed</h3><p className="mt-3 text-sm leading-7 text-[#526B7A]">A product only reaches the public catalog after its listing and release status are approved. The page should clearly distinguish the actual digital instructions, cover photographs, supplied materials information and available checkout. Approval of a listing is not a substitute for complete stitch-by-stitch test results.</p></section>
+        <section className="border border-[#D9E7EE] bg-white p-6"><h3 className="font-serif text-2xl">Why feedback matters</h3><p className="mt-3 text-sm leading-7 text-[#526B7A]">If a customer reports a miscount, mismatch or unclear assembly step, they can send the page and row number through our <Link href="/contact" className="underline text-[#781D35]">support page</Link>. Specific reports can be checked against the PDF and corrected when needed.</p></section>
+      </div>
       <p className="mt-8 text-sm leading-7 text-[#536C7E]">Reviews on product pages are limited to eligible orders through our own purchase-verification process. Older marketplace reviews are not presented as a rating for Dyasse Shop.</p>
     </div>
   </section>

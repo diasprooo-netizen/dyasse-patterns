@@ -96,8 +96,10 @@ function shorten(value: string, max: number): string {
 
 export function productSeoTitle(product: Product): string {
   const raw = compact(product.seo_title || product.title)
-  // Next.js applies the brand suffix globally; don't repeat it.
-  return shorten(raw.replace(/\s*\|\s*Dyasse( Shop)?$/i, ''), 67)
+  // Prefer the edited title and never carry comma-separated marketplace keywords
+  // into H1s, cards, image names or structured data. Reserve room for | Dyasse.
+  const clean = raw.replace(/\s*\|\s*Dyasse( Shop)?$/i, '').split(',')[0].trim()
+  return shorten(clean.replace(/\s*\|\s*/g, ' — '), 52)
 }
 
 /** Display the already-edited, comma-free SEO title instead of the old marketplace title. */

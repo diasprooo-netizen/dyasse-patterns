@@ -2,9 +2,9 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowRight, BookOpen, FileText } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
-import { collectionSeo, primaryCollection, type CollectionSlug } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productDisplayTitle, type CollectionSlug } from '@/lib/seo'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'All Crochet & Knitting PDF Patterns',
@@ -69,7 +69,7 @@ export default async function AllPatterns() {
             <Link prefetch={false} href={'/product/'+encodeURIComponent(product.slug)}
               className="inline-flex items-start gap-2 text-[13px] leading-6 text-[#34495B] hover:text-[#781D35] hover:underline">
               <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#B99286]"/>
-              <span>{product.title}</span>
+              <span>{productDisplayTitle(product)}</span>
             </Link>
           </li>)}
         </ul>

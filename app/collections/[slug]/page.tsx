@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowUpRight, BookOpen, Footprints, Gift, Layers3, Scissors 
 import { getPublishedProducts } from '@/lib/products'
 import { ProductCard } from '@/components/product-card'
 import { productCoverAlt } from '@/lib/image-seo'
-import { collectionSeo, primaryCollection, safeJsonLd, SITE_URL } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productDisplayTitle, safeJsonLd, SITE_URL } from '@/lib/seo'
 import type { Product } from '@/types/product'
 
 type Collection = { label: string; tagline: string; intro: string; match: (product: Product) => boolean; theme: string; icon: typeof Scissors; eyebrow: string }
@@ -164,7 +164,7 @@ export async function generateMetadata({params,searchParams}:{params:{slug:strin
     twitter:{card:'summary_large_image',title,description,images:cover?.image_url?[cover.image_url]:[]}
   }
 }
-export const dynamic='force-dynamic'
+export const revalidate = 3600
 export default async function Collection({params,searchParams}:{params:{slug:string},searchParams?:{page?:string}}) {
   const c=collections[params.slug]
   if (!c) notFound()
@@ -191,7 +191,7 @@ export default async function Collection({params,searchParams}:{params:{slug:str
         {'@type':'ListItem',position:1,name:'Home',item:SITE_URL+'/'},
         {'@type':'ListItem',position:2,name:c.label,item:canonical},
       ]},
-      ...(visibleProducts.length>0?[{'@type':'ItemList',itemListElement:visibleProducts.map((p,i)=>({'@type':'ListItem',position:isPaginated?(page-1)*CROCHET_PAGE_SIZE+i+1:i+1,name:p.title,url:SITE_URL+'/product/'+encodeURIComponent(p.slug)}))}]:[])
+      ...(visibleProducts.length>0?[{'@type':'ItemList',itemListElement:visibleProducts.map((p,i)=>({'@type':'ListItem',position:isPaginated?(page-1)*CROCHET_PAGE_SIZE+i+1:i+1,name:productDisplayTitle(p),url:SITE_URL+'/product/'+encodeURIComponent(p.slug)}))}]:[])
     ]
   }
   return <div className="bg-white text-[#172231]">
@@ -211,7 +211,7 @@ export default async function Collection({params,searchParams}:{params:{slug:str
         </div>
         {heroProduct ? <div className="relative hidden aspect-[5/4] overflow-hidden border border-white/80 bg-white shadow-sm md:block">
           <Image src={heroProduct.image_url} alt={productCoverAlt(heroProduct)} fill sizes="(min-width:1024px) 36vw, 50vw" className="object-cover" priority/>
-          <span className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] bg-white/95 px-3 py-2 text-[11px] font-semibold text-[#384B5A]">{heroProduct.title}</span>
+          <span className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] bg-white/95 px-3 py-2 text-[11px] font-semibold text-[#384B5A]">{productDisplayTitle(heroProduct)}</span>
         </div> : <div aria-hidden="true" className="relative hidden h-[290px] items-center justify-center md:flex">
           <div className="absolute h-64 w-64 rotate-12 rounded-[65px] border-2 border-white/80 bg-white/25" />
           <div className="absolute h-48 w-48 -rotate-12 rounded-full border border-current opacity-25" />

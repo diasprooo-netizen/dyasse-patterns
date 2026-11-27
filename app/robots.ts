@@ -13,6 +13,7 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         '/admin', '/account', '/api', '/auth', '/auth-debug',
         '/go', '/cart', '/checkout', '/login', '/products',
+        '/favorites', '/studio-preview', '/search',
       ],
     }],
     sitemap: SITE_URL + '/sitemap.xml',

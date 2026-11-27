@@ -3,15 +3,15 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, Footprints, Gift, Heart, Layers3, Scissors, ShieldCheck, Sparkles } from 'lucide-react'
 import { getPublishedProducts } from '@/lib/products'
-import { getStudioPreviewProducts } from '@/lib/studio-preview'
+import { productCoverAlt } from '@/lib/image-seo'
 import { ProductCard } from '@/components/product-card'
 import { ShopConfidence } from '@/components/shop-confidence'
 import { CategoryCarousel } from '@/components/category-carousel'
 import { primaryCollection } from '@/lib/seo'
 
-export const dynamic='force-dynamic'
+export const revalidate = 3600
 export const metadata: Metadata = {
- title:'Crochet & Knitting PDF Patterns',
+ title: { absolute: 'Dyasse — Original Crochet & Knitting PDF Patterns' },
  description:'Browse crochet and knitting PDF patterns for bags, keychains, baby booties and more. See design photos, project details and digital delivery information.',
  alternates:{canonical:'/'},
 }
@@ -50,7 +50,6 @@ export default async function Home(){
  const priority=launchSlugs.flatMap(slug=>{const p=allProducts.find(x=>x.slug===slug);return p?[p]:[]})
  const products=[...priority,...allProducts.filter(p=>!launchSlugs.includes(p.slug))].slice(0,8)
  const christmasProducts=allProducts.filter(p=>/christmas tree keychain|santa baby booties/i.test(p.title))
- const studioPreview=await getStudioPreviewProducts(4)
  const categoryItems=collections.map(({href,title,sub,image})=>{
    const slug=href.split('/').pop()
    const representative=slug==='crochet-patterns' ? allProducts[0]
@@ -76,7 +75,7 @@ export default async function Home(){
          </div>
        </div>
        <div className="relative min-h-[245px] overflow-hidden lg:min-h-full">
-         {products[0]?.image_url ? <Image src={products[0].image_url} alt={products[0].title + ' crochet PDF pattern design from Dyasse Shop'} fill priority sizes="(min-width:1024px) 47vw, 100vw" className="object-cover"/> : <div aria-hidden="true" className="dyasse-hero-photo absolute inset-0"/>}
+         {products[0]?.image_url ? <Image src={products[0].image_url} alt={productCoverAlt(products[0])} fill priority sizes="(min-width:1024px) 47vw, 100vw" className="object-cover"/> : <div aria-hidden="true" className="dyasse-hero-photo absolute inset-0"/>}
          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#EAF5FC_0%,transparent_24%)] lg:bg-[linear-gradient(90deg,#EFF8FD_0%,transparent_29%)]"/>
          <div className="absolute bottom-6 left-6 border border-white/65 bg-white/90 p-4 shadow-sm backdrop-blur sm:left-10 lg:bottom-9">
            <p className="font-serif text-xl italic text-[#172231]">A little more handmade.</p>
@@ -143,18 +142,6 @@ export default async function Home(){
      </div>
    </section>
 
-  {studioPreview.length > 0 ? <section aria-labelledby="studio-preview-heading" className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
-    <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-      <div><p className="dyasse-eyebrow">FROM THE STUDIO</p><h2 id="studio-preview-heading" className="mt-2 font-serif text-[clamp(2rem,3vw,3rem)] tracking-[-.045em]">New designs on the way</h2><p className="mt-2 max-w-xl text-sm text-[#5D6F80]">A first look at patterns undergoing final review. Not yet available for purchase.</p></div>
-      <Link href="/studio-preview" className="inline-flex items-center gap-2 text-sm font-bold text-[#781D35]">Explore upcoming patterns <ArrowUpRight size={16}/></Link>
-    </div>
-    <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
-      {studioPreview.map(item=><Link key={item.id} href="/studio-preview" className="group overflow-hidden rounded-lg border border-[#DDEAF2] bg-white">
-        <div className="relative aspect-[4/4.2] overflow-hidden bg-[#EDF6FB]"><Image src={item.image_url} alt={item.title+' design preview'} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover transition-transform group-hover:scale-[1.025]"/></div>
-        <div className="p-3 sm:p-4"><p className="text-[10px] font-bold uppercase tracking-widest text-[#781D35]">Coming soon</p><h3 className="mt-2 text-sm font-semibold leading-6 text-[#26394B]">{item.title}</h3></div>
-      </Link>)}
-    </div>
-  </section> : null}
 
    <ShopConfidence/>
 
