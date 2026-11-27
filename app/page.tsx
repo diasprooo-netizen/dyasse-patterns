@@ -17,14 +17,14 @@ export const metadata: Metadata = {
 }
 
 const collections=[
- {href:'/collections/crochet-patterns',title:'Crochet patterns',sub:'Handmade accessories & gifts',icon:Scissors,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'https://images.pexels.com/photos/5788489/pexels-photo-5788489.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'https://images.pexels.com/photos/5602969/pexels-photo-5602969.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/amigurumi',title:'Amigurumi PDF patterns',sub:'Crochet plush & tiny characters',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/knitting-patterns',title:'Knitting PDF patterns',sub:'Hats, scarves & headbands',icon:Layers3,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/christmas-crochet',title:'Christmas crochet',sub:'Tree ornaments & Santa booties',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/crochet-patterns',title:'Crochet patterns',sub:'Handmade accessories & gifts',icon:Scissors,image:'/images/catalog/Lion_Flower_Keychain__01.webp'},
+ {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'/images/catalog/Burgundy_Bow_Hat__01.webp'},
+ {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'/images/catalog/Red_Gold_Baby_Sandals__01.webp'},
+ {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'/images/catalog/Avocado_Crossbody_Bag__01.webp'},
+ {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'/images/catalog/Vintage_Car_Keychain__01.webp'},
+ {href:'/collections/amigurumi',title:'Amigurumi PDF patterns',sub:'Crochet plush & tiny characters',icon:Gift,image:'/images/catalog/Crescent_Moon_Plush__01.webp'},
+ {href:'/collections/knitting-patterns',title:'Knitting PDF patterns',sub:'Hats, scarves & headbands',icon:Layers3,image:''},
+ {href:'/collections/christmas-crochet',title:'Christmas crochet',sub:'Tree ornaments & Santa booties',icon:Gift,image:''},
 ]
 const more=[
  {href:'/guides/knitting-patterns-for-beginners',label:'How to read knitting PDFs'},
