@@ -27,8 +27,8 @@ export function EditorialGuide({
         description,
         inLanguage: 'en',
         mainEntityOfPage: url,
-        author: { '@type': 'Organization', name: 'Dyasse Shop' },
-        publisher: { '@type': 'Organization', name: 'Dyasse Shop' },
+        author: { '@type': 'Organization', '@id': SITE_URL + '/#organization', name: 'Dyasse Shop' },
+        publisher: { '@type': 'Organization', '@id': SITE_URL + '/#organization', name: 'Dyasse Shop', logo: { '@type': 'ImageObject', url: SITE_URL + '/icon.svg' } },
       },
       {
         '@type': 'BreadcrumbList',
