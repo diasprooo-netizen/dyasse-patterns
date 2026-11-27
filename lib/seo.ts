@@ -100,6 +100,11 @@ export function productSeoTitle(product: Product): string {
   return shorten(raw.replace(/\s*\|\s*Dyasse( Shop)?$/i, ''), 67)
 }
 
+/** Display the already-edited, comma-free SEO title instead of the old marketplace title. */
+export function productDisplayTitle(product: Product): string {
+  return productSeoTitle(product).replace(/\s*\|\s*/g, ' — ')
+}
+
 export function productSeoDescription(product: Product): string {
   const manual = compact(product.seo_description || '')
   if (manual && !/\betsy\b|etsy\.com/i.test(manual)) return shorten(manual, 158)
