@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: Product }) {
         <Link href={href} className="transition hover:text-[#781D35]">{displayTitle}</Link>
       </h3>
       <p className="mt-3 line-clamp-2 text-[13px] leading-6 text-[#556979]">{productSeoDescription(product)}</p>
-      <div className="mt-5"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled}/></div>
+      <div className="mt-5"><PatternActions id={product.id} title={displayTitle} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled}/></div>
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#E0EBF2] pt-5">
         <PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency} size="sm"/>
         <Link href={href} className="inline-flex min-h-10 items-center gap-1.5 text-xs font-bold text-[#781D35] hover:text-[#5F172A]">View pattern <ArrowUpRight size={15}/></Link>
