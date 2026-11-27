@@ -79,7 +79,7 @@ export function ProductFunnel({product,upsells,crossSells}:{product:Product;upse
             <div><span className="block text-[10px] font-bold uppercase tracking-[.15em] text-[#8B8E88]">Pattern price</span><div className="mt-2"><PriceDisplay price={product.price} salePrice={product.sale_price} currency={product.currency}/></div></div>
             <span className="text-right text-xs leading-6 text-[#8A8F8B]">Digital instructions<br/>No physical delivery</span>
           </div>
-          <div className="mt-7"><PatternActions id={product.id} title={product.title} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled} variant="detail"/></div>
+          <div className="mt-7"><PatternActions id={product.id} title={displayTitle} image={product.image_url} priceCents={product.paypal_price_usd_cents} paypalEnabled={product.paypal_checkout_enabled} variant="detail"/></div>
           <a href={pinterestShareUrl} target="_blank" rel="noopener noreferrer nofollow" aria-label={'Save '+displayTitle+' on Pinterest'}
             className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full border border-[#D6E4ED] bg-white px-4 py-3 text-xs font-bold text-[#5A2733] transition-colors hover:border-[#781D35] hover:bg-[#FFF5F7]">
             <Share2 size={16} aria-hidden="true" /> Save this pattern idea on Pinterest <ArrowUpRight size={14} aria-hidden="true" />
