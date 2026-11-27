@@ -1,4 +1,5 @@
 import type { Product } from '@/types/product'
+import { productDisplayTitle } from '@/lib/seo'
 
 // Cover descriptions are grounded in the published catalog's actual product designs.
 // Other gallery slides intentionally avoid claiming a camera angle or feature that
@@ -131,7 +132,7 @@ function cleanFallbackAlt(title: string): string {
 }
 
 export function productCoverAlt(product: Product): string {
-  return coverAltBySlug[product.slug] ?? cleanFallbackAlt(product.title)
+  return coverAltBySlug[product.slug] ?? cleanFallbackAlt(productDisplayTitle(product))
 }
 
 export function productGalleryAlt(product: Product, galleryIndex: number): string {

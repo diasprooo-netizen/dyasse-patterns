@@ -4,7 +4,7 @@ import { ProductFunnel } from '@/components/product-funnel'
 import { productCoverAlt } from '@/lib/image-seo'
 import { ProductReviews } from '@/components/product-reviews'
 import { getProductBySlug, getRelatedProducts } from '@/lib/products'
-import { collectionSeo, primaryCollection, productSeoDescription, productSeoTitle, safeJsonLd, SITE_NAME, SITE_URL } from '@/lib/seo'
+import { collectionSeo, primaryCollection, productDisplayTitle, productSeoDescription, productSeoTitle, safeJsonLd, SITE_NAME, SITE_URL } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
 
@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: PageProps) {
         '@type': 'Product',
         '@id': url + '#product',
         url,
-        name: product.title,
+        name: productDisplayTitle(product),
         description: productSeoDescription(product),
         image: [product.image_url, ...product.gallery_images].filter(Boolean),
         sku: product.id,
@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: PageProps) {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
           { '@type': 'ListItem', position: 2, name: collectionSeo[col].label, item: `${SITE_URL}/collections/${col}` },
-          { '@type': 'ListItem', position: 3, name: product.title, item: url },
+          { '@type': 'ListItem', position: 3, name: productDisplayTitle(product), item: url },
         ],
       },
     ],

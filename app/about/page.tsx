@@ -36,5 +36,26 @@ export default function About(){
       </div>
     </div>
   </section>
+  <section aria-labelledby="how-to-choose-dyasse" className="border-t border-[#E8DAD7] bg-[#F5FAFD] px-5 py-16 sm:px-8 lg:py-20">
+    <div className="mx-auto max-w-7xl">
+      <p className="dyasse-eyebrow">HOW WE PRESENT OUR WORK</p>
+      <h2 id="how-to-choose-dyasse" className="mt-4 max-w-3xl font-serif text-[clamp(2rem,4vw,3.5rem)] leading-tight text-[#203759]">A pattern listing should help you make an informed choice.</h2>
+      <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <article className="border border-[#D9E7EE] bg-white p-7">
+          <h3 className="font-serif text-2xl text-[#203759]">Before a listing goes live</h3>
+          <p className="mt-4 text-sm leading-7 text-[#526B7A]">The storefront checks that a product has approved listing details and is marked for release. Its photos, PDF information and checkout options should be visible before you pay. This website review does not claim that every pattern has been physically crocheted or knitted as a complete test sample.</p>
+        </article>
+        <article className="border border-[#D9E7EE] bg-white p-7">
+          <h3 className="font-serif text-2xl text-[#203759]">Read the project, not only the picture</h3>
+          <p className="mt-4 text-sm leading-7 text-[#526B7A]">A listing explains the digital format and any materials, measurements or skills the source specifies. Finished sizes can vary with yarn, tension and gauge. Our <Link href="/guides" className="font-semibold text-[#781D35] underline underline-offset-4">free guides</Link> help you make those choices before starting.</p>
+        </article>
+        <article className="border border-[#D9E7EE] bg-white p-7">
+          <h3 className="font-serif text-2xl text-[#203759]">Questions and corrections</h3>
+          <p className="mt-4 text-sm leading-7 text-[#526B7A]">If a stitch count, diagram or assembly instruction is unclear, please <Link href="/contact" className="font-semibold text-[#781D35] underline underline-offset-4">contact Dyasse</Link> with the pattern name and exact page, row or round. This makes the problem specific enough to review and, where needed, correct.</p>
+        </article>
+      </div>
+      <p className="mt-8 text-sm leading-7 text-[#536C7E]">Reviews on product pages are limited to eligible orders through our own purchase-verification process. Older marketplace reviews are not presented as a rating for Dyasse Shop.</p>
+    </div>
+  </section>
  </div>
 }

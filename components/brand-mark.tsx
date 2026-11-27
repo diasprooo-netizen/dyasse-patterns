@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react'
 
 export function BrandMark({ light = false }: { light?: boolean }) {
   return <Link href="/" aria-label="dyasse — home" className="group inline-flex min-w-0 items-center gap-3">
-    <span className={'relative flex h-[43px] w-[43px] shrink-0 items-center justify-center border transition-transform duration-200 group-hover:-rotate-3 ' +
+    <span aria-hidden="true" className={'relative flex h-[43px] w-[43px] shrink-0 items-center justify-center border transition-transform duration-200 group-hover:-rotate-3 ' +
       (light ? 'border-[#DACCBF]/40 bg-[#F2EAE0] text-[#22272B]' : 'border-[#D8C8B9] bg-[#E7F2F8] text-[#80505D]')}>
       <span aria-hidden="true" className="absolute left-1.5 top-1.5 h-3 w-3 rounded-full border border-current opacity-25"/>
       <span aria-hidden="true" className="relative -mt-1 font-serif text-[32px] font-normal italic leading-none">d</span>

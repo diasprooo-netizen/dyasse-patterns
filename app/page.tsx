@@ -5,26 +5,26 @@ import { ArrowRight, ArrowUpRight, BookOpen, CheckCircle2, Download, FileText, F
 import { getPublishedProducts } from '@/lib/products'
 import { getStudioPreviewProducts } from '@/lib/studio-preview'
 import { ProductCard } from '@/components/product-card'
-import { EtsyTestimonials } from '@/components/etsy-testimonials'
+import { ShopConfidence } from '@/components/shop-confidence'
 import { CategoryCarousel } from '@/components/category-carousel'
 import { primaryCollection } from '@/lib/seo'
 
 export const dynamic='force-dynamic'
 export const metadata: Metadata = {
- title:'Crochet PDF Patterns: Keychains, Bags & Accessories',
- description:'Shop digital crochet PDF patterns for keychains, handmade bags, baby booties and accessories. Explore project photos, materials and secure PDF checkout.',
+ title:'Crochet & Knitting PDF Patterns',
+ description:'Browse crochet and knitting PDF patterns for bags, keychains, baby booties and more. See design photos, project details and digital delivery information.',
  alternates:{canonical:'/'},
 }
 
 const collections=[
- {href:'/collections/crochet-patterns',title:'Crochet patterns',sub:'Handmade accessories & gifts',icon:Scissors,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'https://images.pexels.com/photos/6001441/pexels-photo-6001441.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'https://images.pexels.com/photos/5788489/pexels-photo-5788489.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'https://images.pexels.com/photos/5602969/pexels-photo-5602969.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'https://images.pexels.com/photos/5788368/pexels-photo-5788368.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/amigurumi',title:'Amigurumi PDF patterns',sub:'Crochet plush & tiny characters',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/knitting-patterns',title:'Knitting PDF patterns',sub:'Hats, scarves & headbands',icon:Layers3,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
- {href:'/collections/christmas-crochet',title:'Christmas crochet',sub:'Tree ornaments & Santa booties',icon:Gift,image:'https://images.pexels.com/photos/5602985/pexels-photo-5602985.jpeg?auto=compress&cs=tinysrgb&w=640'},
+ {href:'/collections/crochet-patterns',title:'Crochet patterns',sub:'Handmade accessories & gifts',icon:Scissors,image:'/images/catalog/Lion_Flower_Keychain__01.webp'},
+ {href:'/collections/crochet-accessories',title:'Crochet accessories',sub:'Hats & wearable crochet patterns',icon:Layers3,image:'/images/catalog/Burgundy_Bow_Hat__01.webp'},
+ {href:'/collections/baby-shoes',title:'Baby booties',sub:'Tiny things worth making',icon:Footprints,image:'/images/catalog/Red_Gold_Baby_Sandals__01.webp'},
+ {href:'/collections/crochet-bags',title:'Bags & purses',sub:'Patterns to carry anywhere',icon:Gift,image:'/images/catalog/Avocado_Crossbody_Bag__01.webp'},
+ {href:'/collections/keychains',title:'Crochet keychains',sub:'Mini charms & handmade gifts',icon:Heart,image:'/images/catalog/Vintage_Car_Keychain__01.webp'},
+ {href:'/collections/amigurumi',title:'Amigurumi PDF patterns',sub:'Crochet plush & tiny characters',icon:Gift,image:'/images/catalog/Crescent_Moon_Plush__01.webp'},
+ {href:'/collections/knitting-patterns',title:'Knitting PDF patterns',sub:'Hats, scarves & headbands',icon:Layers3,image:''},
+ {href:'/collections/christmas-crochet',title:'Christmas crochet',sub:'Tree ornaments & Santa booties',icon:Gift,image:''},
 ]
 const more=[
  {href:'/guides/knitting-patterns-for-beginners',label:'How to read knitting PDFs'},
@@ -156,7 +156,7 @@ export default async function Home(){
     </div>
   </section> : null}
 
-   <EtsyTestimonials/>
+   <ShopConfidence/>
 
    <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
      <div className="grid items-center gap-9 rounded-[24px] border border-[#DDECF4] bg-[#EAF6FC] p-8 sm:p-11 lg:grid-cols-[.9fr_1.1fr]">

@@ -93,7 +93,12 @@ export function CategoryCarousel({ items }: { items: AtelierCategory[] }) {
       <div className="flex touch-pan-y gap-3 sm:gap-4">
         {items.map((item, index) => <div key={item.href} className="min-w-0 flex-[0_0_78%] sm:flex-[0_0_45%] md:flex-[0_0_34%] lg:flex-[0_0_27%] xl:flex-[0_0_24%]" role="group" aria-roledescription="slide" aria-label={String(index + 1) + ' of ' + items.length + ': ' + item.title}>
           <Link href={item.href} className="group relative isolate flex h-[188px] flex-col justify-end overflow-hidden rounded-[15px] border border-[#E2EAF0] bg-[#EBF3F8] p-5 shadow-[0_3px_13px_rgba(23,53,78,.045)] transition duration-300 hover:-translate-y-1 hover:border-[#BDD2E0] hover:shadow-[0_15px_28px_rgba(25,52,73,.12)] sm:h-[205px]">
-            <div aria-hidden="true" className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.075]" style={{ backgroundImage: 'url("' + item.image + '")' }}/>
+            {item.image
+              ? <div aria-hidden="true" className="absolute inset-0 -z-20 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-[1.075]" style={{ backgroundImage: 'url("' + item.image + '")' }}/>
+              : <div aria-hidden="true" className="absolute inset-0 -z-20 overflow-hidden bg-gradient-to-br from-[#F4DEE5] via-[#E7F4FA] to-[#BCD7E7]">
+                  <span className="absolute -right-6 -top-14 h-52 w-52 rounded-full border-[22px] border-white/40"/>
+                  <span className="absolute right-10 top-10 h-20 w-20 rounded-full border-8 border-[#D5B9C8]/30"/>
+                </div>}
             <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-[#FDFEFF]/95 via-[#FDFEFF]/45 to-transparent"/>
             <span className="max-w-[220px] font-serif text-[23px] font-semibold leading-[1.08] tracking-[-.025em] text-[#172A3B] sm:text-[25px]">{item.title}</span>
             <span className="mt-2 flex items-center justify-between gap-3 text-[12px] font-medium text-[#42586B]">
